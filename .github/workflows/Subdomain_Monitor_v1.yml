@@ -14,7 +14,7 @@ jobs:
     # environment: production   # uncomment + set name if webhook is an Environment secret
     env:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-      TARGET_DOMAIN: "example.com"
+      TARGET_DOMAIN: "redbull.com"
 
     steps:
       - name: Checkout repo
@@ -104,15 +104,9 @@ jobs:
         if: steps.diff.outputs.new_count != '0'
         run: |
           NEW_SUBS=$(cat results/new_detail.txt)
-          PAYLOAD=$(jq -n \
-            --arg content "**New live subdomains found for $TARGET_DOMAIN:**
-\`\`\`
-$NEW_SUBS
-\`\`\`" \
-            '{content: $content}')
-          curl -s -H "Content-Type: application/json" \
-               -d "$PAYLOAD" \
-               "$DISCORD_WEBHOOK_URL"
+          CONTENT=$(printf "**New live subdomains found for %s:**\n\`\`\`\n%s\n\`\`\`" "$TARGET_DOMAIN" "$NEW_SUBS")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
 
       - name: Update previous results
         run: |
