@@ -4618,6 +4618,7 @@ chat.citymesh.com
 chef.local.citymesh.com
 chiheb.edpnet.be
 citymesh-combell.edpnet.com
+citymesh-test-hr.odoo.citymesh.com
 citymesh-test.odoo.citymesh.com
 citymesh.edpnet.com
 clamav.edpnet.net
@@ -4700,7 +4701,6 @@ en.oldwiki.edpnet.be
 en.wiki.edpnet.be
 es.citymesh.guide
 es.citymeshconnect.com
-est-ce_que_je_peux_faire_avec_mon_espace_web_gratuit_sur_users.edpnet.be
 ethan.citymesh.com
 event-support.towereye.be
 events.citymesh.be
@@ -4766,7 +4766,6 @@ go.wifinmbssncb.be
 gos-rb01.edpnet.be
 gpt.ncentric.cloud
 groups.citymesh.guide
-halo.myiot.be
 has-rb01.edpnet.be
 hcp.edpnet.net
 help.citymesh.guide
@@ -4858,7 +4857,6 @@ lweb05.edpnet.net
 lweb05test.edpnet.net
 lweb06.edpnet.net
 lxextweb.edpnet.net
-lxmailer01.edpnet.net
 lxweb1.edpnet.net
 mail.antwerpfreewifi.be
 mail.biotechnology-citymesh.com
@@ -4955,7 +4953,6 @@ netbird.citymesh.net
 netbox.citymesh.com
 netline.bruitx.be.edpnet.net
 newwebmail.edpnet.be
-nimbus.myiot.be
 nl.be-prof.edpnet.be
 nl.belgianpress.edpnet.be
 nl.edpnet.be
@@ -5067,7 +5064,6 @@ proxy.edpnet.nl
 ps2.ncentric.com
 putty.edpnet.net
 quake3.edpnet.be
-que_puis-je_faire_avec_mon_espace_web_users.edpnet.be
 qwww.edpnet.com
 ranger.citymesh.com
 rc.antlcl.infra.edpnet.be
@@ -5138,6 +5134,7 @@ simulator.edpnet.be
 smtp.edpnet.be
 smtp.edpnet.com
 sn.edpnet.be
+snippet.citymesh.com
 softphone.citymeshconnect.com
 spco.towereye.be
 speedtest.citymesh.com
@@ -5149,20 +5146,10 @@ spf.edpnet.be
 srv-edpnet-05.edpnet.net
 ss.citymesh.guide
 ss7.ncentric.cloud
-ssl4all-10.le.ssl.lxweb1.edpnet.net
-ssl4all-100.le.ssl.lxweb1.edpnet.net
-ssl4all-115.le.ssl.lxweb1.edpnet.net
-ssl4all-124.le.ssl.lxweb1.edpnet.net
-ssl4all-138.le.ssl.lxweb1.edpnet.net
 ssl4all-144.le.ssl.lxweb1.edpnet.net
-ssl4all-156.le.ssl.lxweb1.edpnet.net
 ssl4all-186.le.ssl.lxweb1.edpnet.net
-ssl4all-204.le.ssl.lxweb1.edpnet.net
-ssl4all-213.le.ssl.lxweb1.edpnet.net
-ssl4all-216.le.ssl.lxweb1.edpnet.net
 ssl4all-239.le.ssl.lxweb1.edpnet.net
 ssl4all-248.le.ssl.lxweb1.edpnet.net
-ssl4all-25.le.ssl.lxweb1.edpnet.net
 ssl4all-251.le.ssl.lxweb1.edpnet.net
 ssl4all-257.le.ssl.lxweb1.edpnet.net
 ssl4all-269.le.ssl.lxweb1.edpnet.net
@@ -5194,7 +5181,6 @@ ssl4all-394.le.ssl.lxweb1.edpnet.net
 ssl4all-395.le.ssl.lxweb1.edpnet.net
 ssl4all-398.le.ssl.lxweb1.edpnet.net
 ssl4all-4.le.ssl.lxextweb.edpnet.net
-ssl4all-4.le.ssl.lxweb1.edpnet.net
 ssl4all-413.le.ssl.lxweb1.edpnet.net
 ssl4all-416.le.ssl.lxweb1.edpnet.net
 ssl4all-419.le.ssl.lxweb1.edpnet.net
@@ -5223,7 +5209,6 @@ ssl4all-489.le.ssl.lxweb1.edpnet.net
 ssl4all-492.le.ssl.lxweb1.edpnet.net
 ssl4all-494.le.ssl.lxweb1.edpnet.net
 ssl4all-7.le.ssl.lxextweb.edpnet.net
-ssl4all-78.le.ssl.lxweb1.edpnet.net
 staging.antwerpfreewifi.be
 staging.api.safety-drones.com
 staging.cc.safety-drones.com
@@ -5363,19 +5348,14 @@ voip.edpnet.nl
 voipproxy.edpnet.nl
 vpbx.edpnet.net
 vpn.ncentric.cloud
-waibmail.edpnet.be
-wat_kan_ik_doen_met_mijn_gratis_webruimte_op_users.edpnet.be
 wat_kan_ik_doen_met_mijn_gratis_webruimte_op_users.edpnet.nl
 wbmh.edpnet.net
-webaim.edpnet.be
 webmail.edpnet.be
 webmail.edpnet.com
 webmail.edpnet.net
 webmail.edpnet.nl
 webuse.edpnet.net
 westtoer.citymesh.com
-what_can_i_do_with_my_free_webspace_on_users.edpnet.be
-what_i_can_do_with_my_free_webspace_at_users.edpnet.be
 whoami.citymesh.guide
 wifi.guest.edpnet.net
 wifilab.citymesh.com
@@ -5401,7 +5381,6 @@ www.antwerpfreewifi.be
 www.api.edpnet.nl
 www.apps.edpnet.net
 www.appstesting.edpnet.net
-www.backup.edpnet.com
 www.biotechnology-citymesh.com
 www.career.edpnet.com
 www.citymesh.be
@@ -5450,7 +5429,6 @@ www.testaankoop.edpnet.be
 www.towereye.be
 www.towereye.eu
 www.webmail.edpnet.be
-www.websites.edpnet.be
 www.wifi.guest.edpnet.net
 www.wifilab.be
 www.wintercircus.citymesh.com
@@ -5465,7 +5443,6 @@ xenswitch-stack-3.sn.be.edpnet.net
 xenswitch-stack.bxl.be.edpnet.net
 xenswitch-stack.sn.be.edpnet.net
 xml.edpnet.be
-xn--priv-epa.edpnet.be
 xom1.ncentric.cloud
 zakelijk.edpnet.nl
 zulip.citymesh.net
