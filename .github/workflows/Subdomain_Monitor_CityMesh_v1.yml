@@ -26,10 +26,11 @@ jobs:
         with:
           go-version: '1.22'
 
-      - name: Install subfinder and httpx
+      - name: Install subfinder, httpx and nuclei
         run: |
           go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
           go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+          go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Write subfinder provider config
@@ -125,16 +126,96 @@ jobs:
           PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
 
+      - name: Update nuclei templates
+        run: nuclei -update-templates -silent || true
+
+      - name: Scan live hosts with nuclei
+        run: |
+          # Conservative template scope for a responsible-disclosure program:
+          # exposures, misconfigs, takeovers, default creds, known CVEs.
+          # Excludes fuzzing/dos-tagged templates entirely.
+          nuclei -l results/current_alive_hosts.txt \
+                 -tags exposures,misconfiguration,takeovers,default-logins,cves \
+                 -severity low,medium,high,critical \
+                 -rate-limit 15 \
+                 -silent \
+                 -o results/nuclei_current.txt || touch results/nuclei_current.txt
+          sort -u results/nuclei_current.txt -o results/nuclei_current.txt
+
+      - name: Diff nuclei findings against previous run
+        id: nuclei_diff
+        run: |
+          if [ -f results/nuclei_previous.txt ]; then
+            comm -13 results/nuclei_previous.txt results/nuclei_current.txt > results/nuclei_new.txt
+          else
+            cp results/nuclei_current.txt results/nuclei_new.txt
+          fi
+
+          NEW_FINDINGS=$(wc -l < results/nuclei_new.txt | tr -d ' ')
+          echo "new_findings=$NEW_FINDINGS" >> "$GITHUB_OUTPUT"
+
+      - name: AI-triage new nuclei findings
+        id: triage
+        if: steps.nuclei_diff.outputs.new_findings != '0'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+        run: |
+          FINDINGS=$(cat results/nuclei_new.txt)
+          INSTRUCTIONS="You are triaging bug bounty / responsible-disclosure scan output for the Citymesh program (no bounty, points/reputation only). Below is nuclei output listing NEW findings from this scan cycle. For each finding, briefly note what it is and whether it looks worth manual follow-up. Group by severity (critical/high first). Flag anything that overlaps with Citymesh's excluded finding categories (e.g. missing headers, verbose errors without sensitive data, CSRF with low impact, disclosed API keys without proven business impact) as LOW PRIORITY / likely not reportable. End with a short list of the top 3 findings worth investigating manually first, or state clearly if nothing looks worth pursuing. Be concise, plain text, no markdown headers."
+          PROMPT_TEXT=$(printf "%s\n\nFINDINGS:\n%s" "$INSTRUCTIONS" "$FINDINGS")
+
+          SUMMARY=""
+
+          # --- Try Gemini first ---
+          if [ -n "$GEMINI_API_KEY" ]; then
+            GEMINI_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
+              '{contents: [{parts: [{text: $text}]}]}')
+            GEMINI_RESPONSE=$(curl -s -X POST \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GEMINI_API_KEY" \
+              -H "Content-Type: application/json" \
+              -d "$GEMINI_PAYLOAD")
+            SUMMARY=$(echo "$GEMINI_RESPONSE" | jq -r '.candidates[0].content.parts[0].text // empty')
+          fi
+
+          # --- Fall back to Cohere if Gemini gave nothing ---
+          if [ -z "$SUMMARY" ] && [ -n "$COHERE_API_KEY" ]; then
+            COHERE_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
+              '{model: "command-r-plus", messages: [{role: "user", content: $text}]}')
+            COHERE_RESPONSE=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $COHERE_API_KEY" \
+              -d "$COHERE_PAYLOAD")
+            SUMMARY=$(echo "$COHERE_RESPONSE" | jq -r '.message.content[0].text // empty')
+          fi
+
+          # --- Final fallback: raw findings if both AI calls failed ---
+          if [ -z "$SUMMARY" ]; then
+            SUMMARY=$(printf "AI triage unavailable this run — raw findings:\n%s" "$(head -c 1200 results/nuclei_new.txt)")
+          fi
+
+          echo "$SUMMARY" > results/ai_summary.txt
+
+      - name: Notify Discord if new nuclei findings
+        if: steps.nuclei_diff.outputs.new_findings != '0'
+        run: |
+          # Discord's 2000-char limit: truncate the AI summary if needed
+          SUMMARY=$(head -c 1700 results/ai_summary.txt)
+          CONTENT=$(printf "**New nuclei findings for Citymesh (AI-triaged):**\n\`\`\`\n%s\n\`\`\`" "$SUMMARY")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
       - name: Update previous results
         run: |
           cp results/current.txt results/previous.txt
           cp results/current_alive.txt results/previous_alive.txt
           cp results/current_alive_hosts.txt results/previous_alive_hosts.txt
+          cp results/nuclei_current.txt results/nuclei_previous.txt
 
       - name: Commit updated results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results/previous.txt results/previous_alive.txt results/previous_alive_hosts.txt
-          git diff --cached --quiet || git commit -m "Update subdomain baseline [skip ci]"
+          git add results/previous.txt results/previous_alive.txt results/previous_alive_hosts.txt results/nuclei_previous.txt
+          git diff --cached --quiet || git commit -m "Update subdomain and nuclei baseline [skip ci]"
           git push
