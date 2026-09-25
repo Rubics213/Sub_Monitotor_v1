@@ -1,4 +1,4 @@
-name: Subdomain Monitor
+name: Subdomain Monitor - Citymesh
 
 on:
   schedule:
@@ -14,7 +14,6 @@ jobs:
     # environment: production   # uncomment + set name if webhook is an Environment secret
     env:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-      TARGET_DOMAIN: "redbull.com"
 
     steps:
       - name: Checkout repo
@@ -66,15 +65,33 @@ jobs:
             - $VIRUSTOTAL_API_KEY
           EOF
 
-      - name: Run subdomain enumeration
+      - name: Run subdomain enumeration across all targets
         run: |
           mkdir -p results
-          subfinder -d "$TARGET_DOMAIN" -silent -all -o results/current.txt || touch results/current.txt
+          > results/current_raw.txt
+          while IFS= read -r domain; do
+            # skip blank lines and comments
+            [ -z "$domain" ] && continue
+            case "$domain" in \#*) continue ;; esac
+            echo "Enumerating: $domain"
+            subfinder -d "$domain" -silent -all >> results/current_raw.txt || true
+          done < targets.txt
+          sort -u results/current_raw.txt -o results/current_raw.txt
+
+      - name: Filter out-of-scope subdomains
+        run: |
+          if [ -s excluded.txt ]; then
+            grep -v -F -f excluded.txt results/current_raw.txt > results/current.txt || true
+          else
+            cp results/current_raw.txt results/current.txt
+          fi
           sort -u results/current.txt -o results/current.txt
 
       - name: Probe for live hosts with httpx
         run: |
+          # rate-limit kept under Citymesh's 20 req/sec cap
           httpx -l results/current.txt -silent -status-code -title -follow-redirects \
+                -rate-limit 15 \
                 -o results/current_alive.txt || touch results/current_alive.txt
           sort -u results/current_alive.txt -o results/current_alive.txt
 
@@ -104,7 +121,7 @@ jobs:
         if: steps.diff.outputs.new_count != '0'
         run: |
           NEW_SUBS=$(cat results/new_detail.txt)
-          CONTENT=$(printf "**New live subdomains found for %s:**\n\`\`\`\n%s\n\`\`\`" "$TARGET_DOMAIN" "$NEW_SUBS")
+          CONTENT=$(printf "**New live subdomains found for Citymesh:**\n\`\`\`\n%s\n\`\`\`" "$NEW_SUBS")
           PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
 
