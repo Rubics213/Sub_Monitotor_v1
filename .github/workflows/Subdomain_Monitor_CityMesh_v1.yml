@@ -21,7 +21,11 @@ jobs:
     env:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+      GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
       COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+      COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
     steps:
       - name: Test Discord webhook
         run: |
@@ -34,32 +38,47 @@ jobs:
             exit 1
           fi
 
-      - name: Test AI triage pipeline (Gemini -> Cohere fallback)
+      - name: Test AI triage pipeline (multi-key rotation, Gemini -> Cohere fallback)
         run: |
           PROMPT_TEXT="Reply with exactly one short sentence confirming you received this test message."
           SUMMARY=""
+          PROVIDER="none"
 
-          if [ -n "$GEMINI_API_KEY" ]; then
+          # Try each Gemini key in turn until one succeeds
+          for KEY_VAR in GEMINI_API_KEY GEMINI_API_KEY_2 GEMINI_API_KEY_3; do
+            KEY_VAL="${!KEY_VAR}"
+            [ -z "$KEY_VAL" ] && continue
             GEMINI_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" '{contents: [{parts: [{text: $text}]}]}')
             GEMINI_RESPONSE=$(curl -s -X POST \
-              "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$GEMINI_API_KEY" \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$KEY_VAL" \
               -H "Content-Type: application/json" -d "$GEMINI_PAYLOAD")
             SUMMARY=$(echo "$GEMINI_RESPONSE" | jq -r '.candidates[0].content.parts[0].text // empty' 2>/dev/null || echo "")
-            echo "Gemini raw response: $GEMINI_RESPONSE"
-          fi
+            echo "Tried $KEY_VAR -> $([ -n "$SUMMARY" ] && echo "success" || echo "failed: $GEMINI_RESPONSE")"
+            if [ -n "$SUMMARY" ]; then
+              PROVIDER="Gemini ($KEY_VAR)"
+              break
+            fi
+          done
 
-          PROVIDER="Gemini"
-          if [ -z "$SUMMARY" ] && [ -n "$COHERE_API_KEY" ]; then
-            PROVIDER="Cohere (fallback)"
-            COHERE_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" '{model: "command-r-plus", messages: [{role: "user", content: $text}]}')
-            COHERE_RESPONSE=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
-              -H "Content-Type: application/json" -H "Authorization: Bearer $COHERE_API_KEY" -d "$COHERE_PAYLOAD")
-            SUMMARY=$(echo "$COHERE_RESPONSE" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
-            echo "Cohere raw response: $COHERE_RESPONSE"
+          # Try each Cohere key in turn if every Gemini key failed
+          if [ -z "$SUMMARY" ]; then
+            for KEY_VAR in COHERE_API_KEY COHERE_API_KEY_2 COHERE_API_KEY_3; do
+              KEY_VAL="${!KEY_VAR}"
+              [ -z "$KEY_VAL" ] && continue
+              COHERE_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" '{model: "command-a-03-2025", messages: [{role: "user", content: $text}]}')
+              COHERE_RESPONSE=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+                -H "Content-Type: application/json" -H "Authorization: Bearer $KEY_VAL" -d "$COHERE_PAYLOAD")
+              SUMMARY=$(echo "$COHERE_RESPONSE" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
+              echo "Tried $KEY_VAR -> $([ -n "$SUMMARY" ] && echo "success" || echo "failed: $COHERE_RESPONSE")"
+              if [ -n "$SUMMARY" ]; then
+                PROVIDER="Cohere ($KEY_VAR, fallback)"
+                break
+              fi
+            done
           fi
 
           if [ -z "$SUMMARY" ]; then
-            SUMMARY="AI triage FAILED — both Gemini and Cohere returned empty. Check API keys."
+            SUMMARY="AI triage FAILED — every configured Gemini and Cohere key failed. Check API keys and provider status."
             PROVIDER="none"
           fi
 
@@ -246,37 +265,57 @@ jobs:
         if: steps.nuclei_diff.outputs.new_findings != '0'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
           COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+          COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
         run: |
           FINDINGS=$(cat results/nuclei_new.txt)
           INSTRUCTIONS="You are triaging bug bounty / responsible-disclosure scan output for the Citymesh program (no bounty, points/reputation only). Below is nuclei output listing NEW findings from this scan cycle. For each finding, briefly note what it is and whether it looks worth manual follow-up. Group by severity (critical/high first). Flag anything that overlaps with Citymesh's excluded finding categories (e.g. missing headers, verbose errors without sensitive data, CSRF with low impact, disclosed API keys without proven business impact) as LOW PRIORITY / likely not reportable. End with a short list of the top 3 findings worth investigating manually first, or state clearly if nothing looks worth pursuing. Be concise, plain text, no markdown headers."
           PROMPT_TEXT=$(printf "%s\n\nFINDINGS:\n%s" "$INSTRUCTIONS" "$FINDINGS")
 
           SUMMARY=""
+          PROVIDER="none"
 
-          # --- Try Gemini first ---
-          if [ -n "$GEMINI_API_KEY" ]; then
-            GEMINI_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
-              '{contents: [{parts: [{text: $text}]}]}')
+          # --- Try each Gemini key in turn ---
+          for KEY_VAR in GEMINI_API_KEY GEMINI_API_KEY_2 GEMINI_API_KEY_3; do
+            KEY_VAL="${!KEY_VAR}"
+            [ -z "$KEY_VAL" ] && continue
+            GEMINI_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" '{contents: [{parts: [{text: $text}]}]}')
             GEMINI_RESPONSE=$(curl -s -X POST \
-              "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$GEMINI_API_KEY" \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$KEY_VAL" \
               -H "Content-Type: application/json" \
               -d "$GEMINI_PAYLOAD")
             SUMMARY=$(echo "$GEMINI_RESPONSE" | jq -r '.candidates[0].content.parts[0].text // empty' 2>/dev/null || echo "")
+            if [ -n "$SUMMARY" ]; then
+              PROVIDER="Gemini ($KEY_VAR)"
+              break
+            fi
+          done
+
+          # --- Fall back to each Cohere key in turn if every Gemini key failed ---
+          if [ -z "$SUMMARY" ]; then
+            for KEY_VAR in COHERE_API_KEY COHERE_API_KEY_2 COHERE_API_KEY_3; do
+              KEY_VAL="${!KEY_VAR}"
+              [ -z "$KEY_VAL" ] && continue
+              COHERE_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
+                '{model: "command-a-03-2025", messages: [{role: "user", content: $text}]}')
+              COHERE_RESPONSE=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+                -H "Content-Type: application/json" \
+                -H "Authorization: Bearer $KEY_VAL" \
+                -d "$COHERE_PAYLOAD")
+              SUMMARY=$(echo "$COHERE_RESPONSE" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
+              if [ -n "$SUMMARY" ]; then
+                PROVIDER="Cohere ($KEY_VAR, fallback)"
+                break
+              fi
+            done
           fi
 
-          # --- Fall back to Cohere if Gemini gave nothing ---
-          if [ -z "$SUMMARY" ] && [ -n "$COHERE_API_KEY" ]; then
-            COHERE_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
-              '{model: "command-r-plus", messages: [{role: "user", content: $text}]}')
-            COHERE_RESPONSE=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
-              -H "Content-Type: application/json" \
-              -H "Authorization: Bearer $COHERE_API_KEY" \
-              -d "$COHERE_PAYLOAD")
-            SUMMARY=$(echo "$COHERE_RESPONSE" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
-          fi
+          echo "AI triage provider used: $PROVIDER"
 
-          # --- Final fallback: raw findings if both AI calls failed ---
+          # --- Final fallback: raw findings if every key on both providers failed ---
           if [ -z "$SUMMARY" ]; then
             SUMMARY=$(printf "AI triage unavailable this run — raw findings:\n%s" "$(head -c 1200 results/nuclei_new.txt)")
           fi
