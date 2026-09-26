@@ -3,13 +3,92 @@ name: Subdomain Monitor - Citymesh
 on:
   schedule:
     - cron: '0 */6 * * *'   # every 6 hours
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      smoke_test:
+        description: 'Run smoke test only (Discord + AI triage check, no scanning)'
+        required: false
+        default: 'false'
+        type: boolean
 
 permissions:
   contents: write
 
 jobs:
+  smoke_test:
+    if: github.event_name == 'workflow_dispatch' && inputs.smoke_test == true
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+    steps:
+      - name: Test Discord webhook
+        run: |
+          CONTENT="Smoke test: Discord webhook is reachable. $(date -u '+%Y-%m-%d %H:%M UTC')"
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL")
+          echo "Discord response code: $HTTP_CODE"
+          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
+            echo "::error::Discord webhook returned $HTTP_CODE — check DISCORD_WEBHOOK_URL secret"
+            exit 1
+          fi
+
+      - name: Test AI triage pipeline (Gemini -> Cohere fallback)
+        run: |
+          PROMPT_TEXT="Reply with exactly one short sentence confirming you received this test message."
+          SUMMARY=""
+
+          if [ -n "$GEMINI_API_KEY" ]; then
+            GEMINI_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" '{contents: [{parts: [{text: $text}]}]}')
+            GEMINI_RESPONSE=$(curl -s -X POST \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GEMINI_API_KEY" \
+              -H "Content-Type: application/json" -d "$GEMINI_PAYLOAD")
+            SUMMARY=$(echo "$GEMINI_RESPONSE" | jq -r '.candidates[0].content.parts[0].text // empty')
+            echo "Gemini raw response: $GEMINI_RESPONSE"
+          fi
+
+          PROVIDER="Gemini"
+          if [ -z "$SUMMARY" ] && [ -n "$COHERE_API_KEY" ]; then
+            PROVIDER="Cohere (fallback)"
+            COHERE_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" '{model: "command-r-plus", messages: [{role: "user", content: $text}]}')
+            COHERE_RESPONSE=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+              -H "Content-Type: application/json" -H "Authorization: Bearer $COHERE_API_KEY" -d "$COHERE_PAYLOAD")
+            SUMMARY=$(echo "$COHERE_RESPONSE" | jq -r '.message.content[0].text // empty')
+            echo "Cohere raw response: $COHERE_RESPONSE"
+          fi
+
+          if [ -z "$SUMMARY" ]; then
+            SUMMARY="AI triage FAILED — both Gemini and Cohere returned empty. Check API keys."
+            PROVIDER="none"
+          fi
+
+          CONTENT=$(printf "Smoke test — AI triage via **%s**:\n\`\`\`\n%s\n\`\`\`" "$PROVIDER" "$SUMMARY")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+          echo "SMOKE_PROVIDER=$PROVIDER" >> "$GITHUB_ENV"
+          echo "SMOKE_SUMMARY=$SUMMARY" >> "$GITHUB_ENV"
+
+      - name: Write smoke test summary
+        if: always()
+        run: |
+          {
+            echo "## Smoke Test Results"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "- Discord webhook: reachable (see step above for status code)"
+            echo "- AI triage provider that responded: **${SMOKE_PROVIDER:-unknown}**"
+            echo ""
+            echo "AI response:"
+            echo '```'
+            echo "${SMOKE_SUMMARY:-no response captured}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
   monitor:
+    if: github.event_name != 'workflow_dispatch' || inputs.smoke_test != true
     runs-on: ubuntu-latest
     # environment: production   # uncomment + set name if webhook is an Environment secret
     env:
@@ -26,12 +105,20 @@ jobs:
         with:
           go-version: '1.22'
 
-      - name: Install subfinder, httpx and nuclei
+      - name: Install subfinder, httpx, nuclei, ffuf and katana
         run: |
           go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
           go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
           go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+          go install -v github.com/ffuf/ffuf/v2@latest
+          go install -v github.com/projectdiscovery/katana/cmd/katana@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Download wordlist for directory bruteforce
+        run: |
+          mkdir -p wordlists
+          curl -s -o wordlists/common.txt \
+            https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt
 
       - name: Write subfinder provider config
         env:
@@ -205,17 +292,155 @@ jobs:
           PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
 
+      - name: Directory bruteforce with ffuf
+        run: |
+          > results/ffuf_current.txt
+          while IFS= read -r host; do
+            [ -z "$host" ] && continue
+            echo "Fuzzing: $host"
+            ffuf -u "${host}/FUZZ" \
+                 -w wordlists/common.txt \
+                 -mc 200,201,202,204,301,302,307,401,403 \
+                 -rate 10 \
+                 -t 10 \
+                 -timeout 8 \
+                 -s \
+              >> results/ffuf_current.txt || true
+          done < results/current_alive_hosts.txt
+          sort -u results/ffuf_current.txt -o results/ffuf_current.txt
+
+      - name: Diff ffuf findings against previous run
+        id: ffuf_diff
+        run: |
+          if [ -f results/ffuf_previous.txt ]; then
+            comm -13 results/ffuf_previous.txt results/ffuf_current.txt > results/ffuf_new.txt
+          else
+            cp results/ffuf_current.txt results/ffuf_new.txt
+          fi
+          NEW_PATHS=$(wc -l < results/ffuf_new.txt | tr -d ' ')
+          echo "new_paths=$NEW_PATHS" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Discord if new paths found
+        if: steps.ffuf_diff.outputs.new_paths != '0'
+        run: |
+          PATHS=$(head -c 1700 results/ffuf_new.txt)
+          CONTENT=$(printf "**New paths found via directory bruteforce (Citymesh):**\n\`\`\`\n%s\n\`\`\`" "$PATHS")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: Discover JS files with katana
+        run: |
+          katana -list results/current_alive_hosts.txt \
+                 -jc \
+                 -silent \
+                 -rate-limit 10 \
+                 -depth 2 \
+            | grep -E '\.js($|\?)' | sort -u > results/js_urls_current.txt || touch results/js_urls_current.txt
+
+      - name: Download JS files and scan for secrets
+        run: |
+          mkdir -p js_files
+          > results/js_secrets_current.txt
+
+          # Secret patterns: AWS keys, Google API keys, Slack tokens, JWTs, private keys, generic api_key assignments
+          PATTERN="(AKIA[0-9A-Z]{16})|(AIza[0-9A-Za-z_-]{35})|(xox[baprs]-[0-9A-Za-z-]{10,})|(eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,})|(-----BEGIN [A-Z ]*PRIVATE KEY-----)|([Aa]pi[_-]?[Kk]ey.{0,3}[:=].{0,3}[A-Za-z0-9_-]{16,})"
+
+          COUNT=0
+          while IFS= read -r jsurl; do
+            [ -z "$jsurl" ] && continue
+            COUNT=$((COUNT+1))
+            # cap how many JS files we pull per run to stay light on the target
+            if [ "$COUNT" -gt 100 ]; then
+              echo "JS file cap (100) reached, stopping"
+              break
+            fi
+            FNAME="js_files/$(echo "$jsurl" | sha1sum | cut -d' ' -f1).js"
+            curl -s --max-time 10 -o "$FNAME" "$jsurl" || continue
+            MATCHES=$(grep -E -o "$PATTERN" "$FNAME" 2>/dev/null | sort -u || true)
+            if [ -n "$MATCHES" ]; then
+              while IFS= read -r m; do
+                echo "$jsurl | $m" >> results/js_secrets_current.txt
+              done <<< "$MATCHES"
+            fi
+          done < results/js_urls_current.txt
+          sort -u results/js_secrets_current.txt -o results/js_secrets_current.txt
+
+      - name: Diff JS secret findings against previous run
+        id: js_diff
+        run: |
+          if [ -f results/js_secrets_previous.txt ]; then
+            comm -13 results/js_secrets_previous.txt results/js_secrets_current.txt > results/js_secrets_new.txt
+          else
+            cp results/js_secrets_current.txt results/js_secrets_new.txt
+          fi
+          NEW_SECRETS=$(wc -l < results/js_secrets_new.txt | tr -d ' ')
+          echo "new_secrets=$NEW_SECRETS" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Discord if new JS secrets found
+        if: steps.js_diff.outputs.new_secrets != '0'
+        run: |
+          # Note: matched secret values are included — this channel should be private
+          FINDINGS=$(head -c 1700 results/js_secrets_new.txt)
+          CONTENT=$(printf "**Possible secrets found in JS files (Citymesh) — verify manually before reporting:**\n\`\`\`\n%s\n\`\`\`" "$FINDINGS")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
       - name: Update previous results
         run: |
           cp results/current.txt results/previous.txt
           cp results/current_alive.txt results/previous_alive.txt
           cp results/current_alive_hosts.txt results/previous_alive_hosts.txt
           cp results/nuclei_current.txt results/nuclei_previous.txt
+          cp results/ffuf_current.txt results/ffuf_previous.txt
+          cp results/js_secrets_current.txt results/js_secrets_previous.txt
 
       - name: Commit updated results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results/previous.txt results/previous_alive.txt results/previous_alive_hosts.txt results/nuclei_previous.txt
-          git diff --cached --quiet || git commit -m "Update subdomain and nuclei baseline [skip ci]"
+          git add results/previous.txt results/previous_alive.txt results/previous_alive_hosts.txt results/nuclei_previous.txt results/ffuf_previous.txt results/js_secrets_previous.txt
+          git diff --cached --quiet || git commit -m "Update baselines [skip ci]"
           git push
+
+      - name: Write job summary
+        if: always()
+        run: |
+          TOTAL_SUBS=$(wc -l < results/current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          ALIVE_SUBS=$(wc -l < results/current_alive_hosts.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_SUBS=$(wc -l < results/new_hosts.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_NUCLEI=$(wc -l < results/nuclei_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_NUCLEI=$(wc -l < results/nuclei_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_PATHS=$(wc -l < results/ffuf_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_PATHS=$(wc -l < results/ffuf_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          JS_FILES_SCANNED=$(wc -l < results/js_urls_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_SECRETS=$(wc -l < results/js_secrets_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_SECRETS=$(wc -l < results/js_secrets_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+
+          {
+            echo "## Citymesh Monitor — Run Summary"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "| Stage | Total | New this run |"
+            echo "|---|---|---|"
+            echo "| Subdomains found | $TOTAL_SUBS | — |"
+            echo "| Live hosts | $ALIVE_SUBS | $NEW_SUBS |"
+            echo "| Nuclei findings | $TOTAL_NUCLEI | $NEW_NUCLEI |"
+            echo "| Directory paths | $TOTAL_PATHS | $NEW_PATHS |"
+            echo "| JS files scanned | $JS_FILES_SCANNED | — |"
+            echo "| Possible JS secrets | $TOTAL_SECRETS | $NEW_SECRETS |"
+            echo ""
+            if [ "$NEW_SUBS" = "0" ] && [ "$NEW_NUCLEI" = "0" ] && [ "$NEW_PATHS" = "0" ] && [ "$NEW_SECRETS" = "0" ]; then
+              echo "No new findings this run — baseline unchanged."
+            else
+              echo "New findings this run — check Discord for details, or the \`results/\` artifacts below."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload full results as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-results-${{ github.run_number }}
+          path: results/
+          retention-days: 14
