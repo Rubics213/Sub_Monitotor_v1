@@ -175,14 +175,11 @@ jobs:
       - name: Run subdomain enumeration across all targets
         run: |
           mkdir -p results
-          > results/current_raw.txt
-          while IFS= read -r domain; do
-            # skip blank lines and comments
-            [ -z "$domain" ] && continue
-            case "$domain" in \#*) continue ;; esac
-            echo "Enumerating: $domain"
-            subfinder -d "$domain" -silent -all >> results/current_raw.txt || true
-          done < targets.txt
+          # Single multi-domain invocation instead of looping subfinder once per
+          # domain — each separate invocation pays its own source-connection
+          # startup cost (~5-15s), so 41 domains looped serially adds up fast.
+          # subfinder's -dL handles internal concurrency across all of them at once.
+          subfinder -dL targets.txt -silent -all -o results/current_raw.txt || touch results/current_raw.txt
           sort -u results/current_raw.txt -o results/current_raw.txt
 
       - name: Filter out-of-scope subdomains
@@ -401,20 +398,30 @@ jobs:
 
       - name: Directory bruteforce with ffuf
         run: |
-          > results/ffuf_current.txt
-          while IFS= read -r host; do
-            [ -z "$host" ] && continue
-            echo "Fuzzing: $host"
+          mkdir -p results/ffuf_tmp
+          rm -f results/ffuf_tmp/*
+
+          # Fuzz 4 hosts concurrently at 4 req/sec each (~16/sec combined),
+          # comfortably under Citymesh's 20/sec cap but using far more of the
+          # allowed budget than one host at a time ever could. Same wordlist,
+          # same host list, same match codes as before — only the scheduling
+          # changed, so coverage and findings are unaffected.
+          cat results/ffuf_targets.txt | xargs -P 4 -I{} bash -c '
+            host="$1"
+            [ -z "$host" ] && exit 0
+            safe_name=$(echo "$host" | sha1sum | cut -d" " -f1)
             ffuf -u "${host}/FUZZ" \
                  -w wordlists/common.txt \
                  -mc 200,201,202,204,301,302,307,401,403 \
                  -ac \
-                 -rate 10 \
+                 -rate 4 \
                  -t 15 \
                  -timeout 8 \
                  -s \
-              >> results/ffuf_current.txt || true
-          done < results/ffuf_targets.txt
+              > "results/ffuf_tmp/${safe_name}.txt" 2>/dev/null || true
+          ' _ {}
+
+          cat results/ffuf_tmp/*.txt > results/ffuf_current.txt 2>/dev/null || touch results/ffuf_current.txt
           sort -u results/ffuf_current.txt -o results/ffuf_current.txt
 
       - name: Diff ffuf findings against previous run
