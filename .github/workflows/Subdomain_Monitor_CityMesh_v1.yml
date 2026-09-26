@@ -331,6 +331,74 @@ jobs:
           PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
 
+      - name: AI-prioritize hosts worth fuzzing
+        id: prioritize
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+          COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+        run: |
+          # Cap the input list so the prompt stays a reasonable size
+          HOSTS_INFO=$(head -n 150 results/current_alive.txt)
+          TOTAL_HOSTS=$(wc -l < results/current_alive_hosts.txt | tr -d ' ')
+
+          INSTRUCTIONS="You are prioritizing which live hosts are worth deep directory bruteforcing in a responsible-disclosure recon pipeline. Below is a list of live hosts with their HTTP status code and page title, one per line. Pick the hosts most likely to be real applications, admin panels, APIs, portals, or dashboards worth fuzzing for hidden paths — favor hostnames like auth., api., admin., portal., my., dashboard., app., cabmanager., gateway. Deprioritize and EXCLUDE hosts that look like static marketing pages, CDN/asset hosts, parked domains, pure redirects with no distinct title, or anything clearly not an application. Return ONLY the full URLs to fuzz, one per line, nothing else — no numbering, no explanation, no markdown. Return at most 20 URLs, chosen by likely value."
+          PROMPT_TEXT=$(printf "%s\n\nHOSTS:\n%s" "$INSTRUCTIONS" "$HOSTS_INFO")
+
+          AI_OUTPUT=""
+          PROVIDER="none"
+
+          for KEY_VAR in GEMINI_API_KEY GEMINI_API_KEY_2 GEMINI_API_KEY_3; do
+            KEY_VAL="${!KEY_VAR}"
+            [ -z "$KEY_VAL" ] && continue
+            GEMINI_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" '{contents: [{parts: [{text: $text}]}]}')
+            GEMINI_RESPONSE=$(curl -s -X POST \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$KEY_VAL" \
+              -H "Content-Type: application/json" -d "$GEMINI_PAYLOAD")
+            AI_OUTPUT=$(echo "$GEMINI_RESPONSE" | jq -r '.candidates[0].content.parts[0].text // empty' 2>/dev/null || echo "")
+            if [ -n "$AI_OUTPUT" ]; then
+              PROVIDER="Gemini ($KEY_VAR)"
+              break
+            fi
+          done
+
+          if [ -z "$AI_OUTPUT" ]; then
+            for KEY_VAR in COHERE_API_KEY COHERE_API_KEY_2 COHERE_API_KEY_3; do
+              KEY_VAL="${!KEY_VAR}"
+              [ -z "$KEY_VAL" ] && continue
+              COHERE_PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
+                '{model: "command-a-03-2025", messages: [{role: "user", content: $text}]}')
+              COHERE_RESPONSE=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+                -H "Content-Type: application/json" -H "Authorization: Bearer $KEY_VAL" -d "$COHERE_PAYLOAD")
+              AI_OUTPUT=$(echo "$COHERE_RESPONSE" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
+              if [ -n "$AI_OUTPUT" ]; then
+                PROVIDER="Cohere ($KEY_VAR, fallback)"
+                break
+              fi
+            done
+          fi
+
+          echo "Prioritization provider: $PROVIDER"
+
+          # Keep only lines that look like real http(s) URLs from the AI's output
+          echo "$AI_OUTPUT" | grep -E '^https?://' | sort -u > results/ffuf_targets.txt || true
+
+          # Safety net: if AI failed or returned nothing usable, fall back to
+          # the first 15 live hosts so the run still makes progress and finishes.
+          FILTERED_COUNT=$(wc -l < results/ffuf_targets.txt | tr -d ' ')
+          if [ "$FILTERED_COUNT" = "0" ]; then
+            echo "AI prioritization returned nothing usable — falling back to first 15 live hosts"
+            head -n 15 results/current_alive_hosts.txt > results/ffuf_targets.txt
+            echo "prioritized=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "prioritized=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "Fuzzing $(wc -l < results/ffuf_targets.txt | tr -d ' ') of $TOTAL_HOSTS live hosts"
+
       - name: Directory bruteforce with ffuf
         run: |
           > results/ffuf_current.txt
@@ -340,12 +408,13 @@ jobs:
             ffuf -u "${host}/FUZZ" \
                  -w wordlists/common.txt \
                  -mc 200,201,202,204,301,302,307,401,403 \
+                 -ac \
                  -rate 10 \
-                 -t 10 \
+                 -t 15 \
                  -timeout 8 \
                  -s \
               >> results/ffuf_current.txt || true
-          done < results/current_alive_hosts.txt
+          done < results/ffuf_targets.txt
           sort -u results/ffuf_current.txt -o results/ffuf_current.txt
 
       - name: Diff ffuf findings against previous run
@@ -449,11 +518,13 @@ jobs:
           NEW_SUBS=$(wc -l < results/new_hosts.txt 2>/dev/null | tr -d ' ' || echo 0)
           TOTAL_NUCLEI=$(wc -l < results/nuclei_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           NEW_NUCLEI=$(wc -l < results/nuclei_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          FUZZED_HOSTS=$(wc -l < results/ffuf_targets.txt 2>/dev/null | tr -d ' ' || echo 0)
           TOTAL_PATHS=$(wc -l < results/ffuf_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           NEW_PATHS=$(wc -l < results/ffuf_new.txt 2>/dev/null | tr -d ' ' || echo 0)
           JS_FILES_SCANNED=$(wc -l < results/js_urls_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           TOTAL_SECRETS=$(wc -l < results/js_secrets_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           NEW_SECRETS=$(wc -l < results/js_secrets_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          PRIORITIZED="${{ steps.prioritize.outputs.prioritized }}"
 
           {
             echo "## Citymesh Monitor — Run Summary"
@@ -465,6 +536,7 @@ jobs:
             echo "| Subdomains found | $TOTAL_SUBS | — |"
             echo "| Live hosts | $ALIVE_SUBS | $NEW_SUBS |"
             echo "| Nuclei findings | $TOTAL_NUCLEI | $NEW_NUCLEI |"
+            echo "| Hosts fuzzed ($FUZZED_HOSTS/$ALIVE_SUBS, AI-prioritized: $PRIORITIZED) | — | — |"
             echo "| Directory paths | $TOTAL_PATHS | $NEW_PATHS |"
             echo "| JS files scanned | $JS_FILES_SCANNED | — |"
             echo "| Possible JS secrets | $TOTAL_SECRETS | $NEW_SECRETS |"
