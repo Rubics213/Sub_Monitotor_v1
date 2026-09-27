@@ -406,6 +406,11 @@ jobs:
           # allowed budget than one host at a time ever could. Same wordlist,
           # same host list, same match codes as before — only the scheduling
           # changed, so coverage and findings are unaffected.
+          #
+          # Output as JSON (not -s silent) so each match keeps its host, full
+          # URL and status code — without this, findings can't be attributed
+          # to a host or triaged (a 200 could be real, or a soft-404 that
+          # slipped past calibration; a 401/403 is a different story entirely).
           cat results/ffuf_targets.txt | xargs -P 4 -I{} bash -c '
             host="$1"
             [ -z "$host" ] && exit 0
@@ -418,11 +423,33 @@ jobs:
                  -t 15 \
                  -timeout 8 \
                  -s \
-              > "results/ffuf_tmp/${safe_name}.txt" 2>/dev/null || true
+                 -o "results/ffuf_tmp/${safe_name}.json" \
+                 -of json \
+              > /dev/null 2>&1 || true
           ' _ {}
 
-          cat results/ffuf_tmp/*.txt > results/ffuf_current.txt 2>/dev/null || touch results/ffuf_current.txt
+          # Flatten every host's JSON results into "url [status]" lines
+          > results/ffuf_current.txt
+          for f in results/ffuf_tmp/*.json; do
+            [ -f "$f" ] || continue
+            jq -r '.results[]? | "\(.url) [\(.status)]"' "$f" 2>/dev/null >> results/ffuf_current.txt || true
+          done
           sort -u results/ffuf_current.txt -o results/ffuf_current.txt
+
+          # Flag hosts where matches exceed 60% of the wordlist — near-total
+          # coverage almost always means calibration missed a soft-404/catch-all
+          # page on that host, not 60%+ of paths genuinely existing.
+          WORDLIST_SIZE=$(wc -l < wordlists/common.txt | tr -d ' ')
+          THRESHOLD=$((WORDLIST_SIZE * 60 / 100))
+          > results/ffuf_suspect_hosts.txt
+          for f in results/ffuf_tmp/*.json; do
+            [ -f "$f" ] || continue
+            COUNT=$(jq '.results | length' "$f" 2>/dev/null || echo 0)
+            if [ "$COUNT" -gt "$THRESHOLD" ]; then
+              HOST_URL=$(jq -r '.config.url // "unknown"' "$f" 2>/dev/null)
+              echo "$HOST_URL — $COUNT/$WORDLIST_SIZE matched (likely soft-404, calibration missed it)" >> results/ffuf_suspect_hosts.txt
+            fi
+          done
 
       - name: Diff ffuf findings against previous run
         id: ffuf_diff
@@ -438,10 +465,20 @@ jobs:
       - name: Notify Discord if new paths found
         if: steps.ffuf_diff.outputs.new_paths != '0'
         run: |
-          PATHS=$(head -c 1700 results/ffuf_new.txt)
+          PATHS=$(head -c 1500 results/ffuf_new.txt)
           CONTENT=$(printf "**New paths found via directory bruteforce (Citymesh):**\n\`\`\`\n%s\n\`\`\`" "$PATHS")
           PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: Notify Discord if any host looks like a soft-404 false-positive source
+        if: hashFiles('results/ffuf_suspect_hosts.txt') != ''
+        run: |
+          if [ -s results/ffuf_suspect_hosts.txt ]; then
+            SUSPECTS=$(cat results/ffuf_suspect_hosts.txt)
+            CONTENT=$(printf "**Warning: possible soft-404 false positives (Citymesh ffuf run):**\nThese hosts matched over 60%% of the wordlist — likely a catch-all page, not real paths. Treat their findings as unreliable until manually checked.\n\`\`\`\n%s\n\`\`\`" "$SUSPECTS")
+            PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+            curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+          fi
 
       - name: Discover JS files with katana
         run: |
