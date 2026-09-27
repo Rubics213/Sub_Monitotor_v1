@@ -1,136 +1,263 @@
-.bash_history
-.bashrc
-.cvs
-.env
-.git
-.git/HEAD
-.git/config
-.git/index
-.git/logs/
-.history
-.htaccess
-.htpasswd
-.mysql_history
-.passwd
-.profile
-.ssh
-.svn
-.svn/entries
-.swf
-.well-known/acme-challenge
-.well-known/apple-app-site-association
-.well-known/apple-developer-merchantid-domain-association
-.well-known/ashrae
-.well-known/assetlinks.json
-.well-known/autoconfig/mail
-.well-known/browserid
-.well-known/caldav
-.well-known/carddav
-.well-known/change-password
-.well-known/coap
-.well-known/core
-.well-known/csvm
-.well-known/dnt
-.well-known/dnt-policy.txt
-.well-known/dots
-.well-known/ecips
-.well-known/enterprise-transport-security
-.well-known/est
-.well-known/genid
-.well-known/hoba
-.well-known/host-meta
-.well-known/host-meta.json
-.well-known/http-opportunistic
-.well-known/humans.txt
-.well-known/idp-proxy
-.well-known/jmap
-.well-known/jwks.json
-.well-known/keybase.txt
-.well-known/looking-glass
-.well-known/matrix
-.well-known/mercure
-.well-known/mta-sts.txt
-.well-known/mud
-.well-known/nfv-oauth-server-configuration
-.well-known/ni
-.well-known/nodeinfo
-.well-known/oauth-authorization-server
-.well-known/openid-configuration
-.well-known/openid-federation
-.well-known/openorg
-.well-known/openpgpkey
-.well-known/pki-validation
-.well-known/posh
-.well-known/pvd
-.well-known/reload-config
-.well-known/repute-template
-.well-known/resourcesync
-.well-known/security.txt
-.well-known/ssf-configuration
-.well-known/stun-key
-.well-known/thread
-.well-known/time
-.well-known/timezone
-.well-known/uma2-configuration
-.well-known/void
-.well-known/webfinger
-404
-_framework/blazor.webassembly.js
-access_log
-activity
-app
-assets
-audio
-authorized_keys
-bc
-cats
-conf
-contacts.txt
-credentials.txt
-customers
-data
-dns
-docs
-download
-error
-error_log
-events
-favicon.ico
-fc
-group
-groups
-health
-humans.txt
-id_rsa
-include
-index
-index.html
-index.php
-install
-invite
-js
-local
-locale
-mc
-mobile
-modules
-network
-payments
-phpinfo.php
-player
-player.swf
-robots.txt
-security.txt
-settings
-setup
-static
-swfobject.js
-tar.gz
-team
-ui
-vendor
-vite.config.js
-vite.config.ts
-web.config
-widgets
-xmlrpc.php
+http://pbx-dev.edpnet.net/.well-known/acme-challenge [301]
+http://pbx-dev.edpnet.net/gui [301]
+http://pbx-lcr-demo.edpnet.net/.well-known/acme-challenge [301]
+http://ru-pbx.edpnet.net/.well-known/acme-challenge [301]
+http://ru-pbx.edpnet.net/gui [301]
+https://api.citymesh.io/.well-known/http-opportunistic [200]
+https://backup.edpnet.com/.well-known/openid-configuration [200]
+https://backup.edpnet.com/bc [302]
+https://backup.edpnet.com/docs [301]
+https://backup.edpnet.com/download [302]
+https://backup.edpnet.com/fc [302]
+https://backup.edpnet.com/mc [200]
+https://backup.edpnet.com/mobile [301]
+https://backup.edpnet.com/static [301]
+https://backup.edpnet.com/ui [302]
+https://brand.citymesh.com/.well-known/acme-challenge [301]
+https://cabmanager.citymesh.com/.well-known/http-opportunistic [200]
+https://cabmanager.citymesh.com/favicon.ico [200]
+https://cabmanager.citymesh.com/robots.txt [200]
+https://cabmanager.citymesh.com/tar.gz [403]
+https://client.wifilab.be/favicon.ico [200]
+https://dashboard.citymesh.com/.well-known/http-opportunistic [200]
+https://dashboard.citymesh.com/tar.gz [403]
+https://ffai.citymesh.com/.swf [302]
+https://ffai.citymesh.com/.well-known/acme-challenge [302]
+https://ffai.citymesh.com/.well-known/apple-app-site-association [302]
+https://ffai.citymesh.com/.well-known/apple-developer-merchantid-domain-association [302]
+https://ffai.citymesh.com/.well-known/ashrae [302]
+https://ffai.citymesh.com/.well-known/assetlinks.json [302]
+https://ffai.citymesh.com/.well-known/autoconfig/mail [302]
+https://ffai.citymesh.com/.well-known/browserid [302]
+https://ffai.citymesh.com/.well-known/caldav [302]
+https://ffai.citymesh.com/.well-known/carddav [302]
+https://ffai.citymesh.com/.well-known/change-password [302]
+https://ffai.citymesh.com/.well-known/coap [302]
+https://ffai.citymesh.com/.well-known/core [302]
+https://ffai.citymesh.com/.well-known/csvm [302]
+https://ffai.citymesh.com/.well-known/dnt [302]
+https://ffai.citymesh.com/.well-known/dnt-policy.txt [302]
+https://ffai.citymesh.com/.well-known/dots [302]
+https://ffai.citymesh.com/.well-known/ecips [302]
+https://ffai.citymesh.com/.well-known/enterprise-transport-security [302]
+https://ffai.citymesh.com/.well-known/est [302]
+https://ffai.citymesh.com/.well-known/genid [302]
+https://ffai.citymesh.com/.well-known/hoba [302]
+https://ffai.citymesh.com/.well-known/host-meta [302]
+https://ffai.citymesh.com/.well-known/host-meta.json [302]
+https://ffai.citymesh.com/.well-known/http-opportunistic [200]
+https://ffai.citymesh.com/.well-known/humans.txt [302]
+https://ffai.citymesh.com/.well-known/idp-proxy [302]
+https://ffai.citymesh.com/.well-known/jmap [302]
+https://ffai.citymesh.com/.well-known/jwks.json [302]
+https://ffai.citymesh.com/.well-known/keybase.txt [302]
+https://ffai.citymesh.com/.well-known/looking-glass [302]
+https://ffai.citymesh.com/.well-known/matrix [302]
+https://ffai.citymesh.com/.well-known/mercure [302]
+https://ffai.citymesh.com/.well-known/mta-sts.txt [302]
+https://ffai.citymesh.com/.well-known/mud [302]
+https://ffai.citymesh.com/.well-known/nfv-oauth-server-configuration [302]
+https://ffai.citymesh.com/.well-known/ni [302]
+https://ffai.citymesh.com/.well-known/nodeinfo [302]
+https://ffai.citymesh.com/.well-known/oauth-authorization-server [302]
+https://ffai.citymesh.com/.well-known/openid-configuration [302]
+https://ffai.citymesh.com/.well-known/openid-federation [302]
+https://ffai.citymesh.com/.well-known/openorg [302]
+https://ffai.citymesh.com/.well-known/openpgpkey [302]
+https://ffai.citymesh.com/.well-known/pki-validation [302]
+https://ffai.citymesh.com/.well-known/posh [302]
+https://ffai.citymesh.com/.well-known/pvd [302]
+https://ffai.citymesh.com/.well-known/reload-config [302]
+https://ffai.citymesh.com/.well-known/repute-template [302]
+https://ffai.citymesh.com/.well-known/resourcesync [302]
+https://ffai.citymesh.com/.well-known/security.txt [302]
+https://ffai.citymesh.com/.well-known/ssf-configuration [302]
+https://ffai.citymesh.com/.well-known/stun-key [302]
+https://ffai.citymesh.com/.well-known/thread [302]
+https://ffai.citymesh.com/.well-known/time [302]
+https://ffai.citymesh.com/.well-known/timezone [302]
+https://ffai.citymesh.com/.well-known/uma2-configuration [302]
+https://ffai.citymesh.com/.well-known/void [302]
+https://ffai.citymesh.com/.well-known/webfinger [302]
+https://ffai.citymesh.com/_framework/blazor.webassembly.js [302]
+https://ffai.citymesh.com/contacts.txt [302]
+https://ffai.citymesh.com/credentials.txt [302]
+https://ffai.citymesh.com/favicon.ico [302]
+https://ffai.citymesh.com/humans.txt [302]
+https://ffai.citymesh.com/player.swf [302]
+https://ffai.citymesh.com/robots.txt [200]
+https://ffai.citymesh.com/security.txt [302]
+https://ffai.citymesh.com/swfobject.js [302]
+https://ffai.citymesh.com/tar.gz [403]
+https://ffai.citymesh.com/vite.config.js [302]
+https://ffai.citymesh.com/vite.config.ts [302]
+https://hcp.edpnet.net/css [301]
+https://hcp.edpnet.net/favicon.ico [200]
+https://hcp.edpnet.net/fonts [301]
+https://hcp.edpnet.net/images [301]
+https://hcp.edpnet.net/index.php [302]
+https://hcp.edpnet.net/js [301]
+https://hcp.edpnet.net/logs [301]
+https://hcp.edpnet.net/robots.txt [200]
+https://hcp.edpnet.net/tmp [301]
+https://linemon.citymesh.com/.well-known/pki-validation [301]
+https://linemon.citymesh.com/app [301]
+https://linemon.citymesh.com/assets [301]
+https://linemon.citymesh.com/audio [301]
+https://linemon.citymesh.com/conf [301]
+https://linemon.citymesh.com/data [301]
+https://linemon.citymesh.com/favicon.ico [200]
+https://linemon.citymesh.com/health [301]
+https://linemon.citymesh.com/include [301]
+https://linemon.citymesh.com/index.php [200]
+https://linemon.citymesh.com/js [301]
+https://linemon.citymesh.com/local [301]
+https://linemon.citymesh.com/locale [301]
+https://linemon.citymesh.com/modules [301]
+https://linemon.citymesh.com/robots.txt [200]
+https://linemon.citymesh.com/vendor [301]
+https://linemon.citymesh.com/widgets [301]
+https://livechat.citymesh.com/.well-known/http-opportunistic [200]
+https://livechat.citymesh.com/favicon.ico [200]
+https://livechat.citymesh.com/robots.txt [200]
+https://livechat.citymesh.com/tar.gz [403]
+https://mail.edpnet.be/favicon.ico [200]
+https://mail.edpnet.be/index.php [200]
+https://mail.edpnet.be/public_html [301]
+https://monitoring.ncentric.cloud/.well-known/http-opportunistic [200]
+https://my.citymesh.com/.swf [200]
+https://my.citymesh.com/.well-known/acme-challenge [200]
+https://my.citymesh.com/.well-known/apple-app-site-association [200]
+https://my.citymesh.com/.well-known/apple-developer-merchantid-domain-association [200]
+https://my.citymesh.com/.well-known/ashrae [200]
+https://my.citymesh.com/.well-known/assetlinks.json [200]
+https://my.citymesh.com/.well-known/autoconfig/mail [200]
+https://my.citymesh.com/.well-known/browserid [200]
+https://my.citymesh.com/.well-known/caldav [200]
+https://my.citymesh.com/.well-known/carddav [200]
+https://my.citymesh.com/.well-known/change-password [200]
+https://my.citymesh.com/.well-known/coap [200]
+https://my.citymesh.com/.well-known/core [200]
+https://my.citymesh.com/.well-known/csvm [200]
+https://my.citymesh.com/.well-known/dnt [200]
+https://my.citymesh.com/.well-known/dnt-policy.txt [200]
+https://my.citymesh.com/.well-known/dots [200]
+https://my.citymesh.com/.well-known/ecips [200]
+https://my.citymesh.com/.well-known/enterprise-transport-security [200]
+https://my.citymesh.com/.well-known/est [200]
+https://my.citymesh.com/.well-known/genid [200]
+https://my.citymesh.com/.well-known/hoba [200]
+https://my.citymesh.com/.well-known/host-meta [200]
+https://my.citymesh.com/.well-known/host-meta.json [200]
+https://my.citymesh.com/.well-known/http-opportunistic [200]
+https://my.citymesh.com/.well-known/humans.txt [200]
+https://my.citymesh.com/.well-known/idp-proxy [200]
+https://my.citymesh.com/.well-known/jmap [200]
+https://my.citymesh.com/.well-known/jwks.json [200]
+https://my.citymesh.com/.well-known/keybase.txt [200]
+https://my.citymesh.com/.well-known/looking-glass [200]
+https://my.citymesh.com/.well-known/matrix [200]
+https://my.citymesh.com/.well-known/mercure [200]
+https://my.citymesh.com/.well-known/mta-sts.txt [200]
+https://my.citymesh.com/.well-known/mud [200]
+https://my.citymesh.com/.well-known/nfv-oauth-server-configuration [200]
+https://my.citymesh.com/.well-known/ni [200]
+https://my.citymesh.com/.well-known/nodeinfo [200]
+https://my.citymesh.com/.well-known/oauth-authorization-server [200]
+https://my.citymesh.com/.well-known/openid-configuration [200]
+https://my.citymesh.com/.well-known/openid-federation [200]
+https://my.citymesh.com/.well-known/openorg [200]
+https://my.citymesh.com/.well-known/openpgpkey [200]
+https://my.citymesh.com/.well-known/pki-validation [200]
+https://my.citymesh.com/.well-known/posh [200]
+https://my.citymesh.com/.well-known/pvd [200]
+https://my.citymesh.com/.well-known/reload-config [200]
+https://my.citymesh.com/.well-known/repute-template [200]
+https://my.citymesh.com/.well-known/resourcesync [200]
+https://my.citymesh.com/.well-known/security.txt [200]
+https://my.citymesh.com/.well-known/ssf-configuration [200]
+https://my.citymesh.com/.well-known/stun-key [200]
+https://my.citymesh.com/.well-known/thread [200]
+https://my.citymesh.com/.well-known/time [200]
+https://my.citymesh.com/.well-known/timezone [200]
+https://my.citymesh.com/.well-known/uma2-configuration [200]
+https://my.citymesh.com/.well-known/void [200]
+https://my.citymesh.com/.well-known/webfinger [200]
+https://my.citymesh.com/contacts.txt [200]
+https://my.citymesh.com/credentials.txt [200]
+https://my.citymesh.com/favicon.ico [200]
+https://my.citymesh.com/humans.txt [200]
+https://my.citymesh.com/player.swf [200]
+https://my.citymesh.com/robots.txt [200]
+https://my.citymesh.com/security.txt [200]
+https://my.citymesh.com/tar.gz [403]
+https://my.citymesh.com/vite.config.ts [200]
+https://netbird.citymesh.net/.bash_history [403]
+https://netbird.citymesh.net/.bashrc [403]
+https://netbird.citymesh.net/.cvs [403]
+https://netbird.citymesh.net/.env [403]
+https://netbird.citymesh.net/.git [403]
+https://netbird.citymesh.net/.git/HEAD [403]
+https://netbird.citymesh.net/.git/config [403]
+https://netbird.citymesh.net/.git/index [403]
+https://netbird.citymesh.net/.git/logs/ [403]
+https://netbird.citymesh.net/.history [403]
+https://netbird.citymesh.net/.htaccess [403]
+https://netbird.citymesh.net/.htpasswd [403]
+https://netbird.citymesh.net/.mysql_history [403]
+https://netbird.citymesh.net/.passwd [403]
+https://netbird.citymesh.net/.profile [403]
+https://netbird.citymesh.net/.ssh [403]
+https://netbird.citymesh.net/.svn [403]
+https://netbird.citymesh.net/.svn/entries [403]
+https://netbird.citymesh.net/.well-known/http-opportunistic [200]
+https://netbird.citymesh.net/.well-known/security.txt [200]
+https://netbird.citymesh.net/404 [200]
+https://netbird.citymesh.net/access_log [403]
+https://netbird.citymesh.net/activity [200]
+https://netbird.citymesh.net/assets [301]
+https://netbird.citymesh.net/authorized_keys [403]
+https://netbird.citymesh.net/customers [200]
+https://netbird.citymesh.net/dns [200]
+https://netbird.citymesh.net/error [200]
+https://netbird.citymesh.net/error_log [403]
+https://netbird.citymesh.net/events [301]
+https://netbird.citymesh.net/favicon.ico [200]
+https://netbird.citymesh.net/group [200]
+https://netbird.citymesh.net/groups [200]
+https://netbird.citymesh.net/id_rsa [403]
+https://netbird.citymesh.net/index [200]
+https://netbird.citymesh.net/index.html [200]
+https://netbird.citymesh.net/install [200]
+https://netbird.citymesh.net/invite [200]
+https://netbird.citymesh.net/local [301]
+https://netbird.citymesh.net/network [200]
+https://netbird.citymesh.net/phpinfo.php [403]
+https://netbird.citymesh.net/settings [200]
+https://netbird.citymesh.net/setup [200]
+https://netbird.citymesh.net/team [200]
+https://netbird.citymesh.net/web.config [403]
+https://odoo.citymesh.com/.swf [302]
+https://odoo.citymesh.com/.well-known/acme-challenge [301]
+https://odoo.citymesh.com/.well-known/http-opportunistic [200]
+https://odoo.citymesh.com/_framework/blazor.webassembly.js [302]
+https://odoo.citymesh.com/contacts.txt [302]
+https://odoo.citymesh.com/credentials.txt [302]
+https://odoo.citymesh.com/favicon.ico [200]
+https://odoo.citymesh.com/humans.txt [302]
+https://odoo.citymesh.com/player.swf [302]
+https://odoo.citymesh.com/robots.txt [200]
+https://odoo.citymesh.com/security.txt [302]
+https://odoo.citymesh.com/swfobject.js [302]
+https://odoo.citymesh.com/tar.gz [403]
+https://odoo.citymesh.com/vite.config.js [302]
+https://odoo.citymesh.com/vite.config.ts [302]
+https://odoo2.citymesh.com/.well-known/acme-challenge [301]
+https://odoo2.citymesh.com/Documents and Settings [302]
+https://odoo2.citymesh.com/Program Files [302]
+https://odoo2.citymesh.com/en [200]
+https://odoo2.citymesh.com/favicon.ico [200]
+https://odoo2.citymesh.com/logo [200]
+https://odoo2.citymesh.com/reports list [302]
+https://odoo2.citymesh.com/robots.txt [200]
+https://odoo2.citymesh.com/sitemap.xml [200]
