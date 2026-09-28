@@ -2634,7 +2634,6 @@
 213.219.179.97.edpnet.net
 213.219.179.98.edpnet.net
 213.219.179.99.edpnet.net
-213.219.191.169.adslpower.by.edpnet.nl
 219.176.2.sdslpower.by.edpnet.nl
 219.176.7.sdslpower.by.edpnet.nl
 239.static.edpnet.be
@@ -4491,10 +4490,8 @@ aalst.citymesh.com
 acelectronics.edpnet.be
 acp.citymesh.guide
 adam01.edpnet.net
-adje.edpnet.nl
 admin.edpnet.be
 adserver.citymesh.com
-adsl.edpnet.nl
 adslgwbe.edpnet.net
 adslsanslignetelephonique.edpnet.be
 adslwithouttelephoneline.edpnet.be
@@ -4559,7 +4556,6 @@ auth-stg.wifilab.be
 auth-testing.wifilab.be
 auth-tst.citymesh.com
 auth-tst.wifilab.be
-auth.citymesh-connect.com
 auth.citymesh.com
 auth.wifilab.be
 authprofile.myiot.be
@@ -4640,7 +4636,6 @@ colt.mew.citymesh.net
 colt.mewtwo.citymesh.net
 colt.nidoking.citymesh.net
 conditions.edpnet.net
-conf.edpnet.nl
 controller.citymesh.com
 core-api-prd.wifilab.be
 core-api-staging.wifilab.be
@@ -4675,6 +4670,7 @@ dialsn02.sn.be.edpnet.net
 directory.citymesh.be
 directory.citymesh.com
 directory.ncentric.com
+diskcopypro.ncentric.com
 dkim.edpnet.be
 dns01.edpnet.net
 dns02.edpnet.net
@@ -4683,7 +4679,6 @@ dockerhub.citymesh.com
 docs.citymesh.com
 download.edpnet.be
 download.edpnet.net
-download.edpnet.nl
 drone-reporting.citymesh.net
 dronehub-api.citymesh.com
 dronehub.citymesh.com
@@ -4692,7 +4687,6 @@ dsg.citymeshconnect.com
 du.edpnet.net
 dummy.citymesh.com
 e.citymesh.guide
-edpnetnl.edpnet.nl
 element.citymesh.com
 email.edpnet.net
 en.connectow.eu
@@ -4785,7 +4779,6 @@ hostmaster.towereye.be
 hyperbox.ncentric.com
 icecast01.edpnet.net
 ignite.edpnet.be
-ignite.edpnet.nl
 iimahd.citymesh.guide
 informatik.citymesh.guide
 internet-staging.citymesh.com
@@ -4797,6 +4790,7 @@ iot-staging.wifilab.be
 iot-testing.wifilab.be
 iot.citymesh.com
 iot.wifilab.be
+iphone.ncentric.com
 issues.edpnet.be
 issues.edpnet.net
 issues.edpnet.nl
@@ -4874,7 +4868,6 @@ mail.drone-reporting.citymesh.net
 mail.edpnet.be
 mail.edpnet.com
 mail.edpnet.net
-mail.edpnet.nl
 mail.engiem2m.com
 mail.extra.edpnet.net
 mail.gowifi.be
@@ -4929,7 +4922,6 @@ mx.edpnet.be
 my.citymesh.com
 my.edpnet.be
 my.edpnet.net
-my.edpnet.nl
 n2.edpnet.be
 nac.citymesh.com
 nagios-cpe.edpnet.be
@@ -4942,6 +4934,7 @@ ndl2-rb01.edpnet.be
 ndl3-rb01.edpnet.be
 ndn-dispatcher.citymesh.com
 nekkerhalbrusselsnorth.citymesh.com
+neopets.ncentric.com
 netbird-new.citymesh.net
 netbird.citymesh.net
 netbox.citymesh.com
@@ -4979,7 +4972,6 @@ oi.ncentric.cloud
 oksana.edpnet.be
 olivier.debaere.edpnet.be
 onlinebackup.edpnet.net
-onlinebackup.edpnet.nl
 opendata.citymesh.com
 opennms.citymesh.com
 opscim.citymesh.com
@@ -4995,9 +4987,7 @@ orbit-staging.ncentric.com
 order.citymesh.be
 order.citymesh.com
 order.edpnet.be
-order.edpnet.nl
 over.edpnet.be
-over.edpnet.nl
 owa.citymesh.be
 owa.edpnet.net
 partners.edpnet.net
@@ -5047,7 +5037,7 @@ projects.citymesh.com
 projects.citymesh.guide
 provant.citymesh.be
 proxy.edpnet.be
-proxy.edpnet.nl
+ps2.ncentric.com
 putty.edpnet.net
 radius.citymesh.com
 ranger.citymesh.com
@@ -5064,7 +5054,6 @@ relay-b02.edpnet.be
 relay-b03.edpnet.be
 relay.citymesh.be
 relay.edpnet.be
-relay.edpnet.nl
 remote.towereye.be
 remote.wmb.ncentric.cloud
 remote01.ncentric.cloud
@@ -5076,6 +5065,7 @@ repo.ncentric.cloud
 repositories.citymesh.com
 repositories.local.citymesh.com
 research.citymesh.net
+ringtones.ncentric.com
 roeselare.citymesh.com
 rootsweb.citymesh.guide
 router01.antlcl.be.edpnet.net
@@ -5100,10 +5090,8 @@ safecity.citymesh.com
 safety-drones.ncentric.cloud
 safetydrone.citymesh.com
 saipem.ncentric.cloud
-satelliet.edpnet.nl
 sbc1.tgw-test.edpnet.net
 sbc2.tgw-test.edpnet.net
-sdsl.edpnet.nl
 seahub.ncentric.cloud
 search.citymesh.guide
 secure.ncentric.cloud
@@ -5117,7 +5105,6 @@ shoutcast01.edpnet.net
 signage.flex.citymesh.net
 smtp.edpnet.be
 smtp.edpnet.com
-smtp.edpnet.nl
 snippet.citymesh.com
 softphone.citymeshconnect.com
 spco.towereye.be
@@ -5322,7 +5309,6 @@ stagingstop.wifinmbssncb.be
 static.edpnet.be
 static.ncentric.cloud
 stats.edpnet.net
-stats.edpnet.nl
 status.edpnet.net
 stg.antwerpfreewifi.be
 stg.wifinmbssncb.be
@@ -5397,7 +5383,6 @@ testing.wifilab.be
 testpage.edpnet.net
 testup.edpnet.net
 thingsboard.citymesh.com
-thuis.edpnet.nl
 tomato.citymesh.com
 tracker.towereye.be
 training.citymesh.com
@@ -5430,24 +5415,21 @@ vil2-rb01.edpnet.be
 vil3-rb01.edpnet.be
 vma.edpnet.be
 vms12.towereye.be
-voip.edpnet.nl
 voipproxy.edpnet.nl
 vouch.citymesh.com
 vpbx.edpnet.net
 vpn.ncentric.cloud
 wakanda.citymesh.com
-wat_kan_ik_doen_met_mijn_gratis_webruimte_op_users.edpnet.nl
 wbmh.edpnet.net
 webmail.edpnet.be
 webmail.edpnet.net
-webmail.edpnet.nl
 webuse.edpnet.net
 westtoer.citymesh.com
-whoami.citymesh-connect.com
 whoami.citymesh.guide
 whoami.local.citymesh.com
 wifi.guest.edpnet.net
 wifilab.citymesh.com
+wiigames.ncentric.com
 wijnegemshopping.citymesh.com
 wiki.edpnet.be
 wiki.edpnet.net
@@ -5471,7 +5453,6 @@ www.backup.edpnet.com
 www.biotechnology-citymesh.com
 www.campusinsight.citymesh.com
 www.career.edpnet.com
-www.career.edpnet.nl
 www.chef.local.citymesh.com
 www.citymesh.be
 www.citymesh.com
@@ -5504,11 +5485,9 @@ www.ncentric.com
 www.order.citymesh.be
 www.order.edpnet.be
 www.portal.wflb.be
-www.portal.wifinmbssncb.be
 www.privacy.citymesh.com
 www.ps-radiocom.be
 www.ps-radiocom.com
-www.relax.edpnet.nl
 www.research.citymesh.net
 www.safety-drones.be
 www.safety-drones.com
@@ -5526,11 +5505,9 @@ www.towereye.eu
 www.webmail.edpnet.be
 www.wifi.guest.edpnet.net
 www.wifilab.be
-www.wifinmbssncb.be
 www.winbu01.edpnet.net
 www.wintercircus.citymesh.com
 www.www.edpnet.be
-www.zakelijk.edpnet.nl
 www2.citymesh.com
 www2.ncentric.com
 www5b.citymesh.guide
@@ -5541,5 +5518,4 @@ xenswitch-stack.bxl.be.edpnet.net
 xenswitch-stack.sn.be.edpnet.net
 xml.edpnet.be
 xom1.ncentric.cloud
-zakelijk.edpnet.nl
 zulip.citymesh.net

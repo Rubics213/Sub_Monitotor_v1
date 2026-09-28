@@ -1,2 +1,0 @@
-https://ffai.citymesh.com/tar.gz -> bypass via path variant 'https://ffai.citymesh.com/TAR.GZ' returned 200
-https://my.citymesh.com/tar.gz -> bypass via path variant 'https://my.citymesh.com/TAR.GZ' returned 200
