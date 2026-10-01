@@ -1,3 +1,4 @@
+https://app.ncentric.cloud/player [301] -> http://app.ncentric.cloud/player/
 https://backup.edpnet.com/.well-known/openid-configuration [200]
 https://backup.edpnet.com/bc [302] -> https://backup.edpnet.com/ui/
 https://backup.edpnet.com/docs [301] -> http://backup.edpnet.com/api/cyberpsa/docs
@@ -6,98 +7,24 @@ https://backup.edpnet.com/fc [302] -> /fc/
 https://backup.edpnet.com/mc [200]
 https://backup.edpnet.com/mobile [301] -> http://backup.edpnet.com/mobile/
 https://backup.edpnet.com/static [301] -> http://backup.edpnet.com/static/
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=codcuefblothucpowgdjsujz
+https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=aniiuvspmmrycpfyjtybcgxc
 https://cabmanager.citymesh.com/tar.gz [403]
-https://ffai.citymesh.com/.swf [302] -> /login
-https://ffai.citymesh.com/.well-known/apple-app-site-association [302] -> /login
-https://ffai.citymesh.com/.well-known/apple-developer-merchantid-domain-association [302] -> /login
-https://ffai.citymesh.com/.well-known/ashrae [302] -> /login
-https://ffai.citymesh.com/.well-known/assetlinks.json [302] -> /login
-https://ffai.citymesh.com/.well-known/autoconfig/mail [302] -> /login
-https://ffai.citymesh.com/.well-known/browserid [302] -> /login
-https://ffai.citymesh.com/.well-known/caldav [302] -> /login
-https://ffai.citymesh.com/.well-known/carddav [302] -> /login
-https://ffai.citymesh.com/.well-known/change-password [302] -> /profile/password
-https://ffai.citymesh.com/.well-known/coap [302] -> /login
-https://ffai.citymesh.com/.well-known/core [302] -> /login
-https://ffai.citymesh.com/.well-known/csvm [302] -> /login
-https://ffai.citymesh.com/.well-known/dnt [302] -> /login
-https://ffai.citymesh.com/.well-known/dnt-policy.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/dots [302] -> /login
-https://ffai.citymesh.com/.well-known/ecips [302] -> /login
-https://ffai.citymesh.com/.well-known/enterprise-transport-security [302] -> /login
-https://ffai.citymesh.com/.well-known/est [302] -> /login
-https://ffai.citymesh.com/.well-known/genid [302] -> /login
-https://ffai.citymesh.com/.well-known/hoba [302] -> /login
-https://ffai.citymesh.com/.well-known/host-meta [302] -> /login
-https://ffai.citymesh.com/.well-known/host-meta.json [302] -> /login
-https://ffai.citymesh.com/.well-known/humans.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/idp-proxy [302] -> /login
-https://ffai.citymesh.com/.well-known/jmap [302] -> /login
-https://ffai.citymesh.com/.well-known/jwks.json [302] -> /login
-https://ffai.citymesh.com/.well-known/keybase.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/looking-glass [302] -> /login
-https://ffai.citymesh.com/.well-known/matrix [302] -> /login
-https://ffai.citymesh.com/.well-known/mercure [302] -> /login
-https://ffai.citymesh.com/.well-known/mta-sts.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/mud [302] -> /login
-https://ffai.citymesh.com/.well-known/nfv-oauth-server-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/ni [302] -> /login
-https://ffai.citymesh.com/.well-known/nodeinfo [302] -> /login
-https://ffai.citymesh.com/.well-known/oauth-authorization-server [302] -> /login
-https://ffai.citymesh.com/.well-known/openid-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/openid-federation [302] -> /login
-https://ffai.citymesh.com/.well-known/openorg [302] -> /login
-https://ffai.citymesh.com/.well-known/openpgpkey [302] -> /login
-https://ffai.citymesh.com/.well-known/posh [302] -> /login
-https://ffai.citymesh.com/.well-known/pvd [302] -> /login
-https://ffai.citymesh.com/.well-known/reload-config [302] -> /login
-https://ffai.citymesh.com/.well-known/repute-template [302] -> /login
-https://ffai.citymesh.com/.well-known/resourcesync [302] -> /login
-https://ffai.citymesh.com/.well-known/security.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/ssf-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/stun-key [302] -> /login
-https://ffai.citymesh.com/.well-known/thread [302] -> /login
-https://ffai.citymesh.com/.well-known/time [302] -> /login
-https://ffai.citymesh.com/.well-known/timezone [302] -> /login
-https://ffai.citymesh.com/.well-known/uma2-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/void [302] -> /login
-https://ffai.citymesh.com/.well-known/webfinger [302] -> /login
-https://ffai.citymesh.com/_framework/blazor.webassembly.js [302] -> /login
-https://ffai.citymesh.com/contacts.txt [302] -> /login
-https://ffai.citymesh.com/credentials.txt [302] -> /login
-https://ffai.citymesh.com/humans.txt [302] -> /login
-https://ffai.citymesh.com/player.swf [302] -> /login
-https://ffai.citymesh.com/security.txt [302] -> /login
-https://ffai.citymesh.com/swfobject.js [302] -> /login
-https://ffai.citymesh.com/tar.gz [403]
-https://ffai.citymesh.com/vite.config.js [302] -> /login
-https://ffai.citymesh.com/vite.config.ts [302] -> /login
-https://hcp.edpnet.net/.gitignore [200]
-https://hcp.edpnet.net/css [301] -> https://hcp.edpnet.net/css/
-https://hcp.edpnet.net/fonts [301] -> https://hcp.edpnet.net/fonts/
-https://hcp.edpnet.net/images [301] -> https://hcp.edpnet.net/images/
-https://hcp.edpnet.net/index.php [302] -> https://hcp.edpnet.net/
-https://hcp.edpnet.net/js [301] -> https://hcp.edpnet.net/js/
-https://hcp.edpnet.net/logs [301] -> https://hcp.edpnet.net/logs/
-https://hcp.edpnet.net/tmp [301] -> https://hcp.edpnet.net/tmp/
-https://linemon.citymesh.com/app [301] -> https://linemon.citymesh.com/app/
-https://linemon.citymesh.com/assets [301] -> https://linemon.citymesh.com/assets/
-https://linemon.citymesh.com/audio [301] -> https://linemon.citymesh.com/audio/
-https://linemon.citymesh.com/conf [301] -> https://linemon.citymesh.com/conf/
-https://linemon.citymesh.com/data [301] -> https://linemon.citymesh.com/data/
-https://linemon.citymesh.com/health [301] -> https://linemon.citymesh.com/health/
-https://linemon.citymesh.com/include [301] -> https://linemon.citymesh.com/include/
+https://dashboard.citymesh.com/tar.gz [403]
+https://linemon.citymesh.com/app [301] -> http://linemon.citymesh.com/app/
+https://linemon.citymesh.com/assets [301] -> http://linemon.citymesh.com/assets/
+https://linemon.citymesh.com/audio [301] -> http://linemon.citymesh.com/audio/
+https://linemon.citymesh.com/conf [301] -> http://linemon.citymesh.com/conf/
+https://linemon.citymesh.com/data [301] -> http://linemon.citymesh.com/data/
+https://linemon.citymesh.com/health [301] -> http://linemon.citymesh.com/health/
+https://linemon.citymesh.com/include [301] -> http://linemon.citymesh.com/include/
 https://linemon.citymesh.com/index.php [200]
-https://linemon.citymesh.com/js [301] -> https://linemon.citymesh.com/js/
-https://linemon.citymesh.com/local [301] -> https://linemon.citymesh.com/local/
-https://linemon.citymesh.com/locale [301] -> https://linemon.citymesh.com/locale/
-https://linemon.citymesh.com/modules [301] -> https://linemon.citymesh.com/modules/
-https://linemon.citymesh.com/vendor [301] -> https://linemon.citymesh.com/vendor/
-https://linemon.citymesh.com/widgets [301] -> https://linemon.citymesh.com/widgets/
+https://linemon.citymesh.com/js [301] -> http://linemon.citymesh.com/js/
+https://linemon.citymesh.com/local [301] -> http://linemon.citymesh.com/local/
+https://linemon.citymesh.com/locale [301] -> http://linemon.citymesh.com/locale/
+https://linemon.citymesh.com/modules [301] -> http://linemon.citymesh.com/modules/
+https://linemon.citymesh.com/vendor [301] -> http://linemon.citymesh.com/vendor/
+https://linemon.citymesh.com/widgets [301] -> http://linemon.citymesh.com/widgets/
 https://livechat.citymesh.com/tar.gz [403]
-https://mail.edpnet.nl/index.php [200]
-https://mail.edpnet.nl/public_html [301] -> https://mail.edpnet.nl/public_html/
 https://my.citymesh.com/.swf [200]
 https://my.citymesh.com/.well-known/apple-app-site-association [200]
 https://my.citymesh.com/.well-known/apple-developer-merchantid-domain-association [200]
@@ -203,6 +130,7 @@ https://netbird.citymesh.net/settings [200]
 https://netbird.citymesh.net/setup [200]
 https://netbird.citymesh.net/team [200]
 https://netbird.citymesh.net/web.config [403]
+https://notulen.citymesh.com/tar.gz [403]
 https://odoo.citymesh.com/.swf [302] -> https://odoo.citymesh.com/en/.swf
 https://odoo.citymesh.com/_framework/blazor.webassembly.js [302] -> https://odoo.citymesh.com/en/blazor.webassembly.js
 https://odoo.citymesh.com/contacts.txt [302] -> https://odoo.citymesh.com/en/contacts.txt
@@ -214,12 +142,8 @@ https://odoo.citymesh.com/swfobject.js [302] -> https://odoo.citymesh.com/en/swf
 https://odoo.citymesh.com/tar.gz [403]
 https://odoo.citymesh.com/vite.config.js [302] -> https://odoo.citymesh.com/en/vite.config.js
 https://odoo.citymesh.com/vite.config.ts [302] -> https://odoo.citymesh.com/en/vite.config.ts
-https://odoo2.citymesh.com/Documents and Settings [302] -> https://odoo2.citymesh.com/en/Documents%20and%20Settings
-https://odoo2.citymesh.com/Program Files [302] -> https://odoo2.citymesh.com/en/Program%20Files
-https://odoo2.citymesh.com/logo [200]
-https://odoo2.citymesh.com/reports list [302] -> https://odoo2.citymesh.com/en/reports%20list
-https://odoo2.citymesh.com/sitemap.xml [200]
-https://portal.towereye.be/.git/logs/ [301] -> http://towereye-portal.local.citymesh.com/.git/logs
-https://portal.towereye.be/assets [301] -> http://towereye-portal.local.citymesh.com/assets/
-https://portal.towereye.be/cgi-bin/ [301] -> http://towereye-portal.local.citymesh.com/cgi-bin
-https://portal.towereye.be/vendor [301] -> http://towereye-portal.local.citymesh.com/vendor/
+https://pbx-concordia.edpnet.net/gui [301] -> https://pbx-concordia.edpnet.net/gui/
+https://pbx-demo.edpnet.net/gui [301] -> https://pbx-demo.edpnet.net/gui/
+https://pbx-kegelsvana.edpnet.net/gui [301] -> https://pbx-kegelsvana.edpnet.net/gui/
+https://pbx-movemedia.edpnet.net/gui [301] -> https://pbx-movemedia.edpnet.net/gui/
+https://pbx-siveco.edpnet.net/gui [301] -> https://pbx-siveco.edpnet.net/gui/
