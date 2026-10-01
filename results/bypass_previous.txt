@@ -1,1 +1,0 @@
-https://my.citymesh.com/tar.gz -> bypass via path variant 'https://my.citymesh.com/TAR.GZ' returned 200
