@@ -1,3 +1,73 @@
+http://livechat.citymesh.com/.swf [301] -> https://livechat.citymesh.com/.swf
+http://livechat.citymesh.com/.well-known/apple-app-site-association [301] -> https://livechat.citymesh.com/.well-known/apple-app-site-association
+http://livechat.citymesh.com/.well-known/apple-developer-merchantid-domain-association [301] -> https://livechat.citymesh.com/.well-known/apple-developer-merchantid-domain-association
+http://livechat.citymesh.com/.well-known/ashrae [301] -> https://livechat.citymesh.com/.well-known/ashrae
+http://livechat.citymesh.com/.well-known/assetlinks.json [301] -> https://livechat.citymesh.com/.well-known/assetlinks.json
+http://livechat.citymesh.com/.well-known/autoconfig/mail [301] -> https://livechat.citymesh.com/.well-known/autoconfig/mail
+http://livechat.citymesh.com/.well-known/browserid [301] -> https://livechat.citymesh.com/.well-known/browserid
+http://livechat.citymesh.com/.well-known/caldav [301] -> https://livechat.citymesh.com/.well-known/caldav
+http://livechat.citymesh.com/.well-known/carddav [301] -> https://livechat.citymesh.com/.well-known/carddav
+http://livechat.citymesh.com/.well-known/change-password [301] -> https://livechat.citymesh.com/.well-known/change-password
+http://livechat.citymesh.com/.well-known/coap [301] -> https://livechat.citymesh.com/.well-known/coap
+http://livechat.citymesh.com/.well-known/core [301] -> https://livechat.citymesh.com/.well-known/core
+http://livechat.citymesh.com/.well-known/csvm [301] -> https://livechat.citymesh.com/.well-known/csvm
+http://livechat.citymesh.com/.well-known/dnt [301] -> https://livechat.citymesh.com/.well-known/dnt
+http://livechat.citymesh.com/.well-known/dnt-policy.txt [301] -> https://livechat.citymesh.com/.well-known/dnt-policy.txt
+http://livechat.citymesh.com/.well-known/dots [301] -> https://livechat.citymesh.com/.well-known/dots
+http://livechat.citymesh.com/.well-known/ecips [301] -> https://livechat.citymesh.com/.well-known/ecips
+http://livechat.citymesh.com/.well-known/enterprise-transport-security [301] -> https://livechat.citymesh.com/.well-known/enterprise-transport-security
+http://livechat.citymesh.com/.well-known/est [301] -> https://livechat.citymesh.com/.well-known/est
+http://livechat.citymesh.com/.well-known/genid [301] -> https://livechat.citymesh.com/.well-known/genid
+http://livechat.citymesh.com/.well-known/hoba [301] -> https://livechat.citymesh.com/.well-known/hoba
+http://livechat.citymesh.com/.well-known/host-meta [301] -> https://livechat.citymesh.com/.well-known/host-meta
+http://livechat.citymesh.com/.well-known/host-meta.json [301] -> https://livechat.citymesh.com/.well-known/host-meta.json
+http://livechat.citymesh.com/.well-known/humans.txt [301] -> https://livechat.citymesh.com/.well-known/humans.txt
+http://livechat.citymesh.com/.well-known/idp-proxy [301] -> https://livechat.citymesh.com/.well-known/idp-proxy
+http://livechat.citymesh.com/.well-known/jmap [301] -> https://livechat.citymesh.com/.well-known/jmap
+http://livechat.citymesh.com/.well-known/jwks.json [301] -> https://livechat.citymesh.com/.well-known/jwks.json
+http://livechat.citymesh.com/.well-known/keybase.txt [301] -> https://livechat.citymesh.com/.well-known/keybase.txt
+http://livechat.citymesh.com/.well-known/looking-glass [301] -> https://livechat.citymesh.com/.well-known/looking-glass
+http://livechat.citymesh.com/.well-known/matrix [301] -> https://livechat.citymesh.com/.well-known/matrix
+http://livechat.citymesh.com/.well-known/mercure [301] -> https://livechat.citymesh.com/.well-known/mercure
+http://livechat.citymesh.com/.well-known/mta-sts.txt [301] -> https://livechat.citymesh.com/.well-known/mta-sts.txt
+http://livechat.citymesh.com/.well-known/mud [301] -> https://livechat.citymesh.com/.well-known/mud
+http://livechat.citymesh.com/.well-known/nfv-oauth-server-configuration [301] -> https://livechat.citymesh.com/.well-known/nfv-oauth-server-configuration
+http://livechat.citymesh.com/.well-known/ni [301] -> https://livechat.citymesh.com/.well-known/ni
+http://livechat.citymesh.com/.well-known/nodeinfo [301] -> https://livechat.citymesh.com/.well-known/nodeinfo
+http://livechat.citymesh.com/.well-known/oauth-authorization-server [301] -> https://livechat.citymesh.com/.well-known/oauth-authorization-server
+http://livechat.citymesh.com/.well-known/openid-configuration [301] -> https://livechat.citymesh.com/.well-known/openid-configuration
+http://livechat.citymesh.com/.well-known/openid-federation [301] -> https://livechat.citymesh.com/.well-known/openid-federation
+http://livechat.citymesh.com/.well-known/openorg [301] -> https://livechat.citymesh.com/.well-known/openorg
+http://livechat.citymesh.com/.well-known/openpgpkey [301] -> https://livechat.citymesh.com/.well-known/openpgpkey
+http://livechat.citymesh.com/.well-known/posh [301] -> https://livechat.citymesh.com/.well-known/posh
+http://livechat.citymesh.com/.well-known/pvd [301] -> https://livechat.citymesh.com/.well-known/pvd
+http://livechat.citymesh.com/.well-known/reload-config [301] -> https://livechat.citymesh.com/.well-known/reload-config
+http://livechat.citymesh.com/.well-known/repute-template [301] -> https://livechat.citymesh.com/.well-known/repute-template
+http://livechat.citymesh.com/.well-known/resourcesync [301] -> https://livechat.citymesh.com/.well-known/resourcesync
+http://livechat.citymesh.com/.well-known/security.txt [301] -> https://livechat.citymesh.com/.well-known/security.txt
+http://livechat.citymesh.com/.well-known/ssf-configuration [301] -> https://livechat.citymesh.com/.well-known/ssf-configuration
+http://livechat.citymesh.com/.well-known/stun-key [301] -> https://livechat.citymesh.com/.well-known/stun-key
+http://livechat.citymesh.com/.well-known/thread [301] -> https://livechat.citymesh.com/.well-known/thread
+http://livechat.citymesh.com/.well-known/time [301] -> https://livechat.citymesh.com/.well-known/time
+http://livechat.citymesh.com/.well-known/timezone [301] -> https://livechat.citymesh.com/.well-known/timezone
+http://livechat.citymesh.com/.well-known/uma2-configuration [301] -> https://livechat.citymesh.com/.well-known/uma2-configuration
+http://livechat.citymesh.com/.well-known/void [301] -> https://livechat.citymesh.com/.well-known/void
+http://livechat.citymesh.com/.well-known/webfinger [301] -> https://livechat.citymesh.com/.well-known/webfinger
+http://livechat.citymesh.com/_framework/blazor.webassembly.js [301] -> https://livechat.citymesh.com/_framework/blazor.webassembly.js
+http://livechat.citymesh.com/contacts.txt [301] -> https://livechat.citymesh.com/contacts.txt
+http://livechat.citymesh.com/credentials.txt [301] -> https://livechat.citymesh.com/credentials.txt
+http://livechat.citymesh.com/humans.txt [301] -> https://livechat.citymesh.com/humans.txt
+http://livechat.citymesh.com/player.swf [301] -> https://livechat.citymesh.com/player.swf
+http://livechat.citymesh.com/security.txt [301] -> https://livechat.citymesh.com/security.txt
+http://livechat.citymesh.com/swfobject.js [301] -> https://livechat.citymesh.com/swfobject.js
+http://livechat.citymesh.com/tar.gz [301] -> https://livechat.citymesh.com/tar.gz
+http://livechat.citymesh.com/vite.config.js [301] -> https://livechat.citymesh.com/vite.config.js
+http://livechat.citymesh.com/vite.config.ts [301] -> https://livechat.citymesh.com/vite.config.ts
+http://lweb05.edpnet.be/blocked [301] -> http://lweb05.edpnet.be/blocked/
+http://lweb05.edpnet.be/health [301] -> http://lweb05.edpnet.be/health/
+http://lweb05.edpnet.be/maintenance [301] -> http://lweb05.edpnet.be/maintenance/
+http://lweb05.edpnet.be/pma [301] -> http://lweb05.edpnet.be/pma/
+http://pbx-dev.edpnet.net/gui [301] -> http://pbx-dev.edpnet.net/gui/
 https://api-gateway.citymesh.com/.bash_history [403]
 https://api-gateway.citymesh.com/.bashrc [403]
 https://api-gateway.citymesh.com/.cvs [403]
@@ -35,7 +105,7 @@ https://backup.edpnet.com/fc [302] -> /fc/
 https://backup.edpnet.com/mc [200]
 https://backup.edpnet.com/mobile [301] -> http://backup.edpnet.com/mobile/
 https://backup.edpnet.com/static [301] -> http://backup.edpnet.com/static/
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=srqzrzaghdybdoktzlhexktt
+https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=fjckrbgwiuxlyzgwmpyakzqt
 https://cabmanager.citymesh.com/tar.gz [403]
 https://dashboard.citymesh.com/tar.gz [403]
 https://ffai.citymesh.com/.swf [302] -> /login
@@ -111,23 +181,6 @@ https://hcp.edpnet.net/index.php [302] -> https://hcp.edpnet.net/
 https://hcp.edpnet.net/js [301] -> https://hcp.edpnet.net/js/
 https://hcp.edpnet.net/logs [301] -> https://hcp.edpnet.net/logs/
 https://hcp.edpnet.net/tmp [301] -> https://hcp.edpnet.net/tmp/
-https://linemon.citymesh.com/app [301] -> http://linemon.citymesh.com/app/
-https://linemon.citymesh.com/assets [301] -> http://linemon.citymesh.com/assets/
-https://linemon.citymesh.com/audio [301] -> http://linemon.citymesh.com/audio/
-https://linemon.citymesh.com/conf [301] -> http://linemon.citymesh.com/conf/
-https://linemon.citymesh.com/data [301] -> http://linemon.citymesh.com/data/
-https://linemon.citymesh.com/health [301] -> http://linemon.citymesh.com/health/
-https://linemon.citymesh.com/include [301] -> http://linemon.citymesh.com/include/
-https://linemon.citymesh.com/index.php [200]
-https://linemon.citymesh.com/js [301] -> http://linemon.citymesh.com/js/
-https://linemon.citymesh.com/local [301] -> http://linemon.citymesh.com/local/
-https://linemon.citymesh.com/locale [301] -> http://linemon.citymesh.com/locale/
-https://linemon.citymesh.com/modules [301] -> http://linemon.citymesh.com/modules/
-https://linemon.citymesh.com/vendor [301] -> http://linemon.citymesh.com/vendor/
-https://linemon.citymesh.com/widgets [301] -> http://linemon.citymesh.com/widgets/
-https://livechat.citymesh.com/tar.gz [403]
-https://mail.edpnet.be/index.php [200]
-https://mail.edpnet.be/public_html [301] -> https://mail.edpnet.be/public_html/
 https://my.citymesh.com/.swf [200]
 https://my.citymesh.com/.well-known/apple-app-site-association [200]
 https://my.citymesh.com/.well-known/apple-developer-merchantid-domain-association [200]
@@ -244,8 +297,3 @@ https://odoo.citymesh.com/swfobject.js [302] -> https://odoo.citymesh.com/en/swf
 https://odoo.citymesh.com/tar.gz [403]
 https://odoo.citymesh.com/vite.config.js [302] -> https://odoo.citymesh.com/en/vite.config.js
 https://odoo.citymesh.com/vite.config.ts [302] -> https://odoo.citymesh.com/en/vite.config.ts
-https://odoo2.citymesh.com/Documents and Settings [302] -> https://odoo2.citymesh.com/en/Documents%20and%20Settings
-https://odoo2.citymesh.com/Program Files [302] -> https://odoo2.citymesh.com/en/Program%20Files
-https://odoo2.citymesh.com/logo [200]
-https://odoo2.citymesh.com/reports list [302] -> https://odoo2.citymesh.com/en/reports%20list
-https://odoo2.citymesh.com/sitemap.xml [200]
