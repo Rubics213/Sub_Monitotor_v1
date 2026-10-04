@@ -6,8 +6,9 @@ https://backup.edpnet.com/fc [302] -> /fc/
 https://backup.edpnet.com/mc [200]
 https://backup.edpnet.com/mobile [301] -> http://backup.edpnet.com/mobile/
 https://backup.edpnet.com/static [301] -> http://backup.edpnet.com/static/
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=trqlbglrqehyvezefzukaxcf
+https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=dqgyencekgnpbvqeawbxfgme
 https://cabmanager.citymesh.com/tar.gz [403]
+https://dashboard.citymesh.com/tar.gz [403]
 https://ffai.citymesh.com/.swf [302] -> /login
 https://ffai.citymesh.com/.well-known/apple-app-site-association [302] -> /login
 https://ffai.citymesh.com/.well-known/apple-developer-merchantid-domain-association [302] -> /login
@@ -81,21 +82,26 @@ https://hcp.edpnet.net/index.php [302] -> https://hcp.edpnet.net/
 https://hcp.edpnet.net/js [301] -> https://hcp.edpnet.net/js/
 https://hcp.edpnet.net/logs [301] -> https://hcp.edpnet.net/logs/
 https://hcp.edpnet.net/tmp [301] -> https://hcp.edpnet.net/tmp/
-https://linemon.citymesh.com/app [301] -> http://linemon.citymesh.com/app/
-https://linemon.citymesh.com/assets [301] -> http://linemon.citymesh.com/assets/
-https://linemon.citymesh.com/audio [301] -> http://linemon.citymesh.com/audio/
-https://linemon.citymesh.com/conf [301] -> http://linemon.citymesh.com/conf/
-https://linemon.citymesh.com/data [301] -> http://linemon.citymesh.com/data/
-https://linemon.citymesh.com/health [301] -> http://linemon.citymesh.com/health/
-https://linemon.citymesh.com/include [301] -> http://linemon.citymesh.com/include/
-https://linemon.citymesh.com/index.php [200]
-https://linemon.citymesh.com/js [301] -> http://linemon.citymesh.com/js/
-https://linemon.citymesh.com/local [301] -> http://linemon.citymesh.com/local/
-https://linemon.citymesh.com/locale [301] -> http://linemon.citymesh.com/locale/
-https://linemon.citymesh.com/modules [301] -> http://linemon.citymesh.com/modules/
-https://linemon.citymesh.com/vendor [301] -> http://linemon.citymesh.com/vendor/
-https://linemon.citymesh.com/widgets [301] -> http://linemon.citymesh.com/widgets/
-https://livechat.citymesh.com/tar.gz [403]
+https://lweb04.edpnet.be/blocked [301] -> https://lweb04.edpnet.be/blocked/
+https://lweb04.edpnet.be/health [301] -> https://lweb04.edpnet.be/health/
+https://lweb04.edpnet.be/maintenance [301] -> https://lweb04.edpnet.be/maintenance/
+https://lweb04.edpnet.be/pma [301] -> https://lweb04.edpnet.be/pma/
+https://lweb05.edpnet.be/blocked [301] -> https://lweb05.edpnet.be/blocked/
+https://lweb05.edpnet.be/health [301] -> https://lweb05.edpnet.be/health/
+https://lweb05.edpnet.be/maintenance [301] -> https://lweb05.edpnet.be/maintenance/
+https://lweb05.edpnet.be/pma [301] -> https://lweb05.edpnet.be/pma/
+https://lweb06.edpnet.net/blocked [301] -> https://lweb06.edpnet.net/blocked/
+https://lweb06.edpnet.net/health [301] -> https://lweb06.edpnet.net/health/
+https://lweb06.edpnet.net/maintenance [301] -> https://lweb06.edpnet.net/maintenance/
+https://lweb06.edpnet.net/pma [301] -> https://lweb06.edpnet.net/pma/
+https://lxweb1.edpnet.net/blocked [301] -> https://lxweb1.edpnet.net/blocked/
+https://lxweb1.edpnet.net/health [301] -> https://lxweb1.edpnet.net/health/
+https://lxweb1.edpnet.net/maintenance [301] -> https://lxweb1.edpnet.net/maintenance/
+https://lxweb1.edpnet.net/pma [301] -> https://lxweb1.edpnet.net/pma/
+https://mail.edpnet.be/index.php [200]
+https://mail.edpnet.be/public_html [301] -> https://mail.edpnet.be/public_html/
+https://mail.edpnet.nl/index.php [200]
+https://mail.edpnet.nl/public_html [301] -> https://mail.edpnet.nl/public_html/
 https://my.citymesh.com/.swf [200]
 https://my.citymesh.com/.well-known/apple-app-site-association [200]
 https://my.citymesh.com/.well-known/apple-developer-merchantid-domain-association [200]
@@ -158,6 +164,50 @@ https://my.citymesh.com/player.swf [200]
 https://my.citymesh.com/security.txt [200]
 https://my.citymesh.com/tar.gz [403]
 https://my.citymesh.com/vite.config.ts [200]
+https://netbird.citymesh.net/.bash_history [403]
+https://netbird.citymesh.net/.bashrc [403]
+https://netbird.citymesh.net/.cvs [403]
+https://netbird.citymesh.net/.env [403]
+https://netbird.citymesh.net/.git [403]
+https://netbird.citymesh.net/.git/HEAD [403]
+https://netbird.citymesh.net/.git/config [403]
+https://netbird.citymesh.net/.git/index [403]
+https://netbird.citymesh.net/.git/logs/ [403]
+https://netbird.citymesh.net/.history [403]
+https://netbird.citymesh.net/.htaccess [403]
+https://netbird.citymesh.net/.htpasswd [403]
+https://netbird.citymesh.net/.mysql_history [403]
+https://netbird.citymesh.net/.passwd [403]
+https://netbird.citymesh.net/.profile [403]
+https://netbird.citymesh.net/.ssh [403]
+https://netbird.citymesh.net/.svn [403]
+https://netbird.citymesh.net/.svn/entries [403]
+https://netbird.citymesh.net/.well-known/security.txt [200]
+https://netbird.citymesh.net/404 [200]
+https://netbird.citymesh.net/access_log [403]
+https://netbird.citymesh.net/activity [200]
+https://netbird.citymesh.net/assets [301] -> http://netbird.citymesh.net/assets/
+https://netbird.citymesh.net/authorized_keys [403]
+https://netbird.citymesh.net/customers [200]
+https://netbird.citymesh.net/dns [200]
+https://netbird.citymesh.net/error [200]
+https://netbird.citymesh.net/error_log [403]
+https://netbird.citymesh.net/events [301] -> http://netbird.citymesh.net/events/
+https://netbird.citymesh.net/group [200]
+https://netbird.citymesh.net/groups [200]
+https://netbird.citymesh.net/id_rsa [403]
+https://netbird.citymesh.net/index [200]
+https://netbird.citymesh.net/index.html [200]
+https://netbird.citymesh.net/install [200]
+https://netbird.citymesh.net/invite [200]
+https://netbird.citymesh.net/local [301] -> http://netbird.citymesh.net/local/
+https://netbird.citymesh.net/network [200]
+https://netbird.citymesh.net/phpinfo.php [403]
+https://netbird.citymesh.net/settings [200]
+https://netbird.citymesh.net/setup [200]
+https://netbird.citymesh.net/team [200]
+https://netbird.citymesh.net/web.config [403]
+https://notulen.citymesh.com/tar.gz [403]
 https://odoo.citymesh.com/.swf [302] -> https://odoo.citymesh.com/en/.swf
 https://odoo.citymesh.com/_framework/blazor.webassembly.js [302] -> https://odoo.citymesh.com/en/blazor.webassembly.js
 https://odoo.citymesh.com/contacts.txt [302] -> https://odoo.citymesh.com/en/contacts.txt
@@ -174,10 +224,10 @@ https://odoo2.citymesh.com/Program Files [302] -> https://odoo2.citymesh.com/en/
 https://odoo2.citymesh.com/logo [200]
 https://odoo2.citymesh.com/reports list [302] -> https://odoo2.citymesh.com/en/reports%20list
 https://odoo2.citymesh.com/sitemap.xml [200]
+https://pbx-concordia.edpnet.net/gui [301] -> https://pbx-concordia.edpnet.net/gui/
+https://pbx-movemedia.edpnet.net/gui [301] -> https://pbx-movemedia.edpnet.net/gui/
+https://pbx-siveco.edpnet.net/gui [301] -> https://pbx-siveco.edpnet.net/gui/
 https://portal.towereye.be/.git/logs/ [301] -> http://towereye-portal.local.citymesh.com/.git/logs
 https://portal.towereye.be/assets [301] -> http://towereye-portal.local.citymesh.com/assets/
 https://portal.towereye.be/cgi-bin/ [301] -> http://towereye-portal.local.citymesh.com/cgi-bin
 https://portal.towereye.be/vendor [301] -> http://towereye-portal.local.citymesh.com/vendor/
-https://recording.citymeshconnect.com/static [301] -> https://recording.citymeshconnect.com/static/
-https://recordingauth.citymeshconnect.com/static [301] -> https://recordingauth.citymeshconnect.com/static/
-https://signage.flex.citymesh.net/docs [302] -> /docs/
