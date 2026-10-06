@@ -80,7 +80,6 @@ https://helpdesk.citymesh.com
 https://hostctl.edpnet.net
 https://hosting.edpnet.net
 https://ignite.edpnet.be
-https://ignite.edpnet.nl
 https://internet.citymesh.com
 https://ios.es.citymeshconnect.com
 https://iot.citymesh.com
@@ -93,7 +92,6 @@ https://kmda.citymesh.com
 https://knokke-heist-private.citymesh.com
 https://knokke-heist.citymesh.com
 https://kortrijkxpo.citymesh.com
-https://lg.edpnet.net
 https://lijntest.edpnet.be
 https://linemon.citymesh.com
 https://linetest.edpnet.be
@@ -105,18 +103,13 @@ https://loginucaas.citymeshconnect.com
 https://logout.citymesh.com
 https://logout.wifilab.be
 https://logout.wifinmbssncb.be
-https://lweb01.edpnet.net
-https://lweb02.edpnet.net
-https://lweb03.edpnet.net
 https://lweb04.edpnet.be
-https://lweb04.edpnet.net
 https://lweb05.edpnet.be
-https://lweb05.edpnet.net
-https://lweb05test.edpnet.net
 https://lweb06.edpnet.net
 https://lxextweb.edpnet.net
 https://lxweb1.edpnet.net
 https://mail.edpnet.be
+https://mail.edpnet.nl
 https://mailgateway01.edpnet.be
 https://maintenance.citymesh.com
 https://masterrussian.edpnet.com
@@ -133,8 +126,6 @@ https://msg-viewer.citymesh.net
 https://my.citymesh.com
 https://my.edpnet.be
 https://my.edpnet.com
-https://my.edpnet.net
-https://my.edpnet.nl
 https://namurexpo.citymesh.com
 https://nekkerhalbrusselsnorth.citymesh.com
 https://netbird.citymesh.net
@@ -147,7 +138,6 @@ https://odoo2.citymesh.com
 https://order.citymesh.be
 https://order.citymesh.com
 https://order.edpnet.be
-https://order.edpnet.nl
 https://pbx-concordia.edpnet.net
 https://pbx-demo.edpnet.net
 https://pbx-kegelsvana.edpnet.net
@@ -170,15 +160,15 @@ https://redirect.edpnet.be
 https://redirector.edpnet.net
 https://relay.citymesh.be
 https://relay.edpnet.be
+https://relay.edpnet.nl
 https://remote.towereye.be
 https://repo.ncentric.cloud
 https://secure.ncentric.cloud
 https://signage.flex.citymesh.net
+https://smtp.edpnet.nl
 https://softphone.citymeshconnect.com
 https://speedtest.edpnet.be
-https://speedtest.edpnet.net
 https://speedtest.edpnet.nl
-https://speedtest2.edpnet.net
 https://ssl4all-1.le.ssl.lxextweb.edpnet.net
 https://ssl4all-1.le.ssl.lxweb1.edpnet.net
 https://ssl4all-10.le.ssl.lxweb1.edpnet.net
@@ -357,8 +347,6 @@ https://stagingrecord.citymesh.net
 https://stagingrecordauth.citymesh.net
 https://stagingsoft.citymesh.net
 https://static.ncentric.cloud
-https://status.citymesh.com
-https://status.edpnet.net
 https://stop.citymesh.com
 https://stop.edpnet.net
 https://stop.wifilab.be
@@ -369,7 +357,6 @@ https://support.0g.citymesh.com
 https://support.citymesh.be
 https://support.citymesh.com
 https://support.edpnet.be
-https://support.edpnet.net
 https://support.engiem2m.com
 https://tech-radar.citymesh.io
 https://testdeligne.edpnet.be
@@ -391,7 +378,6 @@ https://webmail.edpnet.net
 https://webmail.edpnet.nl
 https://wijnegemshopping.citymesh.com
 https://wiki.edpnet.be
-https://wiki.edpnet.net
 https://wiki.edpnet.nl
 https://wintercircus.citymesh.com
 https://ww.edpnet.com
