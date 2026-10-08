@@ -331,6 +331,17 @@ asm.redbull.com
 asmp.redbullmobile.at
 assessment-platform-q.redbull.com
 assessment-platform.redbull.com
+assetmenu-d.redbull.com
+assetmenu-q.redbull.com
+assetmenu.redbull.com
+assets.clawgameus.redbull.com
+assets.ninja.redbull.com
+assets.prod.ninja.redbull.com
+assets.rbleipzig.com
+assets.redbullshop.com
+assetsmarket-staging.redbull.com
+assetsmarket.redbull.com
+assettest.redbull.com
 assistente.redbull.pt
 at-test02.redbull.com
 at-vpn-sap.redbull.com
@@ -5094,6 +5105,7 @@ tvdashboard.redbull.com
 tvrs.redtech.redbull.com
 tw.redbull.com
 twitch-scraper-admin.redbull.com
+typeserver.redbull.com
 tyrelounge.racingbulls.com
 uae.redbullpaperwings.com
 ucm-sso-d.redbull.com
