@@ -5,24 +5,16 @@ name: Red Bull Recon Assistant (Compliant)
 #   - No automatic scanners (subfinder, httpx, nuclei, ffuf, katana, etc.)
 #   - No bulk JS crawling / scraping of Red Bull assets
 #   - No automated 403-bypass probing
-#   - Max 5 req/sec  -> respected trivially: this workflow makes ZERO
+#   - Max 5 req/sec -> respected trivially: this workflow makes ZERO
 #     requests to Red Bull infrastructure. All HTTP calls go to GitHub
 #     (scope gist) or to the AI providers (Gemini / Cohere).
-#
-# What it DOES do:
-#   1. Monitors the public scope gist for changes (GitHub, not Red Bull).
-#   2. Runs AI-driven static analysis on JS/HTML files YOU manually saved
-#      into the `manual-input/` folder and committed to the repo.
-#   3. Sends split Discord notifications (scope changes vs. analysis).
-#
-# Actual bug hunting remains manual, as the program requires.
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # every 6 hours — scope check
+    - cron: '0 */6 * * *'
   push:
     paths:
-      - 'manual-input/**'   # analyze any manually-added files on push
+      - 'manual-input/**'
   workflow_dispatch:
     inputs:
       mode:
@@ -31,27 +23,23 @@ on:
         default: 'smoke'
         type: choice
         options:
-          - smoke          # test Discord + AI pipeline only
-          - scope          # run scope monitor only
-          - analyze        # run manual-input analyzer only
-          - all            # run scope + analyze
+          - smoke
+          - scope
+          - analyze
+          - all
 
 permissions:
   contents: write
 
-env:
-  # Two separate webhooks so notifications don't drown each other.
-  SCOPE_WEBHOOK: ${{ secrets.SCOPE_WEBHOOK_URL }}
-  ANALYSIS_WEBHOOK: ${{ secrets.ANALYSIS_WEBHOOK_URL }}
-
 jobs:
   # ------------------------------------------------------------------
-  # Smoke test — validates Discord + AI pipeline, touches nothing else
+  # Smoke test
   # ------------------------------------------------------------------
   smoke:
-    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'smoke'
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'smoke' }}
     runs-on: ubuntu-latest
     env:
+      SCOPE_WEBHOOK: ${{ secrets.SCOPE_WEBHOOK_URL }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
       GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
@@ -60,12 +48,14 @@ jobs:
       COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
     steps:
       - name: Verify both Discord webhooks
+        env:
+          ANALYSIS_WEBHOOK: ${{ secrets.ANALYSIS_WEBHOOK_URL }}
         run: |
-          for NAME in SCOPE ANALYSIS; do
-            URL_VAR="${NAME}_WEBHOOK"
-            URL="${!URL_VAR}"
+          for PAIR in "SCOPE:$SCOPE_WEBHOOK" "ANALYSIS:$ANALYSIS_WEBHOOK"; do
+            NAME="${PAIR%%:*}"
+            URL="${PAIR#*:}"
             if [ -z "$URL" ]; then
-              echo "::error::$URL_VAR secret is not set"
+              echo "::error::$NAME webhook secret is not set"
               exit 1
             fi
             CONTENT="Smoke test: $NAME webhook reachable. $(date -u '+%Y-%m-%d %H:%M UTC')"
@@ -118,8 +108,10 @@ jobs:
             exit 1
           fi
 
-          PAYLOAD=$(jq -n --arg content "Smoke test — AI provider: **$PROVIDER**\n\`\`\`\n$SUMMARY\n\`\`\`" \
-            '{content: $content}')
+          PAYLOAD=$(jq -n --arg content "Smoke test — AI provider: **$PROVIDER**
+\`\`\`
+$SUMMARY
+\`\`\`" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$SCOPE_WEBHOOK"
 
       - name: Summary
@@ -135,14 +127,13 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
   # ------------------------------------------------------------------
-  # Scope monitor — watches the public GitHub Gist only
+  # Scope monitor
   # ------------------------------------------------------------------
   scope:
-    if: |
-      (github.event_name == 'schedule') ||
-      (github.event_name == 'workflow_dispatch' && (inputs.mode == 'scope' || inputs.mode == 'all'))
+    if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.mode == 'scope' || inputs.mode == 'all')) }}
     runs-on: ubuntu-latest
     env:
+      SCOPE_WEBHOOK: ${{ secrets.SCOPE_WEBHOOK_URL }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
       GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
@@ -159,8 +150,7 @@ jobs:
         run: |
           mkdir -p scope
           GIST_ID="3eb88debcb01759eccf65ec2b799b340"
-          # This is github.com, not redbull.com. Fetching it does not touch
-          # any Red Bull asset and is entirely within program rules.
+          # github.com, not redbull.com — outside Red Bull infrastructure.
           curl -s --max-time 20 \
             "https://gist.githubusercontent.com/RedBullSecurity/${GIST_ID}/raw" \
             -o scope/current_raw.txt
@@ -173,12 +163,9 @@ jobs:
 
       - name: Normalize scope
         run: |
-          # Extract domain-shaped tokens only. Filters comment lines, blank
-          # lines, and header rows so whitespace/ordering churn doesn't
-          # produce spurious diffs.
-          grep -viE '^\s*(#|$|scope|asset|type|tier|description|program|highlighted)' \
+          grep -aviE '^\s*(#|$|scope|asset|type|tier|description|program|highlighted)' \
             scope/current_raw.txt \
-            | grep -oE '(\*\.)?[A-Za-z0-9._-]+\.[A-Za-z]{2,}' \
+            | grep -aoE '(\*\.)?[A-Za-z0-9._-]+\.[A-Za-z]{2,}' \
             | tr 'A-Z' 'a-z' \
             | sort -u > scope/current.txt || true
           echo "Normalized $(wc -l < scope/current.txt) unique domain(s)"
@@ -191,7 +178,6 @@ jobs:
             comm -13 scope/previous.txt scope/current.txt > scope/added.txt
             comm -23 scope/previous.txt scope/current.txt > scope/removed.txt
           else
-            # First run — establish baseline, nothing is "new"
             cp scope/current.txt scope/previous.txt
             touch scope/added.txt scope/removed.txt
           fi
@@ -204,7 +190,7 @@ jobs:
 
       - name: AI-triage scope diff
         id: triage
-        if: steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0'
+        if: ${{ steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0' }}
         run: |
           ADDED=$(cat scope/added.txt 2>/dev/null || true)
           REMOVED=$(cat scope/removed.txt 2>/dev/null || true)
@@ -265,10 +251,10 @@ EOF
           echo "provider=$PROVIDER" >> "$GITHUB_OUTPUT"
 
       - name: Notify scope channel
-        if: steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0'
+        if: ${{ steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0' }}
         run: |
-          ADDED=${{ steps.diff.outputs.added }}
-          REMOVED=${{ steps.diff.outputs.removed }}
+          ADDED="${{ steps.diff.outputs.added }}"
+          REMOVED="${{ steps.diff.outputs.removed }}"
           SUMMARY=$(head -c 1700 scope/summary.txt)
 
           HEADER=$(printf "**Scope changed** (+%s added, -%s removed)\n" "$ADDED" "$REMOVED")
@@ -321,14 +307,13 @@ EOF
           } >> "$GITHUB_STEP_SUMMARY"
 
   # ------------------------------------------------------------------
-  # Manual-input analyzer — AI reads files YOU saved, not scanned ones
+  # Manual-input analyzer
   # ------------------------------------------------------------------
   analyze:
-    if: |
-      (github.event_name == 'push') ||
-      (github.event_name == 'workflow_dispatch' && (inputs.mode == 'analyze' || inputs.mode == 'all'))
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (inputs.mode == 'analyze' || inputs.mode == 'all')) }}
     runs-on: ubuntu-latest
     env:
+      ANALYSIS_WEBHOOK: ${{ secrets.ANALYSIS_WEBHOOK_URL }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
       GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
@@ -345,9 +330,6 @@ EOF
         id: collect
         run: |
           mkdir -p analysis
-          # Files the researcher drops into manual-input/ — JS bundles saved
-          # from the browser, HTML pages, HAR exports, etc. The workflow
-          # NEVER fetches these itself; they arrive via commit.
           if [ ! -d manual-input ]; then
             echo "found=0" >> "$GITHUB_OUTPUT"
             exit 0
@@ -364,28 +346,23 @@ EOF
           echo "Found $COUNT manual input file(s)"
 
       - name: Local pattern extraction (no AI needed)
-        if: steps.collect.outputs.found != '0'
+        if: ${{ steps.collect.outputs.found != '0' }}
         run: |
-          # Fast local heuristics — surfaces candidates BEFORE the AI pass.
-          # These run on files you saved, not on anything fetched.
           > analysis/local_hits.txt
 
           while IFS= read -r f; do
             [ -z "$f" ] && continue
             echo "=== $f ===" >> analysis/local_hits.txt
 
-            # Endpoint-shaped strings
-            grep -oE '"/[a-zA-Z0-9_./-]{2,80}"' "$f" 2>/dev/null \
+            grep -aoE '"/[a-zA-Z0-9_./-]{2,80}"' "$f" 2>/dev/null \
               | sort -u | head -40 \
               | sed 's/^/  endpoint: /' >> analysis/local_hits.txt || true
 
-            # Suspicious identifiers
-            grep -oiE '(api[_-]?key|access[_-]?token|secret|bearer|authorization)[^,;]{0,60}' "$f" 2>/dev/null \
+            grep -aoiE '(api[_-]?key|access[_-]?token|secret|bearer|authorization)[^,;]{0,60}' "$f" 2>/dev/null \
               | sort -u | head -20 \
               | sed 's/^/  keyword: /' >> analysis/local_hits.txt || true
 
-            # DOM sinks worth a manual look
-            grep -oE '(dangerouslySetInnerHTML|innerHTML|eval\(|document\.write|postMessage)' "$f" 2>/dev/null \
+            grep -aoE '(dangerouslySetInnerHTML|innerHTML|eval\(|document\.write|postMessage)' "$f" 2>/dev/null \
               | sort -u \
               | sed 's/^/  sink: /' >> analysis/local_hits.txt || true
 
@@ -395,14 +372,11 @@ EOF
           echo "Local extraction produced $(wc -l < analysis/local_hits.txt) line(s)"
 
       - name: AI static analysis of manual inputs
-        if: steps.collect.outputs.found != '0'
+        if: ${{ steps.collect.outputs.found != '0' }}
         run: |
-          # Feed file CONTENT (truncated) plus the local hits to the model.
-          # The model is asked to rank findings for MANUAL follow-up, not to
-          # suggest running any tool.
           mkdir -p analysis/bodies
           TOTAL_CHARS=0
-          MAX_TOTAL=120000   # keep the prompt bounded
+          MAX_TOTAL=120000
 
           while IFS= read -r f; do
             [ -z "$f" ] && continue
@@ -481,9 +455,9 @@ EOF
           echo "provider=$PROVIDER" >> "$GITHUB_OUTPUT"
 
       - name: Notify analysis channel
-        if: steps.collect.outputs.found != '0'
+        if: ${{ steps.collect.outputs.found != '0' }}
         run: |
-          COUNT=${{ steps.collect.outputs.found }}
+          COUNT="${{ steps.collect.outputs.found }}"
           SUMMARY=$(head -c 1700 analysis/ai_summary.txt)
           HEADER=$(printf "**Manual-input analysis** (%s file(s))\n" "$COUNT")
           FOOTER=$'\n_Verify every item by hand before reporting. Nothing here was scanner-derived._'
