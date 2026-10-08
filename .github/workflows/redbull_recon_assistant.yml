@@ -27,11 +27,83 @@ on:
           - scope
           - analyze
           - all
+      bootstrap:
+        description: 'Create missing scope/ and manual-input/ folders + baseline files before running'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
 
 jobs:
+  # ------------------------------------------------------------------
+  # Bootstrap — creates scope/ and manual-input/ if missing
+  # Safe to run repeatedly; only writes what's absent.
+  # ------------------------------------------------------------------
+  init:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.bootstrap }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create folders and baseline files if missing
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          CHANGES=0
+
+          if [ ! -d scope ]; then
+            mkdir -p scope
+            echo "Created scope/"
+            CHANGES=1
+          fi
+          if [ ! -f scope/previous.txt ]; then
+            touch scope/previous.txt
+            echo "Created scope/previous.txt (empty baseline)"
+            CHANGES=1
+          fi
+
+          if [ ! -d manual-input ]; then
+            mkdir -p manual-input
+            echo "Created manual-input/"
+            CHANGES=1
+          fi
+          if [ ! -f manual-input/.gitkeep ]; then
+            touch manual-input/.gitkeep
+            echo "Created manual-input/.gitkeep"
+            CHANGES=1
+          fi
+
+          git add -f scope/previous.txt manual-input/.gitkeep
+
+          if [ "$CHANGES" = "0" ]; then
+            echo "Nothing to bootstrap — all paths already exist"
+          fi
+
+          git diff --cached --quiet || git commit -m "Bootstrap scope/ and manual-input/ [skip ci]"
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Bootstrap"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "Ensured the following exist at repo root:"
+            echo ""
+            echo "- \`scope/previous.txt\` (empty baseline)"
+            echo "- \`manual-input/.gitkeep\` (folder placeholder)"
+            echo ""
+            echo "Existing files were left untouched. Safe to re-run."
+          } >> "$GITHUB_STEP_SUMMARY"
+
   # ------------------------------------------------------------------
   # Smoke test
   # ------------------------------------------------------------------
@@ -108,10 +180,8 @@ jobs:
             exit 1
           fi
 
-          PAYLOAD=$(jq -n --arg content "Smoke test — AI provider: **$PROVIDER**
-\`\`\`
-$SUMMARY
-\`\`\`" '{content: $content}')
+          CONTENT=$(printf "Smoke test — AI provider: **%s**\n\`\`\`\n%s\n\`\`\`" "$PROVIDER" "$SUMMARY")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$SCOPE_WEBHOOK"
 
       - name: Summary
@@ -150,7 +220,6 @@ $SUMMARY
         run: |
           mkdir -p scope
           GIST_ID="3eb88debcb01759eccf65ec2b799b340"
-          # github.com, not redbull.com — outside Red Bull infrastructure.
           curl -s --max-time 20 \
             "https://gist.githubusercontent.com/RedBullSecurity/${GIST_ID}/raw" \
             -o scope/current_raw.txt
@@ -372,6 +441,7 @@ EOF
           echo "Local extraction produced $(wc -l < analysis/local_hits.txt) line(s)"
 
       - name: AI static analysis of manual inputs
+        id: analyze
         if: ${{ steps.collect.outputs.found != '0' }}
         run: |
           mkdir -p analysis/bodies
@@ -480,13 +550,14 @@ EOF
         if: always()
         run: |
           FOUND="${{ steps.collect.outputs.found }}"
+          PROVIDER="${{ steps.analyze.outputs.provider }}"
           {
             echo "## Manual-Input Analyzer"
             echo ""
             echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
             echo ""
             echo "- Files analysed: ${FOUND:-0}"
-            echo "- AI provider: ${{ steps.analyze.outputs.provider || 'n/a' }}"
+            echo "- AI provider: ${PROVIDER:-n/a}"
             echo ""
             echo "Reminder: these results are AI-generated hints on files YOU"
             echo "saved manually. Verify every finding by hand before"
