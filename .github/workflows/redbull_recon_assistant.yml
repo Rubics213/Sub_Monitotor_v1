@@ -1,0 +1,520 @@
+name: Red Bull Recon Assistant (Compliant)
+
+# Compliant with Red Bull's responsible-disclosure rules:
+#   - No subdomain enumeration
+#   - No automatic scanners (subfinder, httpx, nuclei, ffuf, katana, etc.)
+#   - No bulk JS crawling / scraping of Red Bull assets
+#   - No automated 403-bypass probing
+#   - Max 5 req/sec  -> respected trivially: this workflow makes ZERO
+#     requests to Red Bull infrastructure. All HTTP calls go to GitHub
+#     (scope gist) or to the AI providers (Gemini / Cohere).
+#
+# What it DOES do:
+#   1. Monitors the public scope gist for changes (GitHub, not Red Bull).
+#   2. Runs AI-driven static analysis on JS/HTML files YOU manually saved
+#      into the `manual-input/` folder and committed to the repo.
+#   3. Sends split Discord notifications (scope changes vs. analysis).
+#
+# Actual bug hunting remains manual, as the program requires.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours — scope check
+  push:
+    paths:
+      - 'manual-input/**'   # analyze any manually-added files on push
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Which stage to run'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke          # test Discord + AI pipeline only
+          - scope          # run scope monitor only
+          - analyze        # run manual-input analyzer only
+          - all            # run scope + analyze
+
+permissions:
+  contents: write
+
+env:
+  # Two separate webhooks so notifications don't drown each other.
+  SCOPE_WEBHOOK: ${{ secrets.SCOPE_WEBHOOK_URL }}
+  ANALYSIS_WEBHOOK: ${{ secrets.ANALYSIS_WEBHOOK_URL }}
+
+jobs:
+  # ------------------------------------------------------------------
+  # Smoke test — validates Discord + AI pipeline, touches nothing else
+  # ------------------------------------------------------------------
+  smoke:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'smoke'
+    runs-on: ubuntu-latest
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+      GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+      COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+    steps:
+      - name: Verify both Discord webhooks
+        run: |
+          for NAME in SCOPE ANALYSIS; do
+            URL_VAR="${NAME}_WEBHOOK"
+            URL="${!URL_VAR}"
+            if [ -z "$URL" ]; then
+              echo "::error::$URL_VAR secret is not set"
+              exit 1
+            fi
+            CONTENT="Smoke test: $NAME webhook reachable. $(date -u '+%Y-%m-%d %H:%M UTC')"
+            PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Content-Type: application/json" -d "$PAYLOAD" "$URL")
+            echo "$NAME webhook -> HTTP $CODE"
+            if [ "$CODE" -lt 200 ] || [ "$CODE" -ge 300 ]; then
+              echo "::error::$NAME webhook returned $CODE"
+              exit 1
+            fi
+          done
+
+      - name: Verify AI pipeline (Gemini -> Cohere fallback)
+        run: |
+          PROMPT_TEXT="Reply with exactly one short sentence confirming receipt."
+          SUMMARY=""
+          PROVIDER="none"
+
+          for KEY_VAR in GEMINI_API_KEY GEMINI_API_KEY_2 GEMINI_API_KEY_3; do
+            KEY_VAL="${!KEY_VAR}"
+            [ -z "$KEY_VAL" ] && continue
+            PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
+              '{contents: [{parts: [{text: $text}]}]}')
+            RESP=$(curl -s -X POST \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$KEY_VAL" \
+              -H "Content-Type: application/json" -d "$PAYLOAD")
+            SUMMARY=$(echo "$RESP" | jq -r '.candidates[0].content.parts[0].text // empty' 2>/dev/null || echo "")
+            echo "Tried $KEY_VAR -> $([ -n "$SUMMARY" ] && echo success || echo failed)"
+            if [ -n "$SUMMARY" ]; then PROVIDER="Gemini ($KEY_VAR)"; break; fi
+          done
+
+          if [ -z "$SUMMARY" ]; then
+            for KEY_VAR in COHERE_API_KEY COHERE_API_KEY_2 COHERE_API_KEY_3; do
+              KEY_VAL="${!KEY_VAR}"
+              [ -z "$KEY_VAL" ] && continue
+              PAYLOAD=$(jq -n --arg text "$PROMPT_TEXT" \
+                '{model: "command-r-plus-08-2024", messages: [{role: "user", content: $text}]}')
+              RESP=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+                -H "Content-Type: application/json" \
+                -H "Authorization: Bearer $KEY_VAL" -d "$PAYLOAD")
+              SUMMARY=$(echo "$RESP" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
+              echo "Tried $KEY_VAR -> $([ -n "$SUMMARY" ] && echo success || echo failed)"
+              if [ -n "$SUMMARY" ]; then PROVIDER="Cohere ($KEY_VAR, fallback)"; break; fi
+            done
+          fi
+
+          if [ -z "$SUMMARY" ]; then
+            echo "::error::All Gemini and Cohere keys failed"
+            exit 1
+          fi
+
+          PAYLOAD=$(jq -n --arg content "Smoke test — AI provider: **$PROVIDER**\n\`\`\`\n$SUMMARY\n\`\`\`" \
+            '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$SCOPE_WEBHOOK"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Smoke Test"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "Both webhooks and the AI fallback chain were exercised."
+            echo "No Red Bull infrastructure was contacted."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ------------------------------------------------------------------
+  # Scope monitor — watches the public GitHub Gist only
+  # ------------------------------------------------------------------
+  scope:
+    if: |
+      (github.event_name == 'schedule') ||
+      (github.event_name == 'workflow_dispatch' && (inputs.mode == 'scope' || inputs.mode == 'all'))
+    runs-on: ubuntu-latest
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+      GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+      COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch scope gist
+        run: |
+          mkdir -p scope
+          GIST_ID="3eb88debcb01759eccf65ec2b799b340"
+          # This is github.com, not redbull.com. Fetching it does not touch
+          # any Red Bull asset and is entirely within program rules.
+          curl -s --max-time 20 \
+            "https://gist.githubusercontent.com/RedBullSecurity/${GIST_ID}/raw" \
+            -o scope/current_raw.txt
+
+          if [ ! -s scope/current_raw.txt ]; then
+            echo "::error::Scope gist fetch failed — aborting to avoid false alerts"
+            exit 1
+          fi
+          echo "Fetched $(wc -l < scope/current_raw.txt) line(s)"
+
+      - name: Normalize scope
+        run: |
+          # Extract domain-shaped tokens only. Filters comment lines, blank
+          # lines, and header rows so whitespace/ordering churn doesn't
+          # produce spurious diffs.
+          grep -viE '^\s*(#|$|scope|asset|type|tier|description|program|highlighted)' \
+            scope/current_raw.txt \
+            | grep -oE '(\*\.)?[A-Za-z0-9._-]+\.[A-Za-z]{2,}' \
+            | tr 'A-Z' 'a-z' \
+            | sort -u > scope/current.txt || true
+          echo "Normalized $(wc -l < scope/current.txt) unique domain(s)"
+
+      - name: Diff against previous
+        id: diff
+        run: |
+          mkdir -p scope
+          if [ -f scope/previous.txt ]; then
+            comm -13 scope/previous.txt scope/current.txt > scope/added.txt
+            comm -23 scope/previous.txt scope/current.txt > scope/removed.txt
+          else
+            # First run — establish baseline, nothing is "new"
+            cp scope/current.txt scope/previous.txt
+            touch scope/added.txt scope/removed.txt
+          fi
+
+          ADDED=$(wc -l < scope/added.txt | tr -d ' ')
+          REMOVED=$(wc -l < scope/removed.txt | tr -d ' ')
+          echo "added=$ADDED" >> "$GITHUB_OUTPUT"
+          echo "removed=$REMOVED" >> "$GITHUB_OUTPUT"
+          echo "Scope diff: +$ADDED added, -$REMOVED removed"
+
+      - name: AI-triage scope diff
+        id: triage
+        if: steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0'
+        run: |
+          ADDED=$(cat scope/added.txt 2>/dev/null || true)
+          REMOVED=$(cat scope/removed.txt 2>/dev/null || true)
+
+          INSTRUCTIONS=$(cat << 'EOF'
+You are helping a bug-bounty researcher track changes to the Red Bull
+responsible-disclosure scope list. Red Bull's rules: no automated
+scanners, no subdomain enumeration, max 5 req/sec, findings must be
+manually discovered.
+
+For each ADDED domain: classify what it looks like (marketing site, API
+host, mobile backend, third-party hosting such as S3/Cloudflare, wildcard).
+For each REMOVED domain: just note it as no-longer-in-scope.
+
+End with a "SUGGESTED FIRST LOOK" list of the 1-3 added assets most worth
+manually reviewing — prioritise things that look like APIs, admin portals,
+or wildcards. If nothing looks worth pursuing, say so clearly.
+
+Plain text, no markdown headers, be concise.
+EOF
+)
+          PROMPT_TEXT=$(printf "%s\n\nADDED:\n%s\n\nREMOVED:\n%s" \
+            "$INSTRUCTIONS" "$ADDED" "$REMOVED")
+
+          SUMMARY=""
+          PROVIDER="none"
+
+          for KEY_VAR in GEMINI_API_KEY GEMINI_API_KEY_2 GEMINI_API_KEY_3; do
+            KEY_VAL="${!KEY_VAR}"
+            [ -z "$KEY_VAL" ] && continue
+            P=$(jq -n --arg text "$PROMPT_TEXT" '{contents: [{parts: [{text: $text}]}]}')
+            R=$(curl -s -X POST \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$KEY_VAL" \
+              -H "Content-Type: application/json" -d "$P")
+            SUMMARY=$(echo "$R" | jq -r '.candidates[0].content.parts[0].text // empty' 2>/dev/null || echo "")
+            if [ -n "$SUMMARY" ]; then PROVIDER="Gemini ($KEY_VAR)"; break; fi
+          done
+
+          if [ -z "$SUMMARY" ]; then
+            for KEY_VAR in COHERE_API_KEY COHERE_API_KEY_2 COHERE_API_KEY_3; do
+              KEY_VAL="${!KEY_VAR}"
+              [ -z "$KEY_VAL" ] && continue
+              P=$(jq -n --arg text "$PROMPT_TEXT" \
+                '{model: "command-r-plus-08-2024", messages: [{role: "user", content: $text}]}')
+              R=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+                -H "Content-Type: application/json" \
+                -H "Authorization: Bearer $KEY_VAL" -d "$P")
+              SUMMARY=$(echo "$R" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
+              if [ -n "$SUMMARY" ]; then PROVIDER="Cohere ($KEY_VAR, fallback)"; break; fi
+            done
+          fi
+
+          if [ -z "$SUMMARY" ]; then
+            SUMMARY=$(printf "AI unavailable — raw diff:\nADDED:\n%s\nREMOVED:\n%s" "$ADDED" "$REMOVED")
+          fi
+
+          echo "$SUMMARY" > scope/summary.txt
+          echo "provider=$PROVIDER" >> "$GITHUB_OUTPUT"
+
+      - name: Notify scope channel
+        if: steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0'
+        run: |
+          ADDED=${{ steps.diff.outputs.added }}
+          REMOVED=${{ steps.diff.outputs.removed }}
+          SUMMARY=$(head -c 1700 scope/summary.txt)
+
+          HEADER=$(printf "**Scope changed** (+%s added, -%s removed)\n" "$ADDED" "$REMOVED")
+          FOOTER=$'\n_Reminder: no scanners, no subdomain enum, manual discovery only._'
+          CONTENT=$(printf "%s\`\`\`\n%s\n\`\`\`%s" "$HEADER" "$SUMMARY" "$FOOTER")
+
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$SCOPE_WEBHOOK"
+
+      - name: Persist new baseline
+        run: |
+          cp scope/current.txt scope/previous.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f scope/previous.txt
+          git diff --cached --quiet || git commit -m "Update Red Bull scope baseline [skip ci]"
+          git push
+
+      - name: Upload scope artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redbull-scope-${{ github.run_number }}
+          path: |
+            scope/current_raw.txt
+            scope/current.txt
+            scope/added.txt
+            scope/removed.txt
+            scope/summary.txt
+          retention-days: 30
+
+      - name: Job summary
+        if: always()
+        run: |
+          ADDED="${{ steps.diff.outputs.added }}"
+          REMOVED="${{ steps.diff.outputs.removed }}"
+          TOTAL=$(wc -l < scope/current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          {
+            echo "## Scope Monitor"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "| Metric | Value |"
+            echo "|---|---|"
+            echo "| Domains currently in scope | $TOTAL |"
+            echo "| Added | $ADDED |"
+            echo "| Removed | $REMOVED |"
+            echo ""
+            echo "Only GitHub was contacted. No Red Bull infrastructure touched."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ------------------------------------------------------------------
+  # Manual-input analyzer — AI reads files YOU saved, not scanned ones
+  # ------------------------------------------------------------------
+  analyze:
+    if: |
+      (github.event_name == 'push') ||
+      (github.event_name == 'workflow_dispatch' && (inputs.mode == 'analyze' || inputs.mode == 'all'))
+    runs-on: ubuntu-latest
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+      GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+      COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Collect manual inputs
+        id: collect
+        run: |
+          mkdir -p analysis
+          # Files the researcher drops into manual-input/ — JS bundles saved
+          # from the browser, HTML pages, HAR exports, etc. The workflow
+          # NEVER fetches these itself; they arrive via commit.
+          if [ ! -d manual-input ]; then
+            echo "found=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          find manual-input -type f \
+            \( -name '*.js' -o -name '*.html' -o -name '*.htm' \
+               -o -name '*.json' -o -name '*.txt' \) \
+            -size -2M \
+            | sort > analysis/filelist.txt
+
+          COUNT=$(wc -l < analysis/filelist.txt | tr -d ' ')
+          echo "found=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Found $COUNT manual input file(s)"
+
+      - name: Local pattern extraction (no AI needed)
+        if: steps.collect.outputs.found != '0'
+        run: |
+          # Fast local heuristics — surfaces candidates BEFORE the AI pass.
+          # These run on files you saved, not on anything fetched.
+          > analysis/local_hits.txt
+
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            echo "=== $f ===" >> analysis/local_hits.txt
+
+            # Endpoint-shaped strings
+            grep -oE '"/[a-zA-Z0-9_./-]{2,80}"' "$f" 2>/dev/null \
+              | sort -u | head -40 \
+              | sed 's/^/  endpoint: /' >> analysis/local_hits.txt || true
+
+            # Suspicious identifiers
+            grep -oiE '(api[_-]?key|access[_-]?token|secret|bearer|authorization)[^,;]{0,60}' "$f" 2>/dev/null \
+              | sort -u | head -20 \
+              | sed 's/^/  keyword: /' >> analysis/local_hits.txt || true
+
+            # DOM sinks worth a manual look
+            grep -oE '(dangerouslySetInnerHTML|innerHTML|eval\(|document\.write|postMessage)' "$f" 2>/dev/null \
+              | sort -u \
+              | sed 's/^/  sink: /' >> analysis/local_hits.txt || true
+
+            echo "" >> analysis/local_hits.txt
+          done < analysis/filelist.txt
+
+          echo "Local extraction produced $(wc -l < analysis/local_hits.txt) line(s)"
+
+      - name: AI static analysis of manual inputs
+        if: steps.collect.outputs.found != '0'
+        run: |
+          # Feed file CONTENT (truncated) plus the local hits to the model.
+          # The model is asked to rank findings for MANUAL follow-up, not to
+          # suggest running any tool.
+          mkdir -p analysis/bodies
+          TOTAL_CHARS=0
+          MAX_TOTAL=120000   # keep the prompt bounded
+
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            [ "$TOTAL_CHARS" -ge "$MAX_TOTAL" ] && break
+            SAFE=$(echo "$f" | tr '/' '_')
+            head -c 20000 "$f" > "analysis/bodies/$SAFE"
+            TOTAL_CHARS=$((TOTAL_CHARS + $(wc -c < "analysis/bodies/$SAFE")))
+          done < analysis/filelist.txt
+
+          BODIES=$(for f in analysis/bodies/*; do
+            echo "----- $f -----"
+            cat "$f"
+            echo ""
+          done)
+          HITS=$(head -c 8000 analysis/local_hits.txt)
+
+          INSTRUCTIONS=$(cat << 'EOF'
+You are doing STATIC analysis on JavaScript/HTML files a bug-bounty
+researcher manually downloaded from Red Bull's in-scope assets using a
+browser. You are NOT to suggest running any scanner, crawler, or
+enumeration tool — Red Bull's program forbids them.
+
+Review the file contents and the pre-extracted candidates below and
+produce a prioritised, human-actionable shortlist:
+
+1. Client-side secrets or tokens that look real (not placeholders like
+   "YOUR_API_KEY_HERE"). Give the exact string and file.
+2. API endpoints that look interesting for manual testing — especially
+   ones with parameters suggesting auth, upload, admin, or user data.
+3. DOM sinks reachable from user-controlled input (postMessage handlers,
+   innerHTML, eval) — describe the data flow you can see statically.
+4. Any third-party hostnames referenced that are NOT in the Red Bull
+   scope list (these would be out of scope — call them out so the
+   researcher doesn't waste time).
+
+For each item: file, exact snippet, why it matters, and the MANUAL step
+you'd take next. No tool suggestions. Plain text, concise.
+EOF
+)
+          PROMPT_TEXT=$(printf "%s\n\nPRE-EXTRACTED CANDIDATES:\n%s\n\nFILE CONTENTS:\n%s" \
+            "$INSTRUCTIONS" "$HITS" "$BODIES")
+
+          SUMMARY=""
+          PROVIDER="none"
+
+          for KEY_VAR in GEMINI_API_KEY GEMINI_API_KEY_2 GEMINI_API_KEY_3; do
+            KEY_VAL="${!KEY_VAR}"
+            [ -z "$KEY_VAL" ] && continue
+            P=$(jq -n --arg text "$PROMPT_TEXT" '{contents: [{parts: [{text: $text}]}]}')
+            R=$(curl -s -X POST \
+              "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$KEY_VAL" \
+              -H "Content-Type: application/json" -d "$P")
+            SUMMARY=$(echo "$R" | jq -r '.candidates[0].content.parts[0].text // empty' 2>/dev/null || echo "")
+            if [ -n "$SUMMARY" ]; then PROVIDER="Gemini ($KEY_VAR)"; break; fi
+          done
+
+          if [ -z "$SUMMARY" ]; then
+            for KEY_VAR in COHERE_API_KEY COHERE_API_KEY_2 COHERE_API_KEY_3; do
+              KEY_VAL="${!KEY_VAR}"
+              [ -z "$KEY_VAL" ] && continue
+              P=$(jq -n --arg text "$PROMPT_TEXT" \
+                '{model: "command-r-plus-08-2024", messages: [{role: "user", content: $text}]}')
+              R=$(curl -s -X POST "https://api.cohere.com/v2/chat" \
+                -H "Content-Type: application/json" \
+                -H "Authorization: Bearer $KEY_VAL" -d "$P")
+              SUMMARY=$(echo "$R" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
+              if [ -n "$SUMMARY" ]; then PROVIDER="Cohere ($KEY_VAR, fallback)"; break; fi
+            done
+          fi
+
+          if [ -z "$SUMMARY" ]; then
+            SUMMARY=$(printf "AI unavailable — local extraction only:\n%s" "$HITS")
+          fi
+
+          echo "$SUMMARY" > analysis/ai_summary.txt
+          echo "provider=$PROVIDER" >> "$GITHUB_OUTPUT"
+
+      - name: Notify analysis channel
+        if: steps.collect.outputs.found != '0'
+        run: |
+          COUNT=${{ steps.collect.outputs.found }}
+          SUMMARY=$(head -c 1700 analysis/ai_summary.txt)
+          HEADER=$(printf "**Manual-input analysis** (%s file(s))\n" "$COUNT")
+          FOOTER=$'\n_Verify every item by hand before reporting. Nothing here was scanner-derived._'
+          CONTENT=$(printf "%s\`\`\`\n%s\n\`\`\`%s" "$HEADER" "$SUMMARY" "$FOOTER")
+
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$ANALYSIS_WEBHOOK"
+
+      - name: Upload analysis artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redbull-analysis-${{ github.run_number }}
+          path: |
+            analysis/local_hits.txt
+            analysis/ai_summary.txt
+          retention-days: 30
+
+      - name: Job summary
+        if: always()
+        run: |
+          FOUND="${{ steps.collect.outputs.found }}"
+          {
+            echo "## Manual-Input Analyzer"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "- Files analysed: ${FOUND:-0}"
+            echo "- AI provider: ${{ steps.analyze.outputs.provider || 'n/a' }}"
+            echo ""
+            echo "Reminder: these results are AI-generated hints on files YOU"
+            echo "saved manually. Verify every finding by hand before"
+            echo "considering a report."
+          } >> "$GITHUB_STEP_SUMMARY"
