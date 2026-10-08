@@ -257,7 +257,9 @@ jobs:
             | grep -aoE '(\*\.)?[A-Za-z0-9._-]+\.[A-Za-z]{2,}' \
             | tr 'A-Z' 'a-z' \
             | sort -u > scope/current.txt
-          echo "Normalized $(wc -l < scope/current.txt) unique domain(s)"
+          TOTAL=$(wc -l < scope/current.txt | tr -d ' ')
+          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+          echo "Normalized $TOTAL unique domain(s)"
 
       - name: Diff against previous
         id: diff
@@ -281,9 +283,8 @@ jobs:
         id: triage
         if: ${{ steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0' }}
         run: |
-          # Cap diff size before embedding in the prompt. First-run case is
-          # handled by bootstrap seeding, but a bulk scope expansion could
-          # still produce a big diff.
+          # Cap diff size before embedding in the prompt. A bulk scope
+          # expansion (or a bad fetch) could otherwise produce a huge prompt.
           ADDED=$(head -n 60 scope/added.txt 2>/dev/null || true)
           REMOVED=$(head -n 60 scope/removed.txt 2>/dev/null || true)
           ADDED_TOTAL=$(wc -l < scope/added.txt 2>/dev/null | tr -d ' ' || echo 0)
@@ -295,27 +296,48 @@ jobs:
             REMOVED=$(printf '%s\n... [%s total, showing first 60]' "$REMOVED" "$REMOVED_TOTAL")
           fi
 
+          TOTAL_IN_SCOPE="${{ steps.normalize.outputs.total }}"
+
           INSTRUCTIONS=$(printf '%s\n' \
-            "You are helping a bug-bounty researcher track changes to the Red Bull" \
+            "You are helping a bug-bounty researcher triage changes to the Red Bull" \
             "responsible-disclosure scope list. Red Bull's rules: no automated" \
             "scanners, no subdomain enumeration, max 5 req/sec, findings must be" \
-            "manually discovered." \
+            "manually discovered. Anything reported must have been found by hand." \
             "" \
-            "The list below is the set of domains that were added to or removed from" \
-            "the scope gist since the last check. Every entry is authorized for" \
-            "testing." \
+            "Context: the full scope contains about ${TOTAL_IN_SCOPE} hostnames." \
+            "Below is the DELTA since the last check: domains recently ADDED to or" \
+            "REMOVED from scope. Every ADDED entry is authorized for testing." \
             "" \
-            "For each ADDED domain: classify what it looks like (marketing site, API" \
-            "host, mobile backend, third-party hosting such as S3/Cloudflare, wildcard)." \
-            "For each REMOVED domain: just note it as no-longer-in-scope." \
+            "Your job is to produce a triage that HELPS THE RESEARCHER AVOID" \
+            "WASTING TIME. Most asset-delivery, CDN, marketing-page, and" \
+            "static-content hosts are not worth a manual 10-minute pass - the" \
+            "researcher's time is better spent on hosts that look like real" \
+            "applications, APIs, admin panels, auth flows, user-facing apps, or" \
+            "stateful services." \
             "" \
-            "If the ADDED list says it is truncated, acknowledge that and summarise" \
-            "the visible entries rather than trying to enumerate everything." \
+            "For each ADDED domain, classify it in one line as one of:" \
+            "  [app]       likely application / API / admin / auth / user-data" \
+            "  [asset]     asset server, CDN, static files, media" \
+            "  [marketing] campaign, event, promo, landing page" \
+            "  [infra]     DNS, mail, VPN, monitoring, build, stage, test" \
+            "  [unknown]   cannot tell from the hostname alone" \
             "" \
-            "End with a \"SUGGESTED FIRST LOOK\" list of the 1-3 added assets most worth" \
-            "manually reviewing - prioritise things that look like APIs, admin portals," \
-            "or wildcards. If nothing looks worth pursuing, say so clearly." \
+            "Do not list every domain. Group by classification and give the count" \
+            "plus at most 3 representative examples per group. For [app] entries," \
+            "name them individually since they are the interesting ones." \
             "" \
+            "Then end with exactly two sections, in this order:" \
+            "" \
+            "PROMISING: list 0-3 added domains worth a manual look, each with a" \
+            "one-line reason and a suggested first manual action (e.g. 'open in" \
+            "browser and inspect /api/v1', 'check login page for framework" \
+            "banners'). If NOTHING is promising, write 'PROMISING: none' - this" \
+            "is a valid and common answer." \
+            "" \
+            "LOW PRIORITY: one line summarising the classes of assets that can be" \
+            "safely skipped this cycle (e.g. '11 asset/marketing hosts - skip')." \
+            "" \
+            "Do not suggest running scanners, crawlers, or enumeration tools." \
             "Plain text, no markdown headers, be concise.")
 
           PROMPT_FILE="scope/prompt.txt"
@@ -364,9 +386,11 @@ jobs:
         run: |
           ADDED="${{ steps.diff.outputs.added }}"
           REMOVED="${{ steps.diff.outputs.removed }}"
+          TOTAL="${{ steps.normalize.outputs.total }}"
           SUMMARY=$(head -c 1700 scope/summary.txt)
 
-          HEADER=$(printf "**Scope changed** (+%s added, -%s removed)\n" "$ADDED" "$REMOVED")
+          HEADER=$(printf "**Scope changed** (+%s added, -%s removed; %s total in scope)\n" \
+            "$ADDED" "$REMOVED" "$TOTAL")
           FOOTER=$'\n_Reminder: no scanners, no subdomain enum, manual discovery only._'
           CONTENT=$(printf "%s\`\`\`\n%s\n\`\`\`%s" "$HEADER" "$SUMMARY" "$FOOTER")
 
@@ -504,20 +528,27 @@ jobs:
             "enumeration tool - Red Bull's program forbids them." \
             "" \
             "Review the file contents and the pre-extracted candidates below and" \
-            "produce a prioritised, human-actionable shortlist:" \
+            "produce a prioritised, human-actionable shortlist. For each item," \
+            "give: file, exact snippet, why it matters, and the MANUAL step the" \
+            "researcher should take next." \
+            "" \
+            "Cover these categories, in order of importance:" \
             "" \
             "1. Client-side secrets or tokens that look real (not placeholders like" \
-            "   \"YOUR_API_KEY_HERE\"). Give the exact string and file." \
-            "2. API endpoints that look interesting for manual testing - especially" \
-            "   ones with parameters suggesting auth, upload, admin, or user data." \
+            "   'YOUR_API_KEY_HERE'). Give the exact string and file." \
+            "2. API endpoints worth manual testing - especially ones with parameters" \
+            "   suggesting auth, upload, admin, or user data." \
             "3. DOM sinks reachable from user-controlled input (postMessage handlers," \
             "   innerHTML, eval) - describe the data flow you can see statically." \
-            "4. Any third-party hostnames referenced that are NOT in the Red Bull" \
-            "   scope list (these would be out of scope - call them out so the" \
-            "   researcher doesn't waste time)." \
+            "4. Third-party hostnames referenced that are NOT in the Red Bull scope" \
+            "   list (out of scope - call them out so the researcher does not waste" \
+            "   time)." \
             "" \
-            "For each item: file, exact snippet, why it matters, and the MANUAL step" \
-            "you'd take next. No tool suggestions. Plain text, concise.")
+            "End with a section 'TOP 3 TO VERIFY BY HAND' listing the three most" \
+            "promising leads, or write 'TOP 3 TO VERIFY BY HAND: none' if nothing" \
+            "in the files warrants follow-up. That is a valid answer." \
+            "" \
+            "No tool suggestions. Plain text, concise.")
 
           PROMPT_FILE="analysis/prompt.txt"
           {
