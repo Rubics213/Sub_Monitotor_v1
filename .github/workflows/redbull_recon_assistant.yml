@@ -38,8 +38,7 @@ permissions:
 
 jobs:
   # ------------------------------------------------------------------
-  # Bootstrap — creates scope/ and manual-input/ if missing
-  # Safe to run repeatedly; only writes what's absent.
+  # Bootstrap
   # ------------------------------------------------------------------
   init:
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.bootstrap }}
@@ -82,7 +81,7 @@ jobs:
           git add -f scope/previous.txt manual-input/.gitkeep
 
           if [ "$CHANGES" = "0" ]; then
-            echo "Nothing to bootstrap — all paths already exist"
+            echo "Nothing to bootstrap - all paths already exist"
           fi
 
           git diff --cached --quiet || git commit -m "Bootstrap scope/ and manual-input/ [skip ci]"
@@ -180,7 +179,7 @@ jobs:
             exit 1
           fi
 
-          CONTENT=$(printf "Smoke test — AI provider: **%s**\n\`\`\`\n%s\n\`\`\`" "$PROVIDER" "$SUMMARY")
+          CONTENT=$(printf "Smoke test - AI provider: **%s**\n\`\`\`\n%s\n\`\`\`" "$PROVIDER" "$SUMMARY")
           PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$SCOPE_WEBHOOK"
 
@@ -225,7 +224,7 @@ jobs:
             -o scope/current_raw.txt
 
           if [ ! -s scope/current_raw.txt ]; then
-            echo "::error::Scope gist fetch failed — aborting to avoid false alerts"
+            echo "::error::Scope gist fetch failed - aborting to avoid false alerts"
             exit 1
           fi
           echo "Fetched $(wc -l < scope/current_raw.txt) line(s)"
@@ -264,23 +263,22 @@ jobs:
           ADDED=$(cat scope/added.txt 2>/dev/null || true)
           REMOVED=$(cat scope/removed.txt 2>/dev/null || true)
 
-          INSTRUCTIONS=$(cat << 'EOF'
-You are helping a bug-bounty researcher track changes to the Red Bull
-responsible-disclosure scope list. Red Bull's rules: no automated
-scanners, no subdomain enumeration, max 5 req/sec, findings must be
-manually discovered.
+          INSTRUCTIONS=$(printf '%s\n' \
+            "You are helping a bug-bounty researcher track changes to the Red Bull" \
+            "responsible-disclosure scope list. Red Bull's rules: no automated" \
+            "scanners, no subdomain enumeration, max 5 req/sec, findings must be" \
+            "manually discovered." \
+            "" \
+            "For each ADDED domain: classify what it looks like (marketing site, API" \
+            "host, mobile backend, third-party hosting such as S3/Cloudflare, wildcard)." \
+            "For each REMOVED domain: just note it as no-longer-in-scope." \
+            "" \
+            "End with a \"SUGGESTED FIRST LOOK\" list of the 1-3 added assets most worth" \
+            "manually reviewing - prioritise things that look like APIs, admin portals," \
+            "or wildcards. If nothing looks worth pursuing, say so clearly." \
+            "" \
+            "Plain text, no markdown headers, be concise.")
 
-For each ADDED domain: classify what it looks like (marketing site, API
-host, mobile backend, third-party hosting such as S3/Cloudflare, wildcard).
-For each REMOVED domain: just note it as no-longer-in-scope.
-
-End with a "SUGGESTED FIRST LOOK" list of the 1-3 added assets most worth
-manually reviewing — prioritise things that look like APIs, admin portals,
-or wildcards. If nothing looks worth pursuing, say so clearly.
-
-Plain text, no markdown headers, be concise.
-EOF
-)
           PROMPT_TEXT=$(printf "%s\n\nADDED:\n%s\n\nREMOVED:\n%s" \
             "$INSTRUCTIONS" "$ADDED" "$REMOVED")
 
@@ -313,7 +311,7 @@ EOF
           fi
 
           if [ -z "$SUMMARY" ]; then
-            SUMMARY=$(printf "AI unavailable — raw diff:\nADDED:\n%s\nREMOVED:\n%s" "$ADDED" "$REMOVED")
+            SUMMARY=$(printf "AI unavailable - raw diff:\nADDED:\n%s\nREMOVED:\n%s" "$ADDED" "$REMOVED")
           fi
 
           echo "$SUMMARY" > scope/summary.txt
@@ -463,29 +461,28 @@ EOF
           done)
           HITS=$(head -c 8000 analysis/local_hits.txt)
 
-          INSTRUCTIONS=$(cat << 'EOF'
-You are doing STATIC analysis on JavaScript/HTML files a bug-bounty
-researcher manually downloaded from Red Bull's in-scope assets using a
-browser. You are NOT to suggest running any scanner, crawler, or
-enumeration tool — Red Bull's program forbids them.
+          INSTRUCTIONS=$(printf '%s\n' \
+            "You are doing STATIC analysis on JavaScript/HTML files a bug-bounty" \
+            "researcher manually downloaded from Red Bull's in-scope assets using a" \
+            "browser. You are NOT to suggest running any scanner, crawler, or" \
+            "enumeration tool - Red Bull's program forbids them." \
+            "" \
+            "Review the file contents and the pre-extracted candidates below and" \
+            "produce a prioritised, human-actionable shortlist:" \
+            "" \
+            "1. Client-side secrets or tokens that look real (not placeholders like" \
+            "   \"YOUR_API_KEY_HERE\"). Give the exact string and file." \
+            "2. API endpoints that look interesting for manual testing - especially" \
+            "   ones with parameters suggesting auth, upload, admin, or user data." \
+            "3. DOM sinks reachable from user-controlled input (postMessage handlers," \
+            "   innerHTML, eval) - describe the data flow you can see statically." \
+            "4. Any third-party hostnames referenced that are NOT in the Red Bull" \
+            "   scope list (these would be out of scope - call them out so the" \
+            "   researcher doesn't waste time)." \
+            "" \
+            "For each item: file, exact snippet, why it matters, and the MANUAL step" \
+            "you'd take next. No tool suggestions. Plain text, concise.")
 
-Review the file contents and the pre-extracted candidates below and
-produce a prioritised, human-actionable shortlist:
-
-1. Client-side secrets or tokens that look real (not placeholders like
-   "YOUR_API_KEY_HERE"). Give the exact string and file.
-2. API endpoints that look interesting for manual testing — especially
-   ones with parameters suggesting auth, upload, admin, or user data.
-3. DOM sinks reachable from user-controlled input (postMessage handlers,
-   innerHTML, eval) — describe the data flow you can see statically.
-4. Any third-party hostnames referenced that are NOT in the Red Bull
-   scope list (these would be out of scope — call them out so the
-   researcher doesn't waste time).
-
-For each item: file, exact snippet, why it matters, and the MANUAL step
-you'd take next. No tool suggestions. Plain text, concise.
-EOF
-)
           PROMPT_TEXT=$(printf "%s\n\nPRE-EXTRACTED CANDIDATES:\n%s\n\nFILE CONTENTS:\n%s" \
             "$INSTRUCTIONS" "$HITS" "$BODIES")
 
@@ -518,7 +515,7 @@ EOF
           fi
 
           if [ -z "$SUMMARY" ]; then
-            SUMMARY=$(printf "AI unavailable — local extraction only:\n%s" "$HITS")
+            SUMMARY=$(printf "AI unavailable - local extraction only:\n%s" "$HITS")
           fi
 
           echo "$SUMMARY" > analysis/ai_summary.txt
