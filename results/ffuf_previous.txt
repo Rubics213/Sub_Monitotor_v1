@@ -1,3 +1,8 @@
+http://pbx-dev.edpnet.net/gui [301] -> http://pbx-dev.edpnet.net/gui/
+http://redirect.edpnet.be/blocked [301] -> http://redirect.edpnet.be/blocked/
+http://redirect.edpnet.be/health [301] -> http://redirect.edpnet.be/health/
+http://redirect.edpnet.be/maintenance [301] -> http://redirect.edpnet.be/maintenance/
+http://redirect.edpnet.be/pma [301] -> http://redirect.edpnet.be/pma/
 https://backup.edpnet.com/.well-known/openid-configuration [200]
 https://backup.edpnet.com/bc [302] -> https://backup.edpnet.com/ui/
 https://backup.edpnet.com/docs [301] -> http://backup.edpnet.com/api/cyberpsa/docs
@@ -6,11 +11,9 @@ https://backup.edpnet.com/fc [302] -> /fc/
 https://backup.edpnet.com/mc [200]
 https://backup.edpnet.com/mobile [301] -> http://backup.edpnet.com/mobile/
 https://backup.edpnet.com/static [301] -> http://backup.edpnet.com/static/
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=mnsejhaijcnvwczaucagbvcc
+https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=fkfeqyapsgzcurruwmyfuwto
 https://cabmanager.citymesh.com/tar.gz [403]
 https://dashboard.citymesh.com/tar.gz [403]
-https://ffai-alerts.citymesh.com/tar.gz [403]
-https://ffai-summary.citymesh.com/tar.gz [403]
 https://ffai.citymesh.com/.swf [302] -> /login
 https://ffai.citymesh.com/.well-known/apple-app-site-association [302] -> /login
 https://ffai.citymesh.com/.well-known/apple-developer-merchantid-domain-association [302] -> /login
@@ -76,8 +79,14 @@ https://ffai.citymesh.com/swfobject.js [302] -> /login
 https://ffai.citymesh.com/tar.gz [403]
 https://ffai.citymesh.com/vite.config.js [302] -> /login
 https://ffai.citymesh.com/vite.config.ts [302] -> /login
-https://iot.citymesh.com/_framework/blazor.webassembly.js [200]
-https://iot.citymesh.com/tar.gz [403]
+https://hcp.edpnet.net/.gitignore [200]
+https://hcp.edpnet.net/css [301] -> https://hcp.edpnet.net/css/
+https://hcp.edpnet.net/fonts [301] -> https://hcp.edpnet.net/fonts/
+https://hcp.edpnet.net/images [301] -> https://hcp.edpnet.net/images/
+https://hcp.edpnet.net/index.php [302] -> https://hcp.edpnet.net/
+https://hcp.edpnet.net/js [301] -> https://hcp.edpnet.net/js/
+https://hcp.edpnet.net/logs [301] -> https://hcp.edpnet.net/logs/
+https://hcp.edpnet.net/tmp [301] -> https://hcp.edpnet.net/tmp/
 https://linemon.citymesh.com/app [301] -> https://linemon.citymesh.com/app/
 https://linemon.citymesh.com/assets [301] -> https://linemon.citymesh.com/assets/
 https://linemon.citymesh.com/audio [301] -> https://linemon.citymesh.com/audio/
@@ -93,7 +102,8 @@ https://linemon.citymesh.com/modules [301] -> https://linemon.citymesh.com/modul
 https://linemon.citymesh.com/vendor [301] -> https://linemon.citymesh.com/vendor/
 https://linemon.citymesh.com/widgets [301] -> https://linemon.citymesh.com/widgets/
 https://livechat.citymesh.com/tar.gz [403]
-https://logout.citymesh.com/tar.gz [403]
+https://mail.edpnet.be/index.php [200]
+https://mail.edpnet.be/public_html [301] -> https://mail.edpnet.be/public_html/
 https://my.citymesh.com/.swf [200]
 https://my.citymesh.com/.well-known/apple-app-site-association [200]
 https://my.citymesh.com/.well-known/apple-developer-merchantid-domain-association [200]
@@ -199,7 +209,6 @@ https://netbird.citymesh.net/settings [200]
 https://netbird.citymesh.net/setup [200]
 https://netbird.citymesh.net/team [200]
 https://netbird.citymesh.net/web.config [403]
-https://notulen.citymesh.com/tar.gz [403]
 https://odoo.citymesh.com/.swf [302] -> https://odoo.citymesh.com/en/.swf
 https://odoo.citymesh.com/_framework/blazor.webassembly.js [302] -> https://odoo.citymesh.com/en/blazor.webassembly.js
 https://odoo.citymesh.com/contacts.txt [302] -> https://odoo.citymesh.com/en/contacts.txt
@@ -216,16 +225,4 @@ https://odoo2.citymesh.com/Program Files [302] -> https://odoo2.citymesh.com/en/
 https://odoo2.citymesh.com/logo [200]
 https://odoo2.citymesh.com/reports list [302] -> https://odoo2.citymesh.com/en/reports%20list
 https://odoo2.citymesh.com/sitemap.xml [200]
-https://pbx-concordia.edpnet.net/gui [301] -> https://pbx-concordia.edpnet.net/gui/
-https://pbx-movemedia.edpnet.net/gui [301] -> https://pbx-movemedia.edpnet.net/gui/
-https://pbx-siveco.edpnet.net/gui [301] -> https://pbx-siveco.edpnet.net/gui/
-https://portal.towereye.be/.git/logs/ [301] -> http://towereye-portal.local.citymesh.com/.git/logs
-https://portal.towereye.be/assets [301] -> http://towereye-portal.local.citymesh.com/assets/
-https://portal.towereye.be/cgi-bin/ [301] -> http://towereye-portal.local.citymesh.com/cgi-bin
-https://portal.towereye.be/vendor [301] -> http://towereye-portal.local.citymesh.com/vendor/
 https://recording.citymeshconnect.com/static [301] -> https://recording.citymeshconnect.com/static/
-https://recordingauth.citymeshconnect.com/static [301] -> https://recordingauth.citymeshconnect.com/static/
-https://redirect.edpnet.be/blocked [301] -> https://redirect.edpnet.be/blocked/
-https://redirect.edpnet.be/health [301] -> https://redirect.edpnet.be/health/
-https://redirect.edpnet.be/maintenance [301] -> https://redirect.edpnet.be/maintenance/
-https://redirect.edpnet.be/pma [301] -> https://redirect.edpnet.be/pma/
