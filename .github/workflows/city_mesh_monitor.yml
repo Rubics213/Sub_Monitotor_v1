@@ -1,0 +1,1557 @@
+name: Subdomain Monitor - Citymesh
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:
+    inputs:
+      smoke_test:
+        description: 'Run smoke test only (Discord + AI triage check, no scanning)'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  smoke_test:
+    if: github.event_name == 'workflow_dispatch' && inputs.smoke_test == true
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+      GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+      COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+    steps:
+      - name: Test Discord webhook
+        run: |
+          CONTENT="Smoke test: Discord webhook is reachable. $(date -u '+%Y-%m-%d %H:%M UTC')"
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL")
+          echo "Discord response code: $HTTP_CODE"
+          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
+            echo "::error::Discord webhook returned $HTTP_CODE — check DISCORD_WEBHOOK_URL secret"
+            exit 1
+          fi
+
+      - name: Setup shared AI triage helper
+        run: |
+          mkdir -p scripts
+          cat > scripts/ai_call.py << 'PYEOF'
+          import json, os, sys, urllib.request, urllib.error
+
+          def ask_ai(prompt, output_file=None):
+              gemini_keys = [os.environ.get(k) for k in ("GEMINI_API_KEY", "GEMINI_API_KEY_2", "GEMINI_API_KEY_3") if os.environ.get(k)]
+              cohere_keys = [os.environ.get(k) for k in ("COHERE_API_KEY", "COHERE_API_KEY_2", "COHERE_API_KEY_3") if os.environ.get(k)]
+              summary, provider = "", "none"
+
+              # 1. Gemini rotation
+              for idx, key in enumerate(gemini_keys, 1):
+                  try:
+                      url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={key}"
+                      payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode("utf-8")
+                      req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+                      with urllib.request.urlopen(req, timeout=15) as resp:
+                          data = json.loads(resp.read().decode("utf-8", "ignore"))
+                          cand = data.get("candidates", [])
+                          if cand:
+                              parts = cand[0].get("content", {}).get("parts", [])
+                              if parts and parts[0].get("text"):
+                                  summary = parts[0]["text"].strip()
+                                  provider = f"Gemini (key {idx})"
+                                  break
+                  except Exception:
+                      continue
+
+              # 2. Cohere fallback
+              if not summary:
+                  for idx, key in enumerate(cohere_keys, 1):
+                      try:
+                          url = "https://api.cohere.com/v2/chat"
+                          payload = json.dumps({"model": "command-a-03-2025", "messages": [{"role": "user", "content": prompt}]}).encode("utf-8")
+                          req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})
+                          with urllib.request.urlopen(req, timeout=15) as resp:
+                              data = json.loads(resp.read().decode("utf-8", "ignore"))
+                              content = data.get("message", {}).get("content", [])
+                              if content and content[0].get("text"):
+                                  summary = content[0]["text"].strip()
+                                  provider = f"Cohere (key {idx}, fallback)"
+                                  break
+                      except Exception:
+                          continue
+
+              if output_file:
+                  with open(output_file, "w") as f:
+                      f.write(summary)
+              print(f"PROVIDER:{provider}")
+              return provider, summary
+
+          if __name__ == "__main__":
+              prompt = sys.argv[1] if len(sys.argv) > 1 else sys.stdin.read()
+              out_file = sys.argv[2] if len(sys.argv) > 2 else None
+              ask_ai(prompt, out_file)
+          PYEOF
+          chmod +x scripts/ai_call.py
+
+      - name: Test AI triage pipeline (multi-key rotation, Gemini -> Cohere fallback)
+        run: |
+          PROMPT_TEXT="Reply with exactly one short sentence confirming you received this test message."
+          AI_RESULT=$(python3 scripts/ai_call.py "$PROMPT_TEXT" /tmp/smoke_summary.txt)
+          PROVIDER=$(echo "$AI_RESULT" | grep -oP 'PROVIDER:\K.*' || echo "none")
+          SUMMARY=$(cat /tmp/smoke_summary.txt 2>/dev/null || echo "")
+
+          if [ -z "$SUMMARY" ]; then
+            SUMMARY="AI triage FAILED — every configured Gemini and Cohere key failed. Check API keys and provider status."
+            PROVIDER="none"
+          fi
+
+          CONTENT=$(printf "Smoke test — AI triage via **%s**:\n\`\`\`\n%s\n\`\`\`" "$PROVIDER" "$SUMMARY")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+          echo "SMOKE_PROVIDER=$PROVIDER" >> "$GITHUB_ENV"
+          echo "SMOKE_SUMMARY=$SUMMARY" >> "$GITHUB_ENV"
+
+      - name: Write smoke test summary
+        if: always()
+        run: |
+          {
+            echo "## Smoke Test Results"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "- Discord webhook: reachable (see step above for status code)"
+            echo "- AI triage provider that responded: **${SMOKE_PROVIDER:-unknown}**"
+            echo ""
+            echo "AI response:"
+            echo '```'
+            echo "${SMOKE_SUMMARY:-no response captured}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  monitor:
+    if: github.event_name != 'workflow_dispatch' || inputs.smoke_test != true
+    runs-on: ubuntu-latest
+    # environment: production   # uncomment + set name if webhook is an Environment secret
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Cache Go security binaries
+        id: cache-go-bin
+        uses: actions/cache@v4
+        with:
+          path: ~/go/bin
+          key: ${{ runner.os }}-go-bin-v1
+
+      - name: Install subfinder, httpx, nuclei, ffuf and katana
+        if: steps.cache-go-bin.outputs.cache-hit != 'true'
+        run: |
+          go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+          go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+          go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+          go install -v github.com/ffuf/ffuf/v2@latest
+          go install -v github.com/projectdiscovery/katana/cmd/katana@latest
+
+      - name: Add Go binaries to PATH
+        run: echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Setup shared helper scripts
+        run: |
+          mkdir -p scripts
+          cat > scripts/ai_call.py << 'PYEOF'
+          import json, os, sys, urllib.request, urllib.error
+
+          def ask_ai(prompt, output_file=None):
+              gemini_keys = [os.environ.get(k) for k in ("GEMINI_API_KEY", "GEMINI_API_KEY_2", "GEMINI_API_KEY_3") if os.environ.get(k)]
+              cohere_keys = [os.environ.get(k) for k in ("COHERE_API_KEY", "COHERE_API_KEY_2", "COHERE_API_KEY_3") if os.environ.get(k)]
+              summary, provider = "", "none"
+
+              # 1. Gemini rotation
+              for idx, key in enumerate(gemini_keys, 1):
+                  try:
+                      url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={key}"
+                      payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode("utf-8")
+                      req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+                      with urllib.request.urlopen(req, timeout=15) as resp:
+                          data = json.loads(resp.read().decode("utf-8", "ignore"))
+                          cand = data.get("candidates", [])
+                          if cand:
+                              parts = cand[0].get("content", {}).get("parts", [])
+                              if parts and parts[0].get("text"):
+                                  summary = parts[0]["text"].strip()
+                                  provider = f"Gemini (key {idx})"
+                                  break
+                  except Exception:
+                      continue
+
+              # 2. Cohere fallback
+              if not summary:
+                  for idx, key in enumerate(cohere_keys, 1):
+                      try:
+                          url = "https://api.cohere.com/v2/chat"
+                          payload = json.dumps({"model": "command-a-03-2025", "messages": [{"role": "user", "content": prompt}]}).encode("utf-8")
+                          req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})
+                          with urllib.request.urlopen(req, timeout=15) as resp:
+                              data = json.loads(resp.read().decode("utf-8", "ignore"))
+                              content = data.get("message", {}).get("content", [])
+                              if content and content[0].get("text"):
+                                  summary = content[0]["text"].strip()
+                                  provider = f"Cohere (key {idx}, fallback)"
+                                  break
+                      except Exception:
+                          continue
+
+              if output_file:
+                  with open(output_file, "w") as f:
+                      f.write(summary)
+              print(f"PROVIDER:{provider}")
+              return provider, summary
+
+          if __name__ == "__main__":
+              prompt = sys.argv[1] if len(sys.argv) > 1 else sys.stdin.read()
+              out_file = sys.argv[2] if len(sys.argv) > 2 else None
+              ask_ai(prompt, out_file)
+          PYEOF
+          chmod +x scripts/ai_call.py
+
+      - name: Download wordlist for directory bruteforce
+        run: |
+          mkdir -p wordlists
+          curl -s -o wordlists/common.txt \
+            https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt
+
+      - name: Write subfinder provider config
+        env:
+          SHODAN_API_KEY: ${{ secrets.SHODAN_API_KEY }}
+          CENSYS_API_ID: ${{ secrets.CENSYS_API_ID }}
+          CENSYS_API_SECRET: ${{ secrets.CENSYS_API_SECRET }}
+          ZOOMEYE_API_KEY: ${{ secrets.ZOOMEYE_API_KEY }}
+          FOFA_EMAIL: ${{ secrets.FOFA_EMAIL }}
+          FOFA_KEY: ${{ secrets.FOFA_KEY }}
+          NETLAS_API_KEY: ${{ secrets.NETLAS_API_KEY }}
+          LEAKIX_API_KEY: ${{ secrets.LEAKIX_API_KEY }}
+          CRIMINALIP_API_KEY: ${{ secrets.CRIMINALIP_API_KEY }}
+          VIRUSTOTAL_API_KEY: ${{ secrets.VIRUSTOTAL_API_KEY }}
+        run: |
+          mkdir -p "$HOME/.config/subfinder"
+          cat > "$HOME/.config/subfinder/provider-config.yaml" <<EOF
+          shodan:
+            - $SHODAN_API_KEY
+          censys:
+            - $CENSYS_API_ID:$CENSYS_API_SECRET
+          zoomeye:
+            - $ZOOMEYE_API_KEY
+          fofa:
+            - $FOFA_EMAIL:$FOFA_KEY
+          netlas:
+            - $NETLAS_API_KEY
+          leakix:
+            - $LEAKIX_API_KEY
+          criminalip:
+            - $CRIMINALIP_API_KEY
+          virustotal:
+            - $VIRUSTOTAL_API_KEY
+          EOF
+
+      - name: Run subdomain enumeration across all targets
+        run: |
+          mkdir -p results
+          # Single multi-domain invocation instead of looping subfinder once per
+          # domain — each separate invocation pays its own source-connection
+          # startup cost (~5-15s), so 41 domains looped serially adds up fast.
+          # subfinder's -dL handles internal concurrency across all of them at once.
+          subfinder -dL targets.txt -silent -all -o results/current_raw.txt || touch results/current_raw.txt
+          sort -u results/current_raw.txt -o results/current_raw.txt
+
+      - name: Filter out-of-scope subdomains
+        run: |
+          if [ -s excluded.txt ]; then
+            grep -v -F -f excluded.txt results/current_raw.txt > results/current.txt || true
+          else
+            cp results/current_raw.txt results/current.txt
+          fi
+          sort -u results/current.txt -o results/current.txt
+
+      - name: Probe for live hosts with httpx
+        run: |
+          # rate-limit kept under Citymesh's 20 req/sec cap
+          # -tech-detect fingerprints the stack so nuclei can use targeted tags
+          #   rather than running the full template set against every host.
+          httpx -l results/current.txt -silent -status-code -title \
+                -tech-detect \
+                -follow-redirects \
+                -rate-limit 15 \
+                -o results/current_alive.txt || touch results/current_alive.txt
+          sort -u results/current_alive.txt -o results/current_alive.txt
+
+          # Extract hostname-only column (first field) for diffing
+          awk '{print $1}' results/current_alive.txt | sort -u > results/current_alive_hosts.txt
+
+      - name: Diff against previous alive hosts
+        id: diff
+        run: |
+          if [ -f results/previous_alive_hosts.txt ]; then
+            comm -13 results/previous_alive_hosts.txt results/current_alive_hosts.txt > results/new_hosts.txt
+          else
+            cp results/current_alive_hosts.txt results/new_hosts.txt
+          fi
+
+          NEW_COUNT=$(wc -l < results/new_hosts.txt | tr -d ' ')
+          echo "new_count=$NEW_COUNT" >> "$GITHUB_OUTPUT"
+
+          # Pull full detail lines (with status/title) for only the new hosts
+          if [ -s results/new_hosts.txt ]; then
+            grep -F -f results/new_hosts.txt results/current_alive.txt > results/new_detail.txt
+          else
+            touch results/new_detail.txt
+          fi
+
+      - name: Notify Discord if new live subdomains found
+        if: steps.diff.outputs.new_count != '0'
+        run: |
+          NEW_SUBS=$(cat results/new_detail.txt)
+          CONTENT=$(printf "**New live subdomains found for Citymesh:**\n\`\`\`\n%s\n\`\`\`" "$NEW_SUBS")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: Update nuclei templates
+        run: nuclei -update-templates -silent || true
+
+      - name: Scan live hosts with nuclei (per-host tech targeting)
+        run: |
+          # Per-host tech targeting: instead of unioning every detected tech
+          # across every host and running nuclei once with a giant tag list
+          # (which meant IIS templates ran against PHP hosts and vice versa),
+          # group hosts by their tech signature and run nuclei once per group
+          # with only that group's relevant tech tags.
+          #
+          # Expected impact:
+          #   - Fewer irrelevant templates evaluated per host -> faster, less
+          #     log noise from templates that can't possibly match.
+          #   - Groups run sequentially, so each keeps its own -rate-limit 15
+          #     and the combined request rate stays under Citymesh's 20/sec cap.
+          #   - Cost: N nuclei invocations instead of 1, each with ~5-15s of
+          #     template-loading overhead. For 5-10 unique tech signatures on
+          #     the Citymesh target set this is well under a minute extra.
+          #
+          # Hosts that httpx couldn't fingerprint land in a single "_BASE_"
+          # group that gets the base tags only — same as the old behaviour
+          # for undetected hosts.
+
+          BASE_TAGS="exposures,misconfiguration,takeovers,default-logins,cves"
+          GROUPS_DIR="results/nuclei_groups"
+          mkdir -p "$GROUPS_DIR"
+          rm -f "$GROUPS_DIR"/*
+
+          # Parse httpx output, group hosts by tech signature, write per-group
+          # host and tag files. Uses Python for the parsing because httpx's
+          # output format (URL [status] [title] [tech,tech]) is genuinely
+          # annoying to parse unambiguously in pure shell — titles contain
+          # brackets, tech lists contain commas, and either field can be absent.
+          python3 - << 'PYEOF'
+          import os
+          import re
+
+          BASE_TAGS = "exposures,misconfiguration,takeovers,default-logins,cves"
+
+          # Tech list — keep in sync with the -tech-detect capabilities of the
+          # installed httpx version. Anything httpx reports that isn't in this
+          # set is ignored (we don't want to pass through random fingerprints
+          # like "Amazon S3" as a nuclei tag that matches nothing).
+          KNOWN_TECHS = {
+              "php", "wordpress", "laravel", "drupal", "joomla", "jquery",
+              "vue", "react", "angular", "iis", "nginx", "apache", "tomcat",
+              "spring", "django", "ruby", "asp.net",
+          }
+          # httpx sometimes writes "aspnet" without the dot; normalize to the
+          # canonical form so hosts dedupe into the same group.
+          TECH_ALIASES = {"aspnet": "asp.net"}
+
+          BRACKET_RE = re.compile(r"\[([^\]]*)\]")
+
+          GROUPS_DIR = "results/nuclei_groups"
+          os.makedirs(GROUPS_DIR, exist_ok=True)
+
+          groups = {}  # key -> {"techs": [...], "hosts": [...]}
+          total_lines = 0
+          parsed_with_tech = 0
+
+          with open("results/current_alive.txt") as fh:
+              for line in fh:
+                  line = line.rstrip("\n")
+                  if not line.strip():
+                      continue
+                  total_lines += 1
+                  host = line.split()[0]
+
+                  # httpx format: <url> [<status>] [<title>] [<tech1>,<tech2>,...]
+                  # The status is always in the first bracket and is numeric.
+                  # The title is optional. The tech bracket, when present, is
+                  # the last bracket and its contents are comma-separated tech
+                  # names (possibly with :version suffixes).
+                  #
+                  # Strategy: scan brackets from the end, take the first one
+                  # whose contents ALL look like known tech names. This avoids
+                  # mistaking a title like "Example [beta]" for a tech list.
+                  techs = []
+                  for b in reversed(BRACKET_RE.findall(line)):
+                      parts = [p.strip() for p in b.split(",") if p.strip()]
+                      if not parts:
+                          continue
+                      matched = []
+                      for p in parts:
+                          name = p.split(":")[0].strip().lower()
+                          name = TECH_ALIASES.get(name, name)
+                          if name in KNOWN_TECHS:
+                              matched.append(name)
+                      # Only accept this bracket as the tech list if every
+                      # part resolved to a known tech.
+                      if matched and len(matched) == len(parts):
+                          techs = sorted(set(matched))
+                          break
+
+                  if techs:
+                      parsed_with_tech += 1
+
+                  key = ",".join(techs) if techs else "_BASE_"
+                  entry = groups.setdefault(key, {"techs": techs, "hosts": []})
+                  entry["hosts"].append(host)
+
+          # Write one pair of files per group.
+          # Sort groups so the base group comes first, then alphabetical by
+          # tech signature — deterministic ordering makes logs diffable.
+          def sort_key(item):
+              key = item[0]
+              return (key != "_BASE_", key)
+
+          group_list = sorted(groups.items(), key=sort_key)
+          for i, (key, entry) in enumerate(group_list):
+              prefix = f"{GROUPS_DIR}/group_{i:02d}"
+              with open(f"{prefix}_hosts.txt", "w") as fh:
+                  fh.write("\n".join(entry["hosts"]) + "\n")
+              tags = BASE_TAGS + ("," + ",".join(entry["techs"]) if entry["techs"] else "")
+              with open(f"{prefix}_tags.txt", "w") as fh:
+                  fh.write(tags)
+
+          # Diagnostic summary printed to the workflow log so you can see
+          # exactly how the hosts were partitioned before nuclei runs.
+          print(f"Parsed {total_lines} live host lines ({parsed_with_tech} with tech detected)")
+          print(f"Nuclei will run in {len(group_list)} group(s):")
+          for i, (key, entry) in enumerate(group_list):
+              label = ",".join(entry["techs"]) if entry["techs"] else "base tags only"
+              print(f"  Group {i:02d}: {len(entry['hosts']):3d} hosts — {label}")
+          PYEOF
+
+          # Run nuclei once per group, sequentially (so rate limits don't stack).
+          # Concatenate all outputs into the same nuclei_current.txt the rest
+          # of the workflow already consumes.
+          > results/nuclei_current.txt
+          for tags_file in "$GROUPS_DIR"/group_*_tags.txt; do
+            [ -f "$tags_file" ] || continue
+            prefix="${tags_file%_tags.txt}"
+            hosts_file="${prefix}_hosts.txt"
+            out_file="${prefix}_out.txt"
+
+            tags=$(cat "$tags_file")
+            host_count=$(wc -l < "$hosts_file" | tr -d ' ')
+            echo "── Running nuclei: $host_count host(s), tags: $tags"
+
+            nuclei -l "$hosts_file" \
+                   -tags "$tags" \
+                   -severity low,medium,high,critical \
+                   -rate-limit 15 \
+                   -silent \
+                   -o "$out_file" || touch "$out_file"
+
+            cat "$out_file" >> results/nuclei_current.txt 2>/dev/null || true
+          done
+          sort -u results/nuclei_current.txt -o results/nuclei_current.txt
+          echo "Total nuclei findings this run: $(wc -l < results/nuclei_current.txt | tr -d ' ')"
+
+      - name: Diff nuclei findings against previous run
+        id: nuclei_diff
+        run: |
+          if [ -f results/nuclei_previous.txt ]; then
+            comm -13 results/nuclei_previous.txt results/nuclei_current.txt > results/nuclei_new.txt
+          else
+            cp results/nuclei_current.txt results/nuclei_new.txt
+          fi
+
+          NEW_FINDINGS=$(wc -l < results/nuclei_new.txt | tr -d ' ')
+          echo "new_findings=$NEW_FINDINGS" >> "$GITHUB_OUTPUT"
+
+      - name: AI-triage new nuclei findings
+        id: triage
+        if: steps.nuclei_diff.outputs.new_findings != '0'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+          COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+        run: |
+          FINDINGS=$(cat results/nuclei_new.txt)
+          INSTRUCTIONS="You are triaging bug bounty / responsible-disclosure scan output for the Citymesh program (no bounty, points/reputation only). Below is nuclei output listing NEW findings from this scan cycle. For each finding, briefly note what it is and whether it looks worth manual follow-up. Group by severity (critical/high first). Flag anything that overlaps with Citymesh's excluded finding categories (e.g. missing headers, verbose errors without sensitive data, CSRF with low impact, disclosed API keys without proven business impact) as LOW PRIORITY / likely not reportable. End with a short list of the top 3 findings worth investigating manually first, or state clearly if nothing looks worth pursuing. Be concise, plain text, no markdown headers."
+          PROMPT_TEXT=$(printf "%s\n\nFINDINGS:\n%s" "$INSTRUCTIONS" "$FINDINGS")
+
+          AI_RESULT=$(python3 scripts/ai_call.py "$PROMPT_TEXT" results/ai_summary.txt)
+          PROVIDER=$(echo "$AI_RESULT" | grep -oP 'PROVIDER:\K.*' || echo "none")
+          echo "AI triage provider used: $PROVIDER"
+
+          if [ ! -s results/ai_summary.txt ]; then
+            printf "AI triage unavailable this run — raw findings:\n%s" "$(head -c 1200 results/nuclei_new.txt)" > results/ai_summary.txt
+          fi
+
+      - name: Notify Discord if new nuclei findings
+        if: steps.nuclei_diff.outputs.new_findings != '0'
+        run: |
+          # Discord's 2000-char limit: truncate the AI summary if needed
+          SUMMARY=$(head -c 1700 results/ai_summary.txt)
+          CONTENT=$(printf "**New nuclei findings for Citymesh (AI-triaged):**\n\`\`\`\n%s\n\`\`\`" "$SUMMARY")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: AI-prioritize hosts worth fuzzing
+        id: prioritize
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+          COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+        run: |
+          # Cap the input list so the prompt stays a reasonable size
+          HOSTS_INFO=$(head -n 150 results/current_alive.txt)
+          TOTAL_HOSTS=$(wc -l < results/current_alive_hosts.txt | tr -d ' ')
+
+          INSTRUCTIONS="You are prioritizing which live hosts are worth deep directory bruteforcing in a responsible-disclosure recon pipeline. Below is a list of live hosts with their HTTP status code and page title, one per line. Pick the hosts most likely to be real applications, admin panels, APIs, portals, or dashboards worth fuzzing for hidden paths — favor hostnames like auth., api., admin., portal., my., dashboard., app., cabmanager., gateway. Deprioritize and EXCLUDE hosts that look like static marketing pages, CDN/asset hosts, parked domains, pure redirects with no distinct title, or anything clearly not an application. Return ONLY the full URLs to fuzz, one per line, nothing else — no numbering, no explanation, no markdown. Return at most 20 URLs, chosen by likely value."
+          PROMPT_TEXT=$(printf "%s\n\nHOSTS:\n%s" "$INSTRUCTIONS" "$HOSTS_INFO")
+
+          AI_RESULT=$(python3 scripts/ai_call.py "$PROMPT_TEXT" /tmp/ai_fuzz_hosts.txt)
+          PROVIDER=$(echo "$AI_RESULT" | grep -oP 'PROVIDER:\K.*' || echo "none")
+          echo "Prioritization provider: $PROVIDER"
+
+          # Keep only lines that look like real http(s) URLs from the AI's output
+          grep -E '^https?://' /tmp/ai_fuzz_hosts.txt 2>/dev/null | sort -u > results/ffuf_targets.txt || true
+
+          # Safety net: if AI failed or returned nothing usable, fall back to
+          # the first 15 live hosts so the run still makes progress and finishes.
+          FILTERED_COUNT=$(wc -l < results/ffuf_targets.txt | tr -d ' ')
+          if [ "$FILTERED_COUNT" = "0" ]; then
+            echo "AI prioritization returned nothing usable — falling back to first 15 live hosts"
+            head -n 15 results/current_alive_hosts.txt > results/ffuf_targets.txt
+            echo "prioritized=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "prioritized=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "Fuzzing $(wc -l < results/ffuf_targets.txt | tr -d ' ') of $TOTAL_HOSTS live hosts"
+
+      - name: Directory bruteforce with ffuf
+        run: |
+          mkdir -p results/ffuf_tmp
+          rm -f results/ffuf_tmp/*
+
+          # Step A: canary fingerprint each host BEFORE fuzzing.
+          # Fires a guaranteed-nonexistent path and records (status, body_len).
+          # Rationale: ffuf's -ac calibration can miss catch-all pages when the
+          # body varies slightly per request (CSRF tokens, nonces, timestamps) —
+          # e.g. an IIS rewrite rule sending every 404 to index.php returns the
+          # same shell HTML for .git/HEAD, web.config, .env etc., which then
+          # shows up as a flood of false-positive 200s. We instead fingerprint
+          # the catch-all once and drop any hit whose body length is within 5%
+          # of that canary.
+          python3 - << 'PYEOF'
+          import json
+          import urllib.request
+          import urllib.error
+
+          def get_canary_signature(base_url):
+              """Request a path that cannot possibly exist to fingerprint catch-all responses."""
+              base_url = base_url.rstrip("/")
+              canary_url = base_url + "/___canary_path_that_cannot_exist_xyz123___"
+              try:
+                  req = urllib.request.Request(canary_url,
+                        headers={"User-Agent": "Mozilla/5.0"})
+                  with urllib.request.urlopen(req, timeout=8) as r:
+                      body = r.read()
+                      return r.status, len(body)
+              except urllib.error.HTTPError as e:
+                  return e.code, 0
+              except Exception:
+                  return None, 0
+
+          sigs = {}
+          with open("results/ffuf_targets.txt") as f:
+              for line in f:
+                  host = line.strip().rstrip("/")
+                  if not host:
+                      continue
+                  status, length = get_canary_signature(host)
+                  sigs[host] = {"status": status, "length": length}
+
+          with open("results/canary_signatures.json", "w") as out:
+              json.dump(sigs, out, indent=2)
+
+          print(f"Canary signatures captured for {len(sigs)} hosts:")
+          for h, s in sigs.items():
+              flag = "  <- CATCH-ALL" if s["status"] == 200 and s["length"] > 0 else ""
+              print(f"  {h} -> status={s['status']} length={s['length']}{flag}")
+          PYEOF
+
+          # Step B: fuzz 4 hosts in parallel at 4 req/sec each (~16/sec combined),
+          # under Citymesh's 20/sec cap. JSON output preserves host+url+status per hit.
+          cat results/ffuf_targets.txt | xargs -P 4 -I{} bash -c '
+            host="$1"
+            [ -z "$host" ] && exit 0
+            safe_name=$(echo "$host" | sha1sum | cut -d" " -f1)
+            ffuf -u "${host}/FUZZ" \
+                 -w wordlists/common.txt \
+                 -mc 200,201,202,204,301,302,307,401,403 \
+                 -ac \
+                 -rate 4 \
+                 -t 15 \
+                 -timeout 8 \
+                 -o "results/ffuf_tmp/${safe_name}.json" \
+                 -of json \
+              > /dev/null 2>&1 || true
+          ' _ {}
+
+          # Step C: flatten JSON hits, apply canary filter, validate sensitive
+          # file contents, drop universal noise.
+          #
+          # Two layers of false-positive defence:
+          #   1. Canary filter — 200s whose body length is within 5% of the
+          #      catch-all page's are the SPA/router default page, not real
+          #      paths. Catches the IIS-rewrite-to-index.php class of issue.
+          #   2. Sensitive-content validation — for paths like .git/HEAD,
+          #      web.config, .env etc., fetch the body and check that it
+          #      actually contains the expected content markers. A 200 with
+          #      an HTML shell as the body is a catch-all, not a real file.
+          #      Never trust status codes alone.
+          python3 - << 'PYEOF'
+          import glob
+          import json
+          import re
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          with open("results/canary_signatures.json") as f:
+              canaries = json.load(f)
+
+          WORDLIST_SIZE = sum(1 for _ in open("wordlists/common.txt"))
+          THRESHOLD = WORDLIST_SIZE * 60 // 100
+
+          NOISE_RE = re.compile(
+              r"/(favicon\.ico|robots\.txt|\.well-known/(http-opportunistic|acme-challenge|pki-validation))( |\[|$)"
+          )
+
+          # Sensitive filenames whose 2xx response body we do not trust until we
+          # confirm it actually contains the expected content markers. A catch-all
+          # (IIS rewrite to index.php, SPA router, PHP front controller) will
+          # happily return 200 for .git/HEAD with an HTML shell as the body.
+          SENSITIVE_PATHS = {
+              "web.config":  ["connectionString", "password", "apiKey", "secret", "credentials"],
+              ".env":        ["DB_PASSWORD", "SECRET_KEY", "API_KEY", "TOKEN", "AWS_"],
+              ".git/HEAD":   ["ref: refs/", "HEAD detached"],
+              ".git/config": ["[core]", "[remote", "url ="],
+              ".htpasswd":   [":"],  # any line with colon = user:hash pair
+              "config.php":  ["$db_pass", "$password", "mysql_connect"],
+              # dotfiles / sensitive paths that were producing false positives
+              # when the server returned 302→login→200 instead of real content
+              ".bash_history": ["cd ", "ls ", "cat ", "export ", "sudo ", "apt ", "git "],
+              ".bashrc":       ["export ", "alias ", "PATH=", "PS1=", "source "],
+              ".profile":      ["export ", "PATH=", "umask", "source ", "if ["],
+              ".ssh":          ["ssh-rsa", "ssh-ed25519", "authorized_keys", "known_hosts"],
+              ".passwd":       ["root:", "nologin", "/bin/bash", "/bin/sh"],
+              ".mysql_history": ["SELECT ", "INSERT ", "UPDATE ", "CREATE ", "DROP "],
+              ".htaccess":     ["RewriteRule", "RewriteCond", "Deny from", "Allow from", "Order"],
+              ".svn":          ["svn:", "format", "entries", "wc.db"],
+              ".cvs":          ["CVS", "Root", "Repository", "Entries"],
+              "access_log":    ["GET /", "POST /", "HTTP/1.", "Mozilla/", "200 ", "404 "],
+          }
+
+          UA = "Mozilla/5.0"
+          FETCH_TIMEOUT = 8
+          FETCH_DELAY = 0.15  # polite spacing between validation fetches
+          MAX_FETCHES = 300   # cap per run so a runaway host can't blow the budget
+
+
+          def is_catchall_response(status, body_len, canary_status, canary_len):
+              """Returns True if this response looks like the catch-all, not a real path."""
+              if canary_status != 200:
+                  return False  # canary wasn't caught, so 200s are likely real
+              if canary_len == 0:
+                  return False
+              # within 5% of canary size = almost certainly the same catch-all page
+              return abs(body_len - canary_len) / canary_len < 0.05
+
+
+          def fetch_body(url, timeout=FETCH_TIMEOUT):
+              """Fetch up to 8KB of body text; return '' on any error."""
+              try:
+                  req = urllib.request.Request(url, headers={"User-Agent": UA})
+                  with urllib.request.urlopen(req, timeout=timeout) as r:
+                      return r.read(8192).decode("utf-8", "ignore")
+              except urllib.error.HTTPError as e:
+                  try:
+                      return e.read(8192).decode("utf-8", "ignore") if e.fp else ""
+                  except Exception:
+                      return ""
+              except Exception:
+                  return ""
+
+
+          def validate_sensitive_content(url, body_text):
+              """Check if body actually contains sensitive content, not just a 200."""
+              path = urllib.parse.urlparse(url).path.lstrip("/")
+              for sensitive_path, keywords in SENSITIVE_PATHS.items():
+                  if path.endswith(sensitive_path):
+                      return any(kw in body_text for kw in keywords)
+              return True  # unknown sensitive path — flag it anyway, let human decide
+
+
+          def is_sensitive_path(url):
+              path = urllib.parse.urlparse(url).path.lstrip("/")
+              return any(path.endswith(sp) for sp in SENSITIVE_PATHS)
+
+
+          current_raw = []
+          suspects = []
+          seen = set()
+          stats = {
+              "total": 0,
+              "filtered_canary": 0,
+              "filtered_noise": 0,
+              "sensitive_checked": 0,
+              "sensitive_dropped": 0,
+              "fetches": 0,
+              "hosts": 0,
+              "catchall_hosts": 0,
+          }
+
+          for path in sorted(glob.glob("results/ffuf_tmp/*.json")):
+              try:
+                  with open(path) as f:
+                      data = json.load(f)
+              except Exception:
+                  continue
+
+              stats["hosts"] += 1
+              host_url = (data.get("config", {}).get("url") or "").replace("/FUZZ", "").rstrip("/")
+              results = data.get("results", []) or []
+              count = len(results)
+              stats["total"] += count
+
+              canary = canaries.get(host_url, {"status": None, "length": 0})
+              canary_status = canary.get("status")
+              canary_len = canary.get("length", 0)
+              if canary_status == 200 and canary_len > 0:
+                  stats["catchall_hosts"] += 1
+
+              if count > THRESHOLD:
+                  suspects.append(
+                      f"{host_url} — {count}/{WORDLIST_SIZE} matched "
+                      f"(likely catch-all, canary check below)"
+                  )
+
+              for r in results:
+                  url = r.get("url", "")
+                  status = r.get("status", 0)
+                  length = r.get("length", 0)
+                  redirect = r.get("redirectlocation", "") or ""
+
+                  # Layer 1: canary / catch-all filter
+                  if is_catchall_response(status, length, canary_status, canary_len):
+                      stats["filtered_canary"] += 1
+                      continue
+
+                  if status in (301, 302) and redirect:
+                      line = f"{url} [{status}] -> {redirect}"
+                  else:
+                      line = f"{url} [{status}]"
+
+                  if NOISE_RE.search(line):
+                      stats["filtered_noise"] += 1
+                      continue
+
+                  # Layer 2: sensitive-content validation.
+                  # Only for 2xx responses — a 401/403 on .git/HEAD is a real
+                  # access-control observation regardless of body content.
+                  if 200 <= status < 300 and is_sensitive_path(url):
+                      stats["sensitive_checked"] += 1
+                      if stats["fetches"] < MAX_FETCHES:
+                          body = fetch_body(url)
+                          stats["fetches"] += 1
+                          time.sleep(FETCH_DELAY)
+                          if not validate_sensitive_content(url, body):
+                              # 200 but body didn't contain any expected markers:
+                              # this is the catch-all / stub page, not a real file.
+                              stats["sensitive_dropped"] += 1
+                              continue
+                      else:
+                          # Over fetch budget — keep, but tag so it's obvious
+                          # in the logs and in Discord that it wasn't verified.
+                          line = f"{line} [sensitive-unverified: fetch cap reached]"
+
+                  if line not in seen:
+                      seen.add(line)
+                      current_raw.append(line)
+
+          ordered = sorted(current_raw)
+          payload = "\n".join(ordered) + ("\n" if ordered else "")
+
+          with open("results/ffuf_current.txt", "w") as out:
+              out.write(payload)
+          with open("results/ffuf_suspect_hosts.txt", "w") as out:
+              out.write("\n".join(suspects) + ("\n" if suspects else ""))
+
+          print(f"Hosts fuzzed: {stats['hosts']}")
+          print(f"Hosts whose canary was itself a 200 (catch-all behaviour): {stats['catchall_hosts']}")
+          print(f"Raw hits: {stats['total']}")
+          print(f"Dropped by canary filter (within 5% of canary length): {stats['filtered_canary']}")
+          print(f"Dropped by noise filter: {stats['filtered_noise']}")
+          print(f"Sensitive-path 2xx responses checked for content: {stats['sensitive_checked']}")
+          print(f"  -> dropped as empty/stub (no expected markers found): {stats['sensitive_dropped']}")
+          print(f"  -> validation fetches performed: {stats['fetches']} (cap {MAX_FETCHES})")
+          print(f"Kept after all filters: {len(ordered)}")
+          if suspects:
+              print("Suspect catch-all hosts (over 60% wordlist match):")
+              for s in suspects:
+                  print(f"  {s}")
+          PYEOF
+
+      - name: Diff ffuf findings against previous run
+        id: ffuf_diff
+        run: |
+          if [ -f results/ffuf_previous.txt ]; then
+            comm -13 results/ffuf_previous.txt results/ffuf_current.txt > results/ffuf_new.txt
+          else
+            cp results/ffuf_current.txt results/ffuf_new.txt
+          fi
+          NEW_PATHS=$(wc -l < results/ffuf_new.txt | tr -d ' ')
+          echo "new_paths=$NEW_PATHS" >> "$GITHUB_OUTPUT"
+
+      - name: Capture server headers for confirmed findings (delta, every run)
+        if: steps.ffuf_diff.outputs.new_paths != '0'
+        run: |
+          # For every NEW ffuf finding, grab the response headers so a human
+          # triaging the Discord notification has Server / X-Powered-By /
+          # X-AspNet-Version / X-Generator / Via / X-Backend context inline.
+          # Version banners here are frequently what turns "some path" into
+          # a reportable EOL-software finding (e.g. phpMyAdmin 4.x, old IIS).
+          > results/findings_with_headers.txt
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            url=$(echo "$line" | awk '{print $1}')
+            echo "=== $url ===" >> results/findings_with_headers.txt
+            curl -sI --max-time 8 "$url" | grep -iE \
+              "server:|x-powered-by:|x-aspnet-version:|x-generator:|via:|x-backend:" \
+              >> results/findings_with_headers.txt 2>/dev/null || true
+            echo "$line" >> results/findings_with_headers.txt
+            echo "" >> results/findings_with_headers.txt
+          done < results/ffuf_new.txt
+
+      - name: Capture server headers for full backlog (weekly Sunday 00:00 UTC, or manual test dispatch)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          # Weekly full-backlog header capture.
+          #
+          # Scheduling behaviour:
+          #  - Scheduled runs: only fires on the Sunday 00:00 UTC slot
+          #    (00:00-02:59 UTC, tolerance for GitHub's scheduling lag).
+          #    Every other 6-hour slot prints the skip line and exits.
+          #  - Manual workflow_dispatch runs: bypass the day/hour check
+          #    entirely, so you can trigger this from the Actions UI to
+          #    verify it works without waiting for Sunday.
+          #
+          # Produces a complete historical snapshot of every confirmed
+          # path's server banner, useful for later reference and for
+          # spotting version drift on already-known paths.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual dispatch — bypassing weekly day/hour guard (test mode)"
+          else
+            DAY=$(date -u +%u)          # 1=Mon .. 7=Sun
+            HOUR=$((10#$(date -u +%H))) # strip leading zero for base-10 arithmetic
+            if [ "$DAY" != "7" ] || [ "$HOUR" -gt 2 ]; then
+              echo "Not the weekly slot (Sunday 00:00 UTC) — skipping full-backlog header capture"
+              exit 0
+            fi
+            echo "Weekly slot confirmed — running full-backlog header capture"
+          fi
+
+          if [ ! -s results/ffuf_current.txt ]; then
+            echo "No confirmed ffuf findings to capture headers for"
+            touch results/findings_with_headers_full.txt
+            exit 0
+          fi
+
+          > results/findings_with_headers_full.txt
+          TOTAL=$(wc -l < results/ffuf_current.txt | tr -d ' ')
+          echo "Capturing headers for all $TOTAL confirmed findings..."
+          COUNT=0
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            COUNT=$((COUNT+1))
+            url=$(echo "$line" | awk '{print $1}')
+            echo "=== $url ===" >> results/findings_with_headers_full.txt
+            curl -sI --max-time 8 "$url" | grep -iE \
+              "server:|x-powered-by:|x-aspnet-version:|x-generator:|via:|x-backend:" \
+              >> results/findings_with_headers_full.txt 2>/dev/null || true
+            echo "$line" >> results/findings_with_headers_full.txt
+            echo "" >> results/findings_with_headers_full.txt
+          done < results/ffuf_current.txt
+
+          echo "Full-backlog header capture complete: $COUNT findings, $(wc -l < results/findings_with_headers_full.txt) lines written"
+
+      - name: AI-triage ffuf and bypass findings
+        id: ffuf_triage
+        if: steps.ffuf_diff.outputs.new_paths != '0'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          COHERE_API_KEY_2: ${{ secrets.COHERE_API_KEY_2 }}
+          COHERE_API_KEY_3: ${{ secrets.COHERE_API_KEY_3 }}
+        run: |
+          FINDINGS=$(head -n 80 results/ffuf_new.txt)
+          INSTRUCTIONS="You are triaging raw ffuf directory bruteforce results for the Citymesh responsible-disclosure program. Each line is 'url [status_code]'. Separate into:\nPRIORITY (manually verify immediately): .git/, .env, web.config, .htpasswd, phpMyAdmin (pma), admin panels, backup files (.bak/.old/.zip/.sql), API endpoints returning 200, exposed config files, management interfaces.\nINVESTIGATE: health endpoints, vendor/, cgi-bin/, staging subdomains, 401/403 paths suggesting auth-gated content.\nNOISE (skip): favicon.ico, .well-known/* (acme-challenge, pki-validation, http-opportunistic), /blocked, /maintenance, /assets returning 301, static files on CDN hosts.\nALSO FLAG: 301 redirects on sensitive paths (follow manually) and case-manipulation bypass results needing body verification.\nBe concise. Plain text. End with TOP PRIORITY: listing the 1-3 URLs to curl manually first."
+          PROMPT_TEXT=$(printf "%s\n\nFINDINGS:\n%s" "$INSTRUCTIONS" "$FINDINGS")
+
+          AI_RESULT=$(python3 scripts/ai_call.py "$PROMPT_TEXT" results/ffuf_ai_summary.txt)
+          PROVIDER=$(echo "$AI_RESULT" | grep -oP 'PROVIDER:\K.*' || echo "none")
+
+          if [ ! -s results/ffuf_ai_summary.txt ]; then
+            printf "AI unavailable — raw findings:\n%s" "$FINDINGS" > results/ffuf_ai_summary.txt
+          fi
+
+          echo "triage_provider=$PROVIDER" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Discord if new paths found
+        if: steps.ffuf_diff.outputs.new_paths != '0'
+        run: |
+          SUMMARY=$(head -c 1700 results/ffuf_ai_summary.txt)
+          CONTENT=$(printf "**New ffuf findings — AI-triaged (Citymesh):**\n\`\`\`\n%s\n\`\`\`" "$SUMMARY")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: Notify Discord if any host looks like a soft-404 false-positive source
+        if: hashFiles('results/ffuf_suspect_hosts.txt') != ''
+        run: |
+          if [ -s results/ffuf_suspect_hosts.txt ]; then
+            SUSPECTS=$(cat results/ffuf_suspect_hosts.txt)
+            CONTENT=$(printf "**Warning: possible soft-404 false positives (Citymesh ffuf run):**\nThese hosts matched over 60%% of the wordlist — likely a catch-all page, not real paths. Treat their findings as unreliable until manually checked.\n\`\`\`\n%s\n\`\`\`" "$SUSPECTS")
+            PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+            curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+          fi
+
+      - name: Attempt 403 bypass on restricted paths found
+        run: |
+          # Only probes paths ffuf already flagged as 401/403 — not a new broad
+          # scan. Techniques below are the standard published set (path
+          # encoding/case tricks, header spoofing, safe HTTP methods, protocol
+          # downgrade, passive Wayback Machine lookup).
+          #
+          # Deliberately EXCLUDED vs. the full published technique list, and why:
+          #  - PUT/DELETE/PATCH/POST/MKCOL/COPY/MOVE/LOCK/UNLOCK/CONNECT: these
+          #    can create, modify or delete server state. Citymesh's rules
+          #    explicitly forbid "change of system settings or conducting
+          #    delete operations" — so only read-only methods are tested
+          #    (OPTIONS, HEAD, TRACE, PROPFIND, SEARCH).
+          #  - JWT tampering: needs a real token from an authenticated session
+          #    tied to a specific app; not something to blindly automate
+          #    against arbitrary 403 paths with no context.
+          #  - Proxy/VPN IP rotation: this runs from a fixed GitHub Actions
+          #    runner IP — only the header-spoofing variant (X-Forwarded-For
+          #    etc., already included) is meaningful here.
+          #  - Alternate subdomains/ports: guessing new hosts at scale
+          #    reintroduces the same enumeration concerns already handled by
+          #    the subfinder stage, and risks probing hosts/ports outside the
+          #    prioritized list. Worth doing manually on a promising finding.
+          cat > bypass_check.py << 'PYEOF'
+          import urllib.request, urllib.error, http.client, urllib.parse, time, json
+
+          TIMEOUT = 8
+          DELAY = 0.3
+          UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+
+          # Read-only HTTP methods only — see exclusions above for why the
+          # state-changing verbs from the article aren't tested here.
+          SAFE_METHODS = ["OPTIONS", "HEAD", "TRACE", "PROPFIND", "SEARCH"]
+
+
+          class _NoRedirectSimple(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  return None
+
+          _no_redirect_simple = urllib.request.build_opener(_NoRedirectSimple)
+
+
+          def request_status(url, method="GET", headers=None, timeout=TIMEOUT):
+              hdrs = {"User-Agent": UA}
+              if headers:
+                  hdrs.update(headers)
+              try:
+                  req = urllib.request.Request(url, method=method, headers=hdrs)
+                  with _no_redirect_simple.open(req, timeout=timeout) as r:
+                      return r.status
+              except urllib.error.HTTPError as e:
+                  return e.code
+              except Exception:
+                  return None
+
+
+          def http10_status(url, timeout=TIMEOUT):
+              # HTTP/1.0 downgrade — some servers apply access rules only under 1.1+
+              try:
+                  parsed = urllib.parse.urlparse(url)
+                  conn_cls = http.client.HTTPSConnection if parsed.scheme == "https" else http.client.HTTPConnection
+                  port = parsed.port or (443 if parsed.scheme == "https" else 80)
+                  conn = conn_cls(parsed.hostname, port, timeout=timeout)
+                  conn._http_vsn = 10
+                  conn._http_vsn_str = "HTTP/1.0"
+                  path = parsed.path or "/"
+                  if parsed.query:
+                      path += "?" + parsed.query
+                  conn.request("GET", path, headers={"User-Agent": UA, "Host": parsed.hostname})
+                  resp = conn.getresponse()
+                  status = resp.status
+                  conn.close()
+                  return status
+              except Exception:
+                  return None
+
+
+          def wayback_snapshot(url):
+              # Passive only — queries archive.org, never touches the target,
+              # so it doesn't count against Citymesh's rate limit at all.
+              try:
+                  api = "https://archive.org/wayback/available?url=" + urllib.parse.quote(url, safe="")
+                  req = urllib.request.Request(api, headers={"User-Agent": UA})
+                  with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+                      data = json.loads(r.read().decode("utf-8", "ignore"))
+                  snap = (data.get("archived_snapshots") or {}).get("closest")
+                  if snap and snap.get("available"):
+                      return snap.get("url")
+              except Exception:
+                  pass
+              return None
+
+
+          def split_url(url):
+              scheme_sep = url.find("://") + 3
+              host_end = url.find("/", scheme_sep)
+              if host_end == -1:
+                  return url, "/"
+              return url[:host_end], url[host_end:]
+
+
+          def build_path_variants(url):
+              base, path = split_url(url)
+              if not path.startswith("/"):
+                  path = "/" + path
+              trimmed = path.rstrip("/")
+              last_seg = trimmed.rsplit("/", 1)[-1] if trimmed else ""
+              parent = trimmed[: -len(last_seg)] if last_seg else trimmed
+
+              variants = [
+                  # trailing slash / dot / whitespace tricks
+                  path + "/",
+                  path.rstrip("/"),
+                  trimmed + ".",
+                  trimmed + "%20",
+                  trimmed + "%2e",
+                  # encoded traversal / slash tricks
+                  "/%2e%2e" + trimmed,
+                  "/%2e%2e%2f" + last_seg if last_seg else path,
+                  "/%2e%2e/%2e%2e" + trimmed,
+                  trimmed + "%2f",
+                  trimmed.replace("/", "//", 1),
+                  trimmed + "%252f",
+                  # semicolon / path-parameter confusion (Tomcat-style)
+                  parent + "..;/" + last_seg if last_seg else path,
+                  "/..;" + trimmed,
+                  # unicode slash bypasses
+                  trimmed + "%c0%af",
+                  trimmed + "%ef%bc%8f",
+                  # null byte truncation (mostly legacy stacks, cheap to try)
+                  trimmed + "%00.html",
+                  trimmed + "%00.json",
+              ]
+
+              # common extensions — trimmed set to bound request volume
+              for ext in [".json", ".html", ".php", ".bak", ".old"]:
+                  variants.append(trimmed + ext)
+
+              # case manipulation on the last path segment only
+              if last_seg:
+                  for cased in {last_seg.upper(), last_seg.lower(), last_seg.swapcase()}:
+                      if cased != last_seg:
+                          variants.append(parent + cased)
+
+              # query parameter tampering (path unchanged, params appended)
+              for param in ["unused_param=1", "debug=true", "access=granted", "redirect=allowed"]:
+                  variants.append(path + "?" + param)
+
+              seen = set()
+              out = []
+              for v in variants:
+                  full = base + v if not v.startswith("http") else v
+                  if full not in seen:
+                      seen.add(full)
+                      out.append(full)
+              return base, path, out
+
+
+          def build_header_variants(url):
+              _, path = split_url(url)
+              return [
+                  {"X-Original-URL": path},
+                  {"X-Rewrite-URL": path},
+                  {"X-Forwarded-For": "127.0.0.1"},
+                  {"X-Forwarded-Host": "127.0.0.1"},
+                  {"X-Custom-IP-Authorization": "127.0.0.1"},
+                  {"X-Client-IP": "127.0.0.1"},
+                  {"True-Client-IP": "127.0.0.1"},
+                  {"X-Real-IP": "127.0.0.1"},
+                  {"X-Host": "localhost"},
+                  {"Referer": url},
+              ]
+
+
+          # For genuinely sensitive paths, check the body contains real content
+          # not just a 200 wrapper from the router. Mirrors the same check used
+          # on ffuf findings, so a "real bypass" isn't a catch-all 200 either.
+          SENSITIVE_PATHS = {
+              "web.config":  ["connectionString", "password", "apiKey", "secret", "credentials"],
+              ".env":        ["DB_PASSWORD", "SECRET_KEY", "API_KEY", "TOKEN", "AWS_"],
+              ".git/HEAD":   ["ref: refs/", "HEAD detached"],
+              ".git/config": ["[core]", "[remote", "url ="],
+              ".htpasswd":   [":"],
+              "config.php":  ["$db_pass", "$password", "mysql_connect"],
+              ".bash_history": ["cd ", "ls ", "cat ", "export ", "sudo ", "apt ", "git "],
+              ".bashrc":       ["export ", "alias ", "PATH=", "PS1=", "source "],
+              ".profile":      ["export ", "PATH=", "umask", "source ", "if ["],
+              ".ssh":          ["ssh-rsa", "ssh-ed25519", "authorized_keys", "known_hosts"],
+              ".passwd":       ["root:", "nologin", "/bin/bash", "/bin/sh"],
+              ".mysql_history": ["SELECT ", "INSERT ", "UPDATE ", "CREATE ", "DROP "],
+              ".htaccess":     ["RewriteRule", "RewriteCond", "Deny from", "Allow from", "Order"],
+              ".svn":          ["svn:", "format", "entries", "wc.db"],
+              ".cvs":          ["CVS", "Root", "Repository", "Entries"],
+              "access_log":    ["GET /", "POST /", "HTTP/1.", "Mozilla/", "200 ", "404 "],
+          }
+
+
+          class _NoRedirect(urllib.request.HTTPRedirectHandler):
+              """Handler that stops urllib from silently following redirects."""
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  return None  # do not follow
+
+          _no_redirect_opener = urllib.request.build_opener(_NoRedirect)
+
+
+          def request_with_body(url, method="GET", headers=None, timeout=TIMEOUT):
+              """Return (initial_status, content_type, body_snippet).
+
+              Uses a no-redirect opener so that 3xx responses are returned as-is
+              instead of silently following them (which was the root cause of
+              bypass false positives: 302→login→200 was reported as 200).
+              """
+              hdrs = {"User-Agent": UA}
+              if headers:
+                  hdrs.update(headers)
+              try:
+                  req = urllib.request.Request(url, method=method, headers=hdrs)
+                  with _no_redirect_opener.open(req, timeout=timeout) as r:
+                      ct = r.headers.get("Content-Type", "")
+                      body = r.read(4096).decode("utf-8", "ignore")
+                      return r.status, ct, body
+              except urllib.error.HTTPError as e:
+                  ct = e.headers.get("Content-Type", "") if e.headers else ""
+                  body = e.read(4096).decode("utf-8", "ignore") if e.fp else ""
+                  return e.code, ct, body
+              except Exception:
+                  return None, "", ""
+
+
+          def validate_bypass_response(url, response_body, content_type):
+              """Returns False if the 200 looks like a catch-all/SPA, not real content."""
+              # HTML responses for non-HTML paths are almost always catch-alls
+              non_html_paths = [".gz", ".tar", ".zip", ".sql", ".bak", ".json", ".xml", ".env"]
+              path = urllib.parse.urlparse(url).path.lower()
+              if any(path.endswith(ext) for ext in non_html_paths):
+                  if "text/html" in content_type:
+                      return False  # file extension but HTML response = catch-all
+
+              # Known SPA landmarks — if any appear, it's the catch-all page
+              spa_markers = [
+                  "<div id=\"app\">",
+                  "<div id=\"spinner\"",
+                  "chunk-vendors",
+                  "has-spinner-active",
+              ]
+              return not any(marker in response_body for marker in spa_markers)
+
+
+          def validate_sensitive_content(url, body_text):
+              """Check if body actually contains sensitive content, not just a 200."""
+              path = urllib.parse.urlparse(url).path.lstrip("/")
+              for sensitive_path, keywords in SENSITIVE_PATHS.items():
+                  if path.endswith(sensitive_path):
+                      return any(kw in body_text for kw in keywords)
+              return True  # unknown sensitive path — flag it anyway, let human decide
+
+
+          def is_real_bypass(bypass_url, original_url, status, content_type, body):
+              """Return False if the bypass 200 looks like a catch-all, not real content."""
+              # Layer 0 (new): login / auth page detection.
+              # Even with redirect-following disabled, some code paths (HTTP/1.0
+              # downgrade, scheme downgrade via plain http.client) may land on a
+              # login page that returns 200. Reject those.
+              login_markers = [
+                  "/login?redirectTo=",
+                  'action="/login"',
+                  'href="/login"',
+                  "<title>Login</title>",
+                  "<title>Sign in</title>",
+                  "name=\"password\"",
+                  'id="login-form"',
+              ]
+              body_lower = body.lower()
+              if any(m.lower() in body_lower for m in login_markers):
+                  return False
+
+              # Layer 1: catch-all/SPA check on the actual response
+              if not validate_bypass_response(bypass_url, body, content_type):
+                  return False
+
+              # Layer 2: for sensitive paths, verify body actually contains
+              # expected content markers instead of trusting the 200 alone.
+              orig_path = urllib.parse.urlparse(original_url).path.lstrip("/")
+              for sensitive_path in SENSITIVE_PATHS:
+                  if orig_path.endswith(sensitive_path):
+                      return validate_sensitive_content(original_url, body)
+
+              return True  # passes all checks — treat as real
+
+
+          def try_target(url):
+              # Returns a finding string if any technique succeeds + passes body
+              # validation, else None. Order runs cheapest/likely-first.
+
+              # 1) header spoofing
+              for hdrs in build_header_variants(url):
+                  status, ct, body = request_with_body(url, method="GET", headers=hdrs)
+                  time.sleep(DELAY)
+                  if status and 200 <= status < 300:
+                      if is_real_bypass(url, url, status, ct, body):
+                          hdr_str = ", ".join(f"{k}: {v}" for k, v in hdrs.items())
+                          return f"{url} -> bypass via header [{hdr_str}] returned {status}"
+
+              # 2) path encoding / case / extension / query tricks
+              base, path, variants = build_path_variants(url)
+              for variant_url in variants:
+                  status, ct, body = request_with_body(variant_url, method="GET")
+                  time.sleep(DELAY)
+                  if status and 200 <= status < 300:
+                      if is_real_bypass(variant_url, url, status, ct, body):
+                          return f"{url} -> bypass via path variant '{variant_url}' returned {status}"
+
+              # 3) safe read-only method tampering
+              for method in SAFE_METHODS:
+                  status, ct, body = request_with_body(url, method=method)
+                  time.sleep(DELAY)
+                  if status and 200 <= status < 300:
+                      if is_real_bypass(url, url, status, ct, body):
+                          return f"{url} -> bypass via method {method} returned {status}"
+
+              # 4) scheme downgrade (https -> http)
+              if url.startswith("https://"):
+                  http_url = "http://" + url[len("https://"):]
+                  status, ct, body = request_with_body(http_url, method="GET")
+                  time.sleep(DELAY)
+                  if status and 200 <= status < 300:
+                      if is_real_bypass(http_url, url, status, ct, body):
+                          return f"{url} -> bypass via HTTP downgrade '{http_url}' returned {status}"
+
+              # 5) HTTP/1.0 protocol downgrade
+              code = http10_status(url)
+              time.sleep(DELAY)
+              if code and 200 <= code < 300:
+                  return f"{url} -> bypass via HTTP/1.0 downgrade returned {code}"
+
+              # 6) passive Wayback Machine check — zero requests to the target
+              snap = wayback_snapshot(url)
+              if snap:
+                  return f"{url} -> historical snapshot available on Wayback Machine: {snap}"
+
+              return None
+
+
+          def main():
+              findings = []
+              with open("results/ffuf_current.txt") as f:
+                  lines = [l.strip() for l in f if l.strip()]
+
+              targets = []
+              for line in lines:
+                  if line.endswith("[401]") or line.endswith("[403]"):
+                      targets.append(line.rsplit(" [", 1)[0])
+              targets = targets[:20]  # cap request volume per run
+
+              for url in targets:
+                  result = try_target(url)
+                  if result:
+                      findings.append(result)
+
+              with open("results/bypass_current.txt", "w") as out:
+                  for f in sorted(set(findings)):
+                      out.write(f + "\n")
+
+
+          if __name__ == "__main__":
+              main()
+          PYEOF
+
+          python3 bypass_check.py
+          sort -u results/bypass_current.txt -o results/bypass_current.txt 2>/dev/null || touch results/bypass_current.txt
+      - name: Diff 403 bypass findings against previous run
+        id: bypass_diff
+        run: |
+          if [ -f results/bypass_previous.txt ]; then
+            comm -13 results/bypass_previous.txt results/bypass_current.txt > results/bypass_new.txt
+          else
+            cp results/bypass_current.txt results/bypass_new.txt
+          fi
+          NEW_BYPASSES=$(wc -l < results/bypass_new.txt | tr -d ' ')
+          echo "new_bypasses=$NEW_BYPASSES" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Discord if new 403 bypass found
+        if: steps.bypass_diff.outputs.new_bypasses != '0'
+        run: |
+          BYPASSES=$(head -c 1700 results/bypass_new.txt)
+          CONTENT=$(printf "**403 bypass succeeded (Citymesh) — verify manually before reporting:**\n\`\`\`\n%s\n\`\`\`" "$BYPASSES")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: Extract JS URLs from discovered pages + katana crawl
+        run: |
+          mkdir -p results
+
+          # Step A: collect candidate pages from all ffuf-discovered URLs.
+          # The old approach only fetched each host's base URL — which misses
+          # JS bundles referenced exclusively from deeper pages (e.g. admin
+          # login pages, portal routes, API docs). Fetching every discovered
+          # URL is more thorough, but we need to be polite:
+          #   - dedupe (ffuf can report the same URL from multiple fuzz runs)
+          #   - skip static assets (images, CSS, fonts, archives) since they
+          #     never contain <script src> refs
+          #   - cap total fetches so a fuzzing-heavy run can't accidentally
+          #     hammer the target (Citymesh cap is 20 req/sec overall)
+          jq -r '.results[]?.url // empty' results/ffuf_tmp/*.json 2>/dev/null \
+            | sort -u \
+            | grep -viE '\.(png|jpg|jpeg|gif|svg|ico|webp|bmp|tiff|css|woff|woff2|ttf|otf|eot|mp4|webm|mp3|wav|pdf|zip|tar|gz|tgz|rar|7z|exe|dmg|iso|bin)(\?|$)' \
+            > results/js_candidate_pages.txt || true
+
+          TOTAL_CANDIDATES=$(wc -l < results/js_candidate_pages.txt | tr -d ' ')
+          MAX_FETCH=200
+          echo "JS extraction: $TOTAL_CANDIDATES candidate page(s), fetch cap $MAX_FETCH"
+
+          # Step B: fetch each candidate, extract .js refs from its HTML, and
+          # resolve them to absolute URLs. 0.15s sleep between fetches keeps
+          # the effective rate at ~6.7 req/sec — well under the Citymesh cap
+          # and safely below whatever the ffuf/nuclei stages left running.
+          > results/js_from_html.txt
+          COUNT=0
+          FETCHED=0
+          while IFS= read -r url; do
+            [ -z "$url" ] && continue
+            COUNT=$((COUNT+1))
+            if [ "$COUNT" -gt "$MAX_FETCH" ]; then
+              echo "Fetch cap ($MAX_FETCH) reached, stopping HTML extraction"
+              break
+            fi
+
+            BODY=$(curl -s --max-time 8 -L "$url" 2>/dev/null || true)
+            sleep 0.15
+            [ -z "$BODY" ] && continue
+
+            # Bound processing — some "pages" are multi-MB responses. 256KB is
+            # plenty for the <head> + opening body where JS refs live.
+            BODY=$(printf '%s' "$BODY" | head -c 262144)
+            FETCHED=$((FETCHED+1))
+
+            ORIGIN=$(printf '%s' "$url" | grep -oE '^https?://[^/]+')
+
+            # Extract src=/href= values ending in .js, strip the attribute
+            # name and any surrounding quotes, then resolve to absolute.
+            printf '%s' "$BODY" \
+              | grep -oE '(src|href)=[^ >]*\.js[^ >]*' 2>/dev/null \
+              | sed -E 's/^(src|href)=//' \
+              | tr -d '"' | tr -d "'" \
+              | while IFS= read -r js_path; do
+                  [ -z "$js_path" ] && continue
+                  case "$js_path" in
+                    http://*|https://*) printf '%s\n' "$js_path" ;;
+                    //*)                printf 'https:%s\n' "$js_path" ;;
+                    /*)                 printf '%s%s\n' "$ORIGIN" "$js_path" ;;
+                    *)                  printf '%s/%s\n' "$ORIGIN" "$js_path" ;;
+                  esac
+                done >> results/js_from_html.txt
+          done < results/js_candidate_pages.txt
+
+          echo "Fetched $FETCHED page(s), extracted $(wc -l < results/js_from_html.txt) JS ref(s) from HTML"
+
+          # Step C: katana as a safety net. It follows links and picks up JS
+          # in pages we didn't fetch ourselves (or that only surface via
+          # navigation), and it applies its own rate limiting.
+          katana -list results/current_alive_hosts.txt \
+                 -jc \
+                 -silent \
+                 -rate-limit 10 \
+                 -depth 2 \
+            | grep -E '\.js($|\?)' >> results/js_from_html.txt || true
+
+          # Step D: dedupe and finalize
+          sort -u results/js_from_html.txt > results/js_urls_current.txt
+          echo "Total JS URLs to scan: $(wc -l < results/js_urls_current.txt)"
+
+      - name: Download JS files and scan for secrets
+        run: |
+          mkdir -p js_files
+          > results/js_secrets_current.txt
+
+          # Secret patterns: AWS keys, Google API keys, Slack tokens, JWTs, private keys, generic api_key assignments
+          PATTERN="(AKIA[0-9A-Z]{16})|(AIza[0-9A-Za-z_-]{35})|(xox[baprs]-[0-9A-Za-z-]{10,})|(eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,})|(-----BEGIN [A-Z ]*PRIVATE KEY-----)|([Aa]pi[_-]?[Kk]ey.{0,3}[:=].{0,3}[A-Za-z0-9_-]{16,})"
+
+          COUNT=0
+          while IFS= read -r jsurl; do
+            [ -z "$jsurl" ] && continue
+            COUNT=$((COUNT+1))
+            # cap how many JS files we pull per run to stay light on the target
+            if [ "$COUNT" -gt 100 ]; then
+              echo "JS file cap (100) reached, stopping"
+              break
+            fi
+            FNAME="js_files/$(echo "$jsurl" | sha1sum | cut -d' ' -f1).js"
+            curl -s --max-time 10 -o "$FNAME" "$jsurl" || continue
+            MATCHES=$(grep -E -o "$PATTERN" "$FNAME" 2>/dev/null | sort -u || true)
+            if [ -n "$MATCHES" ]; then
+              while IFS= read -r m; do
+                echo "$jsurl | $m" >> results/js_secrets_current.txt
+              done <<< "$MATCHES"
+            fi
+          done < results/js_urls_current.txt
+          sort -u results/js_secrets_current.txt -o results/js_secrets_current.txt
+
+      - name: Diff JS secret findings against previous run
+        id: js_diff
+        run: |
+          if [ -f results/js_secrets_previous.txt ]; then
+            comm -13 results/js_secrets_previous.txt results/js_secrets_current.txt > results/js_secrets_new.txt
+          else
+            cp results/js_secrets_current.txt results/js_secrets_new.txt
+          fi
+          NEW_SECRETS=$(wc -l < results/js_secrets_new.txt | tr -d ' ')
+          echo "new_secrets=$NEW_SECRETS" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Discord if new JS secrets found
+        if: steps.js_diff.outputs.new_secrets != '0'
+        run: |
+          # Note: matched secret values are included — this channel should be private
+          FINDINGS=$(head -c 1700 results/js_secrets_new.txt)
+          CONTENT=$(printf "**Possible secrets found in JS files (Citymesh) — verify manually before reporting:**\n\`\`\`\n%s\n\`\`\`" "$FINDINGS")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: Update previous results
+        run: |
+          cp results/current.txt results/previous.txt
+          cp results/current_alive.txt results/previous_alive.txt
+          cp results/current_alive_hosts.txt results/previous_alive_hosts.txt
+          cp results/nuclei_current.txt results/nuclei_previous.txt
+          cp results/ffuf_current.txt results/ffuf_previous.txt
+          cp results/bypass_current.txt results/bypass_previous.txt
+          cp results/js_secrets_current.txt results/js_secrets_previous.txt
+
+      - name: Commit updated results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add results/previous.txt results/previous_alive.txt results/previous_alive_hosts.txt results/nuclei_previous.txt results/ffuf_previous.txt results/bypass_previous.txt results/js_secrets_previous.txt
+          git diff --cached --quiet || git commit -m "Update baselines [skip ci]"
+          git push
+
+      - name: Write job summary
+        if: always()
+        run: |
+          TOTAL_SUBS=$(wc -l < results/current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          ALIVE_SUBS=$(wc -l < results/current_alive_hosts.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_SUBS=$(wc -l < results/new_hosts.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_NUCLEI=$(wc -l < results/nuclei_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_NUCLEI=$(wc -l < results/nuclei_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          FUZZED_HOSTS=$(wc -l < results/ffuf_targets.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_PATHS=$(wc -l < results/ffuf_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_PATHS=$(wc -l < results/ffuf_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_BYPASSES=$(wc -l < results/bypass_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_BYPASSES=$(wc -l < results/bypass_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          JS_FILES_SCANNED=$(wc -l < results/js_urls_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          TOTAL_SECRETS=$(wc -l < results/js_secrets_current.txt 2>/dev/null | tr -d ' ' || echo 0)
+          NEW_SECRETS=$(wc -l < results/js_secrets_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          FULL_HEADERS_LINES=$(wc -l < results/findings_with_headers_full.txt 2>/dev/null | tr -d ' ' || echo 0)
+          PRIORITIZED="${{ steps.prioritize.outputs.prioritized }}"
+
+          {
+            echo "## Citymesh Monitor — Run Summary"
+            echo ""
+            echo "Run time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "| Stage | Total | New this run |"
+            echo "|---|---|---|"
+            echo "| Subdomains found | $TOTAL_SUBS | — |"
+            echo "| Live hosts | $ALIVE_SUBS | $NEW_SUBS |"
+            echo "| Nuclei findings | $TOTAL_NUCLEI | $NEW_NUCLEI |"
+            echo "| Hosts fuzzed ($FUZZED_HOSTS/$ALIVE_SUBS, AI-prioritized: $PRIORITIZED) | — | — |"
+            echo "| Directory paths | $TOTAL_PATHS | $NEW_PATHS |"
+            echo "| 403 bypasses found | $TOTAL_BYPASSES | $NEW_BYPASSES |"
+            echo "| JS files scanned | $JS_FILES_SCANNED | — |"
+            echo "| Possible JS secrets | $TOTAL_SECRETS | $NEW_SECRETS |"
+            echo "| Full-backlog header lines (weekly / manual test) | $FULL_HEADERS_LINES | — |"
+            echo ""
+            if [ "$NEW_SUBS" = "0" ] && [ "$NEW_NUCLEI" = "0" ] && [ "$NEW_PATHS" = "0" ] && [ "$NEW_BYPASSES" = "0" ] && [ "$NEW_SECRETS" = "0" ]; then
+              echo "No new findings this run — baseline unchanged."
+            else
+              echo "New findings this run — check Discord for details, or the \`results/\` artifacts below."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload full results as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-results-${{ github.run_number }}
+          path: |
+            results/
+            results/findings_with_headers.txt
+            results/findings_with_headers_full.txt
+          retention-days: 14
