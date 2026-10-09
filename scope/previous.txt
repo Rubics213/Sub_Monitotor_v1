@@ -1015,6 +1015,8 @@ coveragedb-impm.redbull.com
 coveragedb-mmas.redbull.com
 coveragedb-uploadcenter.redbull.com
 coveragedb.redbull.com
+covopt-dataprep-q.redbull.com
+covopt-dataprep.redbull.com
 cp-atlas.redbull.com
 cp-mcm-d.redbull.com
 cp-mcm.redbull.com
