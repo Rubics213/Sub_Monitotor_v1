@@ -1,16 +1,4 @@
-http://login.wifilab.be/index.html [200]
-http://pbx-dev.edpnet.net/gui [301] -> http://pbx-dev.edpnet.net/gui/
-http://pbx-movemedia.edpnet.net/gui [301] -> http://pbx-movemedia.edpnet.net/gui/
-http://ru-pbx.edpnet.net/gui [301] -> http://ru-pbx.edpnet.net/gui/
-https://backup.edpnet.com/.well-known/openid-configuration [200]
-https://backup.edpnet.com/bc [302] -> https://backup.edpnet.com/ui/
-https://backup.edpnet.com/docs [301] -> http://backup.edpnet.com/api/cyberpsa/docs
-https://backup.edpnet.com/download [302] -> https://backup.edpnet.com/download/
-https://backup.edpnet.com/fc [302] -> /fc/
-https://backup.edpnet.com/mc [200]
-https://backup.edpnet.com/mobile [301] -> http://backup.edpnet.com/mobile/
-https://backup.edpnet.com/static [301] -> http://backup.edpnet.com/static/
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=qtreyqyngbyqxyirmjpaxdpq
+https://cabmanager.citymesh.com/tar.gz [403]
 https://dashboard.citymesh.com/tar.gz [403]
 https://dashboard.citymesh.net/.bash_history [403]
 https://dashboard.citymesh.net/.bashrc [403]
@@ -42,119 +30,38 @@ https://dashboard.citymesh.net/healthz [200]
 https://dashboard.citymesh.net/id_rsa [403]
 https://dashboard.citymesh.net/phpinfo.php [403]
 https://dashboard.citymesh.net/web.config [403]
-https://extra.citymesh.com/.swf [302] -> /Account/Login?ReturnUrl=%2f.swf
-https://extra.citymesh.com/.well-known/apple-app-site-association [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fapple-app-site-association
-https://extra.citymesh.com/.well-known/apple-developer-merchantid-domain-association [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fapple-developer-merchantid-domain-association
-https://extra.citymesh.com/.well-known/ashrae [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fashrae
-https://extra.citymesh.com/.well-known/assetlinks.json [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fassetlinks.json
-https://extra.citymesh.com/.well-known/autoconfig/mail [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fautoconfig%2fmail
-https://extra.citymesh.com/.well-known/browserid [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fbrowserid
-https://extra.citymesh.com/.well-known/caldav [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fcaldav
-https://extra.citymesh.com/.well-known/carddav [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fcarddav
-https://extra.citymesh.com/.well-known/change-password [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fchange-password
-https://extra.citymesh.com/.well-known/coap [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fcoap
-https://extra.citymesh.com/.well-known/core [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fcore
-https://extra.citymesh.com/.well-known/csvm [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fcsvm
-https://extra.citymesh.com/.well-known/dnt [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fdnt
-https://extra.citymesh.com/.well-known/dnt-policy.txt [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fdnt-policy.txt
-https://extra.citymesh.com/.well-known/dots [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fdots
-https://extra.citymesh.com/.well-known/ecips [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fecips
-https://extra.citymesh.com/.well-known/enterprise-transport-security [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fenterprise-transport-security
-https://extra.citymesh.com/.well-known/est [302] -> /Account/Login?ReturnUrl=%2f.well-known%2fest
-https://extra.citymesh.com/_framework/blazor.webassembly.js [302] -> /Account/Login?ReturnUrl=%2f_framework%2fblazor.webassembly.js
-https://extra.citymesh.com/contacts.txt [302] -> /Account/Login?ReturnUrl=%2fcontacts.txt
-https://extra.citymesh.com/credentials.txt [302] -> /Account/Login?ReturnUrl=%2fcredentials.txt
-https://extra.citymesh.com/humans.txt [302] -> /Account/Login?ReturnUrl=%2fhumans.txt
-https://extra.citymesh.com/player.swf [302] -> /Account/Login?ReturnUrl=%2fplayer.swf
-https://extra.citymesh.com/security.txt [302] -> /Account/Login?ReturnUrl=%2fsecurity.txt
-https://extra.citymesh.com/swfobject.js [302] -> /Account/Login?ReturnUrl=%2fswfobject.js
-https://extra.citymesh.com/tar.gz [403]
-https://extra.citymesh.com/vite.config.js [302] -> /Account/Login?ReturnUrl=%2fvite.config.js
-https://extra.citymesh.com/vite.config.ts [302] -> /Account/Login?ReturnUrl=%2fvite.config.ts
-https://ffai.citymesh.com/.swf [302] -> /login
-https://ffai.citymesh.com/.well-known/apple-app-site-association [302] -> /login
-https://ffai.citymesh.com/.well-known/apple-developer-merchantid-domain-association [302] -> /login
-https://ffai.citymesh.com/.well-known/ashrae [302] -> /login
-https://ffai.citymesh.com/.well-known/assetlinks.json [302] -> /login
-https://ffai.citymesh.com/.well-known/autoconfig/mail [302] -> /login
-https://ffai.citymesh.com/.well-known/browserid [302] -> /login
-https://ffai.citymesh.com/.well-known/caldav [302] -> /login
-https://ffai.citymesh.com/.well-known/carddav [302] -> /login
-https://ffai.citymesh.com/.well-known/change-password [302] -> /profile/password
-https://ffai.citymesh.com/.well-known/coap [302] -> /login
-https://ffai.citymesh.com/.well-known/core [302] -> /login
-https://ffai.citymesh.com/.well-known/csvm [302] -> /login
-https://ffai.citymesh.com/.well-known/dnt [302] -> /login
-https://ffai.citymesh.com/.well-known/dnt-policy.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/dots [302] -> /login
-https://ffai.citymesh.com/.well-known/ecips [302] -> /login
-https://ffai.citymesh.com/.well-known/enterprise-transport-security [302] -> /login
-https://ffai.citymesh.com/.well-known/est [302] -> /login
-https://ffai.citymesh.com/.well-known/genid [302] -> /login
-https://ffai.citymesh.com/.well-known/hoba [302] -> /login
-https://ffai.citymesh.com/.well-known/host-meta [302] -> /login
-https://ffai.citymesh.com/.well-known/host-meta.json [302] -> /login
-https://ffai.citymesh.com/.well-known/humans.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/idp-proxy [302] -> /login
-https://ffai.citymesh.com/.well-known/jmap [302] -> /login
-https://ffai.citymesh.com/.well-known/jwks.json [302] -> /login
-https://ffai.citymesh.com/.well-known/keybase.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/looking-glass [302] -> /login
-https://ffai.citymesh.com/.well-known/matrix [302] -> /login
-https://ffai.citymesh.com/.well-known/mercure [302] -> /login
-https://ffai.citymesh.com/.well-known/mta-sts.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/mud [302] -> /login
-https://ffai.citymesh.com/.well-known/nfv-oauth-server-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/ni [302] -> /login
-https://ffai.citymesh.com/.well-known/nodeinfo [302] -> /login
-https://ffai.citymesh.com/.well-known/oauth-authorization-server [302] -> /login
-https://ffai.citymesh.com/.well-known/openid-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/openid-federation [302] -> /login
-https://ffai.citymesh.com/.well-known/openorg [302] -> /login
-https://ffai.citymesh.com/.well-known/openpgpkey [302] -> /login
-https://ffai.citymesh.com/.well-known/posh [302] -> /login
-https://ffai.citymesh.com/.well-known/pvd [302] -> /login
-https://ffai.citymesh.com/.well-known/reload-config [302] -> /login
-https://ffai.citymesh.com/.well-known/repute-template [302] -> /login
-https://ffai.citymesh.com/.well-known/resourcesync [302] -> /login
-https://ffai.citymesh.com/.well-known/security.txt [302] -> /login
-https://ffai.citymesh.com/.well-known/ssf-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/stun-key [302] -> /login
-https://ffai.citymesh.com/.well-known/thread [302] -> /login
-https://ffai.citymesh.com/.well-known/time [302] -> /login
-https://ffai.citymesh.com/.well-known/timezone [302] -> /login
-https://ffai.citymesh.com/.well-known/uma2-configuration [302] -> /login
-https://ffai.citymesh.com/.well-known/void [302] -> /login
-https://ffai.citymesh.com/.well-known/webfinger [302] -> /login
-https://ffai.citymesh.com/_framework/blazor.webassembly.js [302] -> /login
-https://ffai.citymesh.com/contacts.txt [302] -> /login
-https://ffai.citymesh.com/credentials.txt [302] -> /login
-https://ffai.citymesh.com/humans.txt [302] -> /login
-https://ffai.citymesh.com/player.swf [302] -> /login
-https://ffai.citymesh.com/security.txt [302] -> /login
-https://ffai.citymesh.com/swfobject.js [302] -> /login
-https://ffai.citymesh.com/tar.gz [403]
-https://ffai.citymesh.com/vite.config.js [302] -> /login
-https://ffai.citymesh.com/vite.config.ts [302] -> /login
-https://lg.edpnet.net/css [301] -> https://lg.edpnet.net/css/
-https://lg.edpnet.net/fonts [301] -> https://lg.edpnet.net/fonts/
-https://lg.edpnet.net/images [301] -> https://lg.edpnet.net/images/
-https://lg.edpnet.net/index.php [200]
-https://lg.edpnet.net/js [301] -> https://lg.edpnet.net/js/
-https://linemon.citymesh.com/app [301] -> http://linemon.citymesh.com/app/
-https://linemon.citymesh.com/assets [301] -> http://linemon.citymesh.com/assets/
-https://linemon.citymesh.com/audio [301] -> http://linemon.citymesh.com/audio/
-https://linemon.citymesh.com/conf [301] -> http://linemon.citymesh.com/conf/
-https://linemon.citymesh.com/data [301] -> http://linemon.citymesh.com/data/
-https://linemon.citymesh.com/health [301] -> http://linemon.citymesh.com/health/
-https://linemon.citymesh.com/include [301] -> http://linemon.citymesh.com/include/
+https://hcp.edpnet.net/.gitignore [200]
+https://hcp.edpnet.net/css [301] -> https://hcp.edpnet.net/css/
+https://hcp.edpnet.net/fonts [301] -> https://hcp.edpnet.net/fonts/
+https://hcp.edpnet.net/images [301] -> https://hcp.edpnet.net/images/
+https://hcp.edpnet.net/index.php [302] -> https://hcp.edpnet.net/
+https://hcp.edpnet.net/js [301] -> https://hcp.edpnet.net/js/
+https://hcp.edpnet.net/logs [301] -> https://hcp.edpnet.net/logs/
+https://hcp.edpnet.net/tmp [301] -> https://hcp.edpnet.net/tmp/
+https://hcp.edpnet.nl/.gitignore [200]
+https://hcp.edpnet.nl/css [301] -> https://hcp.edpnet.nl/css/
+https://hcp.edpnet.nl/fonts [301] -> https://hcp.edpnet.nl/fonts/
+https://hcp.edpnet.nl/images [301] -> https://hcp.edpnet.nl/images/
+https://hcp.edpnet.nl/index.php [302] -> https://hcp.edpnet.net/
+https://hcp.edpnet.nl/js [301] -> https://hcp.edpnet.nl/js/
+https://hcp.edpnet.nl/logs [301] -> https://hcp.edpnet.nl/logs/
+https://hcp.edpnet.nl/tmp [301] -> https://hcp.edpnet.nl/tmp/
+https://linemon.citymesh.com/app [301] -> https://linemon.citymesh.com/app/
+https://linemon.citymesh.com/assets [301] -> https://linemon.citymesh.com/assets/
+https://linemon.citymesh.com/audio [301] -> https://linemon.citymesh.com/audio/
+https://linemon.citymesh.com/conf [301] -> https://linemon.citymesh.com/conf/
+https://linemon.citymesh.com/data [301] -> https://linemon.citymesh.com/data/
+https://linemon.citymesh.com/health [301] -> https://linemon.citymesh.com/health/
+https://linemon.citymesh.com/include [301] -> https://linemon.citymesh.com/include/
 https://linemon.citymesh.com/index.php [200]
-https://linemon.citymesh.com/js [301] -> http://linemon.citymesh.com/js/
-https://linemon.citymesh.com/local [301] -> http://linemon.citymesh.com/local/
-https://linemon.citymesh.com/locale [301] -> http://linemon.citymesh.com/locale/
-https://linemon.citymesh.com/modules [301] -> http://linemon.citymesh.com/modules/
-https://linemon.citymesh.com/vendor [301] -> http://linemon.citymesh.com/vendor/
-https://linemon.citymesh.com/widgets [301] -> http://linemon.citymesh.com/widgets/
+https://linemon.citymesh.com/js [301] -> https://linemon.citymesh.com/js/
+https://linemon.citymesh.com/local [301] -> https://linemon.citymesh.com/local/
+https://linemon.citymesh.com/locale [301] -> https://linemon.citymesh.com/locale/
+https://linemon.citymesh.com/modules [301] -> https://linemon.citymesh.com/modules/
+https://linemon.citymesh.com/vendor [301] -> https://linemon.citymesh.com/vendor/
+https://linemon.citymesh.com/widgets [301] -> https://linemon.citymesh.com/widgets/
 https://livechat.citymesh.com/tar.gz [403]
 https://mail.edpnet.be/index.php [200]
 https://mail.edpnet.be/public_html [301] -> https://mail.edpnet.be/public_html/
+https://mail.edpnet.nl/index.php [200]
+https://mail.edpnet.nl/public_html [301] -> https://mail.edpnet.nl/public_html/
