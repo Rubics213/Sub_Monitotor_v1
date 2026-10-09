@@ -1,0 +1,13 @@
+https://dashboard.citymesh.net/.bash_history -> bypass via path variant 'https://dashboard.citymesh.net/.bash_history/' returned 200
+https://dashboard.citymesh.net/.bashrc -> bypass via path variant 'https://dashboard.citymesh.net/.bashrc/' returned 200
+https://dashboard.citymesh.net/.cvs -> bypass via path variant 'https://dashboard.citymesh.net/.cvs.' returned 200
+https://dashboard.citymesh.net/.git -> bypass via path variant 'https://dashboard.citymesh.net/.git.' returned 200
+https://dashboard.citymesh.net/.history -> bypass via path variant 'https://dashboard.citymesh.net/.history/' returned 200
+https://dashboard.citymesh.net/.htaccess -> bypass via path variant 'https://dashboard.citymesh.net/.htaccess/' returned 200
+https://dashboard.citymesh.net/.htpasswd -> bypass via path variant 'https://dashboard.citymesh.net/.htpasswd/' returned 200
+https://dashboard.citymesh.net/.mysql_history -> bypass via path variant 'https://dashboard.citymesh.net/.mysql_history/' returned 200
+https://dashboard.citymesh.net/.passwd -> bypass via path variant 'https://dashboard.citymesh.net/.passwd/' returned 200
+https://dashboard.citymesh.net/.profile -> bypass via path variant 'https://dashboard.citymesh.net/.profile/' returned 200
+https://dashboard.citymesh.net/.ssh -> bypass via path variant 'https://dashboard.citymesh.net/.ssh/' returned 200
+https://dashboard.citymesh.net/.svn -> bypass via path variant 'https://dashboard.citymesh.net/.svn.' returned 200
+https://dashboard.citymesh.net/access_log -> bypass via path variant 'https://dashboard.citymesh.net/access_log/' returned 200
