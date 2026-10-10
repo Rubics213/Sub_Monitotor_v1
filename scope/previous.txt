@@ -1007,6 +1007,7 @@ corp-ras-portal-salzburg-q.redbull.com
 corp-ras-portal-vienna-01.redbull.com
 cosmos-mcp-staging.redbull.design
 cosmos-mcp.redbull.design
+cosmos-next-runtime.redbull.design
 cosmos.redbull.design
 coverage.redbull.com
 coveragedb-backoffice.redbull.com
