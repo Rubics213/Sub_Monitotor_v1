@@ -1,7 +1,6 @@
 http://212.71.2.135.powered.by.edpnet.net
 http://212.71.2.65.powered.by.edpnet.net
 http://bc-backup.edpnet.com
-http://dkim.edpnet.be
 http://login.wifilab.be
 http://mail.citymesh.com
 http://mail.ncentric.com
@@ -10,10 +9,9 @@ http://mail.towereye.eu
 http://pbx-dev.edpnet.net
 http://pbx-lcr-demo.edpnet.net
 http://ru-pbx.edpnet.net
-http://webmail.edpnet.com
 http://webmail.ncentric.com
+http://www.towereye.eu
 https://0g.citymesh.com
-https://185.29.109.71.bv.edpnet.nl
 https://212.71.2.252.powered.by.edpnet.net
 https://212.71.6.34.fixedpower.by.edpnet.be
 https://212.71.6.35.fixedpower.by.edpnet.be
@@ -49,6 +47,7 @@ https://bauhuis.citymesh.com
 https://bi.engiem2m.com
 https://bmcc.citymesh.com
 https://brand.citymesh.com
+https://broker-mqtt.flex.citymesh.net
 https://busworld.citymesh.com
 https://cabmanager.citymesh.com
 https://campusinsight.citymesh.com
@@ -66,6 +65,7 @@ https://dashboard.citymesh.com
 https://dashboard.citymesh.net
 https://development.citymesh.com
 https://dialhome.ncentric.be
+https://dkim.edpnet.be
 https://drone-reporting.citymesh.net
 https://drones.citymesh.com
 https://en.wiki.edpnet.be
@@ -73,7 +73,6 @@ https://exhibition.citymesh.com
 https://exhibitions.citymesh.com
 https://expohasselt.citymesh.com
 https://extra.citymesh.com
-https://extra.edpnet.com
 https://extra.edpnet.net
 https://extra.edpnet.nl
 https://extweb.edpnet.net
@@ -91,7 +90,6 @@ https://go.citymesh.com
 https://go.edpnet.com
 https://go.wifinmbssncb.be
 https://hcp.edpnet.net
-https://hcp.edpnet.nl
 https://helpdesk.citymesh.be
 https://helpdesk.citymesh.com
 https://hostctl.edpnet.net
@@ -130,7 +128,6 @@ https://lweb04.edpnet.be
 https://lweb04.edpnet.net
 https://lweb05.edpnet.be
 https://lweb05.edpnet.net
-https://lweb05test.edpnet.net
 https://lweb06.edpnet.net
 https://lxextweb.edpnet.net
 https://lxweb1.edpnet.net
@@ -139,7 +136,6 @@ https://mail.edpnet.nl
 https://mailgateway01.edpnet.be
 https://mailproxy01.edpnet.net
 https://maintenance.citymesh.com
-https://masterrussian.edpnet.com
 https://matexpo.citymesh.com
 https://mediaserver-accept.safety-drones.com
 https://mediaserver-dev.safety-drones.com
@@ -152,7 +148,6 @@ https://mqtt-iot-staging.citymesh.net
 https://msg-viewer.citymesh.net
 https://my.citymesh.com
 https://my.edpnet.be
-https://my.edpnet.com
 https://my.edpnet.net
 https://my.edpnet.nl
 https://mysql.edpnet.be
@@ -162,7 +157,6 @@ https://netbird.citymesh.net
 https://news.edpnet.be
 https://news.edpnet.net
 https://nl.wiki.edpnet.be
-https://nl.wiki.edpnet.com
 https://nl.wiki.edpnet.nl
 https://notulen.citymesh.com
 https://odoo.citymesh.com
@@ -188,7 +182,6 @@ https://portal.wifilab.be
 https://portaldev.towereye.be
 https://pos.wifilab.be
 https://privacy.citymesh.com
-https://qwww.edpnet.com
 https://recording.citymeshconnect.com
 https://recordingauth.citymeshconnect.com
 https://redirect.edpnet.be
@@ -206,7 +199,6 @@ https://softphone.citymeshconnect.com
 https://speedtest.edpnet.be
 https://speedtest.edpnet.net
 https://speedtest.edpnet.nl
-https://speedtest2.edpnet.net
 https://ssl4all-1.le.ssl.lxextweb.edpnet.net
 https://ssl4all-1.le.ssl.lxweb1.edpnet.net
 https://ssl4all-10.le.ssl.lxweb1.edpnet.net
@@ -301,7 +293,6 @@ https://ssl4all-338.le.ssl.lxweb1.edpnet.net
 https://ssl4all-34.le.ssl.lxweb1.edpnet.net
 https://ssl4all-341.le.ssl.lxweb1.edpnet.net
 https://ssl4all-344.le.ssl.lxweb1.edpnet.net
-https://ssl4all-347.le.ssl.lxweb1.edpnet.net
 https://ssl4all-350.le.ssl.lxweb1.edpnet.net
 https://ssl4all-355.le.ssl.lxweb1.edpnet.net
 https://ssl4all-358.le.ssl.lxweb1.edpnet.net
@@ -425,7 +416,6 @@ https://wiki.edpnet.nl
 https://wildcard.edpnet.com
 https://wintercircus.citymesh.com
 https://wr-backupa.edpnet.com
-https://ww.edpnet.com
 https://www.5gjump.citymesh.com
 https://www.biotechnology-citymesh.com
 https://www.citymesh-connect.be
@@ -456,7 +446,6 @@ https://www.ps-radiocom.be
 https://www.safety-drones.com
 https://www.sigfox.nl
 https://www.towereye.be
-https://www.towereye.eu
 https://www.wifilab.be
 https://www.wildcard.edpnet.com
 https://xml.edpnet.be
