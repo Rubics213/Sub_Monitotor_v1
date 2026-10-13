@@ -1,10 +1,10 @@
+http://185.29.108.232.bv.edpnet.nl
 http://212.71.2.135.powered.by.edpnet.net
 http://212.71.2.65.powered.by.edpnet.net
-http://analyticsucaas.citymeshconnect.com
-http://api-sense-accept.safety-drones.com
+http://adslzondertelefoonlijn.edpnet.be
 http://bc-backup.edpnet.com
-http://dashboard.citymesh.com
-http://dashboard.citymesh.net
+http://helpdesk.citymesh.be
+http://helpdesk.citymesh.com
 http://login.wifilab.be
 http://mail.citymesh.com
 http://mail.ncentric.com
@@ -15,7 +15,6 @@ http://pbx-lcr-demo.edpnet.net
 http://ru-pbx.edpnet.net
 http://webmail.ncentric.com
 https://0g.citymesh.com
-https://185.29.109.71.bv.edpnet.nl
 https://185.29.110.75.bv.edpnet.nl
 https://212.71.2.252.powered.by.edpnet.net
 https://212.71.6.34.fixedpower.by.edpnet.be
@@ -28,12 +27,12 @@ https://5gsense.citymesh.com
 https://aalst.citymesh.com
 https://about.edpnet.com
 https://adslsanslignetelephonique.edpnet.be
-https://adslwithouttelephoneline.edpnet.be
-https://adslzondertelefoonlijn.edpnet.be
 https://analytics-api.wifilab.be
 https://analytics.wifilab.be
+https://analyticsucaas.citymeshconnect.com
 https://antwerpexpo.citymesh.com
 https://api-gateway.citymesh.com
+https://api-sense-accept.safety-drones.com
 https://api-sense-test.safety-drones.com
 https://api-sense.safety-drones.com
 https://api.citymesh.io
@@ -64,6 +63,8 @@ https://client.wifilab.be
 https://cloudcampus.citymesh.com
 https://core-api-prd.wifilab.be
 https://core-api.wifilab.be
+https://dashboard.citymesh.com
+https://dashboard.citymesh.net
 https://development.citymesh.com
 https://dialhome.ncentric.be
 https://dkim.edpnet.be
@@ -91,8 +92,6 @@ https://go.citymesh.com
 https://go.edpnet.com
 https://go.wifinmbssncb.be
 https://hcp.edpnet.net
-https://helpdesk.citymesh.be
-https://helpdesk.citymesh.com
 https://hostctl.edpnet.net
 https://hosting.edpnet.net
 https://ignite.edpnet.be
@@ -294,6 +293,7 @@ https://ssl4all-338.le.ssl.lxweb1.edpnet.net
 https://ssl4all-34.le.ssl.lxweb1.edpnet.net
 https://ssl4all-341.le.ssl.lxweb1.edpnet.net
 https://ssl4all-344.le.ssl.lxweb1.edpnet.net
+https://ssl4all-347.le.ssl.lxweb1.edpnet.net
 https://ssl4all-350.le.ssl.lxweb1.edpnet.net
 https://ssl4all-355.le.ssl.lxweb1.edpnet.net
 https://ssl4all-358.le.ssl.lxweb1.edpnet.net
@@ -317,6 +317,7 @@ https://ssl4all-4.le.ssl.lxweb1.edpnet.net
 https://ssl4all-40.le.ssl.lxweb1.edpnet.net
 https://ssl4all-401.le.ssl.lxweb1.edpnet.net
 https://ssl4all-404.le.ssl.lxweb1.edpnet.net
+https://ssl4all-407.le.ssl.lxweb1.edpnet.net
 https://ssl4all-410.le.ssl.lxweb1.edpnet.net
 https://ssl4all-413.le.ssl.lxweb1.edpnet.net
 https://ssl4all-416.le.ssl.lxweb1.edpnet.net
