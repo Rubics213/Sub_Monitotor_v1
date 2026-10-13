@@ -1,10 +1,7 @@
-http://185.29.108.232.bv.edpnet.nl
 http://212.71.2.135.powered.by.edpnet.net
 http://212.71.2.65.powered.by.edpnet.net
-http://adslzondertelefoonlijn.edpnet.be
+http://analyticsucaas.citymeshconnect.com
 http://bc-backup.edpnet.com
-http://helpdesk.citymesh.be
-http://helpdesk.citymesh.com
 http://login.wifilab.be
 http://mail.citymesh.com
 http://mail.ncentric.com
@@ -15,7 +12,6 @@ http://pbx-lcr-demo.edpnet.net
 http://ru-pbx.edpnet.net
 http://webmail.ncentric.com
 https://0g.citymesh.com
-https://185.29.110.75.bv.edpnet.nl
 https://212.71.2.252.powered.by.edpnet.net
 https://212.71.6.34.fixedpower.by.edpnet.be
 https://212.71.6.35.fixedpower.by.edpnet.be
@@ -27,9 +23,10 @@ https://5gsense.citymesh.com
 https://aalst.citymesh.com
 https://about.edpnet.com
 https://adslsanslignetelephonique.edpnet.be
+https://adslwithouttelephoneline.edpnet.be
+https://adslzondertelefoonlijn.edpnet.be
 https://analytics-api.wifilab.be
 https://analytics.wifilab.be
-https://analyticsucaas.citymeshconnect.com
 https://antwerpexpo.citymesh.com
 https://api-gateway.citymesh.com
 https://api-sense-accept.safety-drones.com
@@ -92,6 +89,8 @@ https://go.citymesh.com
 https://go.edpnet.com
 https://go.wifinmbssncb.be
 https://hcp.edpnet.net
+https://helpdesk.citymesh.be
+https://helpdesk.citymesh.com
 https://hostctl.edpnet.net
 https://hosting.edpnet.net
 https://ignite.edpnet.be
@@ -128,6 +127,7 @@ https://lweb04.edpnet.be
 https://lweb04.edpnet.net
 https://lweb05.edpnet.be
 https://lweb05.edpnet.net
+https://lweb05test.edpnet.net
 https://lweb06.edpnet.net
 https://lxextweb.edpnet.net
 https://lxweb1.edpnet.net
@@ -199,6 +199,7 @@ https://softphone.citymeshconnect.com
 https://speedtest.edpnet.be
 https://speedtest.edpnet.net
 https://speedtest.edpnet.nl
+https://speedtest2.edpnet.net
 https://ssl4all-1.le.ssl.lxextweb.edpnet.net
 https://ssl4all-1.le.ssl.lxweb1.edpnet.net
 https://ssl4all-10.le.ssl.lxweb1.edpnet.net
@@ -317,7 +318,6 @@ https://ssl4all-4.le.ssl.lxweb1.edpnet.net
 https://ssl4all-40.le.ssl.lxweb1.edpnet.net
 https://ssl4all-401.le.ssl.lxweb1.edpnet.net
 https://ssl4all-404.le.ssl.lxweb1.edpnet.net
-https://ssl4all-407.le.ssl.lxweb1.edpnet.net
 https://ssl4all-410.le.ssl.lxweb1.edpnet.net
 https://ssl4all-413.le.ssl.lxweb1.edpnet.net
 https://ssl4all-416.le.ssl.lxweb1.edpnet.net
