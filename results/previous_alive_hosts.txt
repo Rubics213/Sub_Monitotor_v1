@@ -1,6 +1,7 @@
 http://212.71.2.135.powered.by.edpnet.net
 http://212.71.2.65.powered.by.edpnet.net
 http://bc-backup.edpnet.com
+http://busworld.citymesh.com
 http://login.wifilab.be
 http://mail.citymesh.com
 http://mail.ncentric.com
@@ -11,6 +12,8 @@ http://pbx-lcr-demo.edpnet.net
 http://ru-pbx.edpnet.net
 http://webmail.ncentric.com
 https://0g.citymesh.com
+https://185.29.108.108.bv.edpnet.nl
+https://185.29.108.70.bv.edpnet.nl
 https://212.71.2.252.powered.by.edpnet.net
 https://212.71.6.34.fixedpower.by.edpnet.be
 https://212.71.6.35.fixedpower.by.edpnet.be
@@ -47,7 +50,6 @@ https://bi.engiem2m.com
 https://bmcc.citymesh.com
 https://brand.citymesh.com
 https://broker-mqtt.flex.citymesh.net
-https://busworld.citymesh.com
 https://cabmanager.citymesh.com
 https://campusinsight.citymesh.com
 https://chat.citymesh.com
@@ -124,6 +126,7 @@ https://lweb04.edpnet.be
 https://lweb04.edpnet.net
 https://lweb05.edpnet.be
 https://lweb05.edpnet.net
+https://lweb05test.edpnet.net
 https://lweb06.edpnet.net
 https://lxextweb.edpnet.net
 https://lxweb1.edpnet.net
@@ -195,6 +198,7 @@ https://softphone.citymeshconnect.com
 https://speedtest.edpnet.be
 https://speedtest.edpnet.net
 https://speedtest.edpnet.nl
+https://speedtest2.edpnet.net
 https://ssl4all-1.le.ssl.lxextweb.edpnet.net
 https://ssl4all-1.le.ssl.lxweb1.edpnet.net
 https://ssl4all-10.le.ssl.lxweb1.edpnet.net
@@ -313,7 +317,6 @@ https://ssl4all-4.le.ssl.lxweb1.edpnet.net
 https://ssl4all-40.le.ssl.lxweb1.edpnet.net
 https://ssl4all-401.le.ssl.lxweb1.edpnet.net
 https://ssl4all-404.le.ssl.lxweb1.edpnet.net
-https://ssl4all-407.le.ssl.lxweb1.edpnet.net
 https://ssl4all-410.le.ssl.lxweb1.edpnet.net
 https://ssl4all-413.le.ssl.lxweb1.edpnet.net
 https://ssl4all-416.le.ssl.lxweb1.edpnet.net
