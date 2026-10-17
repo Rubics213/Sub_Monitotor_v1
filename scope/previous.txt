@@ -129,6 +129,7 @@ agreements-tradicional-rh-p.redbull.com
 agreements-tradicional-rh-q.redbull.com
 agreements-tradicional.redbull.com
 agreements.redbull.com
+ai-avatar.redbull.com
 ai-exchange-d.redbull.com
 ai-exchange-q.redbull.com
 ai-exchange.redbull.com
