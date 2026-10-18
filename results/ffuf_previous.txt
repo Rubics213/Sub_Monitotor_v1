@@ -1,16 +1,4 @@
-http://login.wifilab.be/index.html [200]
-http://pbx-dev.edpnet.net/gui [301] -> http://pbx-dev.edpnet.net/gui/
-https://backup.edpnet.com/.well-known/openid-configuration [200]
-https://backup.edpnet.com/bc [302] -> https://backup.edpnet.com/ui/
-https://backup.edpnet.com/docs [301] -> http://backup.edpnet.com/api/cyberpsa/docs
-https://backup.edpnet.com/download [302] -> https://backup.edpnet.com/download/
-https://backup.edpnet.com/fc [302] -> /fc/
-https://backup.edpnet.com/mc [200]
-https://backup.edpnet.com/mobile [301] -> http://backup.edpnet.com/mobile/
-https://backup.edpnet.com/portal [401]
-https://backup.edpnet.com/portals [401]
-https://backup.edpnet.com/static [301] -> http://backup.edpnet.com/static/
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=kexqlxhojwasjlrzkaoyasew
+https://cabmanager.citymesh.com/tar.gz [403]
 https://dashboard.citymesh.com/tar.gz [403]
 https://dashboard.citymesh.net/.bash_history [403]
 https://dashboard.citymesh.net/.bashrc [403]
@@ -107,12 +95,8 @@ https://ffai.citymesh.com/swfobject.js [302] -> /login
 https://ffai.citymesh.com/tar.gz [403]
 https://ffai.citymesh.com/vite.config.js [302] -> /login
 https://ffai.citymesh.com/vite.config.ts [302] -> /login
-https://lg.edpnet.net/.gitignore [200]
-https://lg.edpnet.net/css [301] -> https://lg.edpnet.net/css/
-https://lg.edpnet.net/fonts [301] -> https://lg.edpnet.net/fonts/
-https://lg.edpnet.net/images [301] -> https://lg.edpnet.net/images/
-https://lg.edpnet.net/index.php [200]
-https://lg.edpnet.net/js [301] -> https://lg.edpnet.net/js/
+https://iot.citymesh.com/_framework/blazor.webassembly.js [200]
+https://iot.citymesh.com/tar.gz [403]
 https://linemon.citymesh.com/app [301] -> http://linemon.citymesh.com/app/
 https://linemon.citymesh.com/assets [301] -> http://linemon.citymesh.com/assets/
 https://linemon.citymesh.com/audio [301] -> http://linemon.citymesh.com/audio/
@@ -128,11 +112,8 @@ https://linemon.citymesh.com/modules [301] -> http://linemon.citymesh.com/module
 https://linemon.citymesh.com/vendor [301] -> http://linemon.citymesh.com/vendor/
 https://linemon.citymesh.com/widgets [301] -> http://linemon.citymesh.com/widgets/
 https://livechat.citymesh.com/tar.gz [403]
-https://lxweb1.edpnet.net/blocked [301] -> https://lxweb1.edpnet.net/blocked/
-https://lxweb1.edpnet.net/health [301] -> https://lxweb1.edpnet.net/health/
-https://lxweb1.edpnet.net/maintenance [301] -> https://lxweb1.edpnet.net/maintenance/
-https://lxweb1.edpnet.net/pma [301] -> https://lxweb1.edpnet.net/pma/
 https://mail.edpnet.be/index.php [200]
 https://mail.edpnet.be/public_html [301] -> https://mail.edpnet.be/public_html/
 https://mail.edpnet.nl/index.php [200]
 https://mail.edpnet.nl/public_html [301] -> https://mail.edpnet.nl/public_html/
+https://support.engiem2m.com/bin [301] -> https://support.engiem2m.com/bin/
