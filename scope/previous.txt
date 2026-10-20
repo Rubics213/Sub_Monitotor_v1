@@ -726,6 +726,7 @@ cc-images.redbull.com
 cc.redbull.hu
 ccai-agentstatus-d.redbull.com
 ccai-agentstatus.redbull.com
+cdn-api-d.redbull.com
 cdn.givesyouwings.redbull.com
 cdn.redbull.tv
 cdn.uk.redbull.com
@@ -1814,6 +1815,8 @@ games-support.redbull.com
 games.redbullusa.com
 gaming.redbull.com
 gammaracingday.redbull.nl
+gap-q.redbull.com
+gap.redbull.com
 garage.redbull.com
 garrettreynoldsultimate.redbull.com
 gastroreports.redbull.com
@@ -2908,6 +2911,7 @@ oauth-ba-s.redbull.com
 oauth-d.redbull.com
 oauth-q.redbull.com
 oauth.redbull.com
+object-cdn-api-d.redbull.com
 occasions.redbull.com
 ocsp-d.cert.redbull.com
 ocsp-q.cert.redbull.com
