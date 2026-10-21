@@ -1,9 +1,6 @@
 http://212.71.2.135.powered.by.edpnet.net
 http://212.71.2.65.powered.by.edpnet.net
-http://analytics.wifilab.be
 http://bc-backup.edpnet.com
-http://brand.citymesh.com
-http://hcp.edpnet.net
 http://login.wifilab.be
 http://mail.citymesh.com
 http://mail.ncentric.com
@@ -12,9 +9,9 @@ http://mail.towereye.eu
 http://pbx-dev.edpnet.net
 http://pbx-lcr-demo.edpnet.net
 http://ru-pbx.edpnet.net
+http://softphone.citymeshconnect.com
+http://webmail.edpnet.com
 http://webmail.ncentric.com
-http://www.connectingsenses.be
-http://www.connectingsenses.com
 https://0g.citymesh.com
 https://212.71.2.252.powered.by.edpnet.net
 https://212.71.6.34.fixedpower.by.edpnet.be
@@ -30,6 +27,7 @@ https://adslsanslignetelephonique.edpnet.be
 https://adslwithouttelephoneline.edpnet.be
 https://adslzondertelefoonlijn.edpnet.be
 https://analytics-api.wifilab.be
+https://analytics.wifilab.be
 https://analyticsucaas.citymeshconnect.com
 https://antwerpexpo.citymesh.com
 https://api-gateway.citymesh.com
@@ -49,11 +47,13 @@ https://backup.edpnet.com
 https://bauhuis.citymesh.com
 https://bi.engiem2m.com
 https://bmcc.citymesh.com
+https://brand.citymesh.com
 https://broker-mqtt.flex.citymesh.net
 https://busworld.citymesh.com
 https://cabmanager.citymesh.com
 https://campusinsight.citymesh.com
 https://chat.citymesh.com
+https://citymesh-combell.edpnet.com
 https://citymesh.edpnet.com
 https://client-prd.wifilab.be
 https://client.wifilab.be
@@ -72,6 +72,7 @@ https://exhibition.citymesh.com
 https://exhibitions.citymesh.com
 https://expohasselt.citymesh.com
 https://extra.citymesh.com
+https://extra.edpnet.com
 https://extra.edpnet.net
 https://extra.edpnet.nl
 https://extweb.edpnet.net
@@ -88,6 +89,7 @@ https://gitlab.citymesh.net
 https://go.citymesh.com
 https://go.edpnet.com
 https://go.wifinmbssncb.be
+https://hcp.edpnet.net
 https://helpdesk.citymesh.be
 https://helpdesk.citymesh.com
 https://hostctl.edpnet.net
@@ -135,6 +137,7 @@ https://mail.edpnet.nl
 https://mailgateway01.edpnet.be
 https://mailproxy01.edpnet.net
 https://maintenance.citymesh.com
+https://masterrussian.edpnet.com
 https://matexpo.citymesh.com
 https://mediaserver-accept.safety-drones.com
 https://mediaserver-dev.safety-drones.com
@@ -147,6 +150,7 @@ https://mqtt-iot-staging.citymesh.net
 https://msg-viewer.citymesh.net
 https://my.citymesh.com
 https://my.edpnet.be
+https://my.edpnet.com
 https://my.edpnet.net
 https://my.edpnet.nl
 https://mysql.edpnet.be
@@ -156,6 +160,7 @@ https://netbird.citymesh.net
 https://news.edpnet.be
 https://news.edpnet.net
 https://nl.wiki.edpnet.be
+https://nl.wiki.edpnet.com
 https://nl.wiki.edpnet.nl
 https://notulen.citymesh.com
 https://odoo.citymesh.com
@@ -181,6 +186,7 @@ https://portal.wifilab.be
 https://portaldev.towereye.be
 https://pos.wifilab.be
 https://privacy.citymesh.com
+https://qwww.edpnet.com
 https://recording.citymeshconnect.com
 https://recordingauth.citymeshconnect.com
 https://redirect.edpnet.be
@@ -194,7 +200,6 @@ https://repo.ncentric.cloud
 https://secure.ncentric.cloud
 https://signage.flex.citymesh.net
 https://smtp.edpnet.nl
-https://softphone.citymeshconnect.com
 https://speedtest.edpnet.be
 https://speedtest.edpnet.net
 https://speedtest.edpnet.nl
@@ -416,6 +421,7 @@ https://wiki.edpnet.net
 https://wiki.edpnet.nl
 https://wildcard.edpnet.com
 https://wintercircus.citymesh.com
+https://ww.edpnet.com
 https://www.5gjump.citymesh.com
 https://www.biotechnology-citymesh.com
 https://www.citymesh-connect.be
@@ -428,6 +434,8 @@ https://www.citymesh.net
 https://www.citymesh.nl
 https://www.citymeshconnect.be
 https://www.citymeshconnect.com
+https://www.connectingsenses.be
+https://www.connectingsenses.com
 https://www.edpnet.be
 https://www.edpnet.com
 https://www.edpnet.net
