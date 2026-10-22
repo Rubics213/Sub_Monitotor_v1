@@ -258,6 +258,7 @@ api.redbullmediapitch.com
 api.redbullmobile.at
 api.redbullmobile.om
 api.secretcan.redbull.com
+api.suppliersystem.redbulltechnology.com
 api.tetris-q.redbull.com
 api.tetris.redbull.com
 api.tourshare.rbleipzig.com
@@ -1233,6 +1234,7 @@ dev.api.axess.rbleipzig.com
 dev.api.b2b-approval-portal.rbleipzig.com
 dev.api.flash-upload.rbleipzig.com
 dev.api.flashzone.rbleipzig.com
+dev.api.lineup-it.rbleipzig.com
 dev.api.mixedzone.rbleipzig.com
 dev.api.ofc.rbleipzig.com
 dev.api.playershare.rbleipzig.com
@@ -1246,6 +1248,7 @@ dev.b2b-approval-portal.rbleipzig.com
 dev.ecrbs.redbulls.com
 dev.flash-upload.rbleipzig.com
 dev.flashzone.rbleipzig.com
+dev.lineup-it.rbleipzig.com
 dev.mixedzone.rbleipzig.com
 dev.n8n.rbleipzig.com
 dev.ofc.rbleipzig.com
@@ -1603,6 +1606,7 @@ extensity.wiiings.com
 extensitydev.wiiings.com
 extra.redbullfestivals.es
 f1.theredbulletin.com
+f79584b0-6d1f-4767-befb-3dae453ba38d.suppliersystem.redbulltechnology.com
 factbook.redbull.com
 factory.redbull.racing
 factsheet-q.redbull.com
@@ -3365,6 +3369,7 @@ portal.cooperationhandbook.redbull.com
 portal.racingbulls.com
 portal.racingbullsf1.com
 portal.redbullsalzburg.at
+portal.suppliersystem.redbulltechnology.com
 portaltoro-staging.redbull.com
 portaltoro.redbull.com
 pos-test.redbull.it
@@ -5645,7 +5650,6 @@ www.redbull.lv
 www.redbull.ly
 www.redbull.md
 www.redbull.mk
-www.redbull.mn
 www.redbull.mobile
 www.redbull.mp
 www.redbull.ms
