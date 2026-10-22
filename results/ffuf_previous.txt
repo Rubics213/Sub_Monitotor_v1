@@ -1,4 +1,32 @@
-http://login.wifilab.be/index.html [200]
+http://pbx-dev.edpnet.net/gui [301] -> http://pbx-dev.edpnet.net/gui/
+https://api-gateway.citymesh.com/.bash_history [403]
+https://api-gateway.citymesh.com/.bashrc [403]
+https://api-gateway.citymesh.com/.cvs [403]
+https://api-gateway.citymesh.com/.env [403]
+https://api-gateway.citymesh.com/.git [403]
+https://api-gateway.citymesh.com/.git/HEAD [403]
+https://api-gateway.citymesh.com/.git/config [403]
+https://api-gateway.citymesh.com/.git/index [403]
+https://api-gateway.citymesh.com/.git/logs/ [403]
+https://api-gateway.citymesh.com/.history [403]
+https://api-gateway.citymesh.com/.htaccess [403]
+https://api-gateway.citymesh.com/.htpasswd [403]
+https://api-gateway.citymesh.com/.mysql_history [403]
+https://api-gateway.citymesh.com/.passwd [403]
+https://api-gateway.citymesh.com/.profile [403]
+https://api-gateway.citymesh.com/.ssh [403]
+https://api-gateway.citymesh.com/.svn [403]
+https://api-gateway.citymesh.com/.svn/entries [403]
+https://api-gateway.citymesh.com/access_log [403]
+https://api-gateway.citymesh.com/authorized_keys [403]
+https://api-gateway.citymesh.com/cats [401]
+https://api-gateway.citymesh.com/error_log [403]
+https://api-gateway.citymesh.com/id_rsa [403]
+https://api-gateway.citymesh.com/payments [403]
+https://api-gateway.citymesh.com/phpinfo.php [403]
+https://api-gateway.citymesh.com/tar.gz [403]
+https://api-gateway.citymesh.com/web.config [403]
+https://api-gateway.citymesh.com/xmlrpc.php [403]
 https://app.ncentric.cloud/player [301] -> http://app.ncentric.cloud/player/
 https://backup.edpnet.com/.well-known/openid-configuration [200]
 https://backup.edpnet.com/bc [302] -> https://backup.edpnet.com/ui/
@@ -10,7 +38,7 @@ https://backup.edpnet.com/mobile [301] -> http://backup.edpnet.com/mobile/
 https://backup.edpnet.com/portal [401]
 https://backup.edpnet.com/portals [401]
 https://backup.edpnet.com/static [301] -> http://backup.edpnet.com/static/
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=bxyrnmpeycqpylmxgbxvnbdy
+https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=eokjrvwkfcotcrqspwceuwao
 https://dashboard.citymesh.com/tar.gz [403]
 https://dashboard.citymesh.net/.bash_history [403]
 https://dashboard.citymesh.net/.bashrc [403]
@@ -107,6 +135,14 @@ https://ffai.citymesh.com/swfobject.js [302] -> /login
 https://ffai.citymesh.com/tar.gz [403]
 https://ffai.citymesh.com/vite.config.js [302] -> /login
 https://ffai.citymesh.com/vite.config.ts [302] -> /login
+https://hcp.edpnet.be/.gitignore [200]
+https://hcp.edpnet.be/css [301] -> https://hcp.edpnet.be/css/
+https://hcp.edpnet.be/fonts [301] -> https://hcp.edpnet.be/fonts/
+https://hcp.edpnet.be/images [301] -> https://hcp.edpnet.be/images/
+https://hcp.edpnet.be/index.php [302] -> https://hcp.edpnet.net/
+https://hcp.edpnet.be/js [301] -> https://hcp.edpnet.be/js/
+https://hcp.edpnet.be/logs [301] -> https://hcp.edpnet.be/logs/
+https://hcp.edpnet.be/tmp [301] -> https://hcp.edpnet.be/tmp/
 https://linemon.citymesh.com/app [301] -> https://linemon.citymesh.com/app/
 https://linemon.citymesh.com/assets [301] -> https://linemon.citymesh.com/assets/
 https://linemon.citymesh.com/audio [301] -> https://linemon.citymesh.com/audio/
@@ -122,12 +158,6 @@ https://linemon.citymesh.com/modules [301] -> https://linemon.citymesh.com/modul
 https://linemon.citymesh.com/vendor [301] -> https://linemon.citymesh.com/vendor/
 https://linemon.citymesh.com/widgets [301] -> https://linemon.citymesh.com/widgets/
 https://livechat.citymesh.com/tar.gz [403]
-https://lweb01.edpnet.net/blocked [301] -> https://lweb01.edpnet.net/blocked/
-https://lweb01.edpnet.net/health [301] -> https://lweb01.edpnet.net/health/
-https://lweb01.edpnet.net/maintenance [301] -> https://lweb01.edpnet.net/maintenance/
-https://lweb01.edpnet.net/pma [301] -> https://lweb01.edpnet.net/pma/
-https://mail.edpnet.be/index.php [200]
-https://mail.edpnet.be/public_html [301] -> https://mail.edpnet.be/public_html/
 https://my.citymesh.com/.swf [200]
 https://my.citymesh.com/.well-known/apple-app-site-association [200]
 https://my.citymesh.com/.well-known/apple-developer-merchantid-domain-association [200]
@@ -190,50 +220,3 @@ https://my.citymesh.com/player.swf [200]
 https://my.citymesh.com/security.txt [200]
 https://my.citymesh.com/tar.gz [403]
 https://my.citymesh.com/vite.config.ts [200]
-https://mysql.edpnet.be/blocked [301] -> https://mysql.edpnet.be/blocked/
-https://mysql.edpnet.be/health [301] -> https://mysql.edpnet.be/health/
-https://mysql.edpnet.be/maintenance [301] -> https://mysql.edpnet.be/maintenance/
-https://mysql.edpnet.be/pma [301] -> https://mysql.edpnet.be/pma/
-https://netbird.citymesh.net/.bash_history [403]
-https://netbird.citymesh.net/.bashrc [403]
-https://netbird.citymesh.net/.cvs [403]
-https://netbird.citymesh.net/.env [403]
-https://netbird.citymesh.net/.git [403]
-https://netbird.citymesh.net/.git/HEAD [403]
-https://netbird.citymesh.net/.git/config [403]
-https://netbird.citymesh.net/.git/index [403]
-https://netbird.citymesh.net/.git/logs/ [403]
-https://netbird.citymesh.net/.history [403]
-https://netbird.citymesh.net/.htaccess [403]
-https://netbird.citymesh.net/.htpasswd [403]
-https://netbird.citymesh.net/.mysql_history [403]
-https://netbird.citymesh.net/.passwd [403]
-https://netbird.citymesh.net/.profile [403]
-https://netbird.citymesh.net/.ssh [403]
-https://netbird.citymesh.net/.svn [403]
-https://netbird.citymesh.net/.svn/entries [403]
-https://netbird.citymesh.net/.well-known/security.txt [200]
-https://netbird.citymesh.net/404 [200]
-https://netbird.citymesh.net/access_log [403]
-https://netbird.citymesh.net/activity [200]
-https://netbird.citymesh.net/assets [301] -> http://netbird.citymesh.net/assets/
-https://netbird.citymesh.net/authorized_keys [403]
-https://netbird.citymesh.net/customers [200]
-https://netbird.citymesh.net/dns [200]
-https://netbird.citymesh.net/error [200]
-https://netbird.citymesh.net/error_log [403]
-https://netbird.citymesh.net/events [301] -> http://netbird.citymesh.net/events/
-https://netbird.citymesh.net/group [200]
-https://netbird.citymesh.net/groups [200]
-https://netbird.citymesh.net/id_rsa [403]
-https://netbird.citymesh.net/index [200]
-https://netbird.citymesh.net/index.html [200]
-https://netbird.citymesh.net/install [200]
-https://netbird.citymesh.net/invite [200]
-https://netbird.citymesh.net/local [301] -> http://netbird.citymesh.net/local/
-https://netbird.citymesh.net/network [200]
-https://netbird.citymesh.net/phpinfo.php [403]
-https://netbird.citymesh.net/settings [200]
-https://netbird.citymesh.net/setup [200]
-https://netbird.citymesh.net/team [200]
-https://netbird.citymesh.net/web.config [403]
