@@ -1,7 +1,6 @@
 http://212.71.2.135.powered.by.edpnet.net
 http://212.71.2.65.powered.by.edpnet.net
 http://bc-backup.edpnet.com
-http://jobs.citymesh.com
 http://login.wifilab.be
 http://mail.citymesh.com
 http://mail.ncentric.com
@@ -10,9 +9,7 @@ http://mail.towereye.eu
 http://pbx-dev.edpnet.net
 http://pbx-lcr-demo.edpnet.net
 http://ru-pbx.edpnet.net
-http://thingsboard.citymesh.com
 http://webmail.ncentric.com
-http://www.sigfox.nl
 https://0g.citymesh.com
 https://212.71.2.252.powered.by.edpnet.net
 https://212.71.6.34.fixedpower.by.edpnet.be
@@ -54,6 +51,7 @@ https://busworld.citymesh.com
 https://cabmanager.citymesh.com
 https://campusinsight.citymesh.com
 https://chat.citymesh.com
+https://citymesh-combell.edpnet.com
 https://citymesh.edpnet.com
 https://client-prd.wifilab.be
 https://client.wifilab.be
@@ -101,6 +99,7 @@ https://iot-mqtt.citymesh.com
 https://iot.citymesh.com
 https://issues.edpnet.be
 https://issues.edpnet.net
+https://jobs.citymesh.com
 https://kinepolisbelgie.citymesh.com
 https://kinepolisnederland.citymesh.com
 https://kmda.citymesh.com
@@ -291,6 +290,7 @@ https://ssl4all-338.le.ssl.lxweb1.edpnet.net
 https://ssl4all-34.le.ssl.lxweb1.edpnet.net
 https://ssl4all-341.le.ssl.lxweb1.edpnet.net
 https://ssl4all-344.le.ssl.lxweb1.edpnet.net
+https://ssl4all-347.le.ssl.lxweb1.edpnet.net
 https://ssl4all-350.le.ssl.lxweb1.edpnet.net
 https://ssl4all-355.le.ssl.lxweb1.edpnet.net
 https://ssl4all-358.le.ssl.lxweb1.edpnet.net
@@ -314,6 +314,7 @@ https://ssl4all-4.le.ssl.lxweb1.edpnet.net
 https://ssl4all-40.le.ssl.lxweb1.edpnet.net
 https://ssl4all-401.le.ssl.lxweb1.edpnet.net
 https://ssl4all-404.le.ssl.lxweb1.edpnet.net
+https://ssl4all-407.le.ssl.lxweb1.edpnet.net
 https://ssl4all-410.le.ssl.lxweb1.edpnet.net
 https://ssl4all-413.le.ssl.lxweb1.edpnet.net
 https://ssl4all-416.le.ssl.lxweb1.edpnet.net
@@ -391,6 +392,7 @@ https://support.edpnet.net
 https://support.engiem2m.com
 https://tech-radar.citymesh.io
 https://testdeligne.edpnet.be
+https://thingsboard.citymesh.com
 https://tracker.towereye.be
 https://trekker.towereye.be
 https://trixxoarena.citymesh.com
@@ -403,6 +405,7 @@ https://viewer-test.safety-drones.com
 https://viewer.safety-drones.com
 https://vpbx.edpnet.net
 https://vpn.ncentric.cloud
+https://wakanda.citymesh.com
 https://webmail.edpnet.be
 https://webmail.edpnet.net
 https://webmail.edpnet.nl
@@ -418,13 +421,11 @@ https://www.citymesh-connect.be
 https://www.citymesh-connect.com
 https://www.citymesh.be
 https://www.citymesh.com
-https://www.citymesh.eu
 https://www.citymesh.fr
 https://www.citymesh.net
 https://www.citymesh.nl
 https://www.citymeshconnect.be
 https://www.citymeshconnect.com
-https://www.connectingsenses.be
 https://www.connectingsenses.com
 https://www.edpnet.be
 https://www.edpnet.com
@@ -440,6 +441,7 @@ https://www.ncentric.cloud
 https://www.ncentric.com
 https://www.ps-radiocom.be
 https://www.safety-drones.com
+https://www.sigfox.nl
 https://www.towereye.be
 https://www.towereye.eu
 https://www.wifilab.be
