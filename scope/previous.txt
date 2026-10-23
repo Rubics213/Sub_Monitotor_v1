@@ -1374,7 +1374,6 @@ dtv-dev-6.redbull.tv
 dtv-dev-7.redbull.tv
 dtv-dev-8.redbull.tv
 dtv-staging.redbull.tv
-dude.reclbull.com
 dweb.redbull.com
 dys-d.redbull.com
 dys-q.redbull.com
@@ -1458,6 +1457,8 @@ embeds-staging.redbull.com
 embeds.redbull.com
 emerging-cms.redbull.com
 emi.redbull.com
+emp-api-d.redbull.com
+emp-api-q.redbull.com
 emp-import-modal-d.redbull.com
 emp-import-modal-q.redbull.com
 emp-import-modal.redbull.com
