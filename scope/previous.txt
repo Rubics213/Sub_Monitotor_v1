@@ -2760,6 +2760,7 @@ mr5.redbulltechnologies.com
 mscapi-stage.redbull.com
 mscapi-stage.redbullmediahouse.com
 mscapi.redbullmediahouse.com
+msg-d.redbull.com
 msoid.lt.redbull.com
 msoid.redbullsailingacademy.com
 msoid.redbullsalzburg.at
@@ -3686,6 +3687,8 @@ rbbas.hq-d.redbull.com
 rbcptest.redbull.com
 rbdc-d.redbull.com
 rbdc-q.redbull.com
+rbdc-route-scorecard-q.redbull.com.redbull.com
+rbdc-route-scorecard.redbull.com
 rbdc-uniforms-d.redbull.com
 rbdc-uniforms-q.redbull.com
 rbdc-uniforms.redbull.com
@@ -4115,6 +4118,7 @@ redbulltedaalas.com
 redbulltelevision.com
 redbulltourbus.com
 redbulltrackclubpakistan.com
+redbullturnitup.com
 redbullu.com
 redbulluat.bulls-i.co.in
 redbulluatapi.bulls-i.co.in
@@ -5908,6 +5912,7 @@ www.redbulltelevision.com
 www.redbulltourbus.com
 www.redbulltrackclubpakistan.com
 www.redbullturkey.com
+www.redbullturnitup.com
 www.redbullu.com
 www.redbullusa.com
 www.redbullwingscup.com
