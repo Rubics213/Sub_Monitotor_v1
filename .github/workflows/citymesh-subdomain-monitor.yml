@@ -15,12 +15,23 @@ name: Subdomain Monitor - Citymesh
 #      the ffuf flatten stage and the bypass stage — kills the auth-wall noise class.
 #  [6] Cloudflare-challenge detection (cf-mitigated: challenge / "Just a moment") — those
 #      are suppressed, not treated as restricted assets or bypass candidates.
-#  [7] is_real_bypass() now also consults the canary catch-all signature (length compare).
+#  [7] is_real_bypass() now also consults the canary catch-all signature ([18] fingerprint compare).
 #  [8] excluded.txt glob patterns are normalized to substrings so *.static.edpnet.net
 #      etc. actually match (grep -F on "*.x" never matches "foo.x" — original bug).
 #  [9] httpx now uses -follow-host-redirects to avoid scope drift via cross-host hops.
 # [10] JS-secret Discord notification redacts matched values (type + 8 chars + file).
 # [11] timeout-minutes added; tool versions pinned (adjust as needed).
+# [18] Canary baseline replaced: 3 no-redirect probes per host, fingerprinted by
+#      status|content-type|normalised-body-hash. Fixes two real bugs — urllib followed
+#      302->/login while ffuf did not (baseline/apples-oranges), and the old length-only
+#      5% tolerance both missed small catch-alls and over-dropped large distinct pages.
+# [19] 401/403 are routed to ffuf_authgated.txt and NEVER enter findings. Redirects that
+#      only add a trailing slash, or that leave the host, are canonicalised away.
+# [20] Sensitive-file validation is basename + content-type + magic-byte aware and fails
+#      closed: unverified content is dropped, not reported.
+# [21] Auth walls are detected from the followed body (login form markers), not only the
+#      Location header.
+# [22] Hosts resolving into a program-excluded CIDR are dropped before any fuzzing.
 
 on:
   schedule:
@@ -260,6 +271,111 @@ jobs:
           # Extract hostname-only column (first field) for diffing
           awk '{print $1}' results/current_alive.txt | sort -u > results/current_alive_hosts.txt
 
+      - name: Enforce IP scope (drop hosts resolving out-of-scope)
+        run: |
+          # [22] The program carves specific CIDRs out of the Citymesh space. A wildcard
+          # hostname that resolves into one of them must never be probed, or the run is
+          # out of scope regardless of the hostname. Fail closed: unresolved == dropped.
+          python3 - << 'PYEOF'
+          import ipaddress
+          import socket
+          import urllib.parse
+
+          def host_of(entry):
+              """Entries are httpx line-leads (full URLs with scheme). Extract the
+              hostname, stripping userinfo/port so DNS actually resolves."""
+              e = entry.strip()
+              if "://" in e:
+                  netloc = urllib.parse.urlparse(e).netloc or e.split("/", 3)[2]
+                  netloc = netloc.rsplit("@", 1)[-1]
+                  if netloc.startswith("[") and "]" in netloc:      # IPv6 literal
+                      return netloc[1:netloc.index("]")]
+                  return netloc.split(":")[0].lower()
+              return e.split("/")[0].lower()
+
+          OOS_CIDRS = [
+              "31.31.128.64/26", "31.31.128.128/26", "31.31.128.192/27",
+              "31.31.130.0/23", "31.31.132.0/24", "31.31.134.0/23",
+              "31.31.136.0/21", "31.31.139.0/24", "31.31.141.0/26",
+          ]
+          IN_CIDRS = [
+              "31.31.128.0/24", "31.31.140.0/24", "31.31.141.0/24",
+              "31.31.143.0/24", "31.31.143.0/25", "31.31.150.0/24",
+              "31.31.158.0/24", "31.31.159.0/24",
+              "45.11.166.40/29", "79.132.241.0/24",
+              "85.234.192.0/24", "85.234.203.0/24", "85.234.204.0/24",
+              "85.234.205.0/24", "193.110.255.128/28",
+              "212.71.0.0/24", "212.71.1.0/24", "212.71.2.0/24",
+              "212.71.3.0/24", "212.71.4.0/24", "212.71.5.0/24",
+              "212.71.8.0/24", "212.71.11.0/24",
+              "213.211.130.0/24", "213.211.138.0/24", "213.211.188.0/24",
+              "213.219.128.0/24", "213.219.132.0/24",
+          ]
+          # Non-CIDR-aligned carve-outs taken verbatim from the program page.
+          HARD_DENY = [("31.31.140.0", "31.31.140.87"),
+                       ("31.31.140.92", "31.31.140.254"),
+                       ("31.31.143.0", "31.31.143.71")]
+          RULES = ([(ipaddress.ip_network(c), False) for c in OOS_CIDRS]
+                   + [(ipaddress.ip_network(c), True) for c in IN_CIDRS])
+
+          def scope_ok(host):
+              try:
+                  ips = {ipaddress.ip_address(a) for a in socket.gethostbyname_ex(host)[2]}
+              except Exception:
+                  return False, "unresolved"
+              if not ips:
+                  return False, "no A records"
+
+              # Most-specific-wins: 31.31.136.0/21 is excluded, but the /24s inside it
+              # are explicitly in scope, and the fine carve-outs override both. Default
+              # is allow so CDN-fronted hosts (Cloudflare etc.) are never dropped.
+              for ip in ips:
+                  for a, b in HARD_DENY:
+                      if ipaddress.ip_address(a) <= ip <= ipaddress.ip_address(b):
+                          return False, f"{ip} in excluded range {a}-{b}"
+                  best = None
+                  for net, allow in RULES:
+                      if ip in net and (best is None or net.prefixlen > best[0]):
+                          best = (net.prefixlen, allow)
+                  if best is not None and not best[1]:
+                      return False, f"{ip} excluded ({best[0]}-bit match)"
+              return True, ",".join(str(i) for i in sorted(ips))
+
+          keep, drop = [], []
+          for line in open("results/current_alive_hosts.txt"):
+              if not line.strip():
+                  continue
+              # Keep the original URL entry (current_alive_hosts.txt contract: feeds
+              # comm, katana -list, ffuf). Parse the hostname out only for DNS/scope.
+              entry = line.strip()
+              ok, why = scope_ok(host_of(entry))
+              (keep if ok else drop).append((entry, why))
+
+          # current_alive_hosts.txt is a hostname-only contract (feeds comm, nuclei,
+          # katana, ffuf). Annotations go to separate files, never into it.
+          with open("results/current_alive_hosts.txt", "w") as out:
+              out.write("".join(f"{h}\n" for h, _ in keep))
+          with open("results/scope_kept.txt", "w") as out:
+              out.write("".join(f"{h}  [{why}]\n" for h, why in keep))
+          with open("results/scope_dropped.txt", "w") as out:
+              out.write("".join(f"{h}  [{why}]\n" for h, why in drop))
+
+          print(f"Scope: kept {len(keep)}, dropped {len(drop)}")
+          for h, why in drop:
+              print(f"  DROP {h}  [{why}]")
+          PYEOF
+
+          # Keep the detailed alive list in sync, comparing the FIRST field only so
+          # api.citymesh.com cannot resurrect xapi.citymesh.com as a substring match.
+          if [ -s results/current_alive_hosts.txt ]; then
+            awk 'NR==FNR {keep[$1]=1; next} ($1 in keep)' \
+              results/current_alive_hosts.txt results/current_alive.txt \
+              > results/current_alive.filtered
+          else
+            : > results/current_alive.filtered
+          fi
+          mv results/current_alive.filtered results/current_alive.txt
+
       - name: Diff against previous alive hosts
         id: diff
         run: |
@@ -431,7 +547,7 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
           FINDINGS=$(cat results/nuclei_new.txt)
-          INSTRUCTIONS="You are triaging bug bounty / responsible-disclosure scan output for the Citymesh program (no bounty, points/reputation only). Below is nuclei output listing NEW findings from this scan cycle. For each finding, briefly note what it is and whether it looks worth manual follow-up. Group by severity (critical/high first). Flag anything that overlaps with Citymesh's excluded finding categories (e.g. missing headers, verbose errors without sensitive data, CSRF with low impact, disclosed API keys without proven business impact, CORS on non-sensitive endpoints) as LOW PRIORITY / likely not reportable. End with a short list of the top 3 findings worth investigating manually first, or state clearly if nothing looks worth pursuing. Be concise, plain text, no markdown headers."
+          INSTRUCTIONS="You are triaging bug bounty / responsible-disclosure scan output for the Citymesh program (no bounty, points/reputation only). Below is nuclei output listing NEW findings from this scan cycle. For each finding, briefly note what it is and whether it looks worth manual follow-up. Group by severity (critical/high first). Flag anything that overlaps with Citymesh's excluded finding categories (e.g. missing headers, verbose errors without sensitive data, CSRF with low impact, disclosed API keys without proven business impact, CORS on non-sensitive endpoints) as LOW PRIORITY / likely not reportable. End with a short list of the top 3 findings worth investigating manually first, or state clearly if nothing looks worth pursuing. HARD RULES: standalone version/banner disclosure, missing cookie flags or security headers, 301/302/401/403 responses, and login redirects are NOT findings. Be concise, plain text, no markdown headers."
           PROMPT_TEXT=$(printf "%s\n\nFINDINGS:\n%s" "$INSTRUCTIONS" "$FINDINGS")
 
           SUMMARY=""
@@ -638,33 +754,55 @@ jobs:
           mkdir -p results/ffuf_tmp
           rm -f results/ffuf_tmp/*
 
-          # Step A: canary fingerprint each host BEFORE fuzzing.
-          # [1] program headers + polite spacing on every canary fetch.
+          # Step A: canary baseline per host BEFORE fuzzing.
+          # [18] Three random, redirect-suppressed probes per host, fingerprinted by
+          # status|content-type|normalised-body-hash. ffuf runs without -r, so the
+          # baseline must be collected the same way (the old urllib call followed
+          # 302->/login and compared the login page against ffuf's 302).
           python3 - << 'PYEOF'
+          import hashlib
           import json
           import os
+          import re
+          import secrets
           import time
-          import urllib.request
           import urllib.error
+          import urllib.parse
+          import urllib.request
 
           INTIGRITI = {
               "User-Agent": os.environ.get("INTIGRITI_UA", "Intigriti-VDP-SubdomainMonitor/1.0"),
               "X-Intigriti-Username": os.environ.get("INTIGRITI_H", ""),
           }
 
-          def get_canary_signature(base_url):
-              """Request a path that cannot possibly exist to fingerprint catch-all responses."""
-              base_url = base_url.rstrip("/")
-              canary_url = base_url + "/___canary_path_that_cannot_exist_xyz123___"
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *a, **k):
+                  return None
+
+          OPENER = urllib.request.build_opener(NoRedirect)
+
+          def normalise(raw, path):
+              t = raw[:8192].decode("utf-8", "ignore")
+              t = t.replace(path, "")                    # kill path reflection
+              t = re.sub(r"[0-9a-fA-F]{16,}", "", t)     # ids / hashes
+              t = re.sub(r"\d+", "N", t)                 # numbers / timestamps
+              return re.sub(r"\s+", " ", t).strip().lower()
+
+          def fingerprint(url):
               try:
-                  req = urllib.request.Request(canary_url, headers=INTIGRITI)
-                  with urllib.request.urlopen(req, timeout=8) as r:
-                      body = r.read()
-                      return r.status, len(body)
+                  req = urllib.request.Request(url, headers=INTIGRITI)
+                  with OPENER.open(req, timeout=8) as r:
+                      raw, status = r.read(8192), r.status
+                      ct = r.headers.get("Content-Type", "").split(";")[0]
               except urllib.error.HTTPError as e:
-                  return e.code, 0
+                  raw = e.read(8192) if e.fp else b""
+                  status = e.code
+                  ct = (e.headers.get("Content-Type", "").split(";")[0] if e.headers else "")
               except Exception:
-                  return None, 0
+                  return None
+              path = urllib.parse.urlparse(url).path
+              h = hashlib.sha256(normalise(raw, path).encode()).hexdigest()[:16]
+              return f"{status}|{ct}|{h}"
 
           sigs = {}
           with open("results/ffuf_targets.txt") as f:
@@ -672,28 +810,30 @@ jobs:
                   host = line.strip().rstrip("/")
                   if not host:
                       continue
-                  status, length = get_canary_signature(host)
-                  sigs[host] = {"status": status, "length": length}
-                  time.sleep(0.2)   # polite spacing — avoids stacking on the 20 req/s cap
+                  base = set()
+                  for _ in range(3):
+                      fp = fingerprint(host + "/" + secrets.token_hex(10))
+                      if fp:
+                          base.add(fp)
+                      time.sleep(0.2)   # polite spacing — stays under the 20 req/s cap
+                  sigs[host] = {"reachable": bool(base), "baseline": sorted(base)}
 
           with open("results/canary_signatures.json", "w") as out:
               json.dump(sigs, out, indent=2)
 
-          print(f"Canary signatures captured for {len(sigs)} hosts:")
-          for h, s in sigs.items():
-              flag = "  <- CATCH-ALL" if s["status"] == 200 and s["length"] > 0 else ""
-              print(f"  {h} -> status={s['status']} length={s['length']}{flag}")
-
-          # [14] write the fuzz-active target list: drop catch-alls (everything
-          # returns the same page — ffuf output is noise there) and unreachable
-          # hosts (canary status None). Catches most of the wasted requests.
-          active = [h for h, s in sigs.items()
-                    if not (s["status"] == 200 and s["length"] > 0)
-                    and s["status"] is not None]
+          # [14] fuzz-active list: drop unreachable hosts only. Catch-all hosts are kept
+          # here but neutralised per-response by the baseline fingerprint in the flatten
+          # stage — that also catches catch-alls that vary by length.
+          active = [h for h, s in sigs.items() if s["reachable"]]
           with open("results/ffuf_targets_active.txt", "w") as out:
-              out.write("\n".join(active) + "\n")
-          print(f"Fuzz-active targets: {len(active)}/{len(sigs)} "
-                f"({len(sigs) - len(active)} skipped as catch-all/unreachable)")
+              out.write("\n".join(active) + ("\n" if active else ""))
+
+          print(f"Canary baselines captured for {len(sigs)} hosts:")
+          for h, s in sigs.items():
+              tag = ("unreachable" if not s["reachable"]
+                     else f"{len(s['baseline'])} baseline fingerprint(s)")
+              print(f"  {h} -> {tag}")
+          print(f"Fuzz-active targets: {len(active)}/{len(sigs)}")
           PYEOF
 
           # [15] per-ffuf hard timeout: 1500s covers a full 4.4k-wordlist host at
@@ -717,10 +857,14 @@ jobs:
               > /dev/null 2>&1 || true
           ' _ {}
 
-          # Step C: flatten JSON hits, apply canary filter + [5] redirect-to-login filter,
-          # validate sensitive file contents, drop universal noise.
+          # Step C: flatten JSON hits and apply the evidence gate.
+          # [19] 401/403 -> authgated (never findings); slash-only/cross-host redirects dropped.
+          # [18] 2xx bodies are fingerprinted against the canary baseline (kills catch-alls).
+          # [20] sensitive files validated by content-type + magic bytes + basename; fail closed.
+          # [21] auth walls detected from the followed body, not just the Location string.
           python3 - << 'PYEOF'
           import glob
+          import hashlib
           import json
           import os
           import re
@@ -735,6 +879,12 @@ jobs:
               "X-Intigriti-Username": os.environ.get("INTIGRITI_H", ""),
           }
 
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *a, **k):
+                  return None
+
+          OPENER = urllib.request.build_opener(NoRedirect)
+
           with open("results/canary_signatures.json") as f:
               canaries = json.load(f)
 
@@ -742,25 +892,27 @@ jobs:
           THRESHOLD = WORDLIST_SIZE * 60 // 100
 
           NOISE_RE = re.compile(
-              r"/(favicon\.ico|robots\.txt|\.well-known/(http-opportunistic|acme-challenge|pki-validation))( |\[|$)"
+              r"/(favicon\.ico|robots\.txt|sitemap\.xml|\.well-known/(http-opportunistic|acme-challenge|pki-validation))( |\[|$)"
           )
+          REDIRECT_LOGIN_RE = re.compile(
+              r"(^|/)(login|signin|sign-in|register|auth|account/login|account/register)(/|\?|$)", re.I
+          )
+          LOGIN_FORM_RE = re.compile(
+              r'type=["\']?password|name=["\']?username|id=["\']?login|forgot password', re.I
+          )
+          CT_BLOCK = {"text/html", "application/xhtml+xml"}
 
-          # [16] WAF-deny cluster detection. A 403 served with the SAME body length
-          # for >=3 distinct blocked paths on one host is a reverse-proxy/WAF deny
-          # page (Cloudflare, ModSecurity, IIS request-filtering): not evidence any
-          # of those files exists. Those lines are diverted out of the triage flow.
-          WAF_CLUSTER_MIN = 3
-
-          # [5] anything redirecting to an auth surface is an auth wall, not a finding
-          REDIRECT_LOGIN_RE = re.compile(r"login|signin|sign-in|register|/Account/(Login|Register)|/auth", re.I)
-
-          SENSITIVE_PATHS = {
-              "web.config":  ["connectionString", "password", "apiKey", "secret", "credentials"],
-              ".env":        ["DB_PASSWORD", "SECRET_KEY", "API_KEY", "TOKEN", "AWS_"],
-              ".git/HEAD":   ["ref: refs/", "HEAD detached"],
-              ".git/config": ["[core]", "[remote", "url ="],
-              ".htpasswd":   ["#:"],  # any line with colon = user:hash pair
-              "config.php":  ["$db_pass", "$password", "mysql_connect"],
+          # [20] basename -> required markers. A hit must contain at least one marker.
+          MARKERS = {
+              ".env":               [b"DB_PASSWORD", b"SECRET_KEY", b"API_KEY", b"TOKEN", b"AWS_"],
+              ".git/head":          [b"ref: refs/", b"HEAD detached"],
+              ".git/config":        [b"[core]", b"[remote", b"url ="],
+              ".htpasswd":          [b":"],
+              "config.php":         [b"$db_pass", b"$password", b"mysql_connect"],
+              "wp-config.php":      [b"DB_PASSWORD", b"AUTH_KEY", b"table_prefix"],
+              ".npmrc":             [b"_authToken", b"registry="],
+              "id_rsa":             [b"BEGIN OPENSSH PRIVATE KEY", b"BEGIN RSA PRIVATE KEY"],
+              "docker-compose.yml": [b"services:", b"image:"],
           }
 
           FETCH_TIMEOUT = 8
@@ -768,57 +920,75 @@ jobs:
           MAX_FETCHES = 300
 
 
-          def is_catchall_response(status, body_len, canary_status, canary_len):
-              if canary_status != 200:
-                  return False
-              if canary_len == 0:
-                  return False
-              return abs(body_len - canary_len) / canary_len < 0.05
+          def norm_path(u):
+              return (urllib.parse.urlparse(u).path.rstrip("/") or "/")
 
 
-          def fetch_body(url, timeout=FETCH_TIMEOUT):
+          def normalise(raw, path):
+              t = raw[:8192].decode("utf-8", "ignore")
+              t = t.replace(path, "")
+              t = re.sub(r"[0-9a-fA-F]{16,}", "", t)
+              t = re.sub(r"\d+", "N", t)
+              return re.sub(r"\s+", " ", t).strip().lower()
+
+
+          def get(url):
+              """(status, ctype, body_bytes) — redirects NOT followed, matching ffuf."""
               try:
                   req = urllib.request.Request(url, headers=INTIGRITI)
-                  with urllib.request.urlopen(req, timeout=timeout) as r:
-                      return r.read(8192).decode("utf-8", "ignore")
+                  with OPENER.open(req, timeout=FETCH_TIMEOUT) as r:
+                      return (r.status,
+                              r.headers.get("Content-Type", "").split(";")[0],
+                              r.read(8192))
               except urllib.error.HTTPError as e:
-                  try:
-                      return e.read(8192).decode("utf-8", "ignore") if e.fp else ""
-                  except Exception:
-                      return ""
+                  ct = e.headers.get("Content-Type", "").split(";")[0] if e.headers else ""
+                  return e.code, ct, (e.read(8192) if e.fp else b"")
               except Exception:
-                  return ""
+                  return None, "", b""
 
 
-          def validate_sensitive_content(url, body_text):
-              path = urllib.parse.urlparse(url).path.lstrip("/")
-              for sensitive_path, keywords in SENSITIVE_PATHS.items():
-                  if path.endswith(sensitive_path):
-                      return any(kw in body_text for kw in keywords)
-              return True
+          def basename(url):
+              return os.path.basename(urllib.parse.unquote(urllib.parse.urlparse(url).path)).lower()
 
 
-          def is_sensitive_path(url):
-              path = urllib.parse.urlparse(url).path.lstrip("/")
-              return any(path.endswith(sp) for sp in SENSITIVE_PATHS)
+          def is_sensitive(url):
+              b = basename(url)
+              if b in MARKERS or b == ".gitignore":
+                  return True
+              if b.endswith((".env", ".htpasswd", ".npmrc")):
+                  return True
+              return b.endswith((".bak", ".old", ".orig", ".save", ".swp",
+                                 ".sql", ".zip", ".gz", ".tar"))
 
 
-          current_raw = []
+          def markers_for(b):
+              if b in MARKERS:
+                  return MARKERS[b]
+              for suffix, mk in MARKERS.items():        # e.g. prod.env -> .env markers
+                  if suffix.startswith(".") and b.endswith(suffix):
+                      return mk
+              return None
+
+
+          def valid_sensitive(url, ct, body):
+              b = basename(url)
+              if b == ".gitignore":
+                  return ct not in CT_BLOCK and b"<html" not in body[:256].lower() and len(body) > 0
+              if ct in CT_BLOCK:
+                  return False          # a config/secret served as HTML is an error page
+              if body[:4] in (b"PK\x03\x04", b"%PDF") or body[:2] == b"\x1f\x8b":
+                  return True           # archive / pdf with correct magic bytes
+              markers = markers_for(b)
+              if markers:
+                  return any(m in body for m in markers)
+              return len(body) > 32     # unknown sensitive extension: non-trivial body
+
+
+          current, authgated, noise = [], [], []
           suspects = []
           seen = set()
-          stats = {
-              "total": 0,
-              "filtered_canary": 0,
-              "filtered_noise": 0,
-              "filtered_redirectlogin": 0,
-              "filtered_waf": 0,
-              "sensitive_checked": 0,
-              "sensitive_dropped": 0,
-              "fetches": 0,
-              "hosts": 0,
-              "catchall_hosts": 0,
-          }
-          waf_deny_hits = []
+          stats = Counter()
+          baselines = {h: set(v.get("baseline", [])) for h, v in canaries.items()}
 
           for path in sorted(glob.glob("results/ffuf_tmp/*.json")):
               try:
@@ -830,95 +1000,113 @@ jobs:
               stats["hosts"] += 1
               host_url = (data.get("config", {}).get("url") or "").replace("/FUZZ", "").rstrip("/")
               results = data.get("results", []) or []
-              count = len(results)
-              stats["total"] += count
+              stats["raw"] += len(results)
 
-              canary = canaries.get(host_url, {"status": None, "length": 0})
-              canary_status = canary.get("status")
-              canary_len = canary.get("length", 0)
-              if canary_status == 200 and canary_len > 0:
-                  stats["catchall_hosts"] += 1
-
-              if count > THRESHOLD:
-                  suspects.append(
-                      f"{host_url} — {count}/{WORDLIST_SIZE} matched "
-                      f"(likely catch-all, canary check below)"
-                  )
-
-              # [16] per-host 403 length cluster (see WAF_CLUSTER_MIN note)
-              forty3 = [r for r in results if r.get("status") == 403 and (r.get("length") or 0) > 0]
-              waf_cluster_lengths = {ln for ln, n in Counter(r.get("length") for r in forty3).items()
-                                     if n >= WAF_CLUSTER_MIN}
+              if len(results) > THRESHOLD:
+                  suspects.append(f"{host_url} — {len(results)}/{WORDLIST_SIZE} matched")
 
               for r in results:
                   url = r.get("url", "")
                   status = r.get("status", 0)
-                  length = r.get("length", 0)
                   redirect = r.get("redirectlocation", "") or ""
-
-                  if is_catchall_response(status, length, canary_status, canary_len):
-                      stats["filtered_canary"] += 1
+                  if not url:
                       continue
 
-                  # [16] WAF deny page for a sensitive-looking path — divert, never triage
-                  if status == 403 and length in waf_cluster_lengths:
-                      stats["filtered_waf"] += 1
-                      waf_deny_hits.append(f"{url} [403,WAF-block,len={length}]")
+                  # [19] auth / deny responses are context, never findings
+                  if status in (401, 403):
+                      authgated.append(f"{url} [{status}]")
                       continue
 
-                  # [5] redirect-to-login filter — 30x into an auth surface is a wall
-                  if status in (301, 302, 303, 307) and redirect and REDIRECT_LOGIN_RE.search(redirect):
-                      stats["filtered_redirectlogin"] += 1
-                      continue
-
-                  if status in (301, 302, 303, 307) and redirect:
+                  # [19] canonicalise redirects
+                  if status in (301, 302, 303, 307, 308):
+                      if not redirect:
+                          noise.append(f"{url} [{status}] (no Location)")
+                          continue
+                      target = urllib.parse.urljoin(url, redirect)
+                      if urllib.parse.urlparse(target).netloc != urllib.parse.urlparse(url).netloc:
+                          noise.append(f"{url} [{status}] -> {redirect} (cross-host)")
+                          stats["crosshost"] += 1
+                          continue
+                      if norm_path(target) == norm_path(url):
+                          noise.append(f"{url} [{status}] -> {redirect} (slash-only)")
+                          stats["slashonly"] += 1
+                          continue
+                      if REDIRECT_LOGIN_RE.search(urllib.parse.urlparse(target).path):
+                          authgated.append(f"{url} [{status}] -> {redirect} (auth wall)")
+                          stats["authwall"] += 1
+                          continue
                       line = f"{url} [{status}] -> {redirect}"
-                  else:
-                      line = f"{url} [{status}]"
-
-                  if NOISE_RE.search(line):
-                      stats["filtered_noise"] += 1
+                      if line not in seen:
+                          seen.add(line)
+                          current.append(line)
                       continue
 
-                  if 200 <= status < 300 and is_sensitive_path(url):
-                      stats["sensitive_checked"] += 1
-                      if stats["fetches"] < MAX_FETCHES:
-                          body = fetch_body(url)
-                          stats["fetches"] += 1
-                          time.sleep(FETCH_DELAY)
-                          if not validate_sensitive_content(url, body):
-                              stats["sensitive_dropped"] += 1
-                              continue
-                      else:
-                          line = f"{line} [sensitive-unverified: fetch cap reached]"
+                  if not (200 <= status < 300):
+                      noise.append(f"{url} [{status}]")
+                      continue
 
-                  if line not in seen:
-                      seen.add(line)
-                      current_raw.append(line)
+                  # [18][20][21] fetch once, then apply the evidence gate
+                  if stats["fetches"] >= MAX_FETCHES:
+                      noise.append(f"{url} [{status}] (unverified: fetch cap)")
+                      stats["unverified"] += 1
+                      continue
 
-          ordered = sorted(current_raw)
-          payload = "\n".join(ordered) + ("\n" if ordered else "")
+                  st, ct, body = get(url)
+                  stats["fetches"] += 1
+                  time.sleep(FETCH_DELAY)
 
-          with open("results/ffuf_current_raw.txt", "w") as out:
-              out.write(payload)
-          with open("results/ffuf_current.txt", "w") as out:
-              out.write(payload)
-          with open("results/ffuf_suspect_hosts.txt", "w") as out:
-              out.write("\n".join(suspects) + ("\n" if suspects else ""))
-          with open("results/waf_deny.txt", "w") as out:
-              out.write("\n".join(sorted(set(waf_deny_hits))) + ("\n" if waf_deny_hits else ""))
+                  if st is None:
+                      noise.append(f"{url} [{status}] (unverified: fetch failed)")
+                      stats["unverified"] += 1
+                      continue
 
-          print(f"Hosts fuzzed: {stats['hosts']}")
-          print(f"Hosts whose canary was itself a 200 (catch-all behaviour): {stats['catchall_hosts']}")
-          print(f"Raw hits: {stats['total']}")
-          print(f"Dropped by canary filter (within 5% of canary length): {stats['filtered_canary']}")
-          print(f"Dropped by noise filter: {stats['filtered_noise']}")
-          print(f"[5] Dropped by redirect-to-login filter: {stats['filtered_redirectlogin']}")
-          print(f"[16] Diverted to results/waf_deny.txt as WAF deny pages: {stats['filtered_waf']}")
-          print(f"Sensitive-path 2xx responses checked for content: {stats['sensitive_checked']}")
-          print(f"  -> dropped as empty/stub (no expected markers found): {stats['sensitive_dropped']}")
-          print(f"  -> validation fetches performed: {stats['fetches']} (cap {MAX_FETCHES})")
-          print(f"Kept after all filters: {len(ordered)}")
+                  fp = (f"{status}|{ct}|"
+                        f"{hashlib.sha256(normalise(body, urllib.parse.urlparse(url).path).encode()).hexdigest()[:16]}")
+                  if fp in baselines.get(host_url, set()):
+                      noise.append(f"{url} [{status}] (matches canary baseline)")
+                      stats["baseline"] += 1
+                      continue
+
+                  if LOGIN_FORM_RE.search(body.decode("utf-8", "ignore")):
+                      authgated.append(f"{url} [{status}] (login form)")
+                      stats["authwall"] += 1
+                      continue
+
+                  if is_sensitive(url) and not valid_sensitive(url, ct, body):
+                      noise.append(f"{url} [{status}] (sensitive path failed content validation)")
+                      stats["sensitive_dropped"] += 1
+                      continue
+
+                  if NOISE_RE.search(url):
+                      stats["noise"] += 1
+                      continue
+
+                  key = (urllib.parse.urlparse(url).netloc, norm_path(url))
+                  line = f"{url} [{status}]"
+                  if key not in seen:
+                      seen.add(key)
+                      current.append(line)
+
+          outputs = (("ffuf_current_raw.txt", current),
+                     ("ffuf_current.txt", current),
+                     ("ffuf_authgated.txt", authgated),
+                     ("ffuf_filtered_noise.txt", noise),
+                     ("ffuf_suspect_hosts.txt", suspects),
+                     ("waf_deny.txt", []))
+          for name, rows in outputs:
+              with open("results/" + name, "w") as out:
+                  out.write("\n".join(sorted(set(rows))) + ("\n" if rows else ""))
+
+          print(f"Hosts fuzzed: {stats['hosts']}   raw hits: {stats['raw']}")
+          print(f"  dropped slash-only redirects : {stats['slashonly']}")
+          print(f"  dropped cross-host redirects : {stats['crosshost']}")
+          print(f"  dropped canary-baseline      : {stats['baseline']}")
+          print(f"  dropped auth walls           : {stats['authwall']}")
+          print(f"  dropped sensitive-invalid    : {stats['sensitive_dropped']}")
+          print(f"  unverified (fail-closed)     : {stats['unverified']}")
+          print(f"  kept as findings             : {len(current)}")
+          print(f"  auth-gated (context only)    : {len(authgated)}")
+          print(f"  written to noise             : {len(noise)}")
           if suspects:
               print("Suspect catch-all hosts (over 60% wordlist match):")
               for s in suspects:
@@ -1010,7 +1198,7 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
           FINDINGS=$(head -n 80 results/ffuf_new.txt)
-          INSTRUCTIONS=$(printf "You are triaging raw ffuf directory bruteforce results for the Citymesh responsible-disclosure program. Each line is 'url [status_code]'. Separate into:\nPRIORITY (manually verify immediately): .git/, .env, web.config, .htpasswd, phpMyAdmin (pma), admin panels, backup files (.bak/.old/.zip/.sql), API endpoints returning 200, exposed config files, management interfaces.\nINVESTIGATE: health endpoints, vendor/, cgi-bin/, staging subdomains, 401/403 paths suggesting auth-gated content.\nNOISE (skip): favicon.ico, .well-known/* (acme-challenge, pki-validation, http-opportunistic), /blocked, /maintenance, /assets returning 301, static files on CDN hosts. ALSO never treat as findings: 30x redirects into login/auth pages (auth wall, not a leak), OPTIONS/204 preflight responses, and Cloudflare challenge pages (Just a moment).\nBe concise. Plain text. End with TOP PRIORITY: listing the 1-3 URLs to curl manually first.")
+          INSTRUCTIONS=$(printf "You are triaging raw ffuf directory bruteforce results for the Citymesh responsible-disclosure program. Each line is 'url [status_code]'. Separate into:\nPRIORITY (manually verify immediately): .git/, .env, web.config, .htpasswd, phpMyAdmin (pma), admin panels, backup files (.bak/.old/.zip/.sql), API endpoints returning 200, exposed config files, management interfaces.\nINVESTIGATE: health endpoints, vendor/, cgi-bin/, staging subdomains, 401/403 paths suggesting auth-gated content.\nNOISE (skip): favicon.ico, .well-known/* (acme-challenge, pki-validation, http-opportunistic), /blocked, /maintenance, /assets returning 301, static files on CDN hosts. ALSO never treat as findings: 30x redirects into login/auth pages (auth wall, not a leak), OPTIONS/204 preflight responses, and Cloudflare challenge pages (Just a moment).\nHARD RULES: a 301/302/401/403, a redirect into a login page, a canary/baseline match, or content that failed validation is NEVER a finding — classify it NON-REPORTABLE. If the only evidence is a status code, do not invent impact from the filename; only claim a config/secret leak when the actual sensitive bytes appear in the evidence.\nBe concise. Plain text. End with TOP PRIORITY: listing the 1-3 URLs to curl manually first.")
           PROMPT_TEXT=$(printf "%s\n\nFINDINGS:\n%s" "$INSTRUCTIONS" "$FINDINGS")
           SUMMARY=""
           PROVIDER="none"
@@ -1086,9 +1274,9 @@ jobs:
           #      2xx evidence requires a non-empty body
           #  [5] variants redirecting into login/auth surfaces are classified auth-gated
           #  [6] Cloudflare challenge responses are recognized and suppressed
-          #  [7] canary catch-all length check added to bypass validation
+          #  [7] canary catch-all fingerprint check added to bypass validation
           cat > bypass_check.py << 'PYEOF'
-          import urllib.request, urllib.error, http.client, urllib.parse, time, json, os, re
+          import urllib.request, urllib.error, http.client, urllib.parse, time, json, os, re, hashlib
 
           TIMEOUT = 8
           DELAY = 0.3
@@ -1132,11 +1320,13 @@ jobs:
                   req = urllib.request.Request(url, method=method, headers=hdrs)
                   with OPENER.open(req, timeout=timeout) as r:
                       ct = r.headers.get("Content-Type", "")
-                      body = r.read(4096).decode("utf-8", "ignore")
+                      # 8192 to match the canary baseline window exactly — the
+                      # fingerprint compare below is only valid for equal-size reads.
+                      body = r.read(8192).decode("utf-8", "ignore")
                       return r.status, ct, body
               except urllib.error.HTTPError as e:
                   ct = e.headers.get("Content-Type", "") if e.headers else ""
-                  body = e.read(4096).decode("utf-8", "ignore") if e.fp else ""
+                  body = e.read(8192).decode("utf-8", "ignore") if e.fp else ""
                   # [6] Cloudflare challenge — report it distinctly so caller can suppress
                   if (e.code == 403 and (e.headers.get("cf-mitigated") == "challenge"
                           or "Just a moment" in body or "challenge-platform" in body)):
@@ -1291,13 +1481,21 @@ jobs:
               return True
 
 
-          def canary_matches(host_base, body_len):
-              """[7] does the response length look like the host's catch-all page?"""
+          def canary_matches(host_base, status, content_type, body_text, path):
+              """[18] fingerprint the response against the host's no-redirect canary baseline."""
               c = CANARIES.get(host_base)
-              if not c or c.get("status") != 200:
+              if not c:
                   return False
-              clen = c.get("length", 0)
-              return bool(clen and body_len and abs(body_len - clen) / clen < 0.05)
+              base = set(c.get("baseline", []))
+              if not base:
+                  return False
+              t = (body_text or "")[:8192].replace(path or "", "")
+              t = re.sub(r"[0-9a-fA-F]{16,}", "", t)
+              t = re.sub(r"\d+", "N", t)
+              t = re.sub(r"\s+", " ", t).strip().lower()
+              ct = (content_type or "").split(";")[0]
+              fp = f"{status}|{ct}|{hashlib.sha256(t.encode()).hexdigest()[:16]}"
+              return fp in base
 
 
           def host_base_of(url):
@@ -1310,7 +1508,8 @@ jobs:
                   return False
               if not body:
                   return False
-              if canary_matches(host_base_of(bypass_url), len(body)):
+              if canary_matches(host_base_of(bypass_url), status, content_type, body,
+                                urllib.parse.urlparse(bypass_url).path):
                   return False
               # [16] WAF deny body slipped through a 200 spoof variant — still not evidence
               if status == 403 and WAF_RE.search(body):
@@ -1408,8 +1607,14 @@ jobs:
 
 
           def main():
-              with open("results/ffuf_current.txt") as f:
-                  lines = [l.strip() for l in f if l.strip()]
+              # [19] 401/403 live in ffuf_authgated.txt now (never in ffuf_current.txt —
+              # those are evidence-validated 2xx/redirects only). Only probe the plain
+              # "url [401]" / "url [403]" lines; skip annotated auth-wall lines.
+              try:
+                  with open("results/ffuf_authgated.txt") as f:
+                      lines = [l.strip() for l in f if l.strip()]
+              except FileNotFoundError:
+                  lines = []
 
               targets = []
               for line in lines:
