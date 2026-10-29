@@ -1,0 +1,127 @@
+name: Citymesh BBOT Discovery & Scope Monitor
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'   # Runs every 12 hours
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run only (prints BBOT command without scanning)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: citymesh-bbot-monitor
+  cancel-in-progress: false
+
+jobs:
+  bbot_recon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    env:
+      INTIGRITI_H: ${{ secrets.INTIGRITI_USERNAME }}
+      INTIGRITI_UA: "Intigriti-VDP-SubdomainMonitor/1.0"
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install BBOT and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install bbot pyyaml
+
+      - name: Run Scope Engine & Preset Selftest
+        run: |
+          python3 scripts/bbot_monitor.py selftest
+
+      - name: Execute BBOT Discovery with Strict Scope Enforcement
+        run: |
+          EXTRA_ARGS=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            EXTRA_ARGS="--dry-run"
+          fi
+
+          python3 scripts/bbot_monitor.py run \
+            --results-dir results \
+            --rps 15 \
+            --require-handle \
+            $EXTRA_ARGS
+
+      - name: Diff discovered subdomains against previous run
+        id: diff
+        run: |
+          mkdir -p results
+          if [ -f results/previous_bbot_in_scope.txt ]; then
+            comm -13 results/previous_bbot_in_scope.txt results/in_scope.txt > results/new_bbot_subdomains.txt || true
+          else
+            cp results/in_scope.txt results/new_bbot_subdomains.txt 2>/dev/null || touch results/new_bbot_subdomains.txt
+          fi
+
+          NEW_COUNT=$(wc -l < results/new_bbot_subdomains.txt | tr -d ' ')
+          echo "new_count=$NEW_COUNT" >> "$GITHUB_OUTPUT"
+          echo "Found $NEW_COUNT new verified in-scope subdomains"
+
+      - name: Notify Discord if new in-scope subdomains discovered
+        if: steps.diff.outputs.new_count != '0' && env.DISCORD_WEBHOOK_URL != ''
+        run: |
+          NEW_SUBS=$(head -n 25 results/new_bbot_subdomains.txt)
+          TOTAL=$(wc -l < results/new_bbot_subdomains.txt | tr -d ' ')
+          CONTENT=$(printf "**[BBOT] %s New In-Scope Subdomains Found for Citymesh:**\n\`\`\`\n%s\n\`\`\`" "$TOTAL" "$NEW_SUBS")
+          PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+
+      - name: Notify Discord if BBOT findings generated
+        if: env.DISCORD_WEBHOOK_URL != ''
+        run: |
+          if [ -s results/bbot_findings.txt ]; then
+            FINDINGS=$(head -c 1800 results/bbot_findings.txt)
+            CONTENT=$(printf "**[BBOT] Passive Findings for Citymesh:**\n\`\`\`\n%s\n\`\`\`" "$FINDINGS")
+            PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
+            curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+          fi
+
+      - name: Update previous run state & commit changes
+        run: |
+          if [ -f results/in_scope.txt ]; then
+            cp results/in_scope.txt results/previous_bbot_in_scope.txt
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add results/ || true
+
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(recon): update BBOT discovery and scope results [skip ci]"
+            git push origin main
+          else
+            echo "No changes to commit."
+          fi
+
+      - name: Upload BBOT results artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bbot-recon-results
+          path: |
+            results/bbot_summary.json
+            results/in_scope.txt
+            results/out_of_scope.txt
+            results/bbot_subdomains.txt
+            results/bbot_findings.json
+            results/bbot_run.log
+          retention-days: 14
