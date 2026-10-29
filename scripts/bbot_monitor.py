@@ -12,6 +12,8 @@ Subcommands
   filter -i FILE        keep only in-scope entries from a host/URL list
   dump                  print the resolved scope model as JSON
   run                   discover (BBOT) then verify scope, write artifacts
+  reverify              re-run normalise + scope verification on an existing
+                        BBOT scan directory (no rescan)
 
 Exit codes
   0  success / everything kept
@@ -30,6 +32,14 @@ Compliance notes that are load-bearing:
   exploitation.
 * The blacklist handed to BBOT is derived from the same ip_verdict() the
   filter uses, so discovery and verification cannot disagree about scope.
+
+Changelog
+* Fix: ipaddress objects of different versions (IPv4 vs IPv6) cannot be
+  ordered against each other. resolve() and effective_exclude_networks() now
+  sort with a version-aware key / per-version grouping, so hosts that have
+  both A and AAAA records (e.g. behind Cloudflare) no longer crash the run.
+* resolve() results are cached per host for the life of the process.
+* New `reverify` subcommand so a post-processing bug never costs a rescan.
 """
 from __future__ import annotations
 
@@ -258,6 +268,16 @@ def _range_pairs(values) -> list:
     return out
 
 
+def _ip_sort_key(ip) -> tuple:
+    """Total ordering across IPv4 and IPv6: IPv4 first, then IPv6, each numeric.
+
+    ipaddress objects of different versions raise TypeError on < and >, so any
+    sort over a mixed collection must go through a key like this one.
+    """
+    addr = ip if isinstance(ip, (ipaddress.IPv4Address, ipaddress.IPv6Address)) else ipaddress.ip_address(str(ip))
+    return (addr.version, int(addr))
+
+
 # --------------------------------------------------------------------------- #
 # scope: decision engine
 # --------------------------------------------------------------------------- #
@@ -296,7 +316,8 @@ class Scope:
         addr = ip if isinstance(ip, (ipaddress.IPv4Address, ipaddress.IPv6Address)) else ipaddress.ip_address(ip)
 
         # Hard-deny carve-outs are not CIDR-aligned, so they are checked
-        # directly and beat every network rule.
+        # directly and beat every network rule. The version guard keeps an
+        # IPv6 address from ever being compared against an IPv4 bound.
         for lo, hi in self.hard_deny:
             if lo.version == addr.version and lo <= addr <= hi:
                 return False, f"{addr} in hard-deny range {lo}-{hi}"
@@ -341,7 +362,15 @@ class Scope:
         blocked = [a for a in candidates if not self.ip_verdict(a)[0]]
         if not blocked:
             return []
-        return list(ipaddress.collapse_addresses(sorted(blocked)))
+
+        # collapse_addresses() requires a single IP version per call, so group
+        # by version (IPv4 first, then IPv6) instead of sorting one mixed list.
+        result: list = []
+        for version in (4, 6):
+            group = sorted(a for a in blocked if a.version == version)
+            if group:
+                result.extend(ipaddress.collapse_addresses(group))
+        return result
 
     def blacklist_entries(self) -> list[str]:
         entries = [str(n) for n in self.effective_exclude_networks()]
@@ -370,18 +399,32 @@ def host_of(entry: str) -> str:
     return netloc.split(":", 1)[0].lower()
 
 
+_RESOLVE_CACHE: dict = {}
+
+
 def resolve(host: str) -> list:
+    """Resolve a hostname to a deduplicated list of ipaddress objects.
+
+    A host can return both A and AAAA records, so the result mixes IPv4 and
+    IPv6. The list is ordered with _ip_sort_key (IPv4 first, then IPv6) because
+    plain sorted() raises TypeError on mixed versions. Results are cached.
+    """
+    if host in _RESOLVE_CACHE:
+        return _RESOLVE_CACHE[host]
     try:
         infos = socket.getaddrinfo(host, None)
     except Exception:
+        _RESOLVE_CACHE[host] = []
         return []
-    out = []
+    out = set()
     for info in infos:
         try:
-            out.append(ipaddress.ip_address(info[4][0]))
+            out.add(ipaddress.ip_address(info[4][0]))
         except ValueError:
             continue
-    return sorted(set(out))
+    result = sorted(out, key=_ip_sort_key)
+    _RESOLVE_CACHE[host] = result
+    return result
 
 
 def verdict_for_entry(scope: Scope, entry: str, do_resolve: bool = True) -> tuple[bool, str]:
@@ -493,6 +536,8 @@ def resolve_scan_dir(bbot_out: str, scan_name: str) -> str | None:
     exact = os.path.join(bbot_out, scan_name)
     if os.path.isdir(exact):
         return exact
+    if not os.path.isdir(bbot_out):
+        return None
     candidates = [d for d in sorted(os.listdir(bbot_out)) if os.path.isdir(os.path.join(bbot_out, d))]
     if not candidates:
         return None
@@ -564,6 +609,34 @@ def normalise_outputs(scan_dir: str, results_dir: str) -> dict:
     stats["technologies"] = len(set(technologies))
     stats["open_ports"] = len(set(open_ports))
     stats["findings"] = len(findings)
+    return stats
+
+
+def postprocess(scope: Scope, scan_dir: str, results_dir: str, rc: int, elapsed: int) -> dict:
+    """Normalise a BBOT scan directory, verify scope, write all artifacts.
+
+    Shared by `run` (after a scan) and `reverify` (against an existing scan),
+    so a bug here can be fixed and re-tested without another full scan.
+    """
+    stats = normalise_outputs(scan_dir, results_dir)
+    log("normalised: " + ", ".join(f"{k}={v}" for k, v in sorted(stats.items())))
+
+    # Verify discovery output against the same engine that produced the
+    # blacklist. BBOT should already be clean; this proves it rather than
+    # trusting it.
+    kept, dropped = [], []
+    for entry in read_lines(os.path.join(results_dir, "bbot_subdomains.txt")):
+        ok, why = verdict_for_entry(scope, entry, do_resolve=True)
+        (kept if ok else dropped).append((entry, why))
+    write_lines(os.path.join(results_dir, "in_scope.txt"), (h for h, _ in kept))
+    write_lines(os.path.join(results_dir, "out_of_scope.txt"), (f"{h}  [{w}]" for h, w in dropped))
+    stats["verified_in_scope"] = len(kept)
+    stats["verified_out_of_scope"] = len(dropped)
+    log(f"scope verification: {len(kept)} kept, {len(dropped)} dropped")
+
+    with open(os.path.join(results_dir, "bbot_summary.json"), "w", encoding="utf-8") as fh:
+        json.dump({"exit_code": rc, "elapsed_seconds": elapsed, "scan_dir": scan_dir, **stats},
+                  fh, indent=2)
     return stats
 
 
@@ -669,11 +742,23 @@ def cmd_selftest(args) -> int:
         ("193.110.255.130", True, "in-scope /28"),
         ("193.110.255.140", True, "default allow past the /28"),
         ("8.8.8.8", True, "default allow (CDN edge protection)"),
+        ("2606:4700:20::681a:5d7", True, "IPv6 CDN edge: default allow, must not raise"),
     ]
     for entry, expected, note in ip_checks:
         ok, why = scope.ip_verdict(ipaddress.ip_address(entry))
         if ok != expected:
             failures.append(f"{entry}: expected in_scope={expected}, got {ok} [{why}] ({note})")
+
+    # Regression: mixed IPv4/IPv6 collections must sort without TypeError
+    # (the crash seen on hosts with both A and AAAA records).
+    try:
+        mixed = [ipaddress.ip_address(x) for x in
+                 ("2606:4700:20::681a:5d7", "172.67.69.80", "104.26.5.215", "2606:4700:20::ac43:4550")]
+        ordered = sorted(set(mixed), key=_ip_sort_key)
+        if [a.version for a in ordered] != [4, 4, 6, 6]:
+            failures.append(f"mixed-version sort order wrong: {[str(a) for a in ordered]}")
+    except TypeError as exc:
+        failures.append(f"mixed-version sort raised TypeError: {exc}")
 
     # Bare IPs outside every declared range must be rejected as entries even
     # though ip_verdict() default-allows them.
@@ -764,7 +849,8 @@ def cmd_selftest(args) -> int:
         return 1
 
     print(f"[scope] selftest passed ({len(ip_checks)} IP, {len(host_checks)} hostname, "
-          f"{len(blocked)} blacklist-net, {len(entry_checks)} entry, argv + preset assertions)")
+          f"{len(blocked)} blacklist-net, {len(entry_checks)} entry, mixed-version sort, "
+          f"argv + preset assertions)")
     return 0
 
 
@@ -822,30 +908,26 @@ def cmd_run(args) -> int:
         return 1
     log(f"scan directory: {scan_dir}")
 
-    stats = normalise_outputs(scan_dir, results_dir)
-    log("normalised: " + ", ".join(f"{k}={v}" for k, v in sorted(stats.items())))
-
-    # Verify discovery output against the same engine that produced the
-    # blacklist. BBOT should already be clean; this proves it rather than
-    # trusting it.
-    kept, dropped = [], []
-    for entry in read_lines(os.path.join(results_dir, "bbot_subdomains.txt")):
-        ok, why = verdict_for_entry(scope, entry, do_resolve=True)
-        (kept if ok else dropped).append((entry, why))
-    write_lines(os.path.join(results_dir, "in_scope.txt"), (h for h, _ in kept))
-    write_lines(os.path.join(results_dir, "out_of_scope.txt"), (f"{h}  [{w}]" for h, w in dropped))
-    stats["verified_in_scope"] = len(kept)
-    stats["verified_out_of_scope"] = len(dropped)
-    log(f"scope verification: {len(kept)} kept, {len(dropped)} dropped")
-
-    with open(os.path.join(results_dir, "bbot_summary.json"), "w", encoding="utf-8") as fh:
-        json.dump({"exit_code": rc, "elapsed_seconds": elapsed, "scan_dir": scan_dir, **stats},
-                  fh, indent=2)
+    postprocess(scope, scan_dir, results_dir, rc, elapsed)
 
     # Partial results beat no results: a non-zero exit is recorded and the
     # caller decides whether coverage was adequate.
     if rc != 0:
         log("WARNING: BBOT returned non-zero; using whatever output it produced")
+    return 0
+
+
+def cmd_reverify(args) -> int:
+    """Re-run normalise + scope verification on an existing scan. Never scans."""
+    scope = Scope(load_config(args.scope_config))
+    results_dir = os.path.abspath(args.results_dir)
+    bbot_root = os.path.abspath(args.output_dir or os.path.join(results_dir, "bbot"))
+    scan_dir = os.path.abspath(args.scan_dir) if args.scan_dir else resolve_scan_dir(bbot_root, args.scan_name)
+    if not scan_dir or not os.path.isdir(scan_dir):
+        print(f"[bbot-monitor] FATAL: no scan directory found (looked in {bbot_root})", file=sys.stderr)
+        return 2
+    log(f"reverify: scan directory {scan_dir}")
+    postprocess(scope, scan_dir, results_dir, rc=0, elapsed=0)
     return 0
 
 
@@ -898,6 +980,13 @@ def main(argv=None) -> int:
     p.add_argument("--require-handle", action="store_true",
                    help="fail instead of running with an empty X-Intigriti-Username")
     p.set_defaults(func=cmd_run)
+
+    p = sub.add_parser("reverify", help="reprocess an existing BBOT scan directory (no rescan)")
+    p.add_argument("--results-dir", required=True, help="pipeline results directory")
+    p.add_argument("--output-dir", help="root directory containing BBOT scans (default: RESULTS/bbot)")
+    p.add_argument("--scan-dir", help="explicit scan directory to reprocess")
+    p.add_argument("--scan-name", default="citymesh")
+    p.set_defaults(func=cmd_reverify)
 
     args = parser.parse_args(argv)
     try:
