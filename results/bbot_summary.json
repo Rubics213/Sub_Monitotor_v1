@@ -1,0 +1,12 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 2893,
+  "scan_dir": "/home/runner/work/Sub_Monitotor_v1/Sub_Monitotor_v1/results/bbot/citymesh",
+  "subdomains": 396,
+  "urls": 0,
+  "technologies": 126,
+  "open_ports": 655,
+  "findings": 18,
+  "verified_in_scope": 380,
+  "verified_out_of_scope": 16
+}

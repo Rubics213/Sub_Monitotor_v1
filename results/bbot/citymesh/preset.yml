@@ -1,0 +1,64 @@
+# Secrets (API keys, tokens, etc.) have been redacted.
+# To include secrets, set "redact_secrets: false" in your preset or BBOT config.
+
+description: citymesh
+config:
+  web:
+    http_rate_limit: 15
+    http_timeout: 10
+    http_retries: 1
+    spider_depth: 1
+    spider_distance: 0
+    spider_links_per_page: 25
+    http_headers:
+      User-Agent: Intigriti-VDP-SubdomainMonitor/1.0
+      X-Intigriti-Username: beetlejuice
+  dns:
+    threads: 15
+    brute_threads: 50
+  scope:
+    search_distance: 0
+    report_distance: 0
+  deps:
+    behavior: ignore_failed
+require_flags:
+- passive
+exclude_modules:
+- apkpure
+- baddns
+- baddns_direct
+- baddns_zone
+- bypass403
+- dnsbrute
+- dnsbrute_mutations
+- docker_pull
+- dotnetnuke
+- filedownload
+- generic_ssrf
+- google_playstore
+- gowitness
+- hunt
+- iis_shortnames
+- jadx
+- legba
+- lightfuzz
+- medusa
+- nuclei
+- paramminer_cookies
+- paramminer_getparams
+- paramminer_headers
+- portscan
+- postman_download
+- telerik
+- waf_bypass
+- webbrute
+- webbrute_shortnames
+flags:
+- subdomain-enum
+output_modules:
+- asset_inventory
+- json
+- subdomains
+- txt
+scan_name: citymesh
+output_dir: /home/runner/work/Sub_Monitotor_v1/Sub_Monitotor_v1/results/bbot
