@@ -123,6 +123,7 @@ agreements-energy-rh-p.redbull.com
 agreements-energy-rh-q.redbull.com
 agreements-energy.redbull.com
 agreements-q.redbull.com
+agreements-rh-p.redbull.com
 agreements-rh-q.redbull.com
 agreements-tradicional-q.redbull.com
 agreements-tradicional-rh-p.redbull.com
@@ -258,6 +259,7 @@ api.redbullmediapitch.com
 api.redbullmobile.at
 api.redbullmobile.om
 api.secretcan.redbull.com
+api.staging.redbullmobile.ae
 api.suppliersystem.redbulltechnology.com
 api.tetris-q.redbull.com
 api.tetris.redbull.com
@@ -728,6 +730,7 @@ cc.redbull.hu
 ccai-agentstatus-d.redbull.com
 ccai-agentstatus.redbull.com
 cdn-api-d.redbull.com
+cdn-api.redbull.com
 cdn.givesyouwings.redbull.com
 cdn.redbull.tv
 cdn.uk.redbull.com
@@ -1335,6 +1338,7 @@ do.redbullcontentpool.com
 dockerregistry-q.devel.redbull.com
 dockerregistry.devel.redbull.com
 docmasterlist.redbull.com
+docs.analytics.rbleipzig.ai
 documentation.redbull.com
 docusign-usersync-d.redbull.com
 docusign-usersync.redbull.com
@@ -1375,6 +1379,8 @@ dtv-dev-7.redbull.tv
 dtv-dev-8.redbull.tv
 dtv-staging.redbull.tv
 dweb.redbull.com
+dys-api-qa.redbull.com
+dys-api.redbull.com
 dys-d.redbull.com
 dys-q.redbull.com
 dys.redbull.com
@@ -2208,6 +2214,7 @@ jobs-redesign.redbull.com
 jobs-staging.redbull.com
 jobs.redbull.com
 jobstatus-viewer.redbull.com
+join.staging.redbullmobile.ae
 jotform-cafeco-api.redbull.com
 journeyplanner-q.redbull.com
 journeyplanner.redbull.com
@@ -2631,6 +2638,7 @@ meppng-opensearch-q.redbull.com
 meppng-opensearch.redbull.com
 meppng-q.redbull.com
 meppng.redbull.com
+merch-mobile.rbleipzig.com
 merch.redbull64barslive.com
 merchrecipt.rbleipzig.com
 mesos.jenkins-cjoc-d.app.redbull.com
@@ -2918,6 +2926,7 @@ oauth-d.redbull.com
 oauth-q.redbull.com
 oauth.redbull.com
 object-cdn-api-d.redbull.com
+object-cdn-api.redbull.com
 occasions.redbull.com
 ocsp-d.cert.redbull.com
 ocsp-q.cert.redbull.com
@@ -3321,6 +3330,7 @@ pm.staging.esim.redbullmobile.com
 pma.redbull.com
 poapsa-q.redbull.com
 poc-agenticdeployment.redbull.com
+poc-aura.redbull.com
 poc-cannylabs.redbull.com
 poc-competence-profile.redbull.com
 poc-dashboard.redbull.com
@@ -4808,6 +4818,7 @@ staging.redbullcontentpool.com
 staging.redbulldistributioncompany.com
 staging.redbullf1.com
 staging.redbullfb.com
+staging.redbullmobile.ae
 staging.redbullpicup.com
 staging.redbullpowertrains.com
 staging.redbullracing.com
