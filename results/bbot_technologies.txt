@@ -1,5 +1,16 @@
+212.71.2.135.powered.by.edpnet.net	cpe:/a:apache:http_server:2.4.62
+212.71.2.135.powered.by.edpnet.net	cpe:/a:openssl:openssl:1.0.2k
+212.71.2.195.powered.by.edpnet.net	cpe:/a:apache:http_server:2.4.68
+212.71.2.195.powered.by.edpnet.net	cpe:/a:openssl:openssl:3.5.8
+212.71.2.195.powered.by.edpnet.net	cpe:/o:unix:unix
+adslzondertelefoonlijn.edpnet.be	cpe:/a:apache:http_server:2.4.68
+adslzondertelefoonlijn.edpnet.be	cpe:/a:jquery:jquery
+adslzondertelefoonlijn.edpnet.be	cpe:/a:openssl:openssl:1.1.1k
+adslzondertelefoonlijn.edpnet.be	cpe:/a:php:php:7.4.33
+adslzondertelefoonlijn.edpnet.be	cpe:/o:unix:unix
 analyticsucaas.citymeshconnect.com	cpe:/o:microsoft:windows
 auth-tst.citymesh.com	cpe:/a:cloudflare:cloudflare
+auth.citymesh.com	cpe:/a:cloudflare:cloudflare
 bc-backup.edpnet.com	cpe:/a:cloudflare:cloudflare
 brand.citymesh.com	cpe:/a:f5:nginx
 career.edpnet.be	cpe:/a:caddyserver:caddy
@@ -25,6 +36,7 @@ connectingsenses.be	cpe:/a:plesk:plesk
 connectingsenses.be	cpe:/a:wordpress:wordpress:6.9.10
 connectingsenses.com	cpe:/a:cloudflare:cloudflare
 ctmsh.co	cpe:/a:cloudflare:cloudflare
+edpnet.be	cpe:/a:apache:http_server
 edpnet.net	cpe:/a:apache:http_server
 engiem2m.com	cpe:/a:cloudflare:cloudflare
 extra.edpnet.net	cpe:/a:cloudflare:cloudflare

@@ -1,3 +1,6 @@
+212.71.2.135.powered.by.edpnet.net [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
+212.71.2.195.powered.by.edpnet.net [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
+adslzondertelefoonlijn.edpnet.be [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
 citymesh.com [INFO/HIGH] Federated Authentication Detected (azure_tenant)
 connectingsenses.be [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
 linemon.citymesh.com [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
