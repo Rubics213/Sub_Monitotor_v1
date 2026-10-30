@@ -260,6 +260,7 @@ api.redbullmobile.at
 api.redbullmobile.om
 api.secretcan.redbull.com
 api.staging.redbullmobile.ae
+api.suppliersystem.redbullpowertrains.com
 api.suppliersystem.redbulltechnology.com
 api.tetris-q.redbull.com
 api.tetris.redbull.com
@@ -516,6 +517,7 @@ batchtracking-old.redbull.com
 batchtracking-q.redbull.com
 batchtracking-s.redbull.com
 batchtracking.redbull.com
+bc797972-98e3-4353-a293-2aa87ad11838.suppliersystem.redbullpowertrains.com
 bcone.redbull.com
 bcone.redbull.com.tr
 beatboat-hub.redbull.at
@@ -2148,6 +2150,7 @@ issues-q.redbull.com
 issues-s.redbull.com
 issues.app.redbull.com
 issues.redbull.com
+it-dv.redbullmediahouse.com
 it-info.redbull.com
 it-showroom-d.redbull.com
 it-showroom-q.redbull.com
@@ -3271,6 +3274,7 @@ php53jobboard.redbull.com
 php53tourbus.redbull.es
 phpmyadmin.wingsforstudents.be
 pikespeak.redbull.fr
+pilot-ai.cp.redbull.com
 pilotenspiel.redbullflugtag.de
 pilvaker.redbull.com
 pim-api-q.redbull.com
@@ -3381,6 +3385,7 @@ portal.cooperationhandbook.redbull.com
 portal.racingbulls.com
 portal.racingbullsf1.com
 portal.redbullsalzburg.at
+portal.suppliersystem.redbullpowertrains.com
 portal.suppliersystem.redbulltechnology.com
 portaltoro-staging.redbull.com
 portaltoro.redbull.com
@@ -5371,6 +5376,8 @@ worldelevation3d.redbullxalps.com
 worldofredbull.dk
 worldofredbull.jp
 wrapped.redbull.com
+wrcfa-api-qa.redbull.com
+wrcfa-api.redbull.com
 ws-d.redbull.com
 ws-dev.redbull.com
 ws-prod.redbull.com
