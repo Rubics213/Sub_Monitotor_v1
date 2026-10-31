@@ -398,6 +398,7 @@ ns1.edpnet.be
 ns1.edpnet.net
 ns2.edpnet.be
 ns2.edpnet.net
+ns3.edpnet.be
 ns3.edpnet.net
 ns4.edpnet.be
 ns4.edpnet.net

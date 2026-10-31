@@ -41,8 +41,14 @@ connectingsenses.be	cpe:/a:php:php:8.2.35
 connectingsenses.be	cpe:/a:plesk:plesk
 connectingsenses.be	cpe:/a:wordpress:wordpress:6.9.10
 connectingsenses.com	cpe:/a:cloudflare:cloudflare
+connectingsenses.com	cpe:/a:jquery:jquery:3.5.1
 ctmsh.co	cpe:/a:cloudflare:cloudflare
+ctmsh.co	cpe:/a:jquery:jquery
+ctmsh.co	cpe:/a:mysql:mysql
+ctmsh.co	cpe:/a:php:php
+ctmsh.co	cpe:/a:wordpress:wordpress
 edpnet.be	cpe:/a:apache:http_server
+edpnet.com	cpe:/a:apache:http_server
 edpnet.net	cpe:/a:apache:http_server
 engiem2m.com	cpe:/a:cloudflare:cloudflare
 extra.edpnet.net	cpe:/a:cloudflare:cloudflare
@@ -99,6 +105,9 @@ pbx-concordia.edpnet.net	cpe:/a:apache:http_server:2.4.68
 pbx-concordia.edpnet.net	cpe:/a:openssl:openssl:3.5.1
 pbx-concordia.edpnet.net	cpe:/a:openssl:openssl:3.5.8
 pbx-concordia.edpnet.net	cpe:/o:unix:unix
+pbx-demo.edpnet.net	cpe:/a:apache:http_server:2.4.68
+pbx-demo.edpnet.net	cpe:/a:openssl:openssl:3.5.8
+pbx-demo.edpnet.net	cpe:/o:unix:unix
 pbx-dev.edpnet.net	cpe:/a:apache:http_server:2.4.62
 pbx-dev.edpnet.net	cpe:/a:openssl:openssl:1.0.2k
 pbx-kegelsvana.edpnet.net	cpe:/a:apache:http_server:2.4.65
@@ -139,6 +148,7 @@ speedtest.edpnet.net	cpe:/a:apache:http_server:2.4.68
 speedtest.edpnet.net	cpe:/a:openssl:openssl:3.0.7
 speedtest.edpnet.net	cpe:/o:unix:unix
 stagingrecord.citymesh.net	cpe:/o:microsoft:windows
+stagingrecordauth.citymesh.net	cpe:/o:microsoft:windows
 status.citymesh.com	cpe:/a:cloudflare:cloudflare
 status.edpnet.net	cpe:/a:apache:http_server:2.4.67
 status.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
@@ -159,4 +169,6 @@ webmail.edpnet.net	cpe:/a:jquery:jquery
 webmail.edpnet.net	cpe:/a:jquery:jquery_ui
 webmail.edpnet.net	cpe:/a:php:php:8.3.23
 wifilab.be	cpe:/a:cloudflare:cloudflare
+www.career.edpnet.com	cpe:/a:caddyserver:caddy
+www.career.edpnet.com	cpe:/a:golang:go
 www.edpnet.be	cpe:/a:cloudflare:cloudflare
