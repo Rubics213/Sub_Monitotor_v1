@@ -21,10 +21,15 @@ bc-backup.edpnet.com	cpe:/a:cloudflare:cloudflare
 brand.citymesh.com	cpe:/a:f5:nginx
 career.edpnet.be	cpe:/a:caddyserver:caddy
 career.edpnet.be	cpe:/a:golang:go
+career.edpnet.nl	cpe:/a:caddyserver:caddy
+career.edpnet.nl	cpe:/a:golang:go
 citymesh-connect.be	cpe:/a:cloudflare:cloudflare
 citymesh-connect.com	cpe:/a:cloudflare:cloudflare
 citymesh.be	cpe:/a:cloudflare:cloudflare
+citymesh.com	cpe:/a:angularjs:angular.js
 citymesh.com	cpe:/a:cloudflare:cloudflare
+citymesh.com	cpe:/a:jquery:jquery:3.1.1
+citymesh.com	cpe:/a:microsoft:asp.net:4.0.30319
 citymesh.eu	cpe:/a:cloudflare:cloudflare
 citymesh.fr	cpe:/a:cloudflare:cloudflare
 citymesh.guide	cpe:/a:cloudflare:cloudflare
@@ -50,6 +55,7 @@ ctmsh.co	cpe:/a:wordpress:wordpress
 edpnet.be	cpe:/a:apache:http_server
 edpnet.com	cpe:/a:apache:http_server
 edpnet.net	cpe:/a:apache:http_server
+edpnet.nl	cpe:/a:apache:http_server
 engiem2m.com	cpe:/a:cloudflare:cloudflare
 extra.edpnet.net	cpe:/a:cloudflare:cloudflare
 flex.citymesh.com	cpe:/a:cloudflare:cloudflare
@@ -62,6 +68,8 @@ linemon.citymesh.com	cpe:/a:php:php:8.4.27
 linemon.citymesh.com	cpe:/o:unix:unix
 link.citymesh.com	cpe:/a:exim:exim:4.100.1
 livechat.edpnet.net	cpe:/a:cloudflare:cloudflare
+livechat.edpnet.net	cpe:/a:jquery:jquery
+livechat.edpnet.net	cpe:/a:jqueryui:jquery_ui
 lweb01.edpnet.net	cpe:/a:apache:http_server:2.4.67
 lweb01.edpnet.net	cpe:/a:apache:http_server:2.4.68
 lweb01.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
@@ -129,6 +137,10 @@ pbx-siveco.edpnet.net	cpe:/o:unix:unix
 ps-radiocom.be	cpe:/a:cloudflare:cloudflare
 ps-radiocom.com	cpe:/a:cloudflare:cloudflare
 ptxbac.be	cpe:/a:cloudflare:cloudflare
+recording.citymeshconnect.com	cpe:/a:facebook:react
+recording.citymeshconnect.com	cpe:/a:microsoft:asp.net
+recording.citymeshconnect.com	cpe:/a:microsoft:internet_information_services
+recording.citymeshconnect.com	cpe:/o:microsoft:windows
 redirector.edpnet.net	cpe:/a:apache:http_server:2.4.68
 redirector.edpnet.net	cpe:/a:jquery:jquery
 redirector.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
@@ -137,6 +149,8 @@ redirector.edpnet.net	cpe:/o:unix:unix
 remote.towereye.be	cpe:/a:f5:nginx
 remote.towereye.be	cpe:/a:sencha:ext_js
 remote.towereye.be	cpe:/a:synology:diskstation_manager:7.1.1-42962
+ru-pbx.edpnet.net	cpe:/a:apache:http_server:2.4.62
+ru-pbx.edpnet.net	cpe:/a:openssl:openssl:1.0.2k
 safety-drones.be	cpe:/a:cloudflare:cloudflare
 safety-drones.com	cpe:/a:cloudflare:cloudflare
 safetydrones.be	cpe:/a:cloudflare:cloudflare
@@ -168,6 +182,9 @@ webmail.edpnet.be	cpe:/a:cloudflare:cloudflare
 webmail.edpnet.net	cpe:/a:jquery:jquery
 webmail.edpnet.net	cpe:/a:jquery:jquery_ui
 webmail.edpnet.net	cpe:/a:php:php:8.3.23
+webmail.edpnet.nl	cpe:/a:jquery:jquery
+webmail.edpnet.nl	cpe:/a:jquery:jquery_ui
+webmail.edpnet.nl	cpe:/a:php:php:8.3.23
 wifilab.be	cpe:/a:cloudflare:cloudflare
 www.career.edpnet.com	cpe:/a:caddyserver:caddy
 www.career.edpnet.com	cpe:/a:golang:go

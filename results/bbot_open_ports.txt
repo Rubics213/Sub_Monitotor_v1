@@ -66,6 +66,8 @@ campusinsight.citymesh.com:30003
 campusinsight.citymesh.com:443
 career.edpnet.be:443
 career.edpnet.be:80
+career.edpnet.nl:443
+career.edpnet.nl:80
 citymesh-connect.be:2052
 citymesh-connect.be:2053
 citymesh-connect.be:2082
@@ -273,6 +275,8 @@ edpnet.com:443
 edpnet.com:80
 edpnet.net:443
 edpnet.net:80
+edpnet.nl:443
+edpnet.nl:80
 engiem2m.com:2052
 engiem2m.com:2053
 engiem2m.com:2082
@@ -407,6 +411,10 @@ mediaserver-accept.safety-drones.com:443
 mediaserver-accept.safety-drones.com:444
 mediaserver-accept.safety-drones.com:80
 mediaserver-accept.safety-drones.com:8087
+mediaserver-test.safety-drones.com:443
+mediaserver-test.safety-drones.com:444
+mediaserver-test.safety-drones.com:80
+mediaserver-test.safety-drones.com:8087
 mediaserver.safety-drones.com:443
 mediaserver.safety-drones.com:80
 myiot.be:2052
@@ -489,6 +497,7 @@ pbx-siveco.edpnet.net:443
 pbx-siveco.edpnet.net:5061
 pbx-siveco.edpnet.net:80
 pilot.safety-drones.com:443
+pilot.safety-drones.com:80
 ps-radiocom.be:2052
 ps-radiocom.be:2053
 ps-radiocom.be:2082
@@ -562,8 +571,11 @@ relay.edpnet.be:995
 remote.towereye.be:21
 remote.towereye.be:443
 remote.towereye.be:4500
+remote.towereye.be:500
 remote.towereye.be:5001
 remote.towereye.be:80
+ru-pbx.edpnet.net:80
+ru-pbx.edpnet.net:8543
 safety-drones.be:2052
 safety-drones.be:2082
 safety-drones.be:2083
@@ -703,6 +715,9 @@ viewer-test.safety-drones.com:443
 viewer-test.safety-drones.com:444
 viewer-test.safety-drones.com:80
 viewer-test.safety-drones.com:8087
+vps-ovh-issus.edpnet.net:1194
+vps-ovh-issus.edpnet.net:443
+vps-ovh-issus.edpnet.net:80
 webmail.edpnet.be:2052
 webmail.edpnet.be:2053
 webmail.edpnet.be:2082
@@ -724,6 +739,14 @@ webmail.edpnet.net:465
 webmail.edpnet.net:80
 webmail.edpnet.net:993
 webmail.edpnet.net:995
+webmail.edpnet.nl:110
+webmail.edpnet.nl:143
+webmail.edpnet.nl:25
+webmail.edpnet.nl:443
+webmail.edpnet.nl:465
+webmail.edpnet.nl:80
+webmail.edpnet.nl:993
+webmail.edpnet.nl:995
 wifilab.be:2052
 wifilab.be:2053
 wifilab.be:2082
