@@ -856,6 +856,12 @@ coachinginfocus-admin2.redbull.com
 coachinginfocus-q.redbull.com
 coachinginfocus2.redbull.com
 cobogcavr01rb.redbull.com
+cockpit-d.redbull.com
+cockpit-q.redbull.com
+cockpit.redbull.com
+cockpitleaderboard-d.redbull.com
+cockpitleaderboard-q.redbull.com
+cockpitleaderboard.redbull.com
 code.redbull.com
 code.redbullmediahouse.com
 coderedemption-admin-design.redbull.com
@@ -3153,6 +3159,7 @@ origin.rbssl.microsites2.redbull.com
 origin.rbssl.microsites3.redbull.com
 origin.redbull.com
 origin.redbull.es
+origin.redbullsalzburg.at
 origin.redbullsalzburg.com
 origin.redbullsalzburgproduction.at
 origin.redbullsalzburgstaging.at
@@ -4044,6 +4051,7 @@ redbullmegaloopchallenge.com
 redbullmegaloopchallenge.nl
 redbullmiddleeast.com
 redbullmidnightrun.com
+redbullmobile.ae
 redbullmobile.at
 redbullmobile.com
 redbullmobile.com.kw
@@ -4318,6 +4326,7 @@ saplaunchpad.redbull.com
 sapply.redbullgraduateprogram.com
 sapservices-q.redbull.com
 sapservices.redbull.com
+satge-www.beatsofredbull.com
 sbc.racingbulls.com
 sbm.redbull.com
 sbm.redbull.com.br
@@ -5437,6 +5446,7 @@ www.at.devel.redbull.com
 www.au.devel.redbull.com
 www.b2b.wingsforlifeworldrun.com
 www.be.devel.redbull.com
+www.beatsofredbull.com
 www.bio.redbullsalzburg.at
 www.bob-staging.redbullshop.com.br
 www.bob.redbullshop.com.br
