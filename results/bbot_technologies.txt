@@ -20,6 +20,8 @@ auth.citymesh.com	cpe:/a:cloudflare:cloudflare
 bc-backup.edpnet.com	cpe:/a:cloudflare:cloudflare
 biotechnology-citymesh.com	cpe:/a:cloudflare:cloudflare
 brand.citymesh.com	cpe:/a:f5:nginx
+brand.citymesh.com	cpe:/a:facebook:react
+brand.citymesh.com	cpe:/a:vercel:next.js
 career.edpnet.be	cpe:/a:caddyserver:caddy
 career.edpnet.be	cpe:/a:facebook:react
 career.edpnet.be	cpe:/a:golang:go
@@ -36,6 +38,8 @@ citymesh.eu	cpe:/a:cloudflare:cloudflare
 citymesh.fr	cpe:/a:cloudflare:cloudflare
 citymesh.guide	cpe:/a:cloudflare:cloudflare
 citymesh.io	cpe:/a:cloudflare:cloudflare
+citymesh.io	cpe:/a:facebook:react
+citymesh.io	cpe:/a:google:cloud_platform
 citymesh.net	cpe:/a:cloudflare:cloudflare
 citymesh.nl	cpe:/a:cloudflare:cloudflare
 citymeshconnect.be	cpe:/a:cloudflare:cloudflare
@@ -46,6 +50,7 @@ connectingsenses.be	cpe:/a:mysql:mysql
 connectingsenses.be	cpe:/a:php:php
 connectingsenses.be	cpe:/a:php:php:8.2.35
 connectingsenses.be	cpe:/a:plesk:plesk
+connectingsenses.be	cpe:/a:wordpress:wordpress
 connectingsenses.be	cpe:/a:wordpress:wordpress:6.9.10
 connectingsenses.com	cpe:/a:cloudflare:cloudflare
 connectingsenses.com	cpe:/a:jquery:jquery:3.5.1
@@ -83,11 +88,13 @@ lweb02.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 lweb02.edpnet.net	cpe:/a:php:php:7.3.33
 lweb02.edpnet.net	cpe:/o:unix:unix
 lweb03.edpnet.net	cpe:/a:apache:http_server:2.4.67
+lweb03.edpnet.net	cpe:/a:apache:http_server:2.4.68
 lweb03.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 lweb03.edpnet.net	cpe:/a:php:php:7.3.33
 lweb03.edpnet.net	cpe:/a:php:php:7.4.33
 lweb03.edpnet.net	cpe:/o:unix:unix
 lweb04.edpnet.net	cpe:/a:apache:http_server:2.4.67
+lweb04.edpnet.net	cpe:/a:apache:http_server:2.4.68
 lweb04.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 lweb04.edpnet.net	cpe:/a:php:php:7.3.33
 lweb04.edpnet.net	cpe:/a:php:php:7.4.33
@@ -181,7 +188,17 @@ storefront.edpnet.be	cpe:/a:envoyproxy:envoy
 support.citymesh.be	cpe:/a:cloudflare:cloudflare
 support.citymesh.be	cpe:/a:envoyproxy:envoy
 towereye.be	cpe:/a:cloudflare:cloudflare
+towereye.be	cpe:/a:jquery:jquery:3.7.1
+towereye.be	cpe:/a:jqueryui:jquery_ui
+towereye.be	cpe:/a:mysql:mysql
+towereye.be	cpe:/a:php:php
+towereye.be	cpe:/a:wordpress:wordpress
 towereye.eu	cpe:/a:cloudflare:cloudflare
+users.edpnet.be	cpe:/a:apache:http_server:2.4.68
+users.edpnet.be	cpe:/a:jquery:jquery
+users.edpnet.be	cpe:/a:openssl:openssl:1.1.1k
+users.edpnet.be	cpe:/a:php:php:7.4.33
+users.edpnet.be	cpe:/o:unix:unix
 users2.edpnet.be	cpe:/a:apache:http_server:2.4.67
 users2.edpnet.be	cpe:/a:apache:http_server:2.4.68
 users2.edpnet.be	cpe:/a:openssl:openssl:1.1.1k
