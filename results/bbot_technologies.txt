@@ -18,8 +18,10 @@ auth-staging.citymesh.com	cpe:/a:cloudflare:cloudflare
 auth-tst.citymesh.com	cpe:/a:cloudflare:cloudflare
 auth.citymesh.com	cpe:/a:cloudflare:cloudflare
 bc-backup.edpnet.com	cpe:/a:cloudflare:cloudflare
+biotechnology-citymesh.com	cpe:/a:cloudflare:cloudflare
 brand.citymesh.com	cpe:/a:f5:nginx
 career.edpnet.be	cpe:/a:caddyserver:caddy
+career.edpnet.be	cpe:/a:facebook:react
 career.edpnet.be	cpe:/a:golang:go
 career.edpnet.nl	cpe:/a:caddyserver:caddy
 career.edpnet.nl	cpe:/a:golang:go
@@ -65,6 +67,7 @@ jobs.citymesh.com	cpe:/a:cloudflare:cloudflare
 jobs.citymesh.com	cpe:/a:golang:go
 linemon.citymesh.com	cpe:/a:apache:http_server:2.4.68
 linemon.citymesh.com	cpe:/a:php:php:8.4.27
+linemon.citymesh.com	cpe:/a:zabbix:zabbix
 linemon.citymesh.com	cpe:/o:unix:unix
 link.citymesh.com	cpe:/a:exim:exim:4.100.1
 livechat.edpnet.net	cpe:/a:cloudflare:cloudflare
@@ -141,6 +144,10 @@ recording.citymeshconnect.com	cpe:/a:facebook:react
 recording.citymeshconnect.com	cpe:/a:microsoft:asp.net
 recording.citymeshconnect.com	cpe:/a:microsoft:internet_information_services
 recording.citymeshconnect.com	cpe:/o:microsoft:windows
+recordingauth.citymeshconnect.com	cpe:/a:facebook:react
+recordingauth.citymeshconnect.com	cpe:/a:microsoft:asp.net
+recordingauth.citymeshconnect.com	cpe:/a:microsoft:internet_information_services
+recordingauth.citymeshconnect.com	cpe:/o:microsoft:windows
 redirector.edpnet.net	cpe:/a:apache:http_server:2.4.68
 redirector.edpnet.net	cpe:/a:jquery:jquery
 redirector.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
@@ -157,6 +164,7 @@ safetydrones.be	cpe:/a:cloudflare:cloudflare
 safetydrones.be	cpe:/a:litespeedtech:litespeed_web_server
 safetydrones.be	cpe:/a:php:php:8.3.36
 sigfox.nl	cpe:/a:cloudflare:cloudflare
+sigfox.nl	cpe:/a:jquery:jquery:1.8.3
 signage.flex.citymesh.net	cpe:/a:f5:nginx
 speedtest.edpnet.net	cpe:/a:apache:http_server:2.4.68
 speedtest.edpnet.net	cpe:/a:openssl:openssl:3.0.7
@@ -171,6 +179,7 @@ status.edpnet.net	cpe:/a:php:php:7.4.33
 status.edpnet.net	cpe:/o:unix:unix
 storefront.edpnet.be	cpe:/a:envoyproxy:envoy
 support.citymesh.be	cpe:/a:cloudflare:cloudflare
+support.citymesh.be	cpe:/a:envoyproxy:envoy
 towereye.be	cpe:/a:cloudflare:cloudflare
 towereye.eu	cpe:/a:cloudflare:cloudflare
 users2.edpnet.be	cpe:/a:apache:http_server:2.4.67
@@ -178,6 +187,11 @@ users2.edpnet.be	cpe:/a:apache:http_server:2.4.68
 users2.edpnet.be	cpe:/a:openssl:openssl:1.1.1k
 users2.edpnet.be	cpe:/a:php:php:7.4.33
 users2.edpnet.be	cpe:/o:unix:unix
+vpbx.edpnet.net	cpe:/a:apache:http_server:2.4.68
+vpbx.edpnet.net	cpe:/a:jquery:jquery
+vpbx.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
+vpbx.edpnet.net	cpe:/a:php:php:7.4.33
+vpbx.edpnet.net	cpe:/o:unix:unix
 webmail.edpnet.be	cpe:/a:cloudflare:cloudflare
 webmail.edpnet.net	cpe:/a:jquery:jquery
 webmail.edpnet.net	cpe:/a:jquery:jquery_ui
