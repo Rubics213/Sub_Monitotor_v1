@@ -275,6 +275,7 @@ ctmsh.co:8443
 ctmsh.co:8880
 dkim.edpnet.net:110
 dkim.edpnet.net:143
+dkim.edpnet.net:25
 dkim.edpnet.net:443
 dkim.edpnet.net:465
 dkim.edpnet.net:587
@@ -344,6 +345,7 @@ ios.es.citymeshconnect.com:443
 issues.edpnet.be:1194
 issues.edpnet.be:443
 issues.edpnet.be:80
+issues.edpnet.be:8043
 issues.edpnet.net:1194
 issues.edpnet.net:443
 issues.edpnet.net:80
@@ -370,6 +372,7 @@ livechat.edpnet.net:8880
 lmailing02.edpnet.net:1194
 lmailing02.edpnet.net:4500
 lmailing02.edpnet.net:500
+loginucaas.citymeshconnect.com:443
 loginucaas.citymeshconnect.com:80
 lweb01.edpnet.net:21
 lweb01.edpnet.net:443
@@ -688,6 +691,7 @@ status.edpnet.net:80
 status.edpnet.net:8443
 storefront.edpnet.be:443
 storefront.edpnet.be:80
+storing.edpnet.nl:8000
 support.citymesh.be:2052
 support.citymesh.be:2053
 support.citymesh.be:2082
@@ -701,6 +705,19 @@ support.citymesh.be:80
 support.citymesh.be:8080
 support.citymesh.be:8443
 support.citymesh.be:8880
+support.edpnet.be:2052
+support.edpnet.be:2053
+support.edpnet.be:2082
+support.edpnet.be:2083
+support.edpnet.be:2086
+support.edpnet.be:2087
+support.edpnet.be:2095
+support.edpnet.be:2096
+support.edpnet.be:443
+support.edpnet.be:80
+support.edpnet.be:8080
+support.edpnet.be:8443
+support.edpnet.be:8880
 towereye.be:2052
 towereye.be:2082
 towereye.be:2083
@@ -741,6 +758,8 @@ viewer-test.safety-drones.com:443
 viewer-test.safety-drones.com:444
 viewer-test.safety-drones.com:80
 viewer-test.safety-drones.com:8087
+viewer.safety-drones.com:443
+viewer.safety-drones.com:80
 vpbx.edpnet.net:21
 vpbx.edpnet.net:443
 vpbx.edpnet.net:80
