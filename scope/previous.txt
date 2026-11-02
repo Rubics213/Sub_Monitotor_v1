@@ -140,6 +140,7 @@ ai.redbull.com
 aia-trust-d.cert.redbull.com
 aia-trust-q.cert.redbull.com
 aia-trust.cert.redbull.com
+aiarch.redbull.com
 airbrush.redbullna.com
 airforce.redbullusa.com
 airmail.redbullairrace.com
