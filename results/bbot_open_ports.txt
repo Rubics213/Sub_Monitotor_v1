@@ -317,6 +317,7 @@ extra.edpnet.net:80
 extra.edpnet.net:8080
 extra.edpnet.net:8443
 extra.edpnet.net:8880
+fleetucaas.citymeshconnect.com:443
 fleetucaas.citymeshconnect.com:80
 flex.citymesh.com:2052
 flex.citymesh.com:2053
@@ -333,6 +334,10 @@ flex.citymesh.com:8443
 flex.citymesh.com:8880
 go.edpnet.com:443
 go.edpnet.com:80
+hostctl.edpnet.net:21
+hostctl.edpnet.net:443
+hostctl.edpnet.net:80
+hostctl.edpnet.net:8443
 intrelay.edpnet.net:110
 intrelay.edpnet.net:143
 intrelay.edpnet.net:25
@@ -349,6 +354,7 @@ issues.edpnet.be:8043
 issues.edpnet.net:1194
 issues.edpnet.net:443
 issues.edpnet.net:80
+issues.edpnet.net:8043
 jobs.citymesh.com:443
 jobs.citymesh.com:80
 linemon.citymesh.com:443

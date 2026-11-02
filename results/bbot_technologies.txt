@@ -42,6 +42,11 @@ citymesh.io	cpe:/a:cloudflare:cloudflare
 citymesh.io	cpe:/a:facebook:react
 citymesh.io	cpe:/a:google:cloud_platform
 citymesh.net	cpe:/a:cloudflare:cloudflare
+citymesh.net	cpe:/a:jquery:jquery
+citymesh.net	cpe:/a:mysql:mysql
+citymesh.net	cpe:/a:php:php
+citymesh.net	cpe:/a:woocommerce:woocommerce:11.2.1::~~~wordpress~~
+citymesh.net	cpe:/a:wordpress:wordpress
 citymesh.nl	cpe:/a:cloudflare:cloudflare
 citymeshconnect.be	cpe:/a:cloudflare:cloudflare
 citymeshconnect.com	cpe:/a:cloudflare:cloudflare
@@ -67,6 +72,11 @@ edpnet.nl	cpe:/a:apache:http_server
 engiem2m.com	cpe:/a:cloudflare:cloudflare
 extra.edpnet.net	cpe:/a:cloudflare:cloudflare
 flex.citymesh.com	cpe:/a:cloudflare:cloudflare
+hostctl.edpnet.net	cpe:/a:apache:http_server:2.4.68
+hostctl.edpnet.net	cpe:/a:jquery:jquery
+hostctl.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
+hostctl.edpnet.net	cpe:/a:php:php:7.4.33
+hostctl.edpnet.net	cpe:/o:unix:unix
 ios.es.citymeshconnect.com	cpe:/a:amazon:elastic_load_balancing
 jobs.citymesh.com	cpe:/a:caddyserver:caddy
 jobs.citymesh.com	cpe:/a:cloudflare:cloudflare
@@ -227,5 +237,6 @@ webmail.edpnet.nl	cpe:/a:jquery:jquery_ui
 webmail.edpnet.nl	cpe:/a:php:php:8.3.23
 wifilab.be	cpe:/a:cloudflare:cloudflare
 www.career.edpnet.com	cpe:/a:caddyserver:caddy
+www.career.edpnet.com	cpe:/a:facebook:react
 www.career.edpnet.com	cpe:/a:golang:go
 www.edpnet.be	cpe:/a:cloudflare:cloudflare
