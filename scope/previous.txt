@@ -119,15 +119,11 @@ affiliates.redbullcollection.com
 afterparty.redbull.com
 agents.redbull.com
 agreements-energy-q.redbull.com
-agreements-energy-rh-p.redbull.com
-agreements-energy-rh-q.redbull.com
 agreements-energy.redbull.com
 agreements-q.redbull.com
 agreements-rh-p.redbull.com
 agreements-rh-q.redbull.com
 agreements-tradicional-q.redbull.com
-agreements-tradicional-rh-p.redbull.com
-agreements-tradicional-rh-q.redbull.com
 agreements-tradicional.redbull.com
 agreements.redbull.com
 ai-avatar.redbull.com
@@ -2736,6 +2732,7 @@ mob-ras-portal-salzburg-q.redbull.com
 mob-ras-portal-vienna-01.redbull.com
 mob-ras-portal-vienna.redbull.com
 mobile-infonet.redbull.com
+mobile-signage.rbleipzig.com
 mobile.infonet.redbull.com
 mobile.infonet.staging.redbull.com
 mobile.redbull.com
@@ -3171,7 +3168,6 @@ origin.ssl.rbcom.redbull.com
 origin2-www.redbullxfighters.com
 origin2.redbullxfighters.com
 orsay.redbull.tv
-oskar.redbull.com
 osp.redbull.com
 osx-ci.redbull.com
 osx.redbull.com
@@ -4052,7 +4048,6 @@ redbullmegaloopchallenge.com
 redbullmegaloopchallenge.nl
 redbullmiddleeast.com
 redbullmidnightrun.com
-redbullmobile.ae
 redbullmobile.at
 redbullmobile.com
 redbullmobile.com.kw
@@ -5060,6 +5055,7 @@ timultimate.redbull.com
 tinv-rabbit.rbleipzig.com
 tiny.redbull.com
 tippspiel.redbullsalzburg.at
+tippspiel.redbullsalzburgstaging.at
 tirazo.redbullcaribbean.com
 tivo-qa.redbull.tv
 tivo.redbull.tv
