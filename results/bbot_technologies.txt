@@ -27,6 +27,7 @@ career.edpnet.be	cpe:/a:caddyserver:caddy
 career.edpnet.be	cpe:/a:facebook:react
 career.edpnet.be	cpe:/a:golang:go
 career.edpnet.nl	cpe:/a:caddyserver:caddy
+career.edpnet.nl	cpe:/a:facebook:react
 career.edpnet.nl	cpe:/a:golang:go
 citymesh-connect.be	cpe:/a:cloudflare:cloudflare
 citymesh-connect.com	cpe:/a:cloudflare:cloudflare
