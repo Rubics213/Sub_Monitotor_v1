@@ -36,6 +36,7 @@ citymesh.com	cpe:/a:angularjs:angular.js
 citymesh.com	cpe:/a:cloudflare:cloudflare
 citymesh.com	cpe:/a:jquery:jquery:3.1.1
 citymesh.com	cpe:/a:microsoft:asp.net:4.0.30319
+citymesh.com	cpe:/a:php:php:7.3.33
 citymesh.eu	cpe:/a:cloudflare:cloudflare
 citymesh.fr	cpe:/a:cloudflare:cloudflare
 citymesh.guide	cpe:/a:cloudflare:cloudflare
@@ -147,7 +148,9 @@ pbx-kegelsvana.edpnet.net	cpe:/a:openssl:openssl:3.5.1
 pbx-kegelsvana.edpnet.net	cpe:/a:openssl:openssl:3.5.8
 pbx-kegelsvana.edpnet.net	cpe:/o:unix:unix
 pbx-lcr-demo.edpnet.net	cpe:/a:apache:http_server:2.4.65
+pbx-lcr-demo.edpnet.net	cpe:/a:apache:http_server:2.4.68
 pbx-lcr-demo.edpnet.net	cpe:/a:openssl:openssl:3.2.2
+pbx-lcr-demo.edpnet.net	cpe:/a:openssl:openssl:3.5.8
 pbx-lcr-demo.edpnet.net	cpe:/o:unix:unix
 pbx-movemedia.edpnet.net	cpe:/a:apache:http_server:2.4.65
 pbx-movemedia.edpnet.net	cpe:/a:apache:http_server:2.4.68
@@ -198,6 +201,7 @@ stagingrecord.citymesh.net	cpe:/o:microsoft:windows
 stagingrecordauth.citymesh.net	cpe:/o:microsoft:windows
 status.citymesh.com	cpe:/a:cloudflare:cloudflare
 status.edpnet.net	cpe:/a:apache:http_server:2.4.67
+status.edpnet.net	cpe:/a:apache:http_server:2.4.68
 status.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 status.edpnet.net	cpe:/a:php:php:7.3.33
 status.edpnet.net	cpe:/a:php:php:7.4.33

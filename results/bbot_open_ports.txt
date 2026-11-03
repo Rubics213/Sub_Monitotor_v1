@@ -353,6 +353,7 @@ issues.edpnet.be:80
 issues.edpnet.be:8043
 issues.edpnet.net:1194
 issues.edpnet.net:443
+issues.edpnet.net:500
 issues.edpnet.net:80
 issues.edpnet.net:8043
 issues.edpnet.nl:8000
@@ -667,6 +668,7 @@ smtp.edpnet.nl:587
 smtp.edpnet.nl:80
 smtp.edpnet.nl:993
 smtp.edpnet.nl:995
+softphone.citymeshconnect.com:443
 softphone.citymeshconnect.com:80
 speedtest.edpnet.net:443
 speedtest.edpnet.net:80
