@@ -373,6 +373,8 @@ jobs.citymesh.com:443
 jobs.citymesh.com:80
 linemon.citymesh.com:443
 linemon.citymesh.com:80
+linemon.edpnet.net:443
+linemon.edpnet.net:80
 link.citymesh.com:25
 link.citymesh.com:443
 link.citymesh.com:80

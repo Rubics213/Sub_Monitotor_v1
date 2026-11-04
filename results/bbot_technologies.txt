@@ -44,6 +44,7 @@ citymesh.com	cpe:/a:jquery:jquery:3.1.1
 citymesh.com	cpe:/a:microsoft:asp.net:4.0.30319
 citymesh.com	cpe:/a:php:php:7.3.33
 citymesh.eu	cpe:/a:cloudflare:cloudflare
+citymesh.eu	cpe:/a:litespeedtech:litespeed_web_server
 citymesh.fr	cpe:/a:cloudflare:cloudflare
 citymesh.guide	cpe:/a:cloudflare:cloudflare
 citymesh.io	cpe:/a:cloudflare:cloudflare
@@ -57,6 +58,10 @@ citymesh.net	cpe:/a:woocommerce:woocommerce:11.2.1::~~~wordpress~~
 citymesh.net	cpe:/a:wordpress:wordpress
 citymesh.nl	cpe:/a:cloudflare:cloudflare
 citymeshconnect.be	cpe:/a:cloudflare:cloudflare
+citymeshconnect.be	cpe:/a:jquery:jquery
+citymeshconnect.be	cpe:/a:mysql:mysql
+citymeshconnect.be	cpe:/a:php:php
+citymeshconnect.be	cpe:/a:wordpress:wordpress
 citymeshconnect.com	cpe:/a:cloudflare:cloudflare
 connectingsenses.be	cpe:/a:cloudflare:cloudflare
 connectingsenses.be	cpe:/a:jquery:jquery
@@ -93,6 +98,9 @@ linemon.citymesh.com	cpe:/a:apache:http_server:2.4.68
 linemon.citymesh.com	cpe:/a:php:php:8.4.27
 linemon.citymesh.com	cpe:/a:zabbix:zabbix
 linemon.citymesh.com	cpe:/o:unix:unix
+linemon.edpnet.net	cpe:/a:apache:http_server:2.4.68
+linemon.edpnet.net	cpe:/a:php:php:8.4.27
+linemon.edpnet.net	cpe:/o:unix:unix
 link.citymesh.com	cpe:/a:exim:exim:4.100.1
 livechat.edpnet.net	cpe:/a:cloudflare:cloudflare
 livechat.edpnet.net	cpe:/a:jquery:jquery
@@ -103,8 +111,10 @@ lweb01.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 lweb01.edpnet.net	cpe:/a:php:php:7.4.33
 lweb01.edpnet.net	cpe:/o:unix:unix
 lweb02.edpnet.net	cpe:/a:apache:http_server:2.4.67
+lweb02.edpnet.net	cpe:/a:apache:http_server:2.4.68
 lweb02.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 lweb02.edpnet.net	cpe:/a:php:php:7.3.33
+lweb02.edpnet.net	cpe:/a:php:php:7.4.33
 lweb02.edpnet.net	cpe:/o:unix:unix
 lweb03.edpnet.net	cpe:/a:apache:http_server:2.4.67
 lweb03.edpnet.net	cpe:/a:apache:http_server:2.4.68
@@ -240,6 +250,8 @@ vpbx.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 vpbx.edpnet.net	cpe:/a:php:php:7.4.33
 vpbx.edpnet.net	cpe:/o:unix:unix
 webmail.edpnet.be	cpe:/a:cloudflare:cloudflare
+webmail.edpnet.be	cpe:/a:jquery:jquery
+webmail.edpnet.be	cpe:/a:plesk:plesk
 webmail.edpnet.net	cpe:/a:jquery:jquery
 webmail.edpnet.net	cpe:/a:jquery:jquery_ui
 webmail.edpnet.net	cpe:/a:php:php:8.3.23
