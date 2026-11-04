@@ -2279,6 +2279,7 @@ klampfervpn.redbulltechnology.com
 klubportal.redbullsalzburg.at
 kms-q.infra.redbull.com
 knowledge-dev.redbullperformance.com
+knowledge.ai.redbull.com
 knowledge.redbullperformance.com
 konfigurator.redbullmobile.at
 kontakt.redbull.at
@@ -2993,6 +2994,9 @@ orbit-link-forwarder-frontend.redbull.com
 orbit-video-upload.redbull.com
 orbit.redbull.com
 order.flugplan.redbull.com
+ordermywings-d.redbull.com
+ordermywings-q.redbull.com
+ordermywings.redbull.com
 organics-assets.redbull.com
 organics-stg1.redbull.com
 organics-stg2.redbull.com
@@ -3703,6 +3707,9 @@ rbateamroom-d.redbull.com
 rbateamroom-q.redbull.com
 rbateamroom.redbull.com
 rbbas.hq-d.redbull.com
+rbcd-d.redbull.com
+rbcd-q.redbull.com
+rbcd.redbull.com
 rbcptest.redbull.com
 rbdc-d.redbull.com
 rbdc-q.redbull.com
