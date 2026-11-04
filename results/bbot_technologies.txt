@@ -8,6 +8,11 @@ _wildcard.le.ssl.lxweb1.edpnet.net	cpe:/a:jquery:jquery
 _wildcard.le.ssl.lxweb1.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 _wildcard.le.ssl.lxweb1.edpnet.net	cpe:/a:php:php:7.4.33
 _wildcard.le.ssl.lxweb1.edpnet.net	cpe:/o:unix:unix
+adslwithouttelephoneline.edpnet.be	cpe:/a:apache:http_server:2.4.68
+adslwithouttelephoneline.edpnet.be	cpe:/a:jquery:jquery
+adslwithouttelephoneline.edpnet.be	cpe:/a:openssl:openssl:1.1.1k
+adslwithouttelephoneline.edpnet.be	cpe:/a:php:php:7.4.33
+adslwithouttelephoneline.edpnet.be	cpe:/o:unix:unix
 adslzondertelefoonlijn.edpnet.be	cpe:/a:apache:http_server:2.4.68
 adslzondertelefoonlijn.edpnet.be	cpe:/a:jquery:jquery
 adslzondertelefoonlijn.edpnet.be	cpe:/a:openssl:openssl:1.1.1k
@@ -17,6 +22,7 @@ analyticsucaas.citymeshconnect.com	cpe:/o:microsoft:windows
 auth-staging.citymesh.com	cpe:/a:cloudflare:cloudflare
 auth-tst.citymesh.com	cpe:/a:cloudflare:cloudflare
 auth.citymesh.com	cpe:/a:cloudflare:cloudflare
+backup.edpnet.com	cpe:/a:cloudflare:cloudflare
 bc-backup.edpnet.com	cpe:/a:cloudflare:cloudflare
 biotechnology-citymesh.com	cpe:/a:cloudflare:cloudflare
 biotechnology-citymesh.com	cpe:/a:jquery:jquery:3.5.1

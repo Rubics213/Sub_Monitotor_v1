@@ -5,6 +5,10 @@ _wildcard.le.ssl.lxweb1.edpnet.net:21
 _wildcard.le.ssl.lxweb1.edpnet.net:443
 _wildcard.le.ssl.lxweb1.edpnet.net:80
 _wildcard.le.ssl.lxweb1.edpnet.net:8443
+adslwithouttelephoneline.edpnet.be:21
+adslwithouttelephoneline.edpnet.be:443
+adslwithouttelephoneline.edpnet.be:80
+adslwithouttelephoneline.edpnet.be:8443
 adslzondertelefoonlijn.edpnet.be:21
 adslzondertelefoonlijn.edpnet.be:443
 adslzondertelefoonlijn.edpnet.be:80
@@ -53,6 +57,13 @@ auth.citymesh.com:80
 auth.citymesh.com:8080
 auth.citymesh.com:8443
 auth.citymesh.com:8880
+backup.edpnet.com:443
+backup.edpnet.com:7782
+backup.edpnet.com:7788
+backup.edpnet.com:7790
+backup.edpnet.com:7799
+backup.edpnet.com:80
+backup.edpnet.com:8443
 bc-backup.edpnet.com:443
 bc-backup.edpnet.com:7782
 bc-backup.edpnet.com:7788
@@ -349,6 +360,7 @@ intrelay.edpnet.net:995
 ios.es.citymeshconnect.com:443
 issues.edpnet.be:1194
 issues.edpnet.be:443
+issues.edpnet.be:500
 issues.edpnet.be:80
 issues.edpnet.be:8043
 issues.edpnet.net:1194
@@ -521,6 +533,10 @@ pbx-siveco.edpnet.net:1194
 pbx-siveco.edpnet.net:443
 pbx-siveco.edpnet.net:5061
 pbx-siveco.edpnet.net:80
+pilot-accept.safety-drones.com:443
+pilot-accept.safety-drones.com:444
+pilot-accept.safety-drones.com:80
+pilot-accept.safety-drones.com:8087
 pilot-test.safety-drones.com:443
 pilot-test.safety-drones.com:444
 pilot-test.safety-drones.com:80
