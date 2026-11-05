@@ -18,6 +18,8 @@ api-sense-test.safety-drones.com:443
 api-sense-test.safety-drones.com:444
 api-sense-test.safety-drones.com:80
 api-sense-test.safety-drones.com:8087
+api-sense.safety-drones.com:443
+api-sense.safety-drones.com:80
 auth-staging.citymesh.com:2052
 auth-staging.citymesh.com:2053
 auth-staging.citymesh.com:2082
@@ -793,7 +795,9 @@ vpbx.edpnet.net:80
 vpbx.edpnet.net:8443
 vps-ovh-issus.edpnet.net:1194
 vps-ovh-issus.edpnet.net:443
+vps-ovh-issus.edpnet.net:500
 vps-ovh-issus.edpnet.net:80
+vps-ovh-issus.edpnet.net:8043
 webmail.edpnet.be:2052
 webmail.edpnet.be:2053
 webmail.edpnet.be:2082

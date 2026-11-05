@@ -65,6 +65,7 @@ citymeshconnect.be	cpe:/a:wordpress:wordpress
 citymeshconnect.com	cpe:/a:cloudflare:cloudflare
 connectingsenses.be	cpe:/a:cloudflare:cloudflare
 connectingsenses.be	cpe:/a:jquery:jquery
+connectingsenses.be	cpe:/a:litespeedtech:litespeed_web_server
 connectingsenses.be	cpe:/a:mysql:mysql
 connectingsenses.be	cpe:/a:php:php
 connectingsenses.be	cpe:/a:php:php:8.2.35
