@@ -718,6 +718,10 @@ status.edpnet.net:21
 status.edpnet.net:443
 status.edpnet.net:80
 status.edpnet.net:8443
+stop.edpnet.net:21
+stop.edpnet.net:443
+stop.edpnet.net:80
+stop.edpnet.net:8443
 storefront.edpnet.be:443
 storefront.edpnet.be:80
 storing.edpnet.nl:8000
