@@ -19,3 +19,4 @@
 2026-11-05 19:10:33,162 [ERROR] bbot.modules.subdomaincenter base.py:1792 Setting error state: Setting error state due to 10 failed HTTP requests
 2026-11-06 03:50:22,784 [ERROR] bbot.modules.crt base.py:1792 Setting error state: Setting error state due to 10 failed HTTP requests
 2026-11-06 03:52:58,454 [ERROR] bbot.modules.subdomaincenter base.py:1792 Setting error state: Setting error state due to 10 failed HTTP requests
+2026-11-06 18:35:10,733 [ERROR] bbot.modules.crt base.py:1792 Setting error state: Setting error state due to 10 failed HTTP requests

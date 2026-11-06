@@ -14952,3 +14952,1057 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2026-11-06 04:38:09,128 [INFO] bbot.modules.aggregate base.py:1696 | rapiddns        | 64 (64 DNS_NAME)                  | 32 (32 DNS_NAME)                         |
 2026-11-06 04:38:09,128 [INFO] bbot.modules.aggregate base.py:1696 +-----------------+-----------------------------------+------------------------------------------+
 2026-11-06 04:38:09,128 [INFO] bbot.modules.aggregate base.py:1696 | certspotter     | 63 (63 DNS_NAME)                  | 32 (32 DNS_NAME)                         |
+2026-11-06 18:34:48,726 [TRACE] bbot.scanner logger.py:161 Ran BBOT 3.0.2 at 2026-11-06 18:34:48.724232+00:00, command: /opt/hostedtoolcache/Python/3.11.18/x64/bin/bbot -t /home/runner/work/Sub_Monitotor_v1/Sub_Monitotor_v1/results/bbot_targets.txt -b /home/runner/work/Sub_Monitotor_v1/Sub_Monitotor_v1/results/bbot_blacklist.txt -p /home/runner/work/Sub_Monitotor_v1/Sub_Monitotor_v1/results/bbot-preset.yml -o /home/runner/work/Sub_Monitotor_v1/Sub_Monitotor_v1/results/bbot -n citymesh -em nuclei lightfuzz medusa legba telerik dotnetnuke waf_bypass bypass403 generic_ssrf baddns baddns_direct baddns_zone portscan webbrute webbrute_shortnames paramminer_cookies paramminer_getparams paramminer_headers iis_shortnames hunt dnsbrute dnsbrute_mutations -c web.http_rate_limit=15 -H User-Agent=Intigriti-VDP-SubdomainMonitor/1.0 X-Intigriti-Username=beetlejuice --ignore-failed-deps --no-color
+2026-11-06 18:34:48,726 [TRACE] bbot.scanner logger.py:161 Target: {'target': ['antwerpfreewifi.be', 'biotechnology-citymesh.com', 'citymesh-connect.be', 'citymesh-connect.com', 'citymesh.be', 'citymesh.com', 'citymesh.eu', 'citymesh.fr', 'citymesh.guide', 'citymesh.io', 'citymesh.net', 'citymesh.nl', 'citymeshconnect.be', 'citymeshconnect.com', 'connectingsenses.be', 'connectingsenses.com', 'connectow.be', 'connectow.eu', 'ctmsh.co', 'edpnet.be', 'edpnet.com', 'edpnet.net', 'edpnet.nl', 'engiem2m.be', 'engiem2m.com', 'gowifi.be', 'myiot.be', 'ncentric.be', 'ncentric.cloud', 'ncentric.com', 'ps-radiocom.be', 'ps-radiocom.com', 'ptxbac.be', 'safety-drones.be', 'safety-drones.com', 'safetydrones.be', 'sigfox.nl', 'towereye.be', 'towereye.eu', 'wflb.be', 'wifilab.be', 'wifinmbssncb.be'], 'blacklist': ['31.31.128.128/26', '31.31.128.192/27', '31.31.128.64/26', '31.31.130.0/23', '31.31.132.0/24', '31.31.134.0/23', '31.31.136.0/22', '31.31.140.0/26', '31.31.140.128/26', '31.31.140.192/27', '31.31.140.224/28', '31.31.140.240/29', '31.31.140.248/30', '31.31.140.252/31', '31.31.140.254/32', '31.31.140.64/28', '31.31.140.80/29', '31.31.140.92/30', '31.31.140.96/27', '31.31.141.0/26', '31.31.142.0/24', '31.31.143.0/26', '31.31.143.64/29', 'citymesh.recruitee.com', 'digi-mobile.be', 'dyn.edpnet.net', 'insky.be', 'static.edpnet.net'], 'strict_scope': False, 'hash': 'a2417de9d40a067d506556b3e0adf64609e2ae587cf5a89d', 'seed_hash': 'a2417de9d40a067d', 'target_hash': '506556b3e0adf646', 'blacklist_hash': '09e2ae587cf5a89d', 'scope_hash': '506556b3e0adf64609e2ae587cf5a89d', 'seeds': ['antwerpfreewifi.be', 'biotechnology-citymesh.com', 'citymesh-connect.be', 'citymesh-connect.com', 'citymesh.be', 'citymesh.com', 'citymesh.eu', 'citymesh.fr', 'citymesh.guide', 'citymesh.io', 'citymesh.net', 'citymesh.nl', 'citymeshconnect.be', 'citymeshconnect.com', 'connectingsenses.be', 'connectingsenses.com', 'connectow.be', 'connectow.eu', 'ctmsh.co', 'edpnet.be', 'edpnet.com', 'edpnet.net', 'edpnet.nl', 'engiem2m.be', 'engiem2m.com', 'gowifi.be', 'myiot.be', 'ncentric.be', 'ncentric.cloud', 'ncentric.com', 'ps-radiocom.be', 'ps-radiocom.com', 'ptxbac.be', 'safety-drones.be', 'safety-drones.com', 'safetydrones.be', 'sigfox.nl', 'towereye.be', 'towereye.eu', 'wflb.be', 'wifilab.be', 'wifinmbssncb.be']}
+2026-11-06 18:34:48,726 [TRACE] bbot.scanner logger.py:161 Preset: {'description': 'citymesh', 'config': {'web': {'http_rate_limit': 15, 'http_timeout': 10, 'http_retries': 1, 'spider_depth': 1, 'spider_distance': 0, 'spider_links_per_page': 25, 'http_headers': {'User-Agent': 'Intigriti-VDP-SubdomainMonitor/1.0', 'X-Intigriti-Username': 'beetlejuice'}}, 'dns': {'threads': 15, 'brute_threads': 50}, 'scope': {'search_distance': 0, 'report_distance': 0}, 'deps': {'behavior': 'ignore_failed'}}, 'require_flags': ['passive'], 'exclude_modules': ['apkpure', 'baddns', 'baddns_direct', 'baddns_zone', 'bypass403', 'dnsbrute', 'dnsbrute_mutations', 'docker_pull', 'dotnetnuke', 'filedownload', 'generic_ssrf', 'google_playstore', 'gowitness', 'hunt', 'iis_shortnames', 'jadx', 'legba', 'lightfuzz', 'medusa', 'nuclei', 'paramminer_cookies', 'paramminer_getparams', 'paramminer_headers', 'portscan', 'postman_download', 'telerik', 'waf_bypass', 'webbrute', 'webbrute_shortnames'], 'flags': ['subdomain-enum'], 'output_modules': ['asset_inventory', 'json', 'subdomains', 'txt'], 'scan_name': 'citymesh', 'output_dir': '/home/runner/work/Sub_Monitotor_v1/Sub_Monitotor_v1/results/bbot'}
+2026-11-06 18:34:48,726 [HUGESUCCESS] bbot.scanner logger.py:161 Starting scan citymesh
+2026-11-06 18:34:51,651 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.ncentric.cloud&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:51,705 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=ncentric.cloud failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:34:51,787 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.ncentric.cloud&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:51,998 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.ncentric.cloud&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:51,998 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "ncentric.cloud" (status code 400)
+2026-11-06 18:34:52,033 [TRACE] bbot.modules.crt logger.py:161 Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/templates/subdomain_enum.py", line 126, in query
+    results = list(await parse_fn(response, query))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/crt.py", line 32, in parse_results
+    j = r.json()
+        ^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2026-11-06 18:34:52,033 [TRACE] bbot.modules.crt logger.py:161 '<html>\r\n<head><title>400 Bad Request</title></head>\r\n<body>\r\n<center><h1>400 Bad Request</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n'
+2026-11-06 18:34:52,927 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=ncentric.cloud failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:34:53,921 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.citymesh.be&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:54,057 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.citymesh.be&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:54,193 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.citymesh.be&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:54,193 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "citymesh.be" (status code 400)
+2026-11-06 18:34:54,194 [TRACE] bbot.modules.crt logger.py:161 Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/templates/subdomain_enum.py", line 126, in query
+    results = list(await parse_fn(response, query))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/crt.py", line 32, in parse_results
+    j = r.json()
+        ^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2026-11-06 18:34:54,194 [TRACE] bbot.modules.crt logger.py:161 '<html>\r\n<head><title>400 Bad Request</title></head>\r\n<body>\r\n<center><h1>400 Bad Request</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n'
+2026-11-06 18:34:59,344 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.citymesh-connect.com&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:59,486 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.citymesh-connect.com&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:59,622 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.citymesh-connect.com&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:34:59,622 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "citymesh-connect.com" (status code 400)
+2026-11-06 18:34:59,623 [TRACE] bbot.modules.crt logger.py:161 Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/templates/subdomain_enum.py", line 126, in query
+    results = list(await parse_fn(response, query))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/crt.py", line 32, in parse_results
+    j = r.json()
+        ^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2026-11-06 18:34:59,623 [TRACE] bbot.modules.crt logger.py:161 '<html>\r\n<head><title>400 Bad Request</title></head>\r\n<body>\r\n<center><h1>400 Bad Request</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n'
+2026-11-06 18:35:00,211 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.edpnet.be
+2026-11-06 18:35:01,371 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://ncentric.cloud:443/stlz5332rovk/idgre236?8bgthl=1: request timed out after 10s
+2026-11-06 18:35:01,829 [TRACE] bbot.modules.dnsdumpster logger.py:161 API response to https://dnsdumpster.com failed with status code 429: error code: 1015
+
+2026-11-06 18:35:03,029 [INFO] bbot.modules.crt_db base.py:1696 Error retrieving results for ncentric.cloud: no more connections allowed (max_client_conn)
+2026-11-06 18:35:03,031 [TRACE] bbot.modules.crt_db logger.py:161 Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 1173, in __connect_addr
+    await connected
+asyncpg.exceptions.ProtocolViolationError: no more connections allowed (max_client_conn)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/templates/subdomain_enum.py", line 121, in query
+    response = await request_fn(query)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/crt_db.py", line 42, in request_url
+    self.db_conn = await self._connect()
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/crt_db.py", line 30, in _connect
+    return await asyncpg.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/asyncpg/connection.py", line 2498, in connect
+    return await connect_utils._connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 1278, in _connect
+    conn = await _connect_addr(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 1116, in _connect_addr
+    raise second_error from first_error
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 1099, in _connect_addr
+    return await __connect_addr(params_retry, False, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 1173, in __connect_addr
+    await connected
+asyncpg.exceptions.ProtocolViolationError: no more connections allowed (max_client_conn)
+
+2026-11-06 18:35:03,737 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(503:15:0), subdomaincenter(32:1:0), wayback(32:1:0), crt_db(31:1:0), dnsbimi(31:1:0), crt(29:1:0), rapiddns(29:1:0), myssl(28:1:0), urlscan(28:1:0), dnscaa(27:1:0), hackertarget(27:1:0), anubisdb(26:1:0), certspotter(26:1:0), dnsdumpster(26:1:0), dnstlsrpt(26:1:0), azure_tenant(18:1:0), shodan_idb(17:1:0)
+2026-11-06 18:35:03,738 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 33, ORG_STUB: 2, SCAN: 1
+2026-11-06 18:35:03,738 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,056 processed in the past 15 seconds)
+2026-11-06 18:35:03,991 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=ncentric.cloud: request timed out after 10s
+2026-11-06 18:35:03,991 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=ncentric.cloud failed with status code 0: 
+2026-11-06 18:35:03,991 [INFO] bbot.modules.subdomaincenter base.py:1696 Query "ncentric.cloud" failed (no response)
+2026-11-06 18:35:09,431 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.edpnet.com
+2026-11-06 18:35:09,787 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.edpnet.com
+2026-11-06 18:35:10,065 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.ctmsh.co
+2026-11-06 18:35:10,083 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.ctmsh.co
+2026-11-06 18:35:10,733 [TRACE] bbot.modules.crt logger.py:161 API response to https://crt.sh?q=%25.ptxbac.be&output=json failed with status code 400: <html>
+<head><title>400 Bad Request</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+2026-11-06 18:35:10,733 [ERROR] bbot.modules.crt base.py:1792 Setting error state: Setting error state due to 10 failed HTTP requests
+2026-11-06 18:35:10,733 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "ptxbac.be" (status code 400)
+2026-11-06 18:35:10,734 [TRACE] bbot.modules.crt logger.py:161 Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/templates/subdomain_enum.py", line 126, in query
+    results = list(await parse_fn(response, query))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/bbot/modules/crt.py", line 32, in parse_results
+    j = r.json()
+        ^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2026-11-06 18:35:10,734 [TRACE] bbot.modules.crt logger.py:161 '<html>\r\n<head><title>400 Bad Request</title></head>\r\n<body>\r\n<center><h1>400 Bad Request</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n'
+2026-11-06 18:35:10,734 [TRACE] bbot.modules.crt logger.py:161 Worker stopped
+2026-11-06 18:35:10,795 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (CNAME): *.edpnet.com
+2026-11-06 18:35:11,874 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://ncentric.cloud:443/yvhye4dr6bh5/6worqtbs?4pmgpd=qcm1ea&5mm82f=1: request timed out after 10s
+2026-11-06 18:35:12,100 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.citymesh.guide
+2026-11-06 18:35:12,208 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.citymesh.guide
+2026-11-06 18:35:14,047 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://mta-sts.edpnet.nl/.well-known/mta-sts.txt: request timed out after 10s
+2026-11-06 18:35:18,739 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,173:15:0), wayback(53:1:0), crt_db(52:1:0), dnsbimi(51:1:0), subdomaincenter(50:1:0), rapiddns(47:1:0), dnsdumpster(45:1:0), myssl(44:1:0), certspotter(43:1:0), urlscan(42:1:0), dnscaa(41:1:0), dnstlsrpt(40:1:0), hackertarget(39:1:0), anubisdb(38:1:0), azure_tenant(35:1:0), shodan_idb(6:1:0)
+2026-11-06 18:35:18,739 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 54, OPEN_TCP_PORT: 7, ORG_STUB: 3, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:35:18,739 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,249 processed in the past 15 seconds)
+2026-11-06 18:35:21,941 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://ncentric.cloud:443/ggmtm5yw4jp2/ik46tu16?d1fkai=1: request timed out after 10s
+2026-11-06 18:35:28,801 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.edpnet.nl
+2026-11-06 18:35:32,444 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://ncentric.cloud:443/g4hv6j45tlry/skl0pf5x?2abibz=3sib2h&us91p7=1: request timed out after 10s
+2026-11-06 18:35:33,740 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,574:15:0), wayback(58:1:0), crt_db(57:1:0), dnsbimi(56:1:0), subdomaincenter(53:1:0), rapiddns(51:1:0), dnsdumpster(50:1:0), myssl(49:1:0), certspotter(48:1:0), urlscan(47:1:0), dnscaa(45:1:0), dnstlsrpt(44:1:0), anubisdb(39:1:0), hackertarget(37:1:0), azure_tenant(21:1:0)
+2026-11-06 18:35:33,740 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 11, ORG_STUB: 7, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:35:33,740 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (579 processed in the past 15 seconds)
+2026-11-06 18:35:48,741 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,598:15:0), crt_db(57:1:0), wayback(56:1:0), dnsbimi(55:1:0), subdomaincenter(53:1:0), rapiddns(51:1:0), dnsdumpster(50:1:0), myssl(49:1:0), certspotter(48:1:0), urlscan(46:1:0), dnscaa(44:1:0), dnstlsrpt(44:1:0), anubisdb(39:1:0), hackertarget(37:1:0), azure_tenant(10:1:0)
+2026-11-06 18:35:48,742 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 11, ORG_STUB: 7, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:35:48,742 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (43 processed in the past 15 seconds)
+2026-11-06 18:36:00,398 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://mta-sts.edpnet.be/.well-known/mta-sts.txt: request timed out after 10s
+2026-11-06 18:36:03,742 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,697:15:0), crt_db(56:1:0), wayback(56:1:0), dnsbimi(55:1:0), subdomaincenter(53:1:0), rapiddns(51:1:0), dnsdumpster(50:1:0), myssl(49:1:0), certspotter(48:1:0), urlscan(46:1:0), dnscaa(44:1:0), dnstlsrpt(44:1:0), anubisdb(39:1:0), hackertarget(37:1:0), azure_tenant(4:1:0)
+2026-11-06 18:36:03,743 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 14, ORG_STUB: 7, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:36:03,743 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (190 processed in the past 15 seconds)
+2026-11-06 18:36:15,919 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=engiem2m.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:36:18,744 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,867:15:0), crt_db(56:1:0), wayback(56:1:0), dnsbimi(55:1:0), subdomaincenter(53:1:0), rapiddns(47:1:0), urlscan(46:1:0), myssl(45:1:0), certspotter(43:1:0), dnstlsrpt(43:1:0), dnscaa(41:1:0), dnsdumpster(41:1:0), anubisdb(39:1:0), hackertarget(29:1:0)
+2026-11-06 18:36:18,744 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 24, ORG_STUB: 9, TECHNOLOGY: 2, SCAN: 1
+2026-11-06 18:36:18,744 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (400 processed in the past 15 seconds)
+2026-11-06 18:36:21,609 [TRACE] bbot.modules.dnsdumpster logger.py:161 API response to https://dnsdumpster.com failed with status code 429: error code: 1015
+
+2026-11-06 18:36:33,746 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,957:15:0), crt_db(62:1:0), dnsbimi(60:1:0), subdomaincenter(57:1:0), wayback(57:1:0), certspotter(49:1:0), dnstlsrpt(47:1:0), urlscan(46:1:0), dnscaa(44:1:0), rapiddns(43:1:0), myssl(41:1:0), anubisdb(39:1:0), dnsdumpster(36:1:0), hackertarget(35:1:0)
+2026-11-06 18:36:33,746 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 63, OPEN_TCP_PORT: 24, ORG_STUB: 9, TECHNOLOGY: 2, SCAN: 1
+2026-11-06 18:36:33,746 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (259 processed in the past 15 seconds)
+2026-11-06 18:36:40,823 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=citymesh-connect.be: request timed out after 10s
+2026-11-06 18:36:40,823 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh-connect.be failed with status code 0: 
+2026-11-06 18:36:41,065 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh-connect.be failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:36:42,298 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh-connect.be failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:36:43,573 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymeshconnect.be failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:36:48,747 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,976:15:0), crt_db(90:1:0), dnsbimi(88:1:0), wayback(86:1:0), subdomaincenter(85:1:0), certspotter(78:1:0), dnstlsrpt(73:1:0), rapiddns(72:1:0), dnscaa(66:1:0), dnsdumpster(65:1:0), urlscan(55:1:0), hackertarget(48:1:0), myssl(44:1:0), anubisdb(40:1:0), ipneighbor(0:0:15), asn(0:0:1)
+2026-11-06 18:36:48,747 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 91, OPEN_TCP_PORT: 37, ORG_STUB: 13, TECHNOLOGY: 3, SCAN: 1
+2026-11-06 18:36:48,747 [INFO] bbot.scanner scanner.py:1340 citymesh: 16 events in queue (586 processed in the past 15 seconds)
+2026-11-06 18:36:52,714 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=ncentric.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:36:59,541 [TRACE] bbot.modules.dnsdumpster logger.py:161 API response to https://dnsdumpster.com failed with status code 429: error code: 1015
+
+2026-11-06 18:37:03,754 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(2,122:15:2), crt_db(296:1:0), wayback(288:1:0), certspotter(284:1:0), dnsbimi(278:1:0), subdomaincenter(274:1:0), dnscaa(267:1:0), rapiddns(238:1:0), dnsdumpster(214:1:0), dnstlsrpt(202:1:0), shodan_idb(117:1:0), speculate(0:0:7), cloudcheck(2:0:0), python(1:0:0)
+2026-11-06 18:37:03,754 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: OPEN_TCP_PORT: 382, DNS_NAME: 263, TECHNOLOGY: 50, ORG_STUB: 22, AZURE_TENANT: 5, SCAN: 1, ASN: 1, FINDING: 1 (1 INFO)
+2026-11-06 18:37:03,755 [INFO] bbot.scanner scanner.py:1340 citymesh: 8 events in queue (10,442 processed in the past 15 seconds)
+2026-11-06 18:37:05,626 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=engiem2m.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:37:10,970 [TRACE] bbot.modules.dnsdumpster logger.py:161 API response to https://dnsdumpster.com failed with status code 429: error code: 1015
+
+2026-11-06 18:37:11,225 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://flex.citymesh.com:443/e3lcwsjzk80x/gp12l0ro?1zi6wp=1: request timed out after 10s
+2026-11-06 18:37:17,186 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=engiem2m.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:37:18,755 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,813:15:0), crt_db(345:1:0), wayback(338:1:0), certspotter(334:1:0), dnsbimi(328:1:0), subdomaincenter(315:1:0), dnscaa(299:1:0), dnstlsrpt(216:1:0), dnsdumpster(200:1:0), shodan_idb(2:1:0), python(1:0:0)
+2026-11-06 18:37:18,755 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: OPEN_TCP_PORT: 393, DNS_NAME: 311, TECHNOLOGY: 50, ORG_STUB: 22, AZURE_TENANT: 7, ASN: 3, SCAN: 1, FINDING: 1 (1 INFO)
+2026-11-06 18:37:18,756 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2,296 processed in the past 15 seconds)
+2026-11-06 18:37:18,896 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=edpnet.net failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:37:20,126 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=edpnet.net failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:37:20,320 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (TXT): *.edpnet.com
+2026-11-06 18:37:20,330 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SOA): *.edpnet.com
+2026-11-06 18:37:20,764 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SRV): *.edpnet.com
+2026-11-06 18:37:20,844 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (MX): *.edpnet.com
+2026-11-06 18:37:20,896 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (NS): *.edpnet.com
+2026-11-06 18:37:21,730 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://flex.citymesh.com:443/nloah0nuzy6p/vtgpdxjp?wi0mdn=vw1lcc&km5o1k=1: request timed out after 10s
+2026-11-06 18:37:22,584 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=edpnet.net failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:37:31,732 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://flex.citymesh.com:443/x4t4srh29zr1/vu11ctnv?snxry7=1: request timed out after 10s
+2026-11-06 18:37:33,758 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(747:15:0), crt_db(587:1:0), wayback(580:1:0), certspotter(576:1:0), dnsbimi(570:1:0), subdomaincenter(551:1:0), dnscaa(459:1:0), dnstlsrpt(348:1:0), shodan_idb(79:1:0)
+2026-11-06 18:37:33,758 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 509, OPEN_TCP_PORT: 482, TECHNOLOGY: 64, ORG_STUB: 25, IP_ADDRESS: 8, AZURE_TENANT: 7, ASN: 4, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:37:33,758 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (8,479 processed in the past 15 seconds)
+2026-11-06 18:37:42,235 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://flex.citymesh.com:443/wjhom8gnysfq/beofv5mv?s6kcrx=4efuh9&75gdew=1: request timed out after 10s
+2026-11-06 18:37:42,258 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymeshconnect.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:37:48,760 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(641:1:0), wayback(636:1:0), certspotter(632:1:0), dnsbimi(602:1:0), subdomaincenter(585:1:0), dnsresolve(443:15:0), dnscaa(276:1:0)
+2026-11-06 18:37:48,760 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 525, OPEN_TCP_PORT: 500, TECHNOLOGY: 71, IP_ADDRESS: 34, ORG_STUB: 25, ASN: 13, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:37:48,760 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (3,370 processed in the past 15 seconds)
+2026-11-06 18:37:53,267 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=safety-drones.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:38:03,761 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(644:1:0), certspotter(635:1:0), wayback(635:1:0), dnsbimi(573:1:0), subdomaincenter(560:1:0), dnsresolve(482:15:0), dnscaa(184:1:0), python(2:0:0)
+2026-11-06 18:38:03,761 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 526, OPEN_TCP_PORT: 514, TECHNOLOGY: 71, IP_ADDRESS: 46, ORG_STUB: 25, ASN: 13, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:03,761 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (481 processed in the past 15 seconds)
+2026-11-06 18:38:05,278 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=safety-drones.com: request timed out after 10s
+2026-11-06 18:38:05,278 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=safety-drones.com failed with status code 0: 
+2026-11-06 18:38:06,738 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=safety-drones.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:38:12,326 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.wifilab.be:443/xtrz19ro1q6c/z5cr4xue?r5p9e0=1: request timed out after 10s
+2026-11-06 18:38:12,689 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=biotechnology-citymesh.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:38:18,465 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=engiem2m.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:38:18,763 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(779:1:0), certspotter(774:1:0), wayback(774:1:0), dnsbimi(712:1:0), subdomaincenter(693:1:0), dnscaa(309:1:0), dnsresolve(93:15:0), dnstlsrpt(4:1:0), shodan_idb(2:1:0), python(1:0:0)
+2026-11-06 18:38:18,763 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 663, OPEN_TCP_PORT: 532, IP_ADDRESS: 86, TECHNOLOGY: 71, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:18,763 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2,426 processed in the past 15 seconds)
+2026-11-06 18:38:22,830 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.wifilab.be:443/pex2fv44h3d1/epckneip?kfy70m=4uirrs&a28txj=1: request timed out after 10s
+2026-11-06 18:38:29,691 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=biotechnology-citymesh.com: request timed out after 10s
+2026-11-06 18:38:29,691 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=biotechnology-citymesh.com failed with status code 0: 
+2026-11-06 18:38:32,833 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.wifilab.be:443/1vsa0olr10hd/affxegx6?3uyr7z=1: request timed out after 10s
+2026-11-06 18:38:33,765 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(812:1:0), certspotter(807:1:0), wayback(807:1:0), dnsbimi(745:1:0), subdomaincenter(726:1:0), dnscaa(106:1:0)
+2026-11-06 18:38:33,765 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 697, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:33,765 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,477 processed in the past 15 seconds)
+2026-11-06 18:38:38,940 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=towereye.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:38:43,336 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.wifilab.be:443/ctg1eemrancx/r3j7orz9?6ilhqf=m7wmt1&p4bjt9=1: request timed out after 10s
+2026-11-06 18:38:44,171 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=towereye.be failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:38:46,640 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=towereye.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:38:48,767 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(817:1:0), certspotter(816:1:0), wayback(816:1:0), subdomaincenter(733:1:0), dnsbimi(621:1:0)
+2026-11-06 18:38:48,767 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 706, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:48,767 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (104 processed in the past 15 seconds)
+2026-11-06 18:39:03,768 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(817:1:0), certspotter(816:1:0), wayback(816:1:0), subdomaincenter(720:1:0), dnsbimi(621:1:0)
+2026-11-06 18:39:03,768 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 706, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:39:03,768 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:39:05,650 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=citymesh.io: request timed out after 10s
+2026-11-06 18:39:05,650 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.io failed with status code 0: 
+2026-11-06 18:39:07,126 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.io failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:39:09,587 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.io failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:39:12,103 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,107 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (TXT): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,115 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,243 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (CNAME): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,372 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SOA): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,522 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (MX): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,597 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SRV): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,640 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (NS): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:15,720 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://citymesh.net:443/wjr6sq299hdw/ipqxcwtp?0a2agc=1: request timed out after 10s
+2026-11-06 18:39:16,712 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (TXT): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:16,826 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (CNAME): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,039 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,280 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SRV): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,345 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (NS): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,353 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,440 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (MX): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,491 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SOA): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:18,770 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(825:1:0), certspotter(824:1:0), crt_db(822:1:0), subdomaincenter(731:1:0), dnsbimi(632:1:0), dnsresolve(200:15:0), shodan_idb(1:1:0)
+2026-11-06 18:39:18,770 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 717, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:39:18,770 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (620 processed in the past 15 seconds)
+2026-11-06 18:39:19,736 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:39:26,274 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://citymesh.net:443/zqsukkq615uf/3h7upref?cnlfw4=2bkyx8&iqj2nu=1: request timed out after 10s
+2026-11-06 18:39:29,630 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=towereye.eu: request timed out after 10s
+2026-11-06 18:39:29,630 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=towereye.eu failed with status code 0: 
+2026-11-06 18:39:33,771 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(870:1:0), certspotter(869:1:0), crt_db(856:1:0), subdomaincenter(702:1:0), dnsbimi(400:1:0), dnsresolve(183:15:0), shodan_idb(177:1:0)
+2026-11-06 18:39:33,771 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 773, OPEN_TCP_PORT: 589, IP_ADDRESS: 109, TECHNOLOGY: 97, ORG_STUB: 25, ASN: 14, FINDING: 9 (9 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:39:33,771 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (3,190 processed in the past 15 seconds)
+2026-11-06 18:39:36,276 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://citymesh.net:443/fu9kpdqc2ta5/9n7bli0b?t76a46=1: request timed out after 10s
+2026-11-06 18:39:42,248 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.eu failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:39:43,500 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.eu failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:39:45,986 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.eu failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:39:46,779 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://citymesh.net:443/6poyh8b7ej0u/hic58gd4?uftgmp=hgbj1e&rposi4=1: request timed out after 10s
+2026-11-06 18:39:48,772 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(891:1:0), certspotter(890:1:0), crt_db(877:1:0), subdomaincenter(721:1:0), dnsbimi(324:1:0), dnsresolve(181:15:0), dnscaa(8:1:0), dnstlsrpt(8:1:0), shodan_idb(4:1:0), python(1:0:0)
+2026-11-06 18:39:48,772 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 792, OPEN_TCP_PORT: 594, IP_ADDRESS: 114, TECHNOLOGY: 97, ORG_STUB: 25, ASN: 14, FINDING: 9 (9 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:39:48,772 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (664 processed in the past 15 seconds)
+2026-11-06 18:40:01,436 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.nl failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:40:03,773 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(925:1:0), certspotter(924:1:0), crt_db(906:1:0), subdomaincenter(724:1:0), dnsbimi(329:1:0), dnsresolve(227:15:0), dnstlsrpt(17:1:0), dnscaa(16:1:0), shodan_idb(11:1:0), python(1:0:0), speculate(0:0:1)
+2026-11-06 18:40:03,774 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 826, OPEN_TCP_PORT: 594, IP_ADDRESS: 116, TECHNOLOGY: 97, ORG_STUB: 25, ASN: 14, FINDING: 9 (9 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:03,774 [INFO] bbot.scanner scanner.py:1340 citymesh: 3 events in queue (521 processed in the past 15 seconds)
+2026-11-06 18:40:15,910 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.safetydrones.be:443/ugyi6ygodfpj/bt7ruhop?r7xooh=1: request timed out after 10s
+2026-11-06 18:40:17,677 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=sigfox.nl failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:40:18,775 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(950:1:0), wayback(949:1:0), crt_db(932:1:0), subdomaincenter(728:1:0), dnsbimi(333:1:0), dnsresolve(168:15:0), shodan_idb(49:1:0), dnstlsrpt(20:1:0), dnscaa(18:1:0)
+2026-11-06 18:40:18,775 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 852, OPEN_TCP_PORT: 595, IP_ADDRESS: 168, TECHNOLOGY: 100, ORG_STUB: 25, ASN: 14, FINDING: 10 (10 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:18,776 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,072 processed in the past 15 seconds)
+2026-11-06 18:40:21,079 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:40:26,412 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.safetydrones.be:443/leieh9mmvp8t/40zivvt0?uydoi7=zyqx7s&ib428d=1: request timed out after 10s
+2026-11-06 18:40:29,679 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=sigfox.nl: request timed out after 10s
+2026-11-06 18:40:29,679 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=sigfox.nl failed with status code 0: 
+2026-11-06 18:40:31,146 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=sigfox.nl failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:40:33,674 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=ptxbac.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:40:33,777 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(974:1:0), wayback(973:1:0), crt_db(940:1:0), subdomaincenter(720:1:0), dnsbimi(334:1:0), dnsresolve(140:15:0), shodan_idb(37:1:0), dnscaa(4:1:0)
+2026-11-06 18:40:33,777 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 876, OPEN_TCP_PORT: 595, IP_ADDRESS: 211, TECHNOLOGY: 100, ORG_STUB: 25, ASN: 14, FINDING: 10 (10 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:33,777 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,420 processed in the past 15 seconds)
+2026-11-06 18:40:36,416 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.safetydrones.be:443/7ocz8cyicc5w/k23pyfr6?w06xl8=1: request timed out after 10s
+2026-11-06 18:40:46,918 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.safetydrones.be:443/ixhbpl78fusp/vvl36l29?fr2d1k=1sl87o&v1q7wv=1: request timed out after 10s
+2026-11-06 18:40:48,779 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(994:1:0), wayback(993:1:0), crt_db(947:1:0), subdomaincenter(740:1:0), dnsbimi(295:1:0), dnsresolve(178:15:0)
+2026-11-06 18:40:48,779 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 912, OPEN_TCP_PORT: 633, IP_ADDRESS: 213, TECHNOLOGY: 110, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:48,779 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,562 processed in the past 15 seconds)
+2026-11-06 18:40:50,598 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=wifilab.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:40:56,570 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=edpnet.net&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:41:03,781 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,043:1:0), wayback(1,043:1:0), crt_db(998:1:0), subdomaincenter(755:1:0), dnsbimi(257:1:0)
+2026-11-06 18:41:03,781 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 964, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:03,781 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,098 processed in the past 15 seconds)
+2026-11-06 18:41:05,613 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=wifilab.be: request timed out after 10s
+2026-11-06 18:41:05,613 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=wifilab.be failed with status code 0: 
+2026-11-06 18:41:07,081 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=wifilab.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:41:08,330 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.be failed with status code 503: {"error": "server busy (64 queries in flight)"}
+2026-11-06 18:41:10,512 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://212.71.2.106.powered.by.edpnet.net:443/najgm9qxklld/opkqvwlu?9o7eiq=1: request timed out after 10s
+2026-11-06 18:41:10,788 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:41:18,782 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,058:1:0), wayback(1,058:1:0), crt_db(1,011:1:0), subdomaincenter(728:1:0), dnsbimi(272:1:0)
+2026-11-06 18:41:18,782 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 979, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:18,782 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (192 processed in the past 15 seconds)
+2026-11-06 18:41:21,017 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://212.71.2.106.powered.by.edpnet.net:443/6cfvtu1w4znp/o229lxi6?vntq8n=8m5qtu&zfdls1=1: request timed out after 10s
+2026-11-06 18:41:26,084 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=myiot.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:41:31,020 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://212.71.2.106.powered.by.edpnet.net:443/eg9icqhp5l6f/8gd1q5eo?iaapq2=1: request timed out after 10s
+2026-11-06 18:41:33,016 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=ncentric.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:41:33,784 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,065:1:0), wayback(1,065:1:0), crt_db(1,018:1:0), subdomaincenter(446:1:0), dnsbimi(279:1:0)
+2026-11-06 18:41:33,784 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 986, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:33,784 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (491 processed in the past 15 seconds)
+2026-11-06 18:41:41,622 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://212.71.2.106.powered.by.edpnet.net:443/y8zt0n1ried0/1a5ec9mg?vprxel=7xupf5&jou3lq=1: request timed out after 10s
+2026-11-06 18:41:47,985 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.fr failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:41:48,785 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,065:1:0), wayback(1,065:1:0), crt_db(1,010:1:0), subdomaincenter(417:1:0), dnsbimi(217:1:0)
+2026-11-06 18:41:48,786 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 986, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:48,786 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (251 processed in the past 15 seconds)
+2026-11-06 18:41:57,857 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=edpnet.net&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:42:03,788 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,065:1:0), wayback(1,065:1:0), crt_db(1,010:1:0), subdomaincenter(417:1:0), dnsbimi(217:1:0)
+2026-11-06 18:42:03,788 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 986, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:03,788 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:42:05,987 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=citymesh.fr: request timed out after 10s
+2026-11-06 18:42:05,987 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh.fr failed with status code 0: 
+2026-11-06 18:42:17,612 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=connectingsenses.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:42:18,790 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,069:1:0), wayback(1,069:1:0), crt_db(1,003:1:0), subdomaincenter(420:1:0), dnsbimi(221:1:0)
+2026-11-06 18:42:18,790 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 990, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:18,790 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (69 processed in the past 15 seconds)
+2026-11-06 18:42:29,615 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=connectingsenses.be: request timed out after 10s
+2026-11-06 18:42:29,615 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=connectingsenses.be failed with status code 0: 
+2026-11-06 18:42:33,792 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,071:1:0), wayback(1,071:1:0), crt_db(1,005:1:0), subdomaincenter(103:1:0), dnsbimi(80:1:0)
+2026-11-06 18:42:33,792 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 992, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:33,792 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (47 processed in the past 15 seconds)
+2026-11-06 18:42:34,328 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=citymesh-connect.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:42:45,373 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=connectingsenses.com failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:42:47,485 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ptxbac.be:443/jci6addax86d/jzr1nkio?ed4k2j=1: request timed out after 10s
+2026-11-06 18:42:48,793 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,124:1:0), wayback(1,119:1:0), crt_db(1,045:1:0), subdomaincenter(153:1:0), shodan_idb(19:1:0), dnsresolve(0:8:0)
+2026-11-06 18:42:48,793 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1049, OPEN_TCP_PORT: 657, IP_ADDRESS: 230, TECHNOLOGY: 127, ORG_STUB: 25, FINDING: 16 (16 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:48,793 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,888 processed in the past 15 seconds)
+2026-11-06 18:42:57,988 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ptxbac.be:443/ajbcdifsrb7o/lzos37z1?sh6z0u=o9ktuy&1kaosk=1: request timed out after 10s
+2026-11-06 18:42:59,155 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=edpnet.net&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:43:03,794 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,124:1:0), wayback(1,119:1:0), crt_db(1,045:1:0), subdomaincenter(153:1:0)
+2026-11-06 18:43:03,794 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1049, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:03,795 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (175 processed in the past 15 seconds)
+2026-11-06 18:43:05,289 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=wifinmbssncb.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:43:07,991 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ptxbac.be:443/k7zx9ptu64fw/9kbb4c9j?gu1t73=1: request timed out after 10s
+2026-11-06 18:43:17,292 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://api.subdomain.center/?domain=wifinmbssncb.be: request timed out after 10s
+2026-11-06 18:43:17,292 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=wifinmbssncb.be failed with status code 0: 
+2026-11-06 18:43:18,496 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ptxbac.be:443/zorlu52yfwcd/2wq25jws?t10jzd=rdf3aa&e0y4c0=1: request timed out after 10s
+2026-11-06 18:43:18,788 [TRACE] bbot.modules.subdomaincenter logger.py:161 API response to https://api.subdomain.center/?domain=wifinmbssncb.be failed with status code 429: {"error": "rate limit exceeded"}
+2026-11-06 18:43:18,796 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,126:1:0), wayback(1,121:1:0), crt_db(1,038:1:0), subdomaincenter(117:1:0)
+2026-11-06 18:43:18,796 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1051, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:18,796 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (23 processed in the past 15 seconds)
+2026-11-06 18:43:33,797 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,126:1:0), wayback(1,121:1:0), crt_db(1,038:1:0)
+2026-11-06 18:43:33,797 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1051, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:33,797 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:43:48,799 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,127:1:0), wayback(1,112:1:0), crt_db(1,022:1:0)
+2026-11-06 18:43:48,799 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:48,799 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (12 processed in the past 15 seconds)
+2026-11-06 18:44:00,427 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.net&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:44:03,800 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,112:1:0), crt_db(1,022:1:0)
+2026-11-06 18:44:03,800 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:03,800 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:44:18,801 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,112:1:0), crt_db(994:1:0)
+2026-11-06 18:44:18,801 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:18,801 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:44:33,803 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,103:1:0), crt_db(990:1:0)
+2026-11-06 18:44:33,803 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:33,803 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (4 processed in the past 15 seconds)
+2026-11-06 18:44:35,159 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://safety-drones.com:443/gb6g11dz1k2z/9q8cw30g?i5gvtc=1: request timed out after 10s
+2026-11-06 18:44:45,662 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://safety-drones.com:443/1xb8chkpe14z/wra1ikgh?l78zxw=tz5bba&zieyz8=1: request timed out after 10s
+2026-11-06 18:44:48,804 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,103:1:0), crt_db(990:1:0)
+2026-11-06 18:44:48,804 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:48,804 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:44:55,664 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://safety-drones.com:443/7jk2jh22soi6/k93uh3tm?bedy1b=1: request timed out after 10s
+2026-11-06 18:45:01,695 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.net&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:45:03,806 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,122:1:0), wayback(1,104:1:0), crt_db(964:1:0)
+2026-11-06 18:45:03,806 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1053, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:03,806 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (9 processed in the past 15 seconds)
+2026-11-06 18:45:06,169 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://safety-drones.com:443/wz83zyvtb2xy/duruhdt3?uok6pw=gmumg7&2vsw5b=1: request timed out after 10s
+2026-11-06 18:45:18,807 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,122:1:0), wayback(1,104:1:0), crt_db(964:1:0)
+2026-11-06 18:45:18,807 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1053, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:18,807 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:45:33,809 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,123:1:0), wayback(1,105:1:0), crt_db(953:1:0)
+2026-11-06 18:45:33,809 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1054, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:33,809 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (9 processed in the past 15 seconds)
+2026-11-06 18:45:48,810 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,130:1:0), wayback(1,109:1:0), crt_db(960:1:0)
+2026-11-06 18:45:48,810 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1061, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:48,810 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (69 processed in the past 15 seconds)
+2026-11-06 18:46:02,964 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.net&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:46:03,812 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), wayback(1,110:1:0), crt_db(958:1:0)
+2026-11-06 18:46:03,812 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1062, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:03,812 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (9 processed in the past 15 seconds)
+2026-11-06 18:46:18,813 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,138:1:0), wayback(1,114:1:0), crt_db(965:1:0)
+2026-11-06 18:46:18,813 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1069, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:18,813 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (57 processed in the past 15 seconds)
+2026-11-06 18:46:33,815 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,138:1:0), wayback(1,041:1:0), crt_db(960:1:0)
+2026-11-06 18:46:33,815 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1069, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:33,815 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (3 processed in the past 15 seconds)
+2026-11-06 18:46:40,403 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://myiot.be:443/yd4mgs9dzfqt/aaah5afb?x52qvs=1: request timed out after 10s
+2026-11-06 18:46:48,818 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,138:1:0), wayback(1,041:1:0), crt_db(917:1:0)
+2026-11-06 18:46:48,818 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1069, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:48,818 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:46:50,907 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://myiot.be:443/vo7mmaygm6n4/gfd4jnqa?4itp99=ealouo&2tp18t=1: request timed out after 10s
+2026-11-06 18:46:53,447 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=safetydrones.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:47:00,909 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://myiot.be:443/jo806xtu5bfk/6r5epnuu?88e0m6=1: request timed out after 10s
+2026-11-06 18:47:03,820 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(928:1:0)
+2026-11-06 18:47:03,821 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:03,821 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (90 processed in the past 15 seconds)
+2026-11-06 18:47:11,412 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://myiot.be:443/l2pgc1fncls9/5y4z4h99?iq7f6n=077i6g&3la22v=1: request timed out after 10s
+2026-11-06 18:47:18,822 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(927:1:0)
+2026-11-06 18:47:18,822 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:18,822 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (181 processed in the past 15 seconds)
+2026-11-06 18:47:33,823 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(907:1:0)
+2026-11-06 18:47:33,823 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:33,823 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:47:48,825 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(907:1:0)
+2026-11-06 18:47:48,825 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:48,825 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:47:54,735 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=safetydrones.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:48:03,827 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(988:1:0), crt_db(884:1:0)
+2026-11-06 18:48:03,827 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:03,827 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (21 processed in the past 15 seconds)
+2026-11-06 18:48:08,545 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ps-radiocom.com:443/93ma76dvirth/lmpxn63w?16mbr2=1: request timed out after 10s
+2026-11-06 18:48:18,829 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(988:1:0), crt_db(884:1:0)
+2026-11-06 18:48:18,829 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:18,829 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:48:19,049 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ps-radiocom.com:443/iehdkzurq97k/imc5ikbx?4qtdaa=syfr1z&fxp942=1: request timed out after 10s
+2026-11-06 18:48:29,051 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ps-radiocom.com:443/n0hpj6tcrpx5/594r5jzp?zwmw1f=1: request timed out after 10s
+2026-11-06 18:48:33,831 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(988:1:0), crt_db(880:1:0)
+2026-11-06 18:48:33,831 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:33,831 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (17 processed in the past 15 seconds)
+2026-11-06 18:48:39,554 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.ps-radiocom.com:443/t4chwwkvo1dh/lyad1xkt?cen3wa=oj9bv5&mib12h=1: request timed out after 10s
+2026-11-06 18:48:48,833 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(989:1:0), crt_db(874:1:0)
+2026-11-06 18:48:48,833 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:48,833 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (65 processed in the past 15 seconds)
+2026-11-06 18:48:56,005 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=safetydrones.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:49:03,835 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(989:1:0), crt_db(874:1:0)
+2026-11-06 18:49:03,835 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:03,835 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:49:18,836 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(989:1:0), crt_db(874:1:0)
+2026-11-06 18:49:18,836 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:18,836 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:49:33,838 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(988:1:0), crt_db(855:1:0)
+2026-11-06 18:49:33,838 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:33,838 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 18:49:48,839 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(988:1:0), crt_db(855:1:0)
+2026-11-06 18:49:48,839 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:48,839 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:49:49,816 [WARNING] bbot.modules.wayback base.py:1760 Error JSON-decoding archive.org response for query "biotechnology-citymesh.com"
+2026-11-06 18:49:57,280 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=towereye.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:50:02,252 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.sigfox.nl:443/igdw4i8jkxkp/nlg1f1lq?f1lvpc=1: request timed out after 10s
+2026-11-06 18:50:03,840 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), crt_db(818:1:0), wayback(817:1:0), dnsresolve(0:3:0)
+2026-11-06 18:50:03,840 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:03,840 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (12 processed in the past 15 seconds)
+2026-11-06 18:50:12,756 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.sigfox.nl:443/okt8xfmt8vf9/zh8ue72m?1wlu2w=rz3rci&abosqp=1: request timed out after 10s
+2026-11-06 18:50:18,842 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), crt_db(818:1:0), wayback(817:1:0), dnsresolve(0:3:0)
+2026-11-06 18:50:18,842 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:18,842 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:50:22,758 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.sigfox.nl:443/qnnak2ryq29z/wd119oon?cxn32c=1: request timed out after 10s
+2026-11-06 18:50:33,262 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://www.sigfox.nl:443/fxkv2icn3z0c/tpseblad?msdvoy=09pfjk&hrljin=1: request timed out after 10s
+2026-11-06 18:50:33,844 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), wayback(817:1:0), crt_db(746:1:0)
+2026-11-06 18:50:33,844 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:33,844 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (19 processed in the past 15 seconds)
+2026-11-06 18:50:48,846 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), wayback(817:1:0), crt_db(746:1:0)
+2026-11-06 18:50:48,846 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:48,846 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:50:58,555 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=towereye.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:51:03,847 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,114:1:0), wayback(819:1:0), crt_db(729:1:0)
+2026-11-06 18:51:03,847 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1083, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:03,847 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (21 processed in the past 15 seconds)
+2026-11-06 18:51:18,833 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://connectingsenses.be:443/d2sm3ksr9jo6/whkm65r3?ajbm9n=1: request timed out after 10s
+2026-11-06 18:51:18,849 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), crt_db(456:1:0), wayback(332:1:0)
+2026-11-06 18:51:18,849 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1084, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:18,849 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (34 processed in the past 15 seconds)
+2026-11-06 18:51:29,336 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://connectingsenses.be:443/f6ptsepq3h8a/x6wy53zo?h9yxjo=5flnmt&xi1ri9=1: request timed out after 10s
+2026-11-06 18:51:33,850 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), crt_db(456:1:0), wayback(332:1:0)
+2026-11-06 18:51:33,850 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1084, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:33,850 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:51:39,339 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://connectingsenses.be:443/3afm1vs1karb/wtj4doyn?xrg6k9=1: request timed out after 10s
+2026-11-06 18:51:48,851 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,124:1:0), crt_db(361:1:0), wayback(341:1:0), dnsresolve(7:15:0), dnscaa(5:1:0), python(2:0:0)
+2026-11-06 18:51:48,851 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1096, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:48,851 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (209 processed in the past 15 seconds)
+2026-11-06 18:51:49,842 [TRACE] bbot.core.helpers.web logger.py:161 blasthttp error for https://connectingsenses.be:443/527zzfmg25xo/r0ntnpsu?fvfxll=gq46qd&3hxjox=1: request timed out after 10s
+2026-11-06 18:51:59,834 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=towereye.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:52:03,853 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(368:1:0)
+2026-11-06 18:52:03,853 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:03,853 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (138 processed in the past 15 seconds)
+2026-11-06 18:52:18,854 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(362:1:0), dnsresolve(0:3:0)
+2026-11-06 18:52:18,854 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:18,855 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (7 processed in the past 15 seconds)
+2026-11-06 18:52:33,856 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(336:1:0), dnsresolve(0:1:0)
+2026-11-06 18:52:33,856 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:33,856 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (14 processed in the past 15 seconds)
+2026-11-06 18:52:48,859 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(336:1:0)
+2026-11-06 18:52:48,859 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:48,859 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 18:52:53,301 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.io&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:53:03,860 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(316:1:0)
+2026-11-06 18:53:03,860 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:03,861 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (58 processed in the past 15 seconds)
+2026-11-06 18:53:18,861 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(316:1:0)
+2026-11-06 18:53:18,862 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:18,862 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:53:33,863 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(188:1:0), dnsresolve(0:3:0)
+2026-11-06 18:53:33,863 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:33,863 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (7 processed in the past 15 seconds)
+2026-11-06 18:53:48,864 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(188:1:0)
+2026-11-06 18:53:48,864 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:48,864 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (12 processed in the past 15 seconds)
+2026-11-06 18:53:54,572 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.io&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:54:03,865 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(4:1:0)
+2026-11-06 18:54:03,866 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:03,866 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:54:18,867 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(4:1:0)
+2026-11-06 18:54:18,867 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:18,868 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:54:33,868 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:54:33,869 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:33,869 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:54:48,870 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:54:48,870 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:48,870 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:54:55,842 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.io&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:55:03,871 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:03,872 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:03,872 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:18,873 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:18,873 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:18,873 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:33,875 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:33,875 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:33,876 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:48,877 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:48,877 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:48,877 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:57,134 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=towereye.eu&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:56:03,879 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:03,879 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:03,879 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:56:18,880 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:18,880 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:18,880 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:56:33,882 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:33,882 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:33,882 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:56:48,883 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:48,883 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:48,883 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:56:58,409 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=towereye.eu&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:57:03,884 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:03,884 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:03,884 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:18,886 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:18,886 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:18,886 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:33,887 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:33,888 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:33,888 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:48,889 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:48,889 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:48,889 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:59,678 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=towereye.eu&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:58:03,890 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:03,890 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:03,890 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:18,892 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:18,892 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:18,892 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:33,893 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:33,893 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:33,893 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:48,894 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:48,894 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:48,894 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:53,103 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymeshconnect.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 18:59:03,895 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:03,895 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:03,896 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 18:59:18,896 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:18,896 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:18,897 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:59:33,898 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:33,898 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:33,898 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:59:48,899 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:48,899 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:48,899 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:59:54,376 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymeshconnect.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:00:03,901 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:03,901 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:03,901 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:18,902 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:18,902 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:18,902 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:33,904 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:33,904 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:33,904 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:48,905 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:48,905 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:48,905 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:55,647 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymeshconnect.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:01:03,907 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:03,907 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:03,907 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:18,908 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:18,909 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:18,909 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:33,910 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:33,910 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:33,911 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:48,912 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:48,912 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:48,912 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:56,925 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=connectingsenses.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:02:03,913 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:03,913 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:03,913 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:02:18,914 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:18,914 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:18,914 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:02:33,916 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:33,916 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:33,916 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:02:48,918 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:48,918 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:48,918 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:02:58,200 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=connectingsenses.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:03:03,919 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:03,919 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:03,919 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:18,921 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:18,921 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:18,921 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:33,923 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:33,923 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:33,923 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:48,924 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:48,924 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:48,924 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:59,471 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=connectingsenses.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:04:03,927 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:03,927 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:03,927 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:18,928 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:18,929 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:18,929 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:33,930 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:33,930 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:33,930 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:48,931 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:48,931 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:48,931 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:53,025 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=ps-radiocom.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:05:03,931 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:03,932 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:03,932 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (10 processed in the past 15 seconds)
+2026-11-06 19:05:18,933 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:18,933 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:18,933 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:05:33,934 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:33,934 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:33,934 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:05:48,935 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:48,935 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:48,936 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:05:54,299 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=ps-radiocom.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:06:03,937 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:03,937 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:03,937 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:18,938 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:18,938 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:18,938 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:33,940 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:33,940 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:33,940 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:48,941 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:48,941 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:48,941 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:55,574 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=ps-radiocom.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:07:03,942 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:03,943 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:03,943 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:18,944 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:18,944 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:18,944 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:33,946 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:33,946 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:33,946 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:48,948 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:48,948 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:48,948 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:56,879 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=myiot.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:08:03,949 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:03,949 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:03,949 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:08:18,950 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:18,950 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:18,950 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:08:33,951 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:33,951 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:33,951 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:08:48,953 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:48,953 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:48,953 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:08:58,152 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=myiot.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:09:03,954 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:03,954 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:03,954 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:18,956 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:18,956 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:18,956 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:33,957 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:33,957 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:33,957 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:48,960 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:48,960 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:48,960 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:59,437 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=myiot.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:10:03,961 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:03,961 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:03,961 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:18,962 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:18,963 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:18,963 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:33,964 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:33,964 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:33,964 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:48,965 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:48,966 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:48,966 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:52,920 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=ps-radiocom.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:11:03,967 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:03,968 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:03,968 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 19:11:18,969 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:18,969 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:18,969 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:11:33,971 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:33,971 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:33,971 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:11:48,972 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:48,972 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:48,972 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:11:54,193 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=ps-radiocom.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:12:03,974 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:03,974 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:03,974 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:18,975 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:18,975 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:18,975 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:33,977 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:33,977 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:33,977 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:48,979 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:48,979 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:48,979 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:55,463 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=ps-radiocom.com&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:13:03,981 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:03,981 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:03,981 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:18,983 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:18,983 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:18,983 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:33,984 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:33,984 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:33,984 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:48,986 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:48,986 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:48,986 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:56,765 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.eu&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:14:03,987 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:03,987 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:03,987 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:14:18,988 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:18,988 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:18,988 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:14:33,989 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:33,989 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:33,989 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:14:48,991 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:48,991 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:48,991 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:14:58,036 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.eu&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:15:03,993 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:03,993 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:03,993 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:18,994 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:18,994 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:18,994 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:33,996 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:33,996 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:33,996 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:48,997 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:48,997 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:48,997 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:59,305 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh.eu&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:16:03,999 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:03,999 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:03,999 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:19,001 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:19,002 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:19,002 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:34,003 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:34,003 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:34,003 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:49,005 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:49,005 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:49,005 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:52,863 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh-connect.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:17:04,007 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:04,007 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:04,007 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 19:17:19,008 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:19,009 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:19,009 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:17:34,010 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:34,010 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:34,010 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:17:49,011 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:49,011 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:49,011 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:17:54,133 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh-connect.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:18:04,013 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:04,013 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:04,013 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:19,015 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:19,015 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:19,015 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:34,016 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:34,017 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:34,017 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:49,018 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:49,018 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:49,018 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:55,408 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=citymesh-connect.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:19:04,020 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:04,021 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:04,021 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:19,021 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:19,022 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:19,022 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:34,023 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:34,023 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:34,023 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:49,026 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:49,026 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:49,026 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:56,694 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=wifinmbssncb.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:20:04,027 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:04,027 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:04,028 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:20:19,029 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:19,029 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:19,029 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:20:34,030 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:34,030 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:34,030 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:20:49,032 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:49,032 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:49,032 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:20:57,975 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=wifinmbssncb.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:21:04,033 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:04,033 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:04,033 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:19,034 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:19,034 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:19,034 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:34,036 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:34,036 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:34,036 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:49,037 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:49,037 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:49,038 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:59,246 [TRACE] bbot.modules.certspotter logger.py:161 API response to https://api.certspotter.com/v1/issuances?domain=wifinmbssncb.be&include_subdomains=true&expand=dns_names failed with status code 429: {"code":"rate_limited","message":"You have exceeded your domain search quota for the SSLMate CT Search API. Please try again later, or authenticate with an API key, which you can obtain by signing up at <https://sslmate.com/signup?for=ct_search_api>."}
+
+2026-11-06 19:22:04,039 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:04,039 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:04,039 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:19,040 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:19,041 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:19,041 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:34,042 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:34,042 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:34,043 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:49,044 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:49,044 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:49,044 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:51,439 [INFO] bbot.scanner scanner.py:928 Finishing scan
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | ASN      | Subnet Count   | Name                        | Description               | Country   |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +==========+================+=============================+===========================+===========+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS6848   | 112            | TELENET-AS                  | Telenet BV                | BE        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS8075   | 1,359          | MICROSOFT-CORP-MSN-AS-BLOCK | Microsoft Corporation     | US        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS8368   | 105            | DSTNY-BACKBONE              | Dstny BE N.V.             | BE        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS9031   | 12             | EDPNETapp                   | EDPNET Belgium BV         | BE        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS13335  | 5,775          | CLOUDFLARENET               | Cloudflare, Inc.          | US        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS14061  | 896            | DIGITALOCEAN-ASN            | DigitalOcean, LLC         | US        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS16276  | 826            | OVH                         | OVH SAS                   | FR        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS16509  | 23,671         | AMAZON-02                   | Amazon.com, Inc.          | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS39686  | 96             | AS-EUROFIBER                | Eurofiber Nederland BV    | NL        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS61157  | 218            | PLUSSERVER-ASN1             | PlusServer GmbH           | DE        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS63949  | 454            | AKAMAI-LINODE-AP            | Akamai Technologies, Inc. | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS199095 | 9              | CITYMESH-AS                 | Citymesh Integrator NV    | BE        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS209242 | 301            | CLOUDFLARESPECTRUM          | Cloudflare London, LLC    | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS396982 | 3,909          | GOOGLE-CLOUD-PLATFORM       | Google LLC                | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 +-----------------+-----------------------------------+------------------------------------------+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 | Module          | Produced                          | Consumed                                 |
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 +=================+===================================+==========================================+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 | shodan_idb      | 834 (22 DNS_NAME, 16 FINDING, 662 | 190 (190 DNS_NAME)                       |
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 |                 | OPEN_TCP_PORT, 134 TECHNOLOGY)    |                                          |
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 +-----------------+-----------------------------------+------------------------------------------+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 | crt_db          | 189 (189 DNS_NAME)                | 42 (42 DNS_NAME)                         |

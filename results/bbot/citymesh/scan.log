@@ -9804,3 +9804,657 @@
 2026-11-06 04:38:09,128 [INFO] bbot.modules.aggregate base.py:1696 | rapiddns        | 64 (64 DNS_NAME)                  | 32 (32 DNS_NAME)                         |
 2026-11-06 04:38:09,128 [INFO] bbot.modules.aggregate base.py:1696 +-----------------+-----------------------------------+------------------------------------------+
 2026-11-06 04:38:09,128 [INFO] bbot.modules.aggregate base.py:1696 | certspotter     | 63 (63 DNS_NAME)                  | 32 (32 DNS_NAME)                         |
+2026-11-06 18:34:48,726 [HUGESUCCESS] bbot.scanner logger.py:161 Starting scan citymesh
+2026-11-06 18:34:51,998 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "ncentric.cloud" (status code 400)
+2026-11-06 18:34:54,193 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "citymesh.be" (status code 400)
+2026-11-06 18:34:59,622 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "citymesh-connect.com" (status code 400)
+2026-11-06 18:35:00,211 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.edpnet.be
+2026-11-06 18:35:03,029 [INFO] bbot.modules.crt_db base.py:1696 Error retrieving results for ncentric.cloud: no more connections allowed (max_client_conn)
+2026-11-06 18:35:03,737 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(503:15:0), subdomaincenter(32:1:0), wayback(32:1:0), crt_db(31:1:0), dnsbimi(31:1:0), crt(29:1:0), rapiddns(29:1:0), myssl(28:1:0), urlscan(28:1:0), dnscaa(27:1:0), hackertarget(27:1:0), anubisdb(26:1:0), certspotter(26:1:0), dnsdumpster(26:1:0), dnstlsrpt(26:1:0), azure_tenant(18:1:0), shodan_idb(17:1:0)
+2026-11-06 18:35:03,738 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 33, ORG_STUB: 2, SCAN: 1
+2026-11-06 18:35:03,738 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,056 processed in the past 15 seconds)
+2026-11-06 18:35:03,991 [INFO] bbot.modules.subdomaincenter base.py:1696 Query "ncentric.cloud" failed (no response)
+2026-11-06 18:35:09,431 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.edpnet.com
+2026-11-06 18:35:09,787 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.edpnet.com
+2026-11-06 18:35:10,065 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.ctmsh.co
+2026-11-06 18:35:10,083 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.ctmsh.co
+2026-11-06 18:35:10,733 [ERROR] bbot.modules.crt base.py:1792 Setting error state: Setting error state due to 10 failed HTTP requests
+2026-11-06 18:35:10,733 [INFO] bbot.modules.crt base.py:1696 Error parsing results for query "ptxbac.be" (status code 400)
+2026-11-06 18:35:10,795 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (CNAME): *.edpnet.com
+2026-11-06 18:35:12,100 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.citymesh.guide
+2026-11-06 18:35:12,208 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.citymesh.guide
+2026-11-06 18:35:18,739 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,173:15:0), wayback(53:1:0), crt_db(52:1:0), dnsbimi(51:1:0), subdomaincenter(50:1:0), rapiddns(47:1:0), dnsdumpster(45:1:0), myssl(44:1:0), certspotter(43:1:0), urlscan(42:1:0), dnscaa(41:1:0), dnstlsrpt(40:1:0), hackertarget(39:1:0), anubisdb(38:1:0), azure_tenant(35:1:0), shodan_idb(6:1:0)
+2026-11-06 18:35:18,739 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 54, OPEN_TCP_PORT: 7, ORG_STUB: 3, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:35:18,739 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,249 processed in the past 15 seconds)
+2026-11-06 18:35:28,801 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.edpnet.nl
+2026-11-06 18:35:33,740 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,574:15:0), wayback(58:1:0), crt_db(57:1:0), dnsbimi(56:1:0), subdomaincenter(53:1:0), rapiddns(51:1:0), dnsdumpster(50:1:0), myssl(49:1:0), certspotter(48:1:0), urlscan(47:1:0), dnscaa(45:1:0), dnstlsrpt(44:1:0), anubisdb(39:1:0), hackertarget(37:1:0), azure_tenant(21:1:0)
+2026-11-06 18:35:33,740 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 11, ORG_STUB: 7, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:35:33,740 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (579 processed in the past 15 seconds)
+2026-11-06 18:35:48,741 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,598:15:0), crt_db(57:1:0), wayback(56:1:0), dnsbimi(55:1:0), subdomaincenter(53:1:0), rapiddns(51:1:0), dnsdumpster(50:1:0), myssl(49:1:0), certspotter(48:1:0), urlscan(46:1:0), dnscaa(44:1:0), dnstlsrpt(44:1:0), anubisdb(39:1:0), hackertarget(37:1:0), azure_tenant(10:1:0)
+2026-11-06 18:35:48,742 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 11, ORG_STUB: 7, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:35:48,742 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (43 processed in the past 15 seconds)
+2026-11-06 18:36:03,742 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,697:15:0), crt_db(56:1:0), wayback(56:1:0), dnsbimi(55:1:0), subdomaincenter(53:1:0), rapiddns(51:1:0), dnsdumpster(50:1:0), myssl(49:1:0), certspotter(48:1:0), urlscan(46:1:0), dnscaa(44:1:0), dnstlsrpt(44:1:0), anubisdb(39:1:0), hackertarget(37:1:0), azure_tenant(4:1:0)
+2026-11-06 18:36:03,743 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 14, ORG_STUB: 7, SCAN: 1, TECHNOLOGY: 1
+2026-11-06 18:36:03,743 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (190 processed in the past 15 seconds)
+2026-11-06 18:36:18,744 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,867:15:0), crt_db(56:1:0), wayback(56:1:0), dnsbimi(55:1:0), subdomaincenter(53:1:0), rapiddns(47:1:0), urlscan(46:1:0), myssl(45:1:0), certspotter(43:1:0), dnstlsrpt(43:1:0), dnscaa(41:1:0), dnsdumpster(41:1:0), anubisdb(39:1:0), hackertarget(29:1:0)
+2026-11-06 18:36:18,744 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 57, OPEN_TCP_PORT: 24, ORG_STUB: 9, TECHNOLOGY: 2, SCAN: 1
+2026-11-06 18:36:18,744 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (400 processed in the past 15 seconds)
+2026-11-06 18:36:33,746 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,957:15:0), crt_db(62:1:0), dnsbimi(60:1:0), subdomaincenter(57:1:0), wayback(57:1:0), certspotter(49:1:0), dnstlsrpt(47:1:0), urlscan(46:1:0), dnscaa(44:1:0), rapiddns(43:1:0), myssl(41:1:0), anubisdb(39:1:0), dnsdumpster(36:1:0), hackertarget(35:1:0)
+2026-11-06 18:36:33,746 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 63, OPEN_TCP_PORT: 24, ORG_STUB: 9, TECHNOLOGY: 2, SCAN: 1
+2026-11-06 18:36:33,746 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (259 processed in the past 15 seconds)
+2026-11-06 18:36:48,747 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,976:15:0), crt_db(90:1:0), dnsbimi(88:1:0), wayback(86:1:0), subdomaincenter(85:1:0), certspotter(78:1:0), dnstlsrpt(73:1:0), rapiddns(72:1:0), dnscaa(66:1:0), dnsdumpster(65:1:0), urlscan(55:1:0), hackertarget(48:1:0), myssl(44:1:0), anubisdb(40:1:0), ipneighbor(0:0:15), asn(0:0:1)
+2026-11-06 18:36:48,747 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 91, OPEN_TCP_PORT: 37, ORG_STUB: 13, TECHNOLOGY: 3, SCAN: 1
+2026-11-06 18:36:48,747 [INFO] bbot.scanner scanner.py:1340 citymesh: 16 events in queue (586 processed in the past 15 seconds)
+2026-11-06 18:37:03,754 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(2,122:15:2), crt_db(296:1:0), wayback(288:1:0), certspotter(284:1:0), dnsbimi(278:1:0), subdomaincenter(274:1:0), dnscaa(267:1:0), rapiddns(238:1:0), dnsdumpster(214:1:0), dnstlsrpt(202:1:0), shodan_idb(117:1:0), speculate(0:0:7), cloudcheck(2:0:0), python(1:0:0)
+2026-11-06 18:37:03,754 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: OPEN_TCP_PORT: 382, DNS_NAME: 263, TECHNOLOGY: 50, ORG_STUB: 22, AZURE_TENANT: 5, SCAN: 1, ASN: 1, FINDING: 1 (1 INFO)
+2026-11-06 18:37:03,755 [INFO] bbot.scanner scanner.py:1340 citymesh: 8 events in queue (10,442 processed in the past 15 seconds)
+2026-11-06 18:37:18,755 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(1,813:15:0), crt_db(345:1:0), wayback(338:1:0), certspotter(334:1:0), dnsbimi(328:1:0), subdomaincenter(315:1:0), dnscaa(299:1:0), dnstlsrpt(216:1:0), dnsdumpster(200:1:0), shodan_idb(2:1:0), python(1:0:0)
+2026-11-06 18:37:18,755 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: OPEN_TCP_PORT: 393, DNS_NAME: 311, TECHNOLOGY: 50, ORG_STUB: 22, AZURE_TENANT: 7, ASN: 3, SCAN: 1, FINDING: 1 (1 INFO)
+2026-11-06 18:37:18,756 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2,296 processed in the past 15 seconds)
+2026-11-06 18:37:20,320 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (TXT): *.edpnet.com
+2026-11-06 18:37:20,330 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SOA): *.edpnet.com
+2026-11-06 18:37:20,764 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SRV): *.edpnet.com
+2026-11-06 18:37:20,844 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (MX): *.edpnet.com
+2026-11-06 18:37:20,896 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (NS): *.edpnet.com
+2026-11-06 18:37:33,758 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) dnsresolve(747:15:0), crt_db(587:1:0), wayback(580:1:0), certspotter(576:1:0), dnsbimi(570:1:0), subdomaincenter(551:1:0), dnscaa(459:1:0), dnstlsrpt(348:1:0), shodan_idb(79:1:0)
+2026-11-06 18:37:33,758 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 509, OPEN_TCP_PORT: 482, TECHNOLOGY: 64, ORG_STUB: 25, IP_ADDRESS: 8, AZURE_TENANT: 7, ASN: 4, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:37:33,758 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (8,479 processed in the past 15 seconds)
+2026-11-06 18:37:48,760 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(641:1:0), wayback(636:1:0), certspotter(632:1:0), dnsbimi(602:1:0), subdomaincenter(585:1:0), dnsresolve(443:15:0), dnscaa(276:1:0)
+2026-11-06 18:37:48,760 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 525, OPEN_TCP_PORT: 500, TECHNOLOGY: 71, IP_ADDRESS: 34, ORG_STUB: 25, ASN: 13, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:37:48,760 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (3,370 processed in the past 15 seconds)
+2026-11-06 18:38:03,761 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(644:1:0), certspotter(635:1:0), wayback(635:1:0), dnsbimi(573:1:0), subdomaincenter(560:1:0), dnsresolve(482:15:0), dnscaa(184:1:0), python(2:0:0)
+2026-11-06 18:38:03,761 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 526, OPEN_TCP_PORT: 514, TECHNOLOGY: 71, IP_ADDRESS: 46, ORG_STUB: 25, ASN: 13, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:03,761 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (481 processed in the past 15 seconds)
+2026-11-06 18:38:18,763 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(779:1:0), certspotter(774:1:0), wayback(774:1:0), dnsbimi(712:1:0), subdomaincenter(693:1:0), dnscaa(309:1:0), dnsresolve(93:15:0), dnstlsrpt(4:1:0), shodan_idb(2:1:0), python(1:0:0)
+2026-11-06 18:38:18,763 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 663, OPEN_TCP_PORT: 532, IP_ADDRESS: 86, TECHNOLOGY: 71, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:18,763 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2,426 processed in the past 15 seconds)
+2026-11-06 18:38:33,765 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(812:1:0), certspotter(807:1:0), wayback(807:1:0), dnsbimi(745:1:0), subdomaincenter(726:1:0), dnscaa(106:1:0)
+2026-11-06 18:38:33,765 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 697, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:33,765 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,477 processed in the past 15 seconds)
+2026-11-06 18:38:48,767 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(817:1:0), certspotter(816:1:0), wayback(816:1:0), subdomaincenter(733:1:0), dnsbimi(621:1:0)
+2026-11-06 18:38:48,767 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 706, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:38:48,767 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (104 processed in the past 15 seconds)
+2026-11-06 18:39:03,768 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) crt_db(817:1:0), certspotter(816:1:0), wayback(816:1:0), subdomaincenter(720:1:0), dnsbimi(621:1:0)
+2026-11-06 18:39:03,768 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 706, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:39:03,768 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:39:12,103 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,107 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (TXT): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,115 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,243 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (CNAME): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,372 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SOA): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,522 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (MX): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,597 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SRV): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:12,640 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (NS): *.le.ssl.lxweb1.edpnet.net
+2026-11-06 18:39:16,712 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (TXT): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:16,826 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (CNAME): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,039 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (AAAA): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,280 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SRV): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,345 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (NS): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,353 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (A): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,440 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (MX): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:17,491 [INFO] bbot.core.helpers.dns dns.py:328 Encountered domain with wildcard DNS (SOA): *.le.ssl.lxextweb.edpnet.net
+2026-11-06 18:39:18,770 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(825:1:0), certspotter(824:1:0), crt_db(822:1:0), subdomaincenter(731:1:0), dnsbimi(632:1:0), dnsresolve(200:15:0), shodan_idb(1:1:0)
+2026-11-06 18:39:18,770 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 717, OPEN_TCP_PORT: 545, IP_ADDRESS: 109, TECHNOLOGY: 72, ORG_STUB: 25, ASN: 14, AZURE_TENANT: 7, FINDING: 2 (2 INFO), SCAN: 1
+2026-11-06 18:39:18,770 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (620 processed in the past 15 seconds)
+2026-11-06 18:39:33,771 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(870:1:0), certspotter(869:1:0), crt_db(856:1:0), subdomaincenter(702:1:0), dnsbimi(400:1:0), dnsresolve(183:15:0), shodan_idb(177:1:0)
+2026-11-06 18:39:33,771 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 773, OPEN_TCP_PORT: 589, IP_ADDRESS: 109, TECHNOLOGY: 97, ORG_STUB: 25, ASN: 14, FINDING: 9 (9 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:39:33,771 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (3,190 processed in the past 15 seconds)
+2026-11-06 18:39:48,772 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(891:1:0), certspotter(890:1:0), crt_db(877:1:0), subdomaincenter(721:1:0), dnsbimi(324:1:0), dnsresolve(181:15:0), dnscaa(8:1:0), dnstlsrpt(8:1:0), shodan_idb(4:1:0), python(1:0:0)
+2026-11-06 18:39:48,772 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 792, OPEN_TCP_PORT: 594, IP_ADDRESS: 114, TECHNOLOGY: 97, ORG_STUB: 25, ASN: 14, FINDING: 9 (9 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:39:48,772 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (664 processed in the past 15 seconds)
+2026-11-06 18:40:03,773 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) wayback(925:1:0), certspotter(924:1:0), crt_db(906:1:0), subdomaincenter(724:1:0), dnsbimi(329:1:0), dnsresolve(227:15:0), dnstlsrpt(17:1:0), dnscaa(16:1:0), shodan_idb(11:1:0), python(1:0:0), speculate(0:0:1)
+2026-11-06 18:40:03,774 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 826, OPEN_TCP_PORT: 594, IP_ADDRESS: 116, TECHNOLOGY: 97, ORG_STUB: 25, ASN: 14, FINDING: 9 (9 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:03,774 [INFO] bbot.scanner scanner.py:1340 citymesh: 3 events in queue (521 processed in the past 15 seconds)
+2026-11-06 18:40:18,775 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(950:1:0), wayback(949:1:0), crt_db(932:1:0), subdomaincenter(728:1:0), dnsbimi(333:1:0), dnsresolve(168:15:0), shodan_idb(49:1:0), dnstlsrpt(20:1:0), dnscaa(18:1:0)
+2026-11-06 18:40:18,775 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 852, OPEN_TCP_PORT: 595, IP_ADDRESS: 168, TECHNOLOGY: 100, ORG_STUB: 25, ASN: 14, FINDING: 10 (10 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:18,776 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,072 processed in the past 15 seconds)
+2026-11-06 18:40:33,777 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(974:1:0), wayback(973:1:0), crt_db(940:1:0), subdomaincenter(720:1:0), dnsbimi(334:1:0), dnsresolve(140:15:0), shodan_idb(37:1:0), dnscaa(4:1:0)
+2026-11-06 18:40:33,777 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 876, OPEN_TCP_PORT: 595, IP_ADDRESS: 211, TECHNOLOGY: 100, ORG_STUB: 25, ASN: 14, FINDING: 10 (10 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:33,777 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,420 processed in the past 15 seconds)
+2026-11-06 18:40:48,779 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(994:1:0), wayback(993:1:0), crt_db(947:1:0), subdomaincenter(740:1:0), dnsbimi(295:1:0), dnsresolve(178:15:0)
+2026-11-06 18:40:48,779 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 912, OPEN_TCP_PORT: 633, IP_ADDRESS: 213, TECHNOLOGY: 110, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:40:48,779 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,562 processed in the past 15 seconds)
+2026-11-06 18:41:03,781 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,043:1:0), wayback(1,043:1:0), crt_db(998:1:0), subdomaincenter(755:1:0), dnsbimi(257:1:0)
+2026-11-06 18:41:03,781 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 964, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:03,781 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,098 processed in the past 15 seconds)
+2026-11-06 18:41:18,782 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,058:1:0), wayback(1,058:1:0), crt_db(1,011:1:0), subdomaincenter(728:1:0), dnsbimi(272:1:0)
+2026-11-06 18:41:18,782 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 979, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:18,782 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (192 processed in the past 15 seconds)
+2026-11-06 18:41:33,784 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,065:1:0), wayback(1,065:1:0), crt_db(1,018:1:0), subdomaincenter(446:1:0), dnsbimi(279:1:0)
+2026-11-06 18:41:33,784 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 986, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:33,784 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (491 processed in the past 15 seconds)
+2026-11-06 18:41:48,785 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,065:1:0), wayback(1,065:1:0), crt_db(1,010:1:0), subdomaincenter(417:1:0), dnsbimi(217:1:0)
+2026-11-06 18:41:48,786 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 986, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:41:48,786 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (251 processed in the past 15 seconds)
+2026-11-06 18:42:03,788 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,065:1:0), wayback(1,065:1:0), crt_db(1,010:1:0), subdomaincenter(417:1:0), dnsbimi(217:1:0)
+2026-11-06 18:42:03,788 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 986, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:03,788 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:42:18,790 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,069:1:0), wayback(1,069:1:0), crt_db(1,003:1:0), subdomaincenter(420:1:0), dnsbimi(221:1:0)
+2026-11-06 18:42:18,790 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 990, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:18,790 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (69 processed in the past 15 seconds)
+2026-11-06 18:42:33,792 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,071:1:0), wayback(1,071:1:0), crt_db(1,005:1:0), subdomaincenter(103:1:0), dnsbimi(80:1:0)
+2026-11-06 18:42:33,792 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 992, OPEN_TCP_PORT: 638, IP_ADDRESS: 213, TECHNOLOGY: 111, ORG_STUB: 25, ASN: 14, FINDING: 12 (12 INFO), AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:33,792 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (47 processed in the past 15 seconds)
+2026-11-06 18:42:48,793 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,124:1:0), wayback(1,119:1:0), crt_db(1,045:1:0), subdomaincenter(153:1:0), shodan_idb(19:1:0), dnsresolve(0:8:0)
+2026-11-06 18:42:48,793 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1049, OPEN_TCP_PORT: 657, IP_ADDRESS: 230, TECHNOLOGY: 127, ORG_STUB: 25, FINDING: 16 (16 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:42:48,793 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1,888 processed in the past 15 seconds)
+2026-11-06 18:43:03,794 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,124:1:0), wayback(1,119:1:0), crt_db(1,045:1:0), subdomaincenter(153:1:0)
+2026-11-06 18:43:03,794 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1049, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:03,795 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (175 processed in the past 15 seconds)
+2026-11-06 18:43:18,796 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,126:1:0), wayback(1,121:1:0), crt_db(1,038:1:0), subdomaincenter(117:1:0)
+2026-11-06 18:43:18,796 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1051, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:18,796 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (23 processed in the past 15 seconds)
+2026-11-06 18:43:33,797 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,126:1:0), wayback(1,121:1:0), crt_db(1,038:1:0)
+2026-11-06 18:43:33,797 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1051, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:33,797 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:43:48,799 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,127:1:0), wayback(1,112:1:0), crt_db(1,022:1:0)
+2026-11-06 18:43:48,799 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:43:48,799 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (12 processed in the past 15 seconds)
+2026-11-06 18:44:03,800 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,112:1:0), crt_db(1,022:1:0)
+2026-11-06 18:44:03,800 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:03,800 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:44:18,801 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,112:1:0), crt_db(994:1:0)
+2026-11-06 18:44:18,801 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:18,801 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:44:33,803 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,103:1:0), crt_db(990:1:0)
+2026-11-06 18:44:33,803 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:33,803 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (4 processed in the past 15 seconds)
+2026-11-06 18:44:48,804 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,121:1:0), wayback(1,103:1:0), crt_db(990:1:0)
+2026-11-06 18:44:48,804 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1052, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:44:48,804 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:45:03,806 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,122:1:0), wayback(1,104:1:0), crt_db(964:1:0)
+2026-11-06 18:45:03,806 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1053, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:03,806 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (9 processed in the past 15 seconds)
+2026-11-06 18:45:18,807 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,122:1:0), wayback(1,104:1:0), crt_db(964:1:0)
+2026-11-06 18:45:18,807 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1053, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:18,807 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:45:33,809 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,123:1:0), wayback(1,105:1:0), crt_db(953:1:0)
+2026-11-06 18:45:33,809 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1054, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:33,809 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (9 processed in the past 15 seconds)
+2026-11-06 18:45:48,810 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,130:1:0), wayback(1,109:1:0), crt_db(960:1:0)
+2026-11-06 18:45:48,810 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1061, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:45:48,810 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (69 processed in the past 15 seconds)
+2026-11-06 18:46:03,812 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), wayback(1,110:1:0), crt_db(958:1:0)
+2026-11-06 18:46:03,812 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1062, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:03,812 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (9 processed in the past 15 seconds)
+2026-11-06 18:46:18,813 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,138:1:0), wayback(1,114:1:0), crt_db(965:1:0)
+2026-11-06 18:46:18,813 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1069, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:18,813 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (57 processed in the past 15 seconds)
+2026-11-06 18:46:33,815 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,138:1:0), wayback(1,041:1:0), crt_db(960:1:0)
+2026-11-06 18:46:33,815 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1069, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:33,815 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (3 processed in the past 15 seconds)
+2026-11-06 18:46:48,818 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,138:1:0), wayback(1,041:1:0), crt_db(917:1:0)
+2026-11-06 18:46:48,818 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1069, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:46:48,818 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:47:03,820 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(928:1:0)
+2026-11-06 18:47:03,821 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:03,821 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (90 processed in the past 15 seconds)
+2026-11-06 18:47:18,822 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(927:1:0)
+2026-11-06 18:47:18,822 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:18,822 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (181 processed in the past 15 seconds)
+2026-11-06 18:47:33,823 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(907:1:0)
+2026-11-06 18:47:33,823 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:33,823 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:47:48,825 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(1,052:1:0), crt_db(907:1:0)
+2026-11-06 18:47:48,825 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:47:48,825 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:48:03,827 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(988:1:0), crt_db(884:1:0)
+2026-11-06 18:48:03,827 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:03,827 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (21 processed in the past 15 seconds)
+2026-11-06 18:48:18,829 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(988:1:0), crt_db(884:1:0)
+2026-11-06 18:48:18,829 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:18,829 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:48:33,831 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), wayback(988:1:0), crt_db(880:1:0)
+2026-11-06 18:48:33,831 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1080, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:33,831 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (17 processed in the past 15 seconds)
+2026-11-06 18:48:48,833 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(989:1:0), crt_db(874:1:0)
+2026-11-06 18:48:48,833 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:48:48,833 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (65 processed in the past 15 seconds)
+2026-11-06 18:49:03,835 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(989:1:0), crt_db(874:1:0)
+2026-11-06 18:49:03,835 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:03,835 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:49:18,836 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(989:1:0), crt_db(874:1:0)
+2026-11-06 18:49:18,836 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:18,836 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:49:33,838 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(988:1:0), crt_db(855:1:0)
+2026-11-06 18:49:33,838 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:33,838 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 18:49:48,839 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,116:1:0), wayback(988:1:0), crt_db(855:1:0)
+2026-11-06 18:49:48,839 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:49:48,839 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:49:49,816 [WARNING] bbot.modules.wayback base.py:1760 Error JSON-decoding archive.org response for query "biotechnology-citymesh.com"
+2026-11-06 18:50:03,840 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), crt_db(818:1:0), wayback(817:1:0), dnsresolve(0:3:0)
+2026-11-06 18:50:03,840 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:03,840 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (12 processed in the past 15 seconds)
+2026-11-06 18:50:18,842 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), crt_db(818:1:0), wayback(817:1:0), dnsresolve(0:3:0)
+2026-11-06 18:50:18,842 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:18,842 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:50:33,844 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), wayback(817:1:0), crt_db(746:1:0)
+2026-11-06 18:50:33,844 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:33,844 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (19 processed in the past 15 seconds)
+2026-11-06 18:50:48,846 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,112:1:0), wayback(817:1:0), crt_db(746:1:0)
+2026-11-06 18:50:48,846 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1081, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:50:48,846 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:51:03,847 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,114:1:0), wayback(819:1:0), crt_db(729:1:0)
+2026-11-06 18:51:03,847 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1083, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:03,847 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (21 processed in the past 15 seconds)
+2026-11-06 18:51:18,849 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), crt_db(456:1:0), wayback(332:1:0)
+2026-11-06 18:51:18,849 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1084, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:18,849 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (34 processed in the past 15 seconds)
+2026-11-06 18:51:33,850 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,115:1:0), crt_db(456:1:0), wayback(332:1:0)
+2026-11-06 18:51:33,850 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1084, OPEN_TCP_PORT: 661, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:33,850 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:51:48,851 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,124:1:0), crt_db(361:1:0), wayback(341:1:0), dnsresolve(7:15:0), dnscaa(5:1:0), python(2:0:0)
+2026-11-06 18:51:48,851 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1096, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:51:48,851 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (209 processed in the past 15 seconds)
+2026-11-06 18:52:03,853 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(368:1:0)
+2026-11-06 18:52:03,853 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:03,853 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (138 processed in the past 15 seconds)
+2026-11-06 18:52:18,854 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(362:1:0), dnsresolve(0:3:0)
+2026-11-06 18:52:18,854 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:18,855 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (7 processed in the past 15 seconds)
+2026-11-06 18:52:33,856 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(336:1:0), dnsresolve(0:1:0)
+2026-11-06 18:52:33,856 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:33,856 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (14 processed in the past 15 seconds)
+2026-11-06 18:52:48,859 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,131:1:0), crt_db(336:1:0)
+2026-11-06 18:52:48,859 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:52:48,859 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 18:53:03,860 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(316:1:0)
+2026-11-06 18:53:03,860 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:03,861 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (58 processed in the past 15 seconds)
+2026-11-06 18:53:18,861 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(316:1:0)
+2026-11-06 18:53:18,862 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:18,862 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:53:33,863 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(188:1:0), dnsresolve(0:3:0)
+2026-11-06 18:53:33,863 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:33,863 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (7 processed in the past 15 seconds)
+2026-11-06 18:53:48,864 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(188:1:0)
+2026-11-06 18:53:48,864 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:53:48,864 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (12 processed in the past 15 seconds)
+2026-11-06 18:54:03,865 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(4:1:0)
+2026-11-06 18:54:03,866 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:03,866 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:54:18,867 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0), crt_db(4:1:0)
+2026-11-06 18:54:18,867 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:18,868 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:54:33,868 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:54:33,869 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:33,869 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:54:48,870 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:54:48,870 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:54:48,870 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:03,871 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:03,872 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:03,872 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:18,873 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:18,873 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:18,873 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:33,875 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:33,875 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:33,876 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:55:48,877 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,078:1:0)
+2026-11-06 18:55:48,877 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:55:48,877 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:56:03,879 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:03,879 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:03,879 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 18:56:18,880 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:18,880 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:18,880 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:56:33,882 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:33,882 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:33,882 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:56:48,883 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:56:48,883 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:56:48,883 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:03,884 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:03,884 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:03,884 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:18,886 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:18,886 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:18,886 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:33,887 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:33,888 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:33,888 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:57:48,889 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:57:48,889 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:57:48,889 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:03,890 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:03,890 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:03,890 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:18,892 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:18,892 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:18,892 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:33,893 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:33,893 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:33,893 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:58:48,894 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(1,048:1:0)
+2026-11-06 18:58:48,894 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:58:48,894 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:59:03,895 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:03,895 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:03,896 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 18:59:18,896 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:18,896 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:18,897 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:59:33,898 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:33,898 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:33,898 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 18:59:48,899 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 18:59:48,899 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 18:59:48,899 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:03,901 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:03,901 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:03,901 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:18,902 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:18,902 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:18,902 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:33,904 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:33,904 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:33,904 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:00:48,905 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:00:48,905 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:00:48,905 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:03,907 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:03,907 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:03,907 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:18,908 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:18,909 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:18,909 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:33,910 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:33,910 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:33,911 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:01:48,912 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(997:1:0)
+2026-11-06 19:01:48,912 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:01:48,912 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:02:03,913 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:03,913 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:03,913 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:02:18,914 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:18,914 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:18,914 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:02:33,916 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:33,916 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:33,916 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:02:48,918 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:02:48,918 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:02:48,918 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:03,919 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:03,919 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:03,919 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:18,921 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:18,921 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:18,921 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:33,923 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:33,923 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:33,923 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:03:48,924 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:03:48,924 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:03:48,924 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:03,927 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:03,927 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:03,927 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:18,928 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:18,929 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:18,929 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:33,930 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:33,930 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:33,930 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:04:48,931 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(987:1:0)
+2026-11-06 19:04:48,931 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1106, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:04:48,931 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:05:03,931 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:03,932 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:03,932 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (10 processed in the past 15 seconds)
+2026-11-06 19:05:18,933 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:18,933 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:18,933 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:05:33,934 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:33,934 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:33,934 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:05:48,935 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:05:48,935 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:05:48,936 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:03,937 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:03,937 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:03,937 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:18,938 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:18,938 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:18,938 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:33,940 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:33,940 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:33,940 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:06:48,941 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:06:48,941 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:06:48,941 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:03,942 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:03,943 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:03,943 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:18,944 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:18,944 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:18,944 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:33,946 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:33,946 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:33,946 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:07:48,948 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(957:1:0)
+2026-11-06 19:07:48,948 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:07:48,948 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:08:03,949 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:03,949 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:03,949 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:08:18,950 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:18,950 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:18,950 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:08:33,951 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:33,951 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:33,951 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:08:48,953 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:08:48,953 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:08:48,953 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:03,954 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:03,954 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:03,954 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:18,956 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:18,956 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:18,956 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:33,957 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:33,957 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:33,957 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:09:48,960 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:09:48,960 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:09:48,960 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:03,961 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:03,961 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:03,961 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:18,962 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:18,963 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:18,963 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:33,964 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:33,964 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:33,964 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:10:48,965 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(921:1:0)
+2026-11-06 19:10:48,966 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:10:48,966 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:11:03,967 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:03,968 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:03,968 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 19:11:18,969 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:18,969 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:18,969 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:11:33,971 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:33,971 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:33,971 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:11:48,972 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:11:48,972 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:11:48,972 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:03,974 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:03,974 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:03,974 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:18,975 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:18,975 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:18,975 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:33,977 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:33,977 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:33,977 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:12:48,979 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:12:48,979 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:12:48,979 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:03,981 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:03,981 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:03,981 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:18,983 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:18,983 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:18,983 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:33,984 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:33,984 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:33,984 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:13:48,986 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(749:1:0)
+2026-11-06 19:13:48,986 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:13:48,986 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:14:03,987 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:03,987 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:03,987 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:14:18,988 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:18,988 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:18,988 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:14:33,989 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:33,989 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:33,989 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:14:48,991 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:14:48,991 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:14:48,991 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:03,993 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:03,993 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:03,993 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:18,994 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:18,994 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:18,994 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:33,996 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:33,996 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:33,996 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:15:48,997 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:15:48,997 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:15:48,997 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:03,999 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:03,999 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:03,999 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:19,001 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:19,002 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:19,002 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:34,003 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:34,003 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:34,003 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:16:49,005 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(731:1:0)
+2026-11-06 19:16:49,005 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:16:49,005 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:17:04,007 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:04,007 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:04,007 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (2 processed in the past 15 seconds)
+2026-11-06 19:17:19,008 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:19,009 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:19,009 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:17:34,010 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:34,010 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:34,010 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:17:49,011 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:17:49,011 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:17:49,011 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:04,013 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:04,013 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:04,013 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:19,015 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:19,015 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:19,015 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:34,016 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:34,017 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:34,017 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:18:49,018 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:18:49,018 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:18:49,018 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:04,020 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:04,021 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:04,021 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:19,021 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:19,022 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:19,022 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:34,023 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:34,023 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:34,023 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:19:49,026 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(376:1:0)
+2026-11-06 19:19:49,026 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:19:49,026 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:20:04,027 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:04,027 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:04,028 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (1 processed in the past 15 seconds)
+2026-11-06 19:20:19,029 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:19,029 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:19,029 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:20:34,030 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:34,030 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:34,030 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:20:49,032 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:20:49,032 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:20:49,032 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:04,033 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:04,033 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:04,033 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:19,034 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:19,034 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:19,034 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:34,036 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:34,036 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:34,036 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:21:49,037 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:21:49,037 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:21:49,038 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:04,039 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:04,039 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:04,039 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:19,040 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:19,041 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:19,041 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:34,042 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:34,042 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:34,043 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:49,044 [INFO] bbot.scanner scanner.py:1340 citymesh: Modules running (incoming:processing:outgoing) certspotter(363:1:0)
+2026-11-06 19:22:49,044 [INFO] bbot.scanner scanner.py:1340 citymesh: Events produced so far: DNS_NAME: 1107, OPEN_TCP_PORT: 662, IP_ADDRESS: 230, TECHNOLOGY: 134, ORG_STUB: 25, FINDING: 17 (17 INFO), ASN: 14, AZURE_TENANT: 7, SCAN: 1
+2026-11-06 19:22:49,044 [INFO] bbot.scanner scanner.py:1340 citymesh: No events in queue (0 processed in the past 15 seconds)
+2026-11-06 19:22:51,439 [INFO] bbot.scanner scanner.py:928 Finishing scan
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | ASN      | Subnet Count   | Name                        | Description               | Country   |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +==========+================+=============================+===========================+===========+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS6848   | 112            | TELENET-AS                  | Telenet BV                | BE        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS8075   | 1,359          | MICROSOFT-CORP-MSN-AS-BLOCK | Microsoft Corporation     | US        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS8368   | 105            | DSTNY-BACKBONE              | Dstny BE N.V.             | BE        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS9031   | 12             | EDPNETapp                   | EDPNET Belgium BV         | BE        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS13335  | 5,775          | CLOUDFLARENET               | Cloudflare, Inc.          | US        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS14061  | 896            | DIGITALOCEAN-ASN            | DigitalOcean, LLC         | US        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS16276  | 826            | OVH                         | OVH SAS                   | FR        |
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,655 [INFO] bbot.modules.asn base.py:1696 | AS16509  | 23,671         | AMAZON-02                   | Amazon.com, Inc.          | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS39686  | 96             | AS-EUROFIBER                | Eurofiber Nederland BV    | NL        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS61157  | 218            | PLUSSERVER-ASN1             | PlusServer GmbH           | DE        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS63949  | 454            | AKAMAI-LINODE-AP            | Akamai Technologies, Inc. | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS199095 | 9              | CITYMESH-AS                 | Citymesh Integrator NV    | BE        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS209242 | 301            | CLOUDFLARESPECTRUM          | Cloudflare London, LLC    | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 | AS396982 | 3,909          | GOOGLE-CLOUD-PLATFORM       | Google LLC                | US        |
+2026-11-06 19:22:51,656 [INFO] bbot.modules.asn base.py:1696 +----------+----------------+-----------------------------+---------------------------+-----------+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 +-----------------+-----------------------------------+------------------------------------------+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 | Module          | Produced                          | Consumed                                 |
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 +=================+===================================+==========================================+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 | shodan_idb      | 834 (22 DNS_NAME, 16 FINDING, 662 | 190 (190 DNS_NAME)                       |
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 |                 | OPEN_TCP_PORT, 134 TECHNOLOGY)    |                                          |
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 +-----------------+-----------------------------------+------------------------------------------+
+2026-11-06 19:22:51,661 [INFO] bbot.modules.aggregate base.py:1696 | crt_db          | 189 (189 DNS_NAME)                | 42 (42 DNS_NAME)                         |
