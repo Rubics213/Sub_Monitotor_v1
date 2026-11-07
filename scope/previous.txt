@@ -2269,6 +2269,7 @@ kentico-rbsbackprod.redbullsalzburg.at
 kentico-rbsbackstage.redbullsalzburg.at
 kentico-rbsfrontprod.redbullsalzburg.at
 kentico-rbsfrontstage.redbullsalzburg.at
+keywi-easyjob-prod.redbull.com
 kickoff.admin.access.redbull.ch
 kids-teens-online.redbull.at
 kingoftherock.redbull.ru
@@ -3241,6 +3242,7 @@ partners.redbull.racing
 partners.redbull.tv
 partners.redbullracing.com
 passwordcheck.redbull.com
+passwordless.redbull.com
 passwordreset-staging.redbullmediahouse.com
 passwordreset.redbullmediahouse.com
 pathfinder.rbleipzig.de
