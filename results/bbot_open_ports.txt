@@ -1,6 +1,7 @@
 212.71.2.135.powered.by.edpnet.net:80
 212.71.2.135.powered.by.edpnet.net:8543
 212.71.2.195.powered.by.edpnet.net:8543
+212.71.2.65.powered.by.edpnet.net:80
 _wildcard.le.ssl.lxweb1.edpnet.net:21
 _wildcard.le.ssl.lxweb1.edpnet.net:443
 _wildcard.le.ssl.lxweb1.edpnet.net:80

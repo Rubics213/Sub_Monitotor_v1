@@ -3,6 +3,10 @@
 212.71.2.195.powered.by.edpnet.net	cpe:/a:apache:http_server:2.4.68
 212.71.2.195.powered.by.edpnet.net	cpe:/a:openssl:openssl:3.5.8
 212.71.2.195.powered.by.edpnet.net	cpe:/o:unix:unix
+212.71.2.65.powered.by.edpnet.net	cpe:/a:microsoft:asp.net:4.0.30319
+212.71.2.65.powered.by.edpnet.net	cpe:/a:microsoft:internet_information_services
+212.71.2.65.powered.by.edpnet.net	cpe:/a:microsoft:internet_information_services:10.0
+212.71.2.65.powered.by.edpnet.net	cpe:/o:microsoft:windows
 _wildcard.le.ssl.lxweb1.edpnet.net	cpe:/a:apache:http_server:2.4.68
 _wildcard.le.ssl.lxweb1.edpnet.net	cpe:/a:jquery:jquery
 _wildcard.le.ssl.lxweb1.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
@@ -45,6 +49,7 @@ citymesh.com	cpe:/a:microsoft:asp.net:4.0.30319
 citymesh.com	cpe:/a:php:php:7.3.33
 citymesh.eu	cpe:/a:cloudflare:cloudflare
 citymesh.eu	cpe:/a:litespeedtech:litespeed_web_server
+citymesh.eu	cpe:/a:php:php:7.4.33
 citymesh.fr	cpe:/a:cloudflare:cloudflare
 citymesh.guide	cpe:/a:cloudflare:cloudflare
 citymesh.io	cpe:/a:cloudflare:cloudflare
@@ -226,6 +231,7 @@ speedtest.edpnet.net	cpe:/o:unix:unix
 stagingrecord.citymesh.net	cpe:/o:microsoft:windows
 stagingrecordauth.citymesh.net	cpe:/o:microsoft:windows
 status.citymesh.com	cpe:/a:cloudflare:cloudflare
+status.citymesh.com	cpe:/a:nuxt:nuxt
 status.edpnet.net	cpe:/a:apache:http_server:2.4.67
 status.edpnet.net	cpe:/a:apache:http_server:2.4.68
 status.edpnet.net	cpe:/a:openssl:openssl:1.1.1k

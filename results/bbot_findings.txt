@@ -5,6 +5,7 @@ adslwithouttelephoneline.edpnet.be [INFO/LOW] Shodan - Possible Vulnerabilities 
 adslzondertelefoonlijn.edpnet.be [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
 citymesh.com [INFO/HIGH] Federated Authentication Detected (azure_tenant)
 citymesh.com [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
+citymesh.eu [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
 connectingsenses.be [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
 hostctl.edpnet.net [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
 linemon.citymesh.com [INFO/LOW] Shodan - Possible Vulnerabilities (shodan_idb)
