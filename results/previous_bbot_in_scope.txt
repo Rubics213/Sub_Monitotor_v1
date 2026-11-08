@@ -356,6 +356,7 @@ livechat.citymesh.com
 livechat.edpnet.net
 lmailing01.edpnet.net
 lmailing02.edpnet.net
+lmailproxy02.edpnet.net
 loginucaas.citymeshconnect.com
 logout.citymesh.com
 lweb01.edpnet.net
@@ -365,6 +366,14 @@ lweb04.edpnet.net
 lweb05.edpnet.net
 lweb06.edpnet.net
 lxextweb.edpnet.net
+lxmail-obr-fo-br-b12a.edpnet.net
+lxmail-obr-fo-br-b12b.edpnet.net
+lxmail-obr-fo-br-b12c.edpnet.net
+lxmail-obr-fo-br-b12d.edpnet.net
+lxmail-obr-gr-vd-b12a.edpnet.net
+lxmail-obr-gr-vd-b12b.edpnet.net
+lxmail-obr-gr-vd-b12c.edpnet.net
+lxmail-obr-gr-vd-b12d.edpnet.net
 lxmail01.edpnet.net
 lxmail02.edpnet.net
 lxmail03.edpnet.net

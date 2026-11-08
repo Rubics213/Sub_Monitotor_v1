@@ -1,0 +1,9 @@
+lmailproxy02.edpnet.net
+lxmail-obr-fo-br-b12a.edpnet.net
+lxmail-obr-fo-br-b12b.edpnet.net
+lxmail-obr-fo-br-b12c.edpnet.net
+lxmail-obr-fo-br-b12d.edpnet.net
+lxmail-obr-gr-vd-b12a.edpnet.net
+lxmail-obr-gr-vd-b12b.edpnet.net
+lxmail-obr-gr-vd-b12c.edpnet.net
+lxmail-obr-gr-vd-b12d.edpnet.net

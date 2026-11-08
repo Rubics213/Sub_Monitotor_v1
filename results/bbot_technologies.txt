@@ -181,6 +181,7 @@ myiot.be	cpe:/a:php:php:7.4.33
 ncentric.be	cpe:/a:cloudflare:cloudflare
 ncentric.cloud	cpe:/a:cloudflare:cloudflare
 ncentric.com	cpe:/a:cloudflare:cloudflare
+ncentric.com	cpe:/a:litespeedtech:litespeed_web_server
 opscim.citymesh.com	cpe:/a:postgresql:postgresql
 pbx-concordia.edpnet.net	cpe:/a:apache:http_server:2.4.65
 pbx-concordia.edpnet.net	cpe:/a:apache:http_server:2.4.68
@@ -295,7 +296,11 @@ vpbx.edpnet.net	cpe:/a:php:php:7.4.33
 vpbx.edpnet.net	cpe:/o:unix:unix
 webmail.edpnet.be	cpe:/a:cloudflare:cloudflare
 webmail.edpnet.be	cpe:/a:jquery:jquery
+webmail.edpnet.be	cpe:/a:mysql:mysql
+webmail.edpnet.be	cpe:/a:php:php
 webmail.edpnet.be	cpe:/a:plesk:plesk
+webmail.edpnet.be	cpe:/a:wordpress:wordpress
+webmail.edpnet.be	cpe:/a:wpml:wpml:::~~~wordpress~~
 webmail.edpnet.net	cpe:/a:jquery:jquery
 webmail.edpnet.net	cpe:/a:jquery:jquery_ui
 webmail.edpnet.net	cpe:/a:php:php:8.3.23

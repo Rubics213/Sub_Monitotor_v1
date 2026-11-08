@@ -15,6 +15,10 @@ adslzondertelefoonlijn.edpnet.be:443
 adslzondertelefoonlijn.edpnet.be:80
 adslzondertelefoonlijn.edpnet.be:8443
 analyticsucaas.citymeshconnect.com:80
+api-sense-accept.safety-drones.com:443
+api-sense-accept.safety-drones.com:444
+api-sense-accept.safety-drones.com:80
+api-sense-accept.safety-drones.com:8087
 api-sense-test.safety-drones.com:443
 api-sense-test.safety-drones.com:444
 api-sense-test.safety-drones.com:80
@@ -798,6 +802,7 @@ vpbx.edpnet.net:21
 vpbx.edpnet.net:443
 vpbx.edpnet.net:80
 vpbx.edpnet.net:8443
+vps-ovh-01.edpnet.net:8000
 vps-ovh-issus.edpnet.net:1194
 vps-ovh-issus.edpnet.net:443
 vps-ovh-issus.edpnet.net:500
