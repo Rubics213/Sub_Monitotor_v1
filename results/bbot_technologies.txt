@@ -62,9 +62,12 @@ citymesh.eu	cpe:/a:php:php:7.4.33
 citymesh.fr	cpe:/a:cloudflare:cloudflare
 citymesh.fr	cpe:/a:litespeedtech:litespeed_web_server
 citymesh.guide	cpe:/a:cloudflare:cloudflare
+citymesh.guide	cpe:/a:microsoft:asp.net
+citymesh.guide	cpe:/a:microsoft:internet_information_services
 citymesh.guide	cpe:/a:mysql:mysql
 citymesh.guide	cpe:/a:php:php
 citymesh.guide	cpe:/a:wordpress:wordpress:7.1.4
+citymesh.guide	cpe:/o:microsoft:windows
 citymesh.io	cpe:/a:cloudflare:cloudflare
 citymesh.io	cpe:/a:facebook:react
 citymesh.io	cpe:/a:google:cloud_platform
@@ -80,6 +83,7 @@ citymesh.net	cpe:/a:wordpress:wordpress
 citymesh.nl	cpe:/a:cloudflare:cloudflare
 citymeshconnect.be	cpe:/a:cloudflare:cloudflare
 citymeshconnect.be	cpe:/a:jquery:jquery
+citymeshconnect.be	cpe:/a:jquery:jquery:3.4.1
 citymeshconnect.be	cpe:/a:mysql:mysql
 citymeshconnect.be	cpe:/a:php:php
 citymeshconnect.be	cpe:/a:plesk:plesk

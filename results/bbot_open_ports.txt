@@ -463,6 +463,7 @@ mediaserver-test.safety-drones.com:80
 mediaserver-test.safety-drones.com:8087
 mediaserver.safety-drones.com:443
 mediaserver.safety-drones.com:80
+mx2.fax.edpnet.net:1194
 myiot.be:2052
 myiot.be:2053
 myiot.be:2082

@@ -394,6 +394,8 @@ monitoring.ncentric.cloud
 mqtt.broker.towereye.be
 mqtt.citymesh.io
 msg-viewer.citymesh.net
+mx1.fax.edpnet.net
+mx2.fax.edpnet.net
 my.citymesh.com
 my.edpnet.net
 myiot.be
