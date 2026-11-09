@@ -1,2 +1,0 @@
-mx1.fax.edpnet.net
-mx2.fax.edpnet.net
