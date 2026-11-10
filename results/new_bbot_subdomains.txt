@@ -1,0 +1,2 @@
+teams-gw1-armacell.edpnet.net
+teams-gw2-armacell.edpnet.net

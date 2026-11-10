@@ -500,7 +500,9 @@ support.edpnet.be
 support.edpnet.net
 support.engiem2m.com
 syslog.edpnet.net
+teams-gw1-armacell.edpnet.net
 teams-gw1-demo.edpnet.net
+teams-gw2-armacell.edpnet.net
 teams-gw2-demo.edpnet.net
 tech-radar.citymesh.io
 test-ipv6.edpnet.net

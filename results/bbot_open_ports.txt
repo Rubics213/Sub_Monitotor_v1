@@ -356,6 +356,10 @@ hostctl.edpnet.net:21
 hostctl.edpnet.net:443
 hostctl.edpnet.net:80
 hostctl.edpnet.net:8443
+hosting.edpnet.net:21
+hosting.edpnet.net:443
+hosting.edpnet.net:80
+hosting.edpnet.net:8443
 intrelay.edpnet.net:110
 intrelay.edpnet.net:143
 intrelay.edpnet.net:25
