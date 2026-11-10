@@ -90,12 +90,17 @@ citymeshconnect.be	cpe:/a:jquery:jquery
 citymeshconnect.be	cpe:/a:jquery:jquery:3.4.1
 citymeshconnect.be	cpe:/a:mysql:mysql
 citymeshconnect.be	cpe:/a:php:php
+citymeshconnect.be	cpe:/a:php:php:8.2.27
+citymeshconnect.be	cpe:/a:php:php:8.3.30
 citymeshconnect.be	cpe:/a:plesk:plesk
 citymeshconnect.be	cpe:/a:tiny:tinymce
 citymeshconnect.be	cpe:/a:wordpress:wordpress
 citymeshconnect.com	cpe:/a:cloudflare:cloudflare
+citymeshconnect.com	cpe:/a:getbootstrap:bootstrap:5.3.1
 citymeshconnect.com	cpe:/a:jquery:jquery
 citymeshconnect.com	cpe:/a:jqueryui:jquery_ui:1.12.0
+citymeshconnect.com	cpe:/a:laravel:laravel
+citymeshconnect.com	cpe:/a:php:php
 connectingsenses.be	cpe:/a:cloudflare:cloudflare
 connectingsenses.be	cpe:/a:jquery:jquery
 connectingsenses.be	cpe:/a:litespeedtech:litespeed_web_server
@@ -152,6 +157,7 @@ livechat.edpnet.net	cpe:/a:cloudflare:cloudflare
 livechat.edpnet.net	cpe:/a:jquery:jquery
 livechat.edpnet.net	cpe:/a:jquery:jquery:1.9.1
 livechat.edpnet.net	cpe:/a:jqueryui:jquery_ui
+livechat.edpnet.net	cpe:/a:litespeedtech:litespeed_web_server
 livechat.edpnet.net	cpe:/a:mysql:mysql
 livechat.edpnet.net	cpe:/a:php:php
 livechat.edpnet.net	cpe:/a:wordpress:wordpress:6.9.11
@@ -197,7 +203,13 @@ myiot.be	cpe:/a:php:php:7.4.33
 ncentric.be	cpe:/a:cloudflare:cloudflare
 ncentric.cloud	cpe:/a:cloudflare:cloudflare
 ncentric.com	cpe:/a:cloudflare:cloudflare
+ncentric.com	cpe:/a:getbootstrap:bootstrap
+ncentric.com	cpe:/a:jquery:jquery
 ncentric.com	cpe:/a:litespeedtech:litespeed_web_server
+ncentric.com	cpe:/a:mysql:mysql
+ncentric.com	cpe:/a:php:php
+ncentric.com	cpe:/a:woocommerce:woocommerce:11.1.2::~~~wordpress~~
+ncentric.com	cpe:/a:wordpress:wordpress
 opscim.citymesh.com	cpe:/a:postgresql:postgresql
 pbx-concordia.edpnet.net	cpe:/a:apache:http_server:2.4.65
 pbx-concordia.edpnet.net	cpe:/a:apache:http_server:2.4.68
@@ -332,6 +344,7 @@ vpbx.edpnet.net	cpe:/a:openssl:openssl:1.1.1k
 vpbx.edpnet.net	cpe:/a:php:php:7.4.33
 vpbx.edpnet.net	cpe:/o:unix:unix
 webmail.edpnet.be	cpe:/a:cloudflare:cloudflare
+webmail.edpnet.be	cpe:/a:getbootstrap:bootstrap:5.3.8
 webmail.edpnet.be	cpe:/a:jquery:jquery
 webmail.edpnet.be	cpe:/a:mysql:mysql
 webmail.edpnet.be	cpe:/a:php:php
