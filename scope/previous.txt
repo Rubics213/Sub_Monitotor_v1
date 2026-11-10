@@ -519,6 +519,7 @@ bcone.redbull.com
 bcone.redbull.com.tr
 beatboat-hub.redbull.at
 beatboat.redbull.at
+beatsofredbull.com
 beatsuite.redbull.com.au
 befluegelte-fotos.redbull.at
 berlin.redbullstudios.com
@@ -1029,6 +1030,8 @@ coveragedb-uploadcenter.redbull.com
 coveragedb.redbull.com
 covopt-dataprep-q.redbull.com
 covopt-dataprep.redbull.com
+covopt-q.redbull.com
+covopt.redbull.com
 cp-atlas.redbull.com
 cp-mcm-d.redbull.com
 cp-mcm.redbull.com
@@ -1404,7 +1407,6 @@ easyclause.redbull.com
 easyjob-staging.redbull.com
 easyjob.redbull.com
 ecard.redbullflugtag.de
-echo-login.redbull.design
 echo.redbull.design
 ecollege.redbull.com
 ecommerce.redbullring.com
@@ -2908,6 +2910,7 @@ notifications-q.redbull.com
 notifications.redbull.com
 novinari.redbull.ba
 np-vpn01.redbull.com
+npa-specs.redbull.com
 npmregistry-q.devel.redbull.com
 npmregistry.devel.redbull.com
 ns.lan.ad.redbull.com
@@ -3195,6 +3198,7 @@ panorama-d.redbull.com
 panorama-q.redbull.com
 panorama.redbull.com
 papacsfvr01rb.redbull.com
+parachute.racingbulls.com
 paraestudiar.redbull.es
 paratrabajar.redbull.es
 paris.redbullstudios.com
@@ -4058,6 +4062,7 @@ redbullmegaloopchallenge.com
 redbullmegaloopchallenge.nl
 redbullmiddleeast.com
 redbullmidnightrun.com
+redbullmobile.ae
 redbullmobile.at
 redbullmobile.com
 redbullmobile.com.kw
@@ -4224,7 +4229,6 @@ resource-mgmt.redbull.com
 resources-q.redbull.com
 resources-qa.redbull.tv
 resources-staging.redbull.tv
-resources-staging.redbullmediahouse.com
 resources.redbull.com
 resources.redbull.tv
 resources.redbullmediahouse.com
@@ -4628,7 +4632,6 @@ stage-account-login.redbull.com
 stage-account.redbull.com
 stage-account.redbull.tv
 stage-account.redbullmediahouse.com
-stage-adops.redbullmediahouse.com
 stage-alas.redbull.mx
 stage-arcgis.redbull.com
 stage-argallery-bcone.redbull.com
