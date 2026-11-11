@@ -367,4 +367,6 @@ wifilab.be	cpe:/a:wordpress:wordpress
 www.career.edpnet.com	cpe:/a:caddyserver:caddy
 www.career.edpnet.com	cpe:/a:facebook:react
 www.career.edpnet.com	cpe:/a:golang:go
+www.career.edpnet.nl	cpe:/a:caddyserver:caddy
+www.career.edpnet.nl	cpe:/a:golang:go
 www.edpnet.be	cpe:/a:cloudflare:cloudflare

@@ -861,6 +861,8 @@ wifilab.be:8443
 wifilab.be:8880
 www.career.edpnet.com:443
 www.career.edpnet.com:80
+www.career.edpnet.nl:443
+www.career.edpnet.nl:80
 www.edpnet.be:2052
 www.edpnet.be:2053
 www.edpnet.be:2082
