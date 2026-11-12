@@ -1106,6 +1106,7 @@ culture.redbull.com
 culturenet-hf-q.redbull.com
 customerservice-q.redbullshop.com
 customerservice.redbullshop.com
+cwsapp-q.redbull.com
 cz.localpage.redbull.com
 czqgr.redbullnewyork.com
 d.rbleipzig.com
@@ -4050,7 +4051,6 @@ redbullinfo.redbull.lt
 redbullinventory.co.nz
 redbulljazznote.ch
 redbulljuniorteam.com
-redbullkanatlartakimi.com
 redbullkartfight.com
 redbullkary.sk
 redbullkingoftheairqualifier.com
@@ -4995,6 +4995,7 @@ talentplanning.redbull.com
 talentpool-external.redbull.com
 talentpool-pitching.redbull.com
 talentpool.redbull.com
+tap.redbull.com
 tas-q.redbull.com
 teammanager.redbull.com
 teamroom.redbull.com
