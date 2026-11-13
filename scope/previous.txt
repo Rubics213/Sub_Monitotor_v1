@@ -2789,7 +2789,6 @@ msonline-d.redbull.com
 msonline-q.redbull.com
 msonline.redbull.com
 mta-2.cpmailing.redbull.com
-mta-2.data.rbleipzig.com
 mta-2.info.bullscorner.at
 mta-2.info.newcastleredbulls.co.uk
 mta-2.info.newcastleredbulls.com
