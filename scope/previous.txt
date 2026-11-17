@@ -1386,6 +1386,7 @@ dtv-dev-7.redbull.tv
 dtv-dev-8.redbull.tv
 dtv-staging.redbull.tv
 dweb.redbull.com
+dys-api-design.redbull.com
 dys-api-qa.redbull.com
 dys-api.redbull.com
 dys-d.redbull.com
@@ -2127,6 +2128,7 @@ internalauditdb-uux-d.redbull.com
 internalauditdb-uux-q.redbull.com
 internalauditdb.redbull.com
 internationalsports.redbull.com
+intranet.racingbulls.com
 intranettest.racingbulls.com
 investmentfee-d.redbull.com
 investmentfee-q.redbull.com
@@ -2283,6 +2285,7 @@ klara-q.redbull.com
 klara.redbull.com
 klubportal.redbullsalzburg.at
 kms-q.infra.redbull.com
+kms.infra.redbull.com
 knowledge-dev.redbullperformance.com
 knowledge.ai.redbull.com
 knowledge.redbullperformance.com
@@ -4994,6 +4997,8 @@ talentplanning.redbull.com
 talentpool-external.redbull.com
 talentpool-pitching.redbull.com
 talentpool.redbull.com
+tap-d.redbull.com
+tap-q.redbull.com
 tap.redbull.com
 tas-q.redbull.com
 teammanager.redbull.com
