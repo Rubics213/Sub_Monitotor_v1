@@ -256,6 +256,7 @@ api.redbullmobile.at
 api.redbullmobile.om
 api.secretcan.redbull.com
 api.staging.redbullmobile.ae
+api.suppliersystem.redbulladvancedtechnologies.com
 api.suppliersystem.redbullpowertrains.com
 api.suppliersystem.redbulltechnology.com
 api.tetris-q.redbull.com
@@ -489,7 +490,6 @@ backoffice-soet.redbull.com
 backoffice-stage.redbullshop.com
 backoffice.rbng.redbull.com
 backoffice.redbullshop.com
-backstage-staging.redbull.com
 backstage.redbull.com
 backtoschool.redbullusa.com
 bamboo.redbullmediahouse.com
@@ -1685,6 +1685,7 @@ festivalmgmt-d.redbull.com
 festivalmgmt-q.redbull.com
 festivalmgmt.redbull.com
 festivals-d.redbull.com
+ffe551ad-ab65-4938-9299-00fa7bdb67b0.suppliersystem.redbulladvancedtechnologies.com
 ffm.redbullrecords.com
 fielddistribution-d.redbull.com
 fielddistribution-q.redbull.com
@@ -2654,7 +2655,6 @@ meppng-opensearch.redbull.com
 meppng-q.redbull.com
 meppng.redbull.com
 merch-mobile.rbleipzig.com
-merch.redbull64barslive.com
 merchrecipt.rbleipzig.com
 mesos.jenkins-cjoc-d.app.redbull.com
 mesos.jenkins-cjoc-dev.app.redbull.com
@@ -3292,7 +3292,7 @@ php53jobboard.redbull.com
 php53tourbus.redbull.es
 phpmyadmin.wingsforstudents.be
 pikespeak.redbull.fr
-pilot-ai.cp.redbull.com
+pilot-cp-ai-inventory.redbull.com
 pilotenspiel.redbullflugtag.de
 pilvaker.redbull.com
 pim-api-q.redbull.com
@@ -3359,6 +3359,7 @@ poc-dashboard.redbull.com
 poc-garage-monitoring.redbull.com
 poc-hanamonitoring.redbull.com
 poc-minutemanager.redbull.com
+poc-product-compliance.redbull.com
 poc-researchdatabase-api.redbull.com
 poc-researchdatabase.redbull.com
 poc-test-azmc-minutemanager.redbull.com
@@ -3403,6 +3404,7 @@ portal.cooperationhandbook.redbull.com
 portal.racingbulls.com
 portal.racingbullsf1.com
 portal.redbullsalzburg.at
+portal.suppliersystem.redbulladvancedtechnologies.com
 portal.suppliersystem.redbullpowertrains.com
 portal.suppliersystem.redbulltechnology.com
 portaltoro-staging.redbull.com
