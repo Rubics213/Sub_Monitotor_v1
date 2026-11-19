@@ -131,6 +131,7 @@ ai-exchange-d.redbull.com
 ai-exchange-q.redbull.com
 ai-exchange.redbull.com
 ai-support-q.redbull.com
+ai-support.redbull.com
 ai.architecture.redbull.com
 ai.redbull.com
 aia-trust-d.cert.redbull.com
@@ -308,6 +309,7 @@ arcgis.apps.redbull.com
 arcgis.redbull.com
 are.review.wingsforlifeworldrun.com
 are.wingsforlifeworldrun.com
+areaeursecurity.redbull.com
 argallery-bcone.redbull.com
 argallery-cd.redbull.com
 aro-origin-it-showroom-q.redbull.com
@@ -4318,6 +4320,8 @@ salaryreview.redbull.com
 sales-image-library.redbull.com
 salescatalogue-q.redbull.com
 salesviewer.rbleipzig.ai
+salesvolumeupliftestimator-q.redbull.com
+salesvolumeupliftestimator.redbull.com
 sampling-server-qa.redbull.com
 sampling-server-staging.redbull.com
 sampling-server.redbull.com
