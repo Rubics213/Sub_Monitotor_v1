@@ -1199,6 +1199,7 @@ dcp-dif-admin-api.redbull.com
 ddrive.redbull.com
 de.redbulletin.com
 de.redbullsampling.com
+deckster.redbull.com
 deductlink-d.redbull.com
 deductlink-q.redbull.com
 deductlink.redbull.com
@@ -2222,6 +2223,7 @@ jmc.redbull.com
 jmpdev.app.redbull.com
 jobboard.redbull.com
 jobs-design.redbull.com
+jobs-next.redbull.com
 jobs-redesign.redbull.com
 jobs-staging.redbull.com
 jobs.redbull.com
@@ -3235,6 +3237,7 @@ participantgalleryapp-api-staging.redbull.com
 participantgalleryapp-api.redbull.com
 participantgalleryapp-staging.redbull.com
 participantgalleryapp.redbull.com
+participate-p.redbullbragantino.com
 participate-staging.redbullbragantino.com
 participate.redbull.com
 participate.redbullbragantino.com
@@ -3729,7 +3732,6 @@ rbcd.redbull.com
 rbcptest.redbull.com
 rbdc-d.redbull.com
 rbdc-q.redbull.com
-rbdc-route-scorecard-q.redbull.com.redbull.com
 rbdc-route-scorecard.redbull.com
 rbdc-uniforms-d.redbull.com
 rbdc-uniforms-q.redbull.com
@@ -5012,6 +5014,7 @@ teamroom.redbull.com
 teams.redbull.racing
 teams.wingsforlifeworldrun.com
 technostalgia.redbull.com.br
+techradar-staging.redbull.com
 temp-origin.microsites.redbull.com
 temp-origin.microsites2.redbull.com
 temp-origin.microsites3.redbull.com
