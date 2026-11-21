@@ -5015,6 +5015,7 @@ teams.redbull.racing
 teams.wingsforlifeworldrun.com
 technostalgia.redbull.com.br
 techradar-staging.redbull.com
+techradar.redbull.com
 temp-origin.microsites.redbull.com
 temp-origin.microsites2.redbull.com
 temp-origin.microsites3.redbull.com
