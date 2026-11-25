@@ -58,6 +58,10 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  # [24] No ANSI colour codes in tool output: they broke the httpx tech parser
+  #      (bracketed [200] arrived as [\x1b[32m200\x1b[0m], so 0/451 hosts ever
+  #      got a tech signature and nuclei always fell back to base tags).
+  NO_COLOR: "1"
   # [1] Set your Intigriti handle as a repo secret named INTIGRITI_USERNAME.
   INTIGRITI_H: ${{ secrets.INTIGRITI_USERNAME }}
   INTIGRITI_UA: Intigriti-VDP-SubdomainMonitor/1.0
@@ -169,7 +173,7 @@ jobs:
   monitor:
     if: github.event_name != 'workflow_dispatch' || inputs.smoke_test != true
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 300
     # environment: production   # uncomment + set name if webhook is an Environment secret
     env:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -239,8 +243,11 @@ jobs:
           mkdir -p results
           # single multi-domain invocation — subfinder's -dL handles internal
           # concurrency across all targets at once
-          subfinder -dL targets.txt -silent -all -o results/current_raw.txt || touch results/current_raw.txt
+          subfinder -dL targets.txt -silent -all -nc -o results/current_raw.txt \
+            || { echo "::error::subfinder failed"; exit 1; }
           sort -u results/current_raw.txt -o results/current_raw.txt
+          # [23] fail closed: an empty enumeration must never look like a green run
+          [ -s results/current_raw.txt ] || { echo "::error::subfinder returned 0 subdomains"; exit 1; }
 
       - name: Filter out-of-scope subdomains
         run: |
@@ -259,14 +266,16 @@ jobs:
         run: |
           # rate-limit kept under Citymesh's 20 req/sec cap
           # [1] program headers        [9] same-host redirects only (no scope drift)
-          httpx -l results/current.txt -silent -status-code -title \
+          httpx -l results/current.txt -silent -nc -status-code -title \
                 -tech-detect \
                 -follow-host-redirects \
                 -rate-limit 15 \
                 -H "X-Intigriti-Username: $INTIGRITI_H" \
                 -H "User-Agent: $INTIGRITI_UA" \
-                -o results/current_alive.txt || touch results/current_alive.txt
+                -o results/current_alive.txt \
+            || { echo "::error::httpx failed"; exit 1; }
           sort -u results/current_alive.txt -o results/current_alive.txt
+          [ -s results/current_alive.txt ] || { echo "::error::httpx returned 0 live hosts"; exit 1; }
 
           # Extract hostname-only column (first field) for diffing
           awk '{print $1}' results/current_alive.txt | sort -u > results/current_alive_hosts.txt
@@ -403,8 +412,23 @@ jobs:
           PAYLOAD=$(jq -n --arg content "$CONTENT" '{content: $content}')
           curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
 
-      - name: Update nuclei templates
-        run: nuclei -update-templates -silent || true
+      - name: Install nuclei templates (verified, fail loudly)
+        env:
+          # nuclei's own bootstrap (FreshInstallIfNotExists) calls the ANONYMOUS
+          # GitHub API. On shared runner IPs that budget is exhausted, it 403s,
+          # the error is only a gologger.Warning (hidden by -silent) and the
+          # process still exits 0 -> every later nuclei run dies with
+          # "[FTL] no templates provided for scan" while the step stays green.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          rm -rf "$HOME/nuclei-templates"
+          git clone --depth 1 --quiet \
+            https://github.com/projectdiscovery/nuclei-templates "$HOME/nuclei-templates"
+          COUNT=$(find "$HOME/nuclei-templates" -name '*.yaml' | wc -l | tr -d ' ')
+          echo "nuclei templates installed: $COUNT"
+          [ "$COUNT" -gt 1000 ] || { echo "::error::nuclei templates missing ($COUNT)"; exit 1; }
+          nuclei -tl -silent | wc -l | xargs -I{} echo "templates parsed by nuclei: {}"
+          nuclei -tl -silent | grep -q . || { echo "::error::nuclei cannot load templates"; exit 1; }
 
       - name: Scan live hosts with nuclei (per-host tech targeting)
         run: |
@@ -415,6 +439,20 @@ jobs:
           # [2] "default-logins" removed from BASE_TAGS: those templates submit default
           #     credentials, which the program's rules prohibit (no brute force).
           BASE_TAGS="exposures,misconfiguration,takeovers,cves"
+
+          # [23] Delta scanning: nuclei over all ~450 hosts with exposures+cves
+          #      is hundreds of thousands of requests (hours at -rate-limit 15).
+          #      Default to hosts that are NEW since the last baseline; do the
+          #      full sweep weekly (Sunday) or on manual dispatch.
+          if [ -s results/new_hosts.txt ] && [ "${{ github.event_name }}" != "workflow_dispatch" ] \
+             && [ "$(date -u +%u)" != "7" ]; then
+            grep -F -f results/new_hosts.txt results/current_alive.txt \
+              > results/nuclei_targets.txt || true
+            echo "nuclei delta mode: $(wc -l < results/nuclei_targets.txt | tr -d ' ') new host(s)"
+          else
+            cp results/current_alive.txt results/nuclei_targets.txt
+            echo "nuclei full mode: $(wc -l < results/nuclei_targets.txt | tr -d ' ') host(s)"
+          fi
 
           GROUPS_DIR="results/nuclei_groups"
           mkdir -p "$GROUPS_DIR"
@@ -446,7 +484,7 @@ jobs:
           total_lines = 0
           parsed_with_tech = 0
 
-          with open("results/current_alive.txt") as fh:
+          with open("results/nuclei_targets.txt") as fh:
               for line in fh:
                   line = line.rstrip("\n")
                   if not line.strip():
@@ -515,12 +553,19 @@ jobs:
                    -H "X-Intigriti-Username: $INTIGRITI_H" \
                    -H "User-Agent: $INTIGRITI_UA" \
                    -silent \
-                   -o "$out_file" || touch "$out_file"
+                   -o "$out_file" \
+              || { echo "::error::nuclei failed on $hosts_file (see log above)"; exit 1; }
 
             cat "$out_file" >> results/nuclei_current.txt 2>/dev/null || true
           done
+          # keep the baseline cumulative when scanning only the delta
+          if [ -s results/nuclei_previous.txt ]; then
+            cat results/nuclei_previous.txt results/nuclei_current.txt 2>/dev/null \
+              | sort -u > results/nuclei_current.cum
+            mv results/nuclei_current.cum results/nuclei_current.txt
+          fi
           sort -u results/nuclei_current.txt -o results/nuclei_current.txt
-          echo "Total nuclei findings this run: $(wc -l < results/nuclei_current.txt | tr -d ' ')"
+          echo "Total nuclei findings (cumulative): $(wc -l < results/nuclei_current.txt | tr -d ' ')"
 
       - name: Diff nuclei findings against previous run
         id: nuclei_diff
@@ -720,8 +765,10 @@ jobs:
           if len(chosen) < 5:
               remaining = [h for h in alive if eligible(h) and h not in chosen]
               remaining.sort(key=lambda h: last.get(h, 0))
-              chosen += remaining[:14 - len(chosen)]
-          chosen = sorted(set(chosen))[:14]  # hard cap: 4 batches of 4 parallel
+              chosen += remaining[:8 - len(chosen)]
+          chosen = sorted(set(chosen))[:8]  # [23] hard cap: 8 hosts = 2 waves of 4
+          # 4,751-word list at -rate 4 = ~20 min per host; 14 hosts = 79 min and
+          # the old 120-min job was killed inside this step every single run.
 
           with open("results/ffuf_targets.txt", "w") as out:
               out.write("\n".join(chosen) + "\n" if chosen else "")
@@ -2163,6 +2210,7 @@ jobs:
           echo "Report draft written to results/draft_intigriti_report.md (provider: $DRAFT_PROVIDER)"
 
       - name: Update previous results
+        if: always()
         run: |
           cp results/current.txt results/previous.txt
           cp results/current_alive.txt results/previous_alive.txt
@@ -2175,6 +2223,7 @@ jobs:
           cp -f results/fuzz_log.json results/fuzz_log_last_run.json 2>/dev/null || true
 
       - name: Commit updated results
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
