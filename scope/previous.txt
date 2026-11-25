@@ -492,7 +492,6 @@ backoffice-soet.redbull.com
 backoffice-stage.redbullshop.com
 backoffice.rbng.redbull.com
 backoffice.redbullshop.com
-backstage.redbull.com
 backtoschool.redbullusa.com
 bamboo.redbullmediahouse.com
 barracuda78601368078.redbullsalzburg.at
@@ -4762,6 +4761,7 @@ stage-wtf.redbull.com.br
 stage-www-new-crashedice.redbull.com
 stage-www-new.redbulljuniorteam.com
 stage-www-new.redbullrookiescup.com
+stage-www.beatsofredbull.com
 stage-www.nocdn.redbullmusic.com
 stage-www.redbulladvancedtechnologies.com
 stage-www.redbullbragantino.com.br
