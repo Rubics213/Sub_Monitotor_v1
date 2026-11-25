@@ -48,6 +48,11 @@ on:
         required: false
         default: false
         type: boolean
+      full_scan:
+        description: 'Force a full nuclei sweep instead of new-hosts-only (slow, hours at 15 req/s)'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -442,9 +447,11 @@ jobs:
 
           # [23] Delta scanning: nuclei over all ~450 hosts with exposures+cves
           #      is hundreds of thousands of requests (hours at -rate-limit 15).
-          #      Default to hosts that are NEW since the last baseline; do the
-          #      full sweep weekly (Sunday) or on manual dispatch.
-          if [ -s results/new_hosts.txt ] && [ "${{ github.event_name }}" != "workflow_dispatch" ] \
+          #      Default to hosts that are NEW since the last baseline; full sweep
+          #      only on Sundays or when full_scan=true is passed explicitly
+          #      (manual dispatch is delta by default so a smoke-test dispatch
+          #      cannot silently turn into a multi-hour scan).
+          if [ -s results/new_hosts.txt ] && [ "${{ inputs.full_scan }}" != "true" ] \
              && [ "$(date -u +%u)" != "7" ]; then
             grep -F -f results/new_hosts.txt results/current_alive.txt \
               > results/nuclei_targets.txt || true
