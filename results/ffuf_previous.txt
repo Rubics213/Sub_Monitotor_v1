@@ -1,9 +1,4 @@
-https://analyticsucaas.citymeshconnect.com/Content [301] -> https://analyticsucaas.citymeshconnect.com/Content/
 https://analyticsucaas.citymeshconnect.com/Help [302] -> /?ReturnUrl=%2fHelp
-https://analyticsucaas.citymeshconnect.com/Scripts [301] -> https://analyticsucaas.citymeshconnect.com/Scripts/
-https://analyticsucaas.citymeshconnect.com/Support [302] -> https://link.meridix.se/docs-en
-https://analyticsucaas.citymeshconnect.com/Themes [301] -> https://analyticsucaas.citymeshconnect.com/Themes/
-https://analyticsucaas.citymeshconnect.com/api [301] -> https://analyticsucaas.citymeshconnect.com/api/
 https://analyticsucaas.citymeshconnect.com/app_browsers [302] -> /Error?aspxerrorpath=/app_browsers
 https://analyticsucaas.citymeshconnect.com/app_code [302] -> /Error?aspxerrorpath=/app_code
 https://analyticsucaas.citymeshconnect.com/app_data [302] -> /Error?aspxerrorpath=/app_data
@@ -18,13 +13,10 @@ https://analyticsucaas.citymeshconnect.com/com3 [302] -> /Error?aspxerrorpath=/c
 https://analyticsucaas.citymeshconnect.com/com4 [302] -> /Error?aspxerrorpath=/com4
 https://analyticsucaas.citymeshconnect.com/con [302] -> /Error?aspxerrorpath=/con
 https://analyticsucaas.citymeshconnect.com/config [302] -> /Error?aspxerrorpath=/config
-https://analyticsucaas.citymeshconnect.com/content [301] -> https://analyticsucaas.citymeshconnect.com/content/
-https://analyticsucaas.citymeshconnect.com/controls [301] -> https://analyticsucaas.citymeshconnect.com/controls/
 https://analyticsucaas.citymeshconnect.com/disclaimer [302] -> /?ReturnUrl=%2fdisclaimer
 https://analyticsucaas.citymeshconnect.com/error [200]
 https://analyticsucaas.citymeshconnect.com/help [302] -> /?ReturnUrl=%2fhelp
 https://analyticsucaas.citymeshconnect.com/hooks [302] -> /Error?aspxerrorpath=/hooks
-https://analyticsucaas.citymeshconnect.com/licenses [301] -> https://analyticsucaas.citymeshconnect.com/licenses/
 https://analyticsucaas.citymeshconnect.com/lost+found [302] -> /Error?aspxerrorpath=/lost+found
 https://analyticsucaas.citymeshconnect.com/lpt1 [302] -> /Error?aspxerrorpath=/lpt1
 https://analyticsucaas.citymeshconnect.com/lpt2 [302] -> /Error?aspxerrorpath=/lpt2
@@ -34,42 +26,24 @@ https://analyticsucaas.citymeshconnect.com/plugins [302] -> /Error?aspxerrorpath
 https://analyticsucaas.citymeshconnect.com/prn [302] -> /Error?aspxerrorpath=/prn
 https://analyticsucaas.citymeshconnect.com/render/https://www.google.com [302] -> /Error?aspxerrorpath=/render/https:/www.google.com
 https://analyticsucaas.citymeshconnect.com/reports [302] -> /?ReturnUrl=%2freports
-https://analyticsucaas.citymeshconnect.com/scripts [301] -> https://analyticsucaas.citymeshconnect.com/scripts/
 https://analyticsucaas.citymeshconnect.com/sections [302] -> /?ReturnUrl=%2fsections
 https://analyticsucaas.citymeshconnect.com/signout [302] -> /?ReturnUrl=%2fsignout
-https://analyticsucaas.citymeshconnect.com/sso [302] -> /ErrorMessage?code=400&desc=Missing%20or%20invalid%20query%20parameters&ec=954000
+https://analyticsucaas.citymeshconnect.com/sso [302] -> /ErrorMessage?code=400&desc=Missing+or+invalid+query+parameters&ec=954000
 https://analyticsucaas.citymeshconnect.com/start [302] -> /?ReturnUrl=%2fstart
-https://analyticsucaas.citymeshconnect.com/support [302] -> https://link.meridix.se/docs-en
-https://analyticsucaas.citymeshconnect.com/themes [301] -> https://analyticsucaas.citymeshconnect.com/themes/
 https://analyticsucaas.citymeshconnect.com/tools [302] -> /?ReturnUrl=%2ftools
 https://analyticsucaas.citymeshconnect.com/unsubscribe [200]
-https://analyticsucaas.citymeshconnect.com/webservices [301] -> https://analyticsucaas.citymeshconnect.com/webservices/
-https://api-gateway.citymesh.com/.bash_history [403]
-https://api-gateway.citymesh.com/.bashrc [403]
-https://api-gateway.citymesh.com/.cvs [403]
-https://api-gateway.citymesh.com/.env [403]
-https://api-gateway.citymesh.com/.git [403]
-https://api-gateway.citymesh.com/.git/HEAD [403]
-https://api-gateway.citymesh.com/.git/config [403]
-https://api-gateway.citymesh.com/.git/index [403]
-https://api-gateway.citymesh.com/.git/logs/ [403]
-https://api-gateway.citymesh.com/.history [403]
-https://api-gateway.citymesh.com/.htaccess [403]
-https://api-gateway.citymesh.com/.htpasswd [403]
-https://api-gateway.citymesh.com/.mysql_history [403]
-https://api-gateway.citymesh.com/.passwd [403]
-https://api-gateway.citymesh.com/.profile [403]
-https://api-gateway.citymesh.com/.ssh [403]
-https://api-gateway.citymesh.com/.svn [403]
-https://api-gateway.citymesh.com/.svn/entries [403]
-https://api-gateway.citymesh.com/access_log [403]
-https://api-gateway.citymesh.com/authorized_keys [403]
-https://api-gateway.citymesh.com/cats [401]
-https://api-gateway.citymesh.com/error_log [403]
-https://api-gateway.citymesh.com/id_rsa [403]
-https://api-gateway.citymesh.com/payments [403]
-https://api-gateway.citymesh.com/phpinfo.php [403]
-https://api-gateway.citymesh.com/tar.gz [403]
-https://api-gateway.citymesh.com/web.config [403]
-https://api-gateway.citymesh.com/xmlrpc.php [403]
-https://app.ncentric.cloud/player [301] -> http://app.ncentric.cloud/player/
+https://auth.citymesh.com/.well-known/jwks.json [200]
+https://auth.citymesh.com/.well-known/oauth-authorization-server [200]
+https://auth.citymesh.com/.well-known/openid-configuration [200]
+https://auth.citymesh.com/device [307] -> /error?error=Device%20request%20not%20available&error_description=The%20device%20verification%20link%20is%20missing%20its%20challenge.%20Restart%20the%20flow%20on%20your%20device%20and%20try%20again.
+https://auth.citymesh.com/error [200]
+https://auth.citymesh.com/recovery [200]
+https://auth.citymesh.com/registration [307] -> https://auth.citymesh.com/self-service/registration/browser?
+https://auth.citymesh.com/schemas [200]
+https://auth.citymesh.com/session [307] -> /ui/settings
+https://auth.citymesh.com/settings [307] -> https://auth.citymesh.com/self-service/settings/browser?
+https://backup.edpnet.com/.well-known/openid-configuration [200]
+https://backup.edpnet.com/bc [302] -> https://backup.edpnet.com/ui/
+https://backup.edpnet.com/docs [301] -> http://backup.edpnet.com/api/cyberpsa/docs
+https://backup.edpnet.com/mc [200]
+https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=khypjcgiqjekhtcmgmyrkirx
