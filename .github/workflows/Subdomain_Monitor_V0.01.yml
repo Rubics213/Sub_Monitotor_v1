@@ -1844,10 +1844,15 @@ jobs:
           }
 
           MAP_MARKERS = ('"sourceRoot"', '"sources"', '"sourcesContent"')
+          # The key pattern requires a base64 body: a bare
+          # "-----BEGIN RSA PRIVATE KEY-----" is also the placeholder text in
+          # Grafana's TLS client-key field ("Begins with -----BEGIN RSA PRIVATE
+          # KEY-----"), which is what produced the bogus High-severity draft in
+          # run #70. Same rule as scripts/verify_secret_hits.py.
           SECRET_RE = re.compile(
               r"(AKIA[0-9A-Z]{16})|(AIza[0-9A-Za-z_-]{35})|(xox[baprs]-[0-9A-Za-z-]{10,})"
               r"|(eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,})"
-              r"|(-----BEGIN [A-Z ]*PRIVATE KEY-----)"
+              r"|(-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\\]*[A-Za-z0-9+/=]{60,})"
               r"|([Aa]pi[_-]?[Kk]ey.{0,3}[:=].{0,3}[A-Za-z0-9_-]{16,})"
           )
           # linkfinder-lite: strings that look like intra-app API routes (query-capable)
@@ -1903,9 +1908,17 @@ jobs:
                   sourcemaps.append(map_url)
                   for m in SECRET_RE.findall(body):
                       tok = m[0] if isinstance(m, tuple) else m
-                      if tok:
-                          with open("results/js_secrets_current.txt", "a") as sf:
-                              sf.write(f"{map_url} | SOURCEMAP-{tok}\n")
+                      if not tok:
+                          continue
+                      if "PRIVATE KEY" in tok:
+                          # A key match now includes its base64 body. results/ is
+                          # committed to the repo, so never store the material:
+                          # record the marker and body length, nothing else.
+                          kind = "RSA" if "RSA" in tok else "PRIVATE"
+                          bodylen = len(re.sub(r"[^A-Za-z0-9+/=]", "", tok))
+                          tok = f"-----BEGIN {kind} PRIVATE KEY----- (body {bodylen} chars, redacted)"
+                      with open("results/js_secrets_current.txt", "a") as sf:
+                          sf.write(f"{map_url} | SOURCEMAP-{tok}\n")
               else:
                   # map-shaped but missing standard markers — still a live map
                   if body.strip().startswith("{") and '"version"' in body[:2000]:
@@ -1943,6 +1956,17 @@ jobs:
       - name: Diff JS secret findings against previous run
         id: js_diff
         run: |
+          # A regex hit is not a finding. A bare "-----BEGIN ... PRIVATE KEY-----"
+          # marker also matches UI placeholder copy (Grafana: placeholder="Begins
+          # with -----BEGIN RSA PRIVATE KEY-----"); run #70 alerted on that and
+          # drafted a High-severity report for a key that does not exist. Drop
+          # every hit without a real base64 key body before it can reach Discord
+          # or the report drafter; rejects stay in results/ for audit.
+          python3 scripts/verify_secret_hits.py \
+            --secrets results/js_secrets_current.txt \
+            --hashes results/js_hashes_current.txt \
+            --jsdir js_files \
+            --rejects results/js_secret_rejects.txt
           if [ -f results/js_secrets_previous.txt ]; then
             comm -13 results/js_secrets_previous.txt results/js_secrets_current.txt > results/js_secrets_new.txt
           else
@@ -2126,6 +2150,22 @@ jobs:
           open("results/asset_matches.txt", "w").write("\n".join(matches[:10]) or "(none)")
           PYEOF
           ASSET_MATCHES=$(cat results/asset_matches.txt 2>/dev/null)
+          SECRET_REJECTS=$(awk 'END{print NR}' results/js_secret_rejects.txt 2>/dev/null || true)
+
+          # === pre-submission verification gate ===
+          # A regex hit is not a finding. Refuse to draft unless the evidence
+          # resolves to a listed in-scope asset: if no evidence host matches the
+          # program's asset table, the material is out of scope or a false
+          # positive and must never become a submission. Run #70 is the caution
+          # case — it drafted "Exposed RSA Private Key" (High, CVSS 8.7) off
+          # Grafana's placeholder="Begins with -----BEGIN RSA PRIVATE KEY-----"
+          # string. The verifier drops that class of hit; this gate catches the
+          # next one. Manual dispatch with draft_report=true still overrides.
+          if [ "$FORCE_DRAFT" != "true" ] && { [ -z "$ASSET_MATCHES" ] || [ "$ASSET_MATCHES" = "(none)" ]; }; then
+            echo "::warning::Draft skipped: no evidence host matches an in-scope asset entry."
+            echo "DRAFTED=false" >> "$GITHUB_ENV"
+            exit 0
+          fi
 
           # deterministic candidate bundle for the AI/ skeleton
           CANDIDATES=$(printf "### nuclei findings (new):\n%s\n\n### 403 bypass results (new):\n%s\n\n### possible JS secrets (new):\n%s\n\n### captured response headers for findings:\n%s\n" \
@@ -2134,7 +2174,7 @@ jobs:
           # --- CWE taxonomy subset relevant to automated findings (form dropdown entries) ---
           TAXONOMY="Security Misconfiguration (Generic) (Misconfiguration); CWE-16 Misconfiguration (Misconfiguration); CWE-548 Information Exposure Through Directory Listing (Misconfiguration); CWE-209 Information Exposure Through an Error Message (Misconfiguration); CAPEC-291 DNS Zone Transfers (Misconfiguration); CWE-489 Leftover Debug Code (Backdoor) (Misconfiguration); CWE-287 Improper Authentication (Generic) (Broken Authentication); CWE-613 Insufficient Session Expiration (Broken Authentication); CWE-798 Use of Hard-coded Credentials (Broken Authentication); CWE-639 Insecure Direct Object Reference (Broken Access Control); CWE-285 Improper Authorization (Broken Access Control); CWE-22 Path Traversal (Broken Access Control); CWE-200 Information Disclosure (Access Control Issues); CWE-284 Improper Access Control (Access Control Issues); CWE-425 Forced Browsing (Access Control Issues); CWE-538 File and Directory Information Exposure (Access Control Issues); CWE-89 SQL Injection (Injection); CWE-78 OS Command Injection (Injection); CWE-94 Code Injection (Injection); CWE-96 Server-Side Template Injection (Injection); CWE-79 Reflected Cross-Site Scripting (Cross site scripting); CWE-79 Stored Cross-Site Scripting (Cross site scripting); CWE-79 DOM-Based Cross-Site Scripting (Cross site scripting); CWE-611 XML External Entity (XML External Entities); CWE-502 Deserialization of Untrusted Data (Insecure deserialisation); CWE-327 Use of a Broken or Risky Cryptographic Algorithm (Vulnerable components); CWE-295 Improper Certificate Validation (Cryptographic issues); CWE-918 Server-Side Request Forgery (Other); CWE-352 Cross-Site Request Forgery (Other); CWE-444 HTTP Request Smuggling (Other); CWE-601 Open Redirect (Other); CWE-400 Denial of Service (Other); Weak or Default Credentials (Other); CWE-203 Information Exposure Through Discrepancy ('Enumeration') (Other); Missing Cookie Flag (Other); No Rate Limiting (Other); Missing Security Header (Other); CRLF Injection (Other); Subdomain Takeover (Other); Web Cache Poisoning (Other); Web Cache Deception (Other); Host Header Injection (Other); CWE-434 Unrestricted file upload (Other); CWE-362 Race Condition (Other); LLM07:2025 System Prompt Leakage (Generative AI & LLMs); Sensitive Information Disclosure (Generative AI & LLMs)"
 
-          PROMPT_TEXT=$(printf "You are drafting a submission for the Citymesh responsible-vulnerability-disclosure program (Intigriti RVDP, no bounty — points and reputation only). Below is scanner output from the latest automated run.\n\n%s\n\nLikely matching in-scope asset entries (deterministic match, verify before use):\n%s\n\nFull in-scope asset list (format 'asset|type'):\n%s\n\nINSTRUCTIONS: Draft the report. Use these exact section markers on their own lines: TITLE:, ASSET:, ASSET_TYPE:, CATEGORY:, SPECIFIC_TYPE:, SEVERITY:, CVSS:, POC:, IMPACT:, RECOMMENDED:\n- TITLE: max 100 chars, factual — no hedging like possible or potential.\n- ASSET: the single in-scope asset entry the finding belongs to — IP Range for IP findings, URL if on one of the listed URLs, Wildcard (*.domain) otherwise. Copy the entry verbatim.\n- ASSET_TYPE: IP Range | URL | Wildcard.\n- CATEGORY: one of the form's top-level types: Access Control Issues, Injection, Broken Authentication, XML External Entities, Broken Access Control, Misconfiguration, Cross site scripting, Insecure deserialisation, Vulnerable components, Cryptographic issues, Other.\n- SPECIFIC_TYPE: exactly one dropdown entry from this list that fits best: %s\n- SEVERITY: Low, Medium or High (no-bounty program; do not inflate).\n- CVSS: a plausible CVSS 4.0 vector starting with CVSS:4.0/.\n- POC: numbered repro steps drawn strictly from the automated evidence. State that all requests were sent with an Intigriti-identifying User-Agent and an X-Intigriti-Username header per RVDP rules.\n- IMPACT: 3-6 sentences, concrete and business-relevant.\n- RECOMMENDED: short, actionable fix list.\n- Keep POC under 2500 chars, IMPACT under 1200, RECOMMENDED under 900 (form limits are higher but concise reports review faster).\n- Do NOT invent vulnerabilities the evidence does not show. Draft only around what was observed.\n- Output ONLY the section markers with content, no preamble.\n\nSCANNER EVIDENCE:\n%s" "$CANDIDATES" "$ASSET_MATCHES" "$(echo "$SCOPE_LIST" | head -c 4800)" "$TAXONOMY")
+          PROMPT_TEXT=$(printf "You are drafting a submission for the Citymesh responsible-vulnerability-disclosure program (Intigriti RVDP, no bounty — points and reputation only). Below is scanner output from the latest automated run.\n\n%s\n\nLikely matching in-scope asset entries (deterministic match, verify before use):\n%s\n\nFull in-scope asset list (format 'asset|type'):\n%s\n\nINSTRUCTIONS: Draft the report. Use these exact section markers on their own lines: TITLE:, ASSET:, ASSET_TYPE:, CATEGORY:, SPECIFIC_TYPE:, SEVERITY:, CVSS:, POC:, IMPACT:, RECOMMENDED:\n- TITLE: max 100 chars, factual — no hedging like possible or potential.\n- ASSET: the single in-scope asset entry the finding belongs to — IP Range for IP findings, URL if on one of the listed URLs, Wildcard (*.domain) otherwise. Copy the entry verbatim.\n- ASSET_TYPE: IP Range | URL | Wildcard.\n- CATEGORY: one of the form's top-level types: Access Control Issues, Injection, Broken Authentication, XML External Entities, Broken Access Control, Misconfiguration, Cross site scripting, Insecure deserialisation, Vulnerable components, Cryptographic issues, Other.\n- SPECIFIC_TYPE: exactly one dropdown entry from this list that fits best: %s\n- SEVERITY: Low, Medium or High (no-bounty program; do not inflate).\n- CVSS: a plausible CVSS 4.0 vector starting with CVSS:4.0/.\n- POC: numbered repro steps drawn strictly from the automated evidence. State that all requests were sent with an Intigriti-identifying User-Agent and an X-Intigriti-Username header per RVDP rules.\n- IMPACT: 3-6 sentences, concrete and business-relevant.\n- RECOMMENDED: short, actionable fix list.\n- Keep POC under 2500 chars, IMPACT under 1200, RECOMMENDED under 900 (form limits are higher but concise reports review faster).\n- Do NOT invent vulnerabilities the evidence does not show. Draft only around what was observed.\n- The evidence lines are raw regex hits, not confirmed vulnerabilities. If a hit is a private-key marker with no base64 key body shown, or is placeholder/example text, say it is unconfirmed instead of claiming an exposed key.\n- Output ONLY the section markers with content, no preamble.\n\nSCANNER EVIDENCE:\n%s" "$CANDIDATES" "$ASSET_MATCHES" "$(echo "$SCOPE_LIST" | head -c 4800)" "$TAXONOMY")
 
           # fallback chain Gemini -> DeepSeek -> Cohere (same as other AI steps)
           SUMMARY=""
@@ -2179,6 +2219,10 @@ jobs:
             echo ""
             echo "> Drafted: $(date -u '+%Y-%m-%d %H:%M UTC') | Drafting provider: $DRAFT_PROVIDER"
             echo "> ALWAYS human-review before submitting. Do not submit AI-hallucinated steps unverified."
+            echo ""
+            echo "## Verification status (automated, check before submitting)"
+            echo "- In-scope asset match: $(echo "$ASSET_MATCHES" | tr '\n' ' ')"
+            echo "- JS secret hits suppressed as non-secrets (placeholder / no key body): ${SECRET_REJECTS:-0}"
             echo ""
             echo "## Form: General -> Title"
             echo "$SUMMARY" | sed -n 's/^TITLE:[[:space:]]*//p' | head -n 1
@@ -2271,6 +2315,8 @@ jobs:
           JS_FILES_SCANNED=$(wc -l < results/js_urls_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           TOTAL_SECRETS=$(wc -l < results/js_secrets_current.txt 2>/dev/null | tr -d ' ' || echo 0)
           NEW_SECRETS=$(wc -l < results/js_secrets_new.txt 2>/dev/null | tr -d ' ' || echo 0)
+          REJECTED_SECRETS=$(wc -l < results/js_secret_rejects.txt 2>/dev/null | tr -d ' ')
+          REJECTED_SECRETS=${REJECTED_SECRETS:-0}
           FULL_HEADERS_LINES=$(wc -l < results/findings_with_headers_full.txt 2>/dev/null | tr -d ' ' || echo 0)
           PRIORITIZED="${{ steps.prioritize.outputs.prioritized }}"
 
@@ -2289,6 +2335,7 @@ jobs:
             echo "| 403 bypasses | $TOTAL_BYPASSES | $NEW_BYPASSES |"
             echo "| JS files scanned | $JS_FILES_SCANNED | — |"
             echo "| Possible JS secrets | $TOTAL_SECRETS | $NEW_SECRETS |"
+            echo "| JS secret hits suppressed (placeholder / no key body) | $REJECTED_SECRETS | — |"
             echo "| Full-backlog header lines (weekly / manual test) | $FULL_HEADERS_LINES | — |"
             echo ""
             if [ "$NEW_SUBS" = "0" ] && [ "$NEW_NUCLEI" = "0" ] && [ "$NEW_PATHS" = "0" ] && [ "$NEW_BYPASSES" = "0" ] && [ "$NEW_SECRETS" = "0" ]; then
