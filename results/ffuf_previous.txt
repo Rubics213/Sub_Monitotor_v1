@@ -1,28 +1,4 @@
-https://auth-staging.citymesh.com/.well-known/jwks.json [200]
-https://auth-staging.citymesh.com/.well-known/oauth-authorization-server [200]
-https://auth-staging.citymesh.com/.well-known/openid-configuration [200]
-https://auth-staging.citymesh.com/device [307] -> /error?error=Device%20request%20not%20available&error_description=The%20device%20verification%20link%20is%20missing%20its%20challenge.%20Restart%20the%20flow%20on%20your%20device%20and%20try%20again.
-https://auth-staging.citymesh.com/error [200]
-https://auth-staging.citymesh.com/login [200]
-https://auth-staging.citymesh.com/recovery [200]
-https://auth-staging.citymesh.com/registration [307] -> https://auth-staging.citymesh.com/self-service/registration/browser?
-https://auth-staging.citymesh.com/schemas [200]
-https://auth-staging.citymesh.com/session [307] -> /ui/settings
-https://auth-staging.citymesh.com/settings [307] -> https://auth-staging.citymesh.com/self-service/settings/browser?
-https://auth-tst.citymesh.com/.well-known/jwks.json [200]
-https://auth-tst.citymesh.com/.well-known/oauth-authorization-server [200]
-https://auth-tst.citymesh.com/.well-known/openid-configuration [200]
-https://auth-tst.citymesh.com/device [307] -> /error?error=Device%20request%20not%20available&error_description=The%20device%20verification%20link%20is%20missing%20its%20challenge.%20Restart%20the%20flow%20on%20your%20device%20and%20try%20again.
-https://auth-tst.citymesh.com/error [200]
-https://auth-tst.citymesh.com/login [200]
-https://auth-tst.citymesh.com/recovery [200]
-https://auth-tst.citymesh.com/registration [200]
-https://auth-tst.citymesh.com/schemas [200]
-https://auth-tst.citymesh.com/session [200]
-https://auth-tst.citymesh.com/settings [307] -> https://auth-tst.citymesh.com/self-service/settings/browser?
-https://ffai.citymesh.com/.well-known/change-password [302] -> /profile/password
-https://ffai.citymesh.com/healthz [200]
-https://ffai.citymesh.com/login [200]
-https://ffai.citymesh.com/org [302] -> /
-https://ffai.citymesh.com/signup [200]
-https://livechat.citymesh.com/index.php [200]
+https://campusinsight.citymesh.com/favicon.ico [302] -> /homeportalwebsite/logo/logo_huawei.ico
+https://hcp.edpnet.net/.gitignore [200]
+https://hcp.edpnet.net/index.php [302] -> https://hcp.edpnet.net/
+https://iot.citymesh.com/logout [302] -> http://iot.citymesh.com/oauth2Login?logout
