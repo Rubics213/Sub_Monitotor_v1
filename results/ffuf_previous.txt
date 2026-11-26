@@ -1,49 +1,28 @@
-https://analyticsucaas.citymeshconnect.com/Help [302] -> /?ReturnUrl=%2fHelp
-https://analyticsucaas.citymeshconnect.com/app_browsers [302] -> /Error?aspxerrorpath=/app_browsers
-https://analyticsucaas.citymeshconnect.com/app_code [302] -> /Error?aspxerrorpath=/app_code
-https://analyticsucaas.citymeshconnect.com/app_data [302] -> /Error?aspxerrorpath=/app_data
-https://analyticsucaas.citymeshconnect.com/app_themes [302] -> /Error?aspxerrorpath=/app_themes
-https://analyticsucaas.citymeshconnect.com/aux [302] -> /Error?aspxerrorpath=/aux
-https://analyticsucaas.citymeshconnect.com/bin [302] -> /Error?aspxerrorpath=/bin
-https://analyticsucaas.citymeshconnect.com/clear [302] -> /
-https://analyticsucaas.citymeshconnect.com/client [302] -> /?ReturnUrl=%2fclient
-https://analyticsucaas.citymeshconnect.com/com1 [302] -> /Error?aspxerrorpath=/com1
-https://analyticsucaas.citymeshconnect.com/com2 [302] -> /Error?aspxerrorpath=/com2
-https://analyticsucaas.citymeshconnect.com/com3 [302] -> /Error?aspxerrorpath=/com3
-https://analyticsucaas.citymeshconnect.com/com4 [302] -> /Error?aspxerrorpath=/com4
-https://analyticsucaas.citymeshconnect.com/con [302] -> /Error?aspxerrorpath=/con
-https://analyticsucaas.citymeshconnect.com/config [302] -> /Error?aspxerrorpath=/config
-https://analyticsucaas.citymeshconnect.com/disclaimer [302] -> /?ReturnUrl=%2fdisclaimer
-https://analyticsucaas.citymeshconnect.com/error [200]
-https://analyticsucaas.citymeshconnect.com/help [302] -> /?ReturnUrl=%2fhelp
-https://analyticsucaas.citymeshconnect.com/hooks [302] -> /Error?aspxerrorpath=/hooks
-https://analyticsucaas.citymeshconnect.com/lost+found [302] -> /Error?aspxerrorpath=/lost+found
-https://analyticsucaas.citymeshconnect.com/lpt1 [302] -> /Error?aspxerrorpath=/lpt1
-https://analyticsucaas.citymeshconnect.com/lpt2 [302] -> /Error?aspxerrorpath=/lpt2
-https://analyticsucaas.citymeshconnect.com/message [200]
-https://analyticsucaas.citymeshconnect.com/nul [302] -> /Error?aspxerrorpath=/nul
-https://analyticsucaas.citymeshconnect.com/plugins [302] -> /Error?aspxerrorpath=/plugins
-https://analyticsucaas.citymeshconnect.com/prn [302] -> /Error?aspxerrorpath=/prn
-https://analyticsucaas.citymeshconnect.com/render/https://www.google.com [302] -> /Error?aspxerrorpath=/render/https:/www.google.com
-https://analyticsucaas.citymeshconnect.com/reports [302] -> /?ReturnUrl=%2freports
-https://analyticsucaas.citymeshconnect.com/sections [302] -> /?ReturnUrl=%2fsections
-https://analyticsucaas.citymeshconnect.com/signout [302] -> /?ReturnUrl=%2fsignout
-https://analyticsucaas.citymeshconnect.com/sso [302] -> /ErrorMessage?code=400&desc=Missing+or+invalid+query+parameters&ec=954000
-https://analyticsucaas.citymeshconnect.com/start [302] -> /?ReturnUrl=%2fstart
-https://analyticsucaas.citymeshconnect.com/tools [302] -> /?ReturnUrl=%2ftools
-https://analyticsucaas.citymeshconnect.com/unsubscribe [200]
-https://auth.citymesh.com/.well-known/jwks.json [200]
-https://auth.citymesh.com/.well-known/oauth-authorization-server [200]
-https://auth.citymesh.com/.well-known/openid-configuration [200]
-https://auth.citymesh.com/device [307] -> /error?error=Device%20request%20not%20available&error_description=The%20device%20verification%20link%20is%20missing%20its%20challenge.%20Restart%20the%20flow%20on%20your%20device%20and%20try%20again.
-https://auth.citymesh.com/error [200]
-https://auth.citymesh.com/recovery [200]
-https://auth.citymesh.com/registration [307] -> https://auth.citymesh.com/self-service/registration/browser?
-https://auth.citymesh.com/schemas [200]
-https://auth.citymesh.com/session [307] -> /ui/settings
-https://auth.citymesh.com/settings [307] -> https://auth.citymesh.com/self-service/settings/browser?
-https://backup.edpnet.com/.well-known/openid-configuration [200]
-https://backup.edpnet.com/bc [302] -> https://backup.edpnet.com/ui/
-https://backup.edpnet.com/docs [301] -> http://backup.edpnet.com/api/cyberpsa/docs
-https://backup.edpnet.com/mc [200]
-https://backup.edpnet.com/ui [302] -> https://backup.edpnet.com/api/2/idp/authorize?client_id=f315bcb1-cda1-52f8-9b71-6ba7fea25ae7&redirect_uri=%2Fbc%2Fapi%2Fgateway%2Fcb&response_type=code&scope=offline_access+openid+profile+email&state=%252Fui&nonce=khypjcgiqjekhtcmgmyrkirx
+https://auth-staging.citymesh.com/.well-known/jwks.json [200]
+https://auth-staging.citymesh.com/.well-known/oauth-authorization-server [200]
+https://auth-staging.citymesh.com/.well-known/openid-configuration [200]
+https://auth-staging.citymesh.com/device [307] -> /error?error=Device%20request%20not%20available&error_description=The%20device%20verification%20link%20is%20missing%20its%20challenge.%20Restart%20the%20flow%20on%20your%20device%20and%20try%20again.
+https://auth-staging.citymesh.com/error [200]
+https://auth-staging.citymesh.com/login [200]
+https://auth-staging.citymesh.com/recovery [200]
+https://auth-staging.citymesh.com/registration [307] -> https://auth-staging.citymesh.com/self-service/registration/browser?
+https://auth-staging.citymesh.com/schemas [200]
+https://auth-staging.citymesh.com/session [307] -> /ui/settings
+https://auth-staging.citymesh.com/settings [307] -> https://auth-staging.citymesh.com/self-service/settings/browser?
+https://auth-tst.citymesh.com/.well-known/jwks.json [200]
+https://auth-tst.citymesh.com/.well-known/oauth-authorization-server [200]
+https://auth-tst.citymesh.com/.well-known/openid-configuration [200]
+https://auth-tst.citymesh.com/device [307] -> /error?error=Device%20request%20not%20available&error_description=The%20device%20verification%20link%20is%20missing%20its%20challenge.%20Restart%20the%20flow%20on%20your%20device%20and%20try%20again.
+https://auth-tst.citymesh.com/error [200]
+https://auth-tst.citymesh.com/login [200]
+https://auth-tst.citymesh.com/recovery [200]
+https://auth-tst.citymesh.com/registration [200]
+https://auth-tst.citymesh.com/schemas [200]
+https://auth-tst.citymesh.com/session [200]
+https://auth-tst.citymesh.com/settings [307] -> https://auth-tst.citymesh.com/self-service/settings/browser?
+https://ffai.citymesh.com/.well-known/change-password [302] -> /profile/password
+https://ffai.citymesh.com/healthz [200]
+https://ffai.citymesh.com/login [200]
+https://ffai.citymesh.com/org [302] -> /
+https://ffai.citymesh.com/signup [200]
+https://livechat.citymesh.com/index.php [200]
