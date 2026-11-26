@@ -791,6 +791,7 @@ chat.redbullusa.com
 cheerme.wingsforlifeworldrun.com
 chi-tr.redtech.redbull.com
 chondrit-tr.redtech.redbull.com
+christmas-flugtag.redbull.com
 chromecast-staging.redbull.com
 chromecast.redbull.com
 ciam-design.redbull.com
@@ -1368,6 +1369,7 @@ dosdqamvr01rb.redbull.com
 doubletrouble.redbull.it
 download.canimation.redbull.co.uk
 downloads.redbull.ch
+draft.redbull.tv
 drive-fast-q.redbull.com
 drive-q.redbull.com
 drive.redbull.com
@@ -2138,8 +2140,6 @@ investmentfee-q.redbull.com
 investmentfee.redbull.com
 invitationredbull.ch
 invite.redbull.it
-invoice-test.redbullsalzburg.at
-invoice.redbullsalzburg.at
 ip-q.redbull.com
 ip.redbull.com
 iphone.redbullsfan.tv
@@ -2428,7 +2428,6 @@ login.redbullphenom.com
 login.redbulls.com
 login.redbullseifenkistenrennen.de
 login.redbullstudios.com
-login.redbullxalps.com
 login.redbullxfighters.com
 login.supersubmarina.redbull.com
 login.topsecret.redbull.com
@@ -3148,7 +3147,6 @@ origin-workbench.redbull.com
 origin-www.redbull.com
 origin-www.redbullrookiescup.com
 origin-www.redbullstratos.com
-origin-www.redbullxalps.com
 origin-xfighters2012.redbull.es
 origin.appspaces-ng.redbull.com
 origin.appspaces.redbull.com
@@ -3689,7 +3687,6 @@ r.email.redbullmediahouse.com
 r.info.rbleipzig.com
 r.info.redbulls.com
 r.info.vandeer-redbull-sports.com
-race-control.redbullxalps.com
 race.redbull.com
 racers.redbull.ca
 racing.redbull.com
@@ -4698,7 +4695,6 @@ stage-projects.redbullsalzburg.at
 stage-publishing-platform.redbullmediahouse.com
 stage-publishing.redbull.com
 stage-q.redbull.com
-stage-race-control.redbullxalps.com
 stage-rbgcp.redbull.com
 stage-rbl.redbulls.com
 stage-rbm-assets.redbull.com
@@ -4709,7 +4705,6 @@ stage-rbx00702.microsites.redbull.com
 stage-rbx00877.microsites.redbull.com
 stage-rbx00884.microsites.redbull.com
 stage-rbx00903.microsites.redbull.com
-stage-rc.redbullxalps.com
 stage-recipes.redbull.com
 stage-red-bull-mobile-data-at-2022.redbull.com
 stage-red-bull-mobile-zone-at-2022.redbull.com
@@ -4774,7 +4769,6 @@ stage-www.redbullmobile.pl
 stage-www.redbullmusicacademy.com
 stage-www.redbullring.com
 stage-www.redbullstudios.com
-stage-www.redbullxalps.com
 stage-www.rotorwings.at
 stage-www.soundsofredbull.com
 stage-xfighters2012.redbull.es
@@ -4946,6 +4940,7 @@ streamline.redbull.com
 streamline.redbullmediahouse.com
 streetfit.redbull.com
 streetstyle.redbull.ru
+strengthsfinder-d.redbull.com
 stresiune.redbull.ro
 striker.redbull.com
 striker.redbull.se
@@ -5125,13 +5120,6 @@ tourshare.rbleipzig.com
 trabajaconnosotros.redbull.es
 trackfinity.redbull.com
 tracking-stage.redtech.redbull.com
-tracking.redbullxalps.com
-tracking01.redbullxalps.com
-tracking02.redbullxalps.com
-tracking1.redbullxalps.com
-tracking2.redbullxalps.com
-tracking3.redbullxalps.com
-tracking4.redbullxalps.com
 tracks.wingsforlifeworldrun.com
 trackside-guides.redbull.racing
 trackside-hospitality.redbull.racing
@@ -5408,7 +5396,6 @@ workbench-kerb.redbull.com
 workbench-kerb.redbull.com.redbull.com
 workbench-q.redbull.com
 workbench.redbull.com
-worldelevation3d.redbullxalps.com
 worldofredbull.dk
 worldofredbull.jp
 wrapped.redbull.com
@@ -5452,7 +5439,6 @@ www-new-juniorteam.redbull.com
 www-new-rookiescup.redbull.com
 www-new.redbulljuniorteam.com
 www-new.redbullrookiescup.com
-www-new.redbullxalps.com
 www-old.redbullrookiescup.com
 www-preprod.redbull.tv
 www-production.redbullmediapitch.com
