@@ -1,4 +1,1 @@
-https://campusinsight.citymesh.com/favicon.ico [302] -> /homeportalwebsite/logo/logo_huawei.ico
-https://hcp.edpnet.net/.gitignore [200]
-https://hcp.edpnet.net/index.php [302] -> https://hcp.edpnet.net/
-https://iot.citymesh.com/logout [302] -> http://iot.citymesh.com/oauth2Login?logout
+https://hcp.edpnet.nl/.gitignore [200]
