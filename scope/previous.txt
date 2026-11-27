@@ -1109,6 +1109,7 @@ culturenet-hf-q.redbull.com
 customerservice-q.redbullshop.com
 customerservice.redbullshop.com
 cwsapp-q.redbull.com
+cwsapp.redbull.com
 cz.localpage.redbull.com
 czqgr.redbullnewyork.com
 d.rbleipzig.com
@@ -1251,6 +1252,7 @@ dev.api.mixedzone.rbleipzig.com
 dev.api.ofc.rbleipzig.com
 dev.api.playershare.rbleipzig.com
 dev.api.presseportal.rbleipzig.com
+dev.api.season-pass.rbleipzig.com
 dev.api.tourshare.rbleipzig.com
 dev.api.vip-seating.rbleipzig.com
 dev.audience-heatmap.rbleipzig.com
@@ -1270,6 +1272,7 @@ dev.redbullaudiolibrary.com
 dev.redbulldistributioncompany.com
 dev.redbullrecords.com
 dev.redbullshop.com
+dev.season-pass.rbleipzig.com
 dev.tourshare.rbleipzig.com
 dev.vip-seating.rbleipzig.com
 dev.wiiings.com
