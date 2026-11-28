@@ -1,2 +1,16 @@
-https://5gsense.citymesh.com/404 [200]
-https://5gsense.citymesh.com/index.html [200]
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/app_browsers [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/app_browsers
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/app_code [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/app_code
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/app_data [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/app_data
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/aux [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/aux
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/bin [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/bin
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/com1 [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/com1
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/com2 [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/com2
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/com3 [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/com3
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/com4 [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/com4
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/con [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/con
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/lost+found [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/lost+found
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/lpt1 [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/lpt1
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/lpt2 [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/lpt2
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/nul [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/nul
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/prn [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/prn
+https://analyticsucaas.citymeshconnect.com/auth/openid/citymesh/render/https://www.google.com [302] -> /Error?aspxerrorpath=/auth/openid/citymesh/render/https:/www.google.com
